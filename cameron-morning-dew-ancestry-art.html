@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM · Ancestry Art — Ambervale Patients</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878;
+  --amber:#e6b34d; --teal:#3d9a8a; --line:#2c5440; --soldier:#c07050;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Source Sans 3',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.4; }
+.top {
+  position:sticky; top:0; z-index:20; background:#0c1510ee; backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); padding:0.65rem 1rem 0.75rem;
+}
+.top h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.15rem; }
+.top p { color:var(--muted); font-size:0.82rem; margin-top:0.15rem; }
+.jump {
+  display:flex; flex-wrap:wrap; gap:0.3rem; margin-top:0.55rem;
+}
+.jump a {
+  font-family:'Cinzel',serif; font-size:0.72rem; text-decoration:none;
+  color:#14271d; background:var(--amber); padding:0.22rem 0.45rem; border-radius:4px; font-weight:700;
+}
+.jump a:hover { filter:brightness(1.1); }
+.wrap { max-width:1100px; margin:0 auto; padding:1rem 1rem 3rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:0.85rem; }
+.card {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:0.85rem 0.95rem; display:flex; flex-direction:column; gap:0.45rem;
+  scroll-margin-top:7rem;
+}
+.card.soldier { border-left:4px solid var(--soldier); }
+.card.lover { border-left:4px solid #b070a0; }
+.card.dart { border-left:4px solid #c04a32; }
+.num { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-family:'Cinzel',serif; }
+.title { font-family:'Cinzel',serif; color:var(--amber); font-size:1.05rem; }
+.ancestry { color:var(--teal); font-size:0.88rem; font-weight:600; }
+.lookfor { color:var(--muted); font-size:0.8rem; }
+.links { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.25rem; }
+.links a {
+  display:inline-block; text-decoration:none; font-size:0.8rem; font-weight:700;
+  padding:0.4rem 0.7rem; border-radius:6px; border:1px solid var(--amber);
+  color:#14271d; background:var(--amber);
+}
+.links a.secondary {
+  background:transparent; color:var(--ink); border-color:var(--line);
+}
+.links a:hover { filter:brightness(1.08); }
+.preview {
+  width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:6px;
+  background:#0a100c; border:1px solid var(--line); cursor:pointer;
+}
+.preview.missing { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.85rem; }
+footer { text-align:center; color:var(--muted); font-size:0.8rem; margin-top:1.5rem; font-style:italic; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Ancestry art · GM click board</h1>
+  <p>Public wiki references for table pull-up. Click a jump, then <strong>Open art</strong>. Previews use Wikimedia Commons where available.</p>
+  <nav class="jump" aria-label="Jump to patient">
+    <a href="#p01">01</a><a href="#p02">02</a><a href="#p03">03</a><a href="#p04">04</a>
+    <a href="#p05">05</a><a href="#p06">06</a><a href="#p07">07</a><a href="#p08">08</a>
+    <a href="#p09">09</a><a href="#p10">10</a><a href="#p11">11</a><a href="#p12">12</a>
+    <a href="#p13">13</a><a href="#p14">14</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+
+    <article class="card dart" id="p01">
+      <div class="num">01</div>
+      <div class="title">Scorched Quickling</div>
+      <div class="ancestry">Quickling</div>
+      <a href="https://forgottenrealms.fandom.com/wiki/Quickling" target="_blank" rel="noopener"><img class="preview" alt="Quickling (FR Wiki)" src="https://static.wikia.nocookie.net/forgottenrealms/images/4/4a/Quickling-5e.jpg/revision/latest/scale-to-width-down/480" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Look for: tiny feral blue/white fey blur art on the FR Wiki page.</p>
+      <div class="links">
+        <a href="https://forgottenrealms.fandom.com/wiki/Quickling" target="_blank" rel="noopener">Open art · FR Wiki</a>
+        <a class="secondary" href="https://www.d20pfsrd.com/bestiary/monster-listings/fey/quickling/" target="_blank" rel="noopener">PFSRD (text)</a>
+      </div>
+    </article>
+
+    <article class="card soldier" id="p02">
+      <div class="num">02 · Soldier</div>
+      <div class="title">Cracked Spriggan</div>
+      <div class="ancestry">Spriggan</div>
+      <a href="https://en.wikipedia.org/wiki/Spriggan" target="_blank" rel="noopener"><img class="preview" alt="Spriggan sculpture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Spriggan_Parkland_Walk.jpg/640px-Spriggan_Parkland_Walk.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Look for: Parkland Walk spriggan sculpture (wizened bark guardian).</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Spriggan" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://forgottenrealms.fandom.com/wiki/Spriggan" target="_blank" rel="noopener">FR Wiki (D&amp;D)</a>
+      </div>
+    </article>
+
+    <article class="card soldier" id="p03">
+      <div class="num">03 · Soldier</div>
+      <div class="title">Muddy Gnome</div>
+      <div class="ancestry">Gnome</div>
+      <a href="https://en.wikipedia.org/wiki/Gnome" target="_blank" rel="noopener"><img class="preview" alt="Gnome" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Gnome_Watching_Railway_Train.jpg/640px-Gnome_Watching_Railway_Train.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Look for: classic folklore gnome illustrations on the Wikipedia page (not garden-ornament only).</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Gnome" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Gnomes" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card soldier" id="p04">
+      <div class="num">04 · Soldier</div>
+      <div class="title">Pierced Eladrin</div>
+      <div class="ancestry">Eladrin</div>
+      <a href="https://forgottenrealms.fandom.com/wiki/Eladrin" target="_blank" rel="noopener"><img class="preview" alt="Eladrin" src="https://static.wikia.nocookie.net/forgottenrealms/images/0/0e/Eladrin-5e.jpg/revision/latest/scale-to-width-down/480" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Look for: seasonal elf-kin / eladrin portraits on FR Wiki.</p>
+      <div class="links">
+        <a href="https://forgottenrealms.fandom.com/wiki/Eladrin" target="_blank" rel="noopener">Open art · FR Wiki</a>
+        <a class="secondary" href="https://en.wikipedia.org/wiki/Elf" target="_blank" rel="noopener">Elf (folk baseline)</a>
+      </div>
+    </article>
+
+    <article class="card" id="p05">
+      <div class="num">05</div>
+      <div class="title">Bitten Dryad</div>
+      <div class="ancestry">Dryad</div>
+      <a href="https://commons.wikimedia.org/wiki/File:Dryade_(1884)_by_Evelyn_De_Morgan.jpg" target="_blank" rel="noopener"><img class="preview" alt="Dryad by Evelyn De Morgan" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Dryade_%281884%29_by_Evelyn_De_Morgan.jpg/640px-Dryade_%281884%29_by_Evelyn_De_Morgan.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Evelyn De Morgan, <em>Dryade</em> (1884) — bark/leaf woman.</p>
+      <div class="links">
+        <a href="https://commons.wikimedia.org/wiki/File:Dryade_(1884)_by_Evelyn_De_Morgan.jpg" target="_blank" rel="noopener">Open art · Commons</a>
+        <a class="secondary" href="https://en.wikipedia.org/wiki/Dryad" target="_blank" rel="noopener">Wikipedia</a>
+      </div>
+    </article>
+
+    <article class="card" id="p06">
+      <div class="num">06</div>
+      <div class="title">Limping Human</div>
+      <div class="ancestry">Human</div>
+      <a href="https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg" target="_blank" rel="noopener"><img class="preview" alt="The Sower" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg/640px-Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Ordinary mortal baseline — Millet’s <em>The Sower</em> (or any peasant figure on Commons).</p>
+      <div class="links">
+        <a href="https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg" target="_blank" rel="noopener">Open art · Commons</a>
+        <a class="secondary" href="https://en.wikipedia.org/wiki/Human" target="_blank" rel="noopener">Wikipedia</a>
+      </div>
+    </article>
+
+    <article class="card lover" id="p07">
+      <div class="num">07 · Lover A</div>
+      <div class="title">Bandaged Satyr</div>
+      <div class="ancestry">Satyr</div>
+      <a href="https://en.wikipedia.org/wiki/Satyr" target="_blank" rel="noopener"><img class="preview" alt="Satyr" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Satyr_Louvre_CA2994.jpg/480px-Satyr_Louvre_CA2994.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Classical satyr / silenus sculpture or vase art on Wikipedia.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Satyr" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Satyrs" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card" id="p08">
+      <div class="num">08</div>
+      <div class="title">Fevered Pixie</div>
+      <div class="ancestry">Pixie</div>
+      <a href="https://en.wikipedia.org/wiki/Pixie" target="_blank" rel="noopener"><img class="preview" alt="Pixie" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Take_the_Fair_Face_of_Woman.jpg/480px-Take_the_Fair_Face_of_Woman.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Sophie Gengembre Anderson fairy/pixie paintings linked from the Pixie article.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Pixie" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Pixies" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card" id="p09">
+      <div class="num">09</div>
+      <div class="title">Rooted Leshy</div>
+      <div class="ancestry">Leshy</div>
+      <a href="https://en.wikipedia.org/wiki/Leshy" target="_blank" rel="noopener"><img class="preview" alt="Leshy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Bilibin._Black_Rider.jpg/480px-Bilibin._Black_Rider.jpg" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Leszy.jpg/480px-Leszy.jpg'; this.nextElementSibling &amp;&amp; (this.nextElementSibling.style.display='none')"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Slavic forest spirit — Bilibin-era / folk illustrations on the Leshy Wikipedia page.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Leshy" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Leshy" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card soldier" id="p10">
+      <div class="num">10 · Soldier</div>
+      <div class="title">Soaked Kelpie</div>
+      <div class="ancestry">Kelpie</div>
+      <a href="https://en.wikipedia.org/wiki/Kelpie" target="_blank" rel="noopener"><img class="preview" alt="Kelpie" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Thomas_Millie_Dow_-_The_Kelpie.jpg/640px-Thomas_Millie_Dow_-_The_Kelpie.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Water-horse / kelpie paintings (Dow, Draper, etc.) on Wikipedia.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Kelpie" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Kelpie" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card" id="p11">
+      <div class="num">11</div>
+      <div class="title">Split Centaur</div>
+      <div class="ancestry">Centaur</div>
+      <a href="https://en.wikipedia.org/wiki/Centaur" target="_blank" rel="noopener"><img class="preview" alt="Centaur" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Centaur_mosaic.jpg/640px-Centaur_mosaic.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Classical centaur mosaics / sculpture on the Centaur article.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Centaur" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Centaurs" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card lover" id="p12">
+      <div class="num">12 · Lover B</div>
+      <div class="title">Burned Nymph</div>
+      <div class="ancestry">Nymph</div>
+      <a href="https://en.wikipedia.org/wiki/Nymph" target="_blank" rel="noopener"><img class="preview" alt="Nymph" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/John_William_Waterhouse_-_Hylas_and_the_Nymphs_%281896%29.jpg/640px-John_William_Waterhouse_-_Hylas_and_the_Nymphs_%281896%29.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Waterhouse <em>Hylas and the Nymphs</em> — or other nymph paintings on the article.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Nymph" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Nymphs" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+    <article class="card" id="p13">
+      <div class="num">13</div>
+      <div class="title">Empty Bee-kin</div>
+      <div class="ancestry">Bee-kin · use Thriae as visual stand-in</div>
+      <a href="https://pathfinderwiki.com/wiki/Thriae" target="_blank" rel="noopener"><img class="preview" alt="Thriae" src="https://pathfinderwiki.com/images/thumb/8/8e/Thriae.jpg/480px-Thriae.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Bee-humanoid: Pathfinder <em>Thriae</em> (closest public RPG wiki art). Myth baseline: Greek Thriae.</p>
+      <div class="links">
+        <a href="https://pathfinderwiki.com/wiki/Thriae" target="_blank" rel="noopener">Open art · PathfinderWiki</a>
+        <a class="secondary" href="https://en.wikipedia.org/wiki/Thriae" target="_blank" rel="noopener">Thriae (myth) · Wikipedia</a>
+      </div>
+    </article>
+
+    <article class="card" id="p14">
+      <div class="num">14</div>
+      <div class="title">Exhausted Brownie</div>
+      <div class="ancestry">Brownie</div>
+      <a href="https://en.wikipedia.org/wiki/Brownie_(folklore)" target="_blank" rel="noopener"><img class="preview" alt="Brownie" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/A_Brownie.jpg/480px-A_Brownie.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="preview missing" style="display:none">No preview — use Open art</div></a>
+      <p class="lookfor">Household brownie folklore illustrations on Wikipedia.</p>
+      <div class="links">
+        <a href="https://en.wikipedia.org/wiki/Brownie_(folklore)" target="_blank" rel="noopener">Open art · Wikipedia</a>
+        <a class="secondary" href="https://commons.wikimedia.org/wiki/Category:Brownies_(folklore)" target="_blank" rel="noopener">Commons gallery</a>
+      </div>
+    </article>
+
+  </div>
+  <footer>As They Seem · Ambervale ward · GM-only art board · public wiki/Commons links</footer>
+</main>
+</body>
+</html>
