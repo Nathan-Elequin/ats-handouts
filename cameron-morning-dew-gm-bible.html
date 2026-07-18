@@ -32,43 +32,48 @@ footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:ital
 </head>
 <body>
 <div class="wrap">
-  <p class="tag">GM only · v2 · Jul 17 night revision</p>
+  <p class="tag">GM only · v2.1 · Neighbor Seams</p>
   <h1>Ambervale Field Hospital</h1>
-  <p class="sub">Quack / The Morning Dew · Cameron Red Cap · ~3 hours · Items obfuscated · Deal → Throw → Claim</p>
+  <p class="sub">Quack / The Morning Dew · Cameron Red Cap · ~3 hours · Items obfuscated · Neighbor Seams deal</p>
 
-  <h2>What changed (v2)</h2>
+  <h2>What changed</h2>
   <div class="card">
     <ul>
       <li><strong>Items:</strong> Fantastical, generic, intentionally vague. Physical <em>look</em> cards only — purpose learned by testing on patients (humor + puzzle).</li>
       <li><strong>The Stick:</strong> Universal / innate — not part of the 8. Mythically oversold. Optional fake “charge” die that does nothing useful.</li>
       <li><strong>Teach beat:</strong> Cameron: “Find your stick. Figure the rest out. No time.”</li>
-      <li><strong>Round loop:</strong> Deal hands → 30s read → countdown → <em>Throw → Claim</em> (anti-hoard) → treat.</li>
+      <li><strong>Round loop (v2.1):</strong> <em>Neighbor Seams</em> — 2 cards between each adjacent pair; 30s read; countdown; grab one / pass one per seam; conflict → roll.</li>
       <li><strong>Patients:</strong> Only ~4 soldiers; rest from scattered Feywild locales (future recognition). Lovers are not soldiers.</li>
-      <li><strong>Triage names:</strong> Green / Gold / Scarlet / Ink (shoutable; MCI-homage without Pearldew).</li>
+      <li><strong>Triage names:</strong> Green / Gold / Scarlet / Ink.</li>
     </ul>
   </div>
 
-  <h2>Design note: why not “keep your two”?</h2>
+  <h2>Deal geometry: Neighbor Seams (v2.1)</h2>
   <div class="card warn">
-    <p>If players may <em>keep</em> during the snap, optimal play is calm coordination: everyone holds two, chaos dies.</p>
-    <p><strong>Rule (locked for v2): Throw → Claim.</strong></p>
+    <p><strong>Problem with center pile:</strong> grabbing from 8+ cards mid-countdown = too much reading, too much load.</p>
+    <p><strong>Problem with “keep your two”:</strong> calm coordination; chaos dies.</p>
+    <p><strong>Fix (Between Two Castles energy): Neighbor Seams.</strong></p>
     <ol>
-      <li><strong>Deal</strong> patient cards (often uneven on purpose: e.g. 3 / 3 / 2 / 2).</li>
-      <li><strong>30 seconds</strong> to read patients aloud/quietly. Item cards stay face-up at seats.</li>
-      <li>Countdown from 10. On <strong>zero</strong>: everyone simultaneously puts <em>all</em> patients into the center (no keeping).</li>
-      <li>Immediately: <strong>Claim</strong> — each healer may take up to <strong>2</strong>. If two hands hit the same card, it goes to <strong>Overflow</strong> (untreated this round; Fear magnet).</li>
-      <li>Cards left in the pile after claim = untreated.</li>
+      <li>Four healers sit in a square/circle. Between each adjacent pair is a <strong>seam</strong> → <strong>4 seams</strong>.</li>
+      <li>Each round, place <strong>exactly 2 patient cards</strong> in each seam (8 cards total in the deal). Face-up.</li>
+      <li><strong>30 seconds:</strong> each player may only study their <strong>two seams</strong> (left + right) = 4 cards max in attention. Item cards at seats stay face-up.</li>
+      <li>Countdown from 10. On zero, <strong>per seam</strong> (resolve all four seams at once): the two neighbors each choose <strong>one card to Grab</strong> and effectively <strong>Pass</strong> the other.
+        <ul>
+          <li><strong>Different picks:</strong> each takes their Grab. Clean.</li>
+          <li><strong>Same pick (conflict):</strong> both roll (d6 or Duality Hope die). Winner takes the contested card; loser takes the remaining card <em>or</em> may refuse it → that leftover goes to <strong>Overflow</strong> (untreated / Fear magnet) and the loser is short a patient this round.</li>
+        </ul>
+      </li>
+      <li>Result when clean: everyone ends with <strong>exactly 2</strong> (one from left seam, one from right). Chaos comes from <em>conflicts and refusals</em>, not from reading a pile.</li>
     </ol>
-    <p>Coordination becomes <em>reading the table in 30s</em>, then a messy grab — not a polite keep. Overstuffing still happens when two people dive for the “easy” patient.</p>
-    <p><strong>Softer alt (if Claim feels too mean):</strong> Must-Pass-One — if you were dealt ≥2, you must throw at least one before claim. Prefer Throw→Claim first.</p>
+    <p><strong>Why this works:</strong> cognitive load is local (4 cards). No center scrum. Still punishes “both of us want the easy Gold” with rolls and possible under-staffing. Optional spice: deal a 9th–10th card into a center Overflow that only Cameron may Bark-assign after seams resolve.</p>
   </div>
 
   <h2>Round structure</h2>
   <ol>
     <li>Fear / Dew / blood bookkeeping from last round.</li>
-    <li><strong>Deal</strong> from the Active stack (ramp: after 4 Saved, keep ~10 in the ecosystem).</li>
-    <li><strong>30s read</strong> → <strong>10-count</strong> → Throw → Claim.</li>
-    <li>Each healer with 1–2 patients: creative use of Stick + seat items + own abilities; Duality rolls.</li>
+    <li><strong>Seed seams:</strong> 2 patients per neighbor gap (8). Ramp: after 4 Saved, keep ~10 in the ecosystem (extras wait in draw / Overflow).</li>
+    <li><strong>30s read</strong> (own two seams only) → <strong>10-count</strong> → Grab/Pass per seam → conflict rolls.</li>
+    <li>Each healer with 1–2 patients: Stick + seat items + own abilities; Duality rolls.</li>
     <li>Cameron may Bark Advice / Cap Transfusion / Never Rest as before.</li>
     <li>Modules (break room, lovers, Dart EMP, climax) unchanged in intent.</li>
   </ol>
