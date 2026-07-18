@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching Kit — 8 Quack Implements (Cameron)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cinzel+Decorative:wght@700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size:8.5in 11in; margin:0.45in; }
+:root {
+  --green-deep:#14271d; --green-mid:#2c5440; --amber:#c8902f; --amber-soft:#f0d9a0;
+  --parchment:#f4ead3; --ink:#2a2218; --ink-soft:#4a3d28; --teal:#2d6e6e; --rust:#7c3a1d;
+}
+body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--ink); font-size:10.5pt; line-height:1.45; }
+.wrap { max-width:8in; margin:0 auto; padding:0.2in 0; }
+.sheet {
+  background:var(--parchment); border:1.5px solid var(--green-mid); border-top:6px solid var(--teal);
+  box-shadow:0 0 0 4px var(--parchment), 0 0 0 5.5px var(--amber); padding:0.4in 0.5in; margin-bottom:0.35in;
+}
+.sheet + .sheet { page-break-before:always; }
+.masthead { background:var(--green-deep); border:1.5px solid var(--amber); padding:0.1in 0.18in; margin-bottom:0.14in; display:flex; justify-content:space-between; align-items:center; }
+.mtitle { font-family:'Cinzel Decorative','Cinzel',serif; color:var(--amber-soft); font-size:12.5pt; }
+.mtitle small { display:block; font-family:'Cinzel',serif; font-size:7pt; letter-spacing:0.14em; color:var(--amber); text-transform:uppercase; margin-top:2px; }
+h2 { font-family:'Cinzel Decorative','Cinzel',serif; font-size:15pt; color:var(--green-deep); border-bottom:2px solid var(--amber); margin-bottom:0.1in; padding-bottom:0.04in; }
+.lede { font-size:10pt; margin-bottom:0.12in; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:0.12in; }
+.item {
+  border:1px solid var(--green-mid); border-radius:4px; padding:0.1in 0.12in; background:rgba(255,255,255,0.45);
+  break-inside:avoid; min-height:1.55in;
+}
+.item .name { font-family:'Cinzel',serif; font-weight:700; font-size:11pt; color:var(--teal); }
+.item .look { font-size:9pt; font-style:italic; color:var(--ink-soft); margin:0.02in 0 0.05in; }
+.item .use { font-size:9.5pt; }
+.item .tone { font-size:8.5pt; color:var(--rust); margin-top:0.04in; font-weight:600; }
+.tag { display:inline-block; font-size:7pt; letter-spacing:0.08em; text-transform:uppercase; background:var(--green-deep); color:var(--amber-soft); padding:1px 6px; border-radius:3px; margin-bottom:0.03in; }
+.note { background:#ebdcbd; border-left:3px solid var(--amber); padding:0.08in 0.12in; margin-top:0.12in; font-size:9.5pt; }
+.screen-only { max-width:8in; margin:0.15in auto; background:#1d3a2a; color:#f0d9a0; border:1px solid #c8902f; border-radius:6px; padding:0.12in 0.2in; font-size:10pt; }
+@media print { .screen-only { display:none !important; } body { background:#fff; } }
+.footer { margin-top:0.1in; font-size:8pt; font-style:italic; color:var(--ink-soft); text-align:center; }
+</style>
+</head>
+<body>
+<div class="screen-only"><b>Dr. A (Cameron) teaches from this face-up.</b> Divvy ~2 items per healer (4 people including you). Vague on purpose — creative misuse encouraged.</div>
+<div class="wrap">
+
+<section class="sheet">
+  <div class="masthead">
+    <div class="mtitle">Crash Cart · Eight Implements<small>Teach these · then get out of the way</small></div>
+    <div style="font-family:'Cinzel',serif;font-size:8pt;color:#e6b34d;text-transform:uppercase;letter-spacing:0.08em;text-align:right;">Face-up<br>for the ward</div>
+  </div>
+  <h2>How to teach</h2>
+  <p class="lede">Thirty seconds each. Name it, shove it into a hand, one sentence of “what it’s for,” zero reassurance. Players may also use their own spells/experiences. These tools are distinct on purpose — don’t let two people claim the same niche without trading.</p>
+  <div class="grid">
+    <div class="item">
+      <span class="tag">Locate</span>
+      <div class="name">1 · The Pointing Reed</div>
+      <div class="look">A crooked pale reed with an iron nail lashed to the tip. Twitches like a dowsing rod.</div>
+      <div class="use"><strong>Use:</strong> Find the <em>true</em> hurt when symptoms lie. Point, wait for the lean, then treat what it indicates.</div>
+      <div class="tone">Tone: folksy oracle / “there it is.”</div>
+    </div>
+    <div class="item">
+      <span class="tag">Drain</span>
+      <div class="name">2 · Blue-Wing Leeches</div>
+      <div class="look">Glass jar of fat leeches with iridescent blue wing-nubs. They chirp softly.</div>
+      <div class="use"><strong>Use:</strong> Draw bad humors, “poison blood,” fever-heat, lingering magic in the veins. Better when you use an <em>odd</em> number.</div>
+      <div class="tone">Tone: cheerful gross.</div>
+    </div>
+    <div class="item">
+      <span class="tag">Sedate</span>
+      <div class="name">3 · Mercy Mallet</div>
+      <div class="look">Short padded mallet wrapped in spice-stained cloth. Smells like cloves and regret.</div>
+      <div class="use"><strong>Use:</strong> Instant calm / knock for invasive work. <strong>Cost:</strong> patient drops one triage stage (stabilized-but-worse). Comedy morphine.</div>
+      <div class="tone">Tone: practical violence.</div>
+    </div>
+    <div class="item">
+      <span class="tag">Extract</span>
+      <div class="name">4 · Trepaner's Spool</div>
+      <div class="look">Brass hand-auger with a silk retrieval thread. Looks like an arcade claw for skulls.</div>
+      <div class="use"><strong>Use:</strong> Head pressure, visions, spirit-splinters, “wrong thoughts,” cranial battle-magic. Operation vibes — especially funny for Edmund.</div>
+      <div class="tone">Tone: precise nightmare.</div>
+    </div>
+  </div>
+  <p class="footer">Morning Dew Teaching Kit · page 1 of 2 · continue →</p>
+</section>
+
+<section class="sheet">
+  <div class="masthead">
+    <div class="mtitle">Crash Cart · Eight Implements<small>page 2</small></div>
+  </div>
+  <div class="grid">
+    <div class="item">
+      <span class="tag">Seal</span>
+      <div class="name">5 · Sealing Pitch</div>
+      <div class="look">Pot of black-green sticky resin. Label in three languages, all misspelled.</div>
+      <div class="use"><strong>Use:</strong> Close open wounds by any means — squeeze, smear, “laxative bandage,” whatever. Closure &gt; elegance.</div>
+      <div class="tone">Tone: unhinged confidence.</div>
+    </div>
+    <div class="item">
+      <span class="tag">Soothe</span>
+      <div class="name">6 · Herb-and-Spice Compress</div>
+      <div class="look">Linen poultice warm with thyme, pepperbark, and morning moisture. Smells like kitchen + clinic.</div>
+      <div class="use"><strong>Use:</strong> Bones, breaks, cold joints, “structural” hurts. Extra strong if paired with anything pleasantly aromatic.</div>
+      <div class="tone">Tone: grandmother competence.</div>
+    </div>
+    <div class="item">
+      <span class="tag">Cleanse</span>
+      <div class="name">7 · Stillwater Bowl</div>
+      <div class="look">Shallow ceramic bowl that never ripples. River water poured in goes flat and silent.</div>
+      <div class="use"><strong>Use:</strong> Wash infection, river-curse, battlefield filth, spiritual dirt. Red Cap rule: still water only — never running river.</div>
+      <div class="tone">Tone: quiet ritual.</div>
+    </div>
+    <div class="item">
+      <span class="tag">Bind</span>
+      <div class="name">8 · Odd-Coin Tourniquet</div>
+      <div class="look">Leather strap studded with three mismatched coins (never even). Jingles when tightened.</div>
+      <div class="use"><strong>Use:</strong> Stop bleeding, bind fate, pin a soul into a body for one more round. Odd counts only — superstition that works here.</div>
+      <div class="tone">Tone: battlefield luck.</div>
+    </div>
+  </div>
+  <div class="note">
+    <strong>Divvy suggestion (change freely):</strong> Dr. A keeps Mercy Mallet + Cap isn’t an item (blood ability). Give Pointing Reed + Compress to Edmund; Leeches + Spool to Drii; Pitch + Stillwater to Ennalyn; Odd-Coin + leftover to whoever needs a second. Or let them grab.
+  </div>
+  <p class="footer">As They Seem · Amberveil · Quack implements · Dr. A teaches</p>
+</section>
+
+</div>
+</body>
+</html>

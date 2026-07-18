@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooted Dryad — 5 condition-pair options (Design 2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --bg:#0f1a14; --ink:#f0d9a0; --muted:#b8a878; --amber:#e6b34d;
+  --paper:#f4ead3; --dark:#2a2218; --line:#2c5440; --teal:#2d6e6e;
+}
+body { font-family:'Source Sans 3',system-ui,sans-serif; background:var(--bg); color:var(--ink); padding:1.25rem; }
+.wrap { max-width:1400px; margin:0 auto; }
+h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.3rem; margin-bottom:0.3rem; }
+.note { color:var(--muted); font-size:0.88rem; margin-bottom:1rem; max-width:48rem; }
+.mech {
+  color:var(--muted); font-size:0.8rem; margin-bottom:1rem;
+  border:1px solid #2c5440; border-radius:8px; padding:0.55rem 0.75rem; background:#1a2e22;
+}
+.mech b { color:var(--ink); }
+.grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:1rem; align-items:start;
+}
+.col .label {
+  font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--amber); margin-bottom:0.35rem;
+}
+.col .pair {
+  font-size:0.75rem; color:var(--muted); margin-bottom:0.35rem; font-style:italic;
+}
+.card {
+  background:var(--paper); color:var(--dark); border:1.5px solid var(--line);
+  border-left:5px solid var(--teal); border-radius:6px; padding:0.65rem 0.75rem;
+}
+.num { font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; color:#8a7a60; text-transform:uppercase; }
+.title { font-family:'Cinzel',serif; font-weight:700; font-size:1.1rem; color:#14271d; margin:0.06rem 0 0.35rem; }
+.sec { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#6a5a40; font-weight:700; margin:0.4rem 0 0.15rem; }
+.arrive { font-size:0.86rem; line-height:1.4; margin-bottom:0.15rem; }
+.chart { display:grid; gap:0.3rem; margin-top:0.15rem; }
+.row { border:1px solid #c0b090; border-radius:4px; padding:0.3rem 0.4rem; background:#fffef8; font-size:0.86rem; line-height:1.35; }
+.row b { display:block; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:#5a4a30; margin-bottom:0.1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Rooted Dryad — five pairs (chart layout)</h1>
+  <p class="note">Same structure each time: arrive-blurb (what a dryad is) → two presenting boxes. Conditions aim for different verbs.</p>
+  <div class="mech"><b>Verb check used:</b> REMOVE · CLOSE/SEAL · DRAIN · ADD/FILL · SET/BRACE · CUT AWAY · JOIN · STOP MOTION · RESTORE RHYTHM · COOL/HEAT</div>
+
+  <div class="grid">
+
+    <div class="col">
+      <div class="label">Option A</div>
+      <div class="pair">REMOVE + SET/BRACE</div>
+      <article class="card">
+        <div class="num">09</div>
+        <div class="title">Rooted Dryad</div>
+        <div class="sec">Arrive</div>
+        <p class="arrive">They carry her in and set her on the litter: a dryad — a fey woman of living bark and leaf-hair, sap for blood, body grown as much as born. Market twine still knots her dress hem. One forearm bends at a wrong angle. Thin green threads show under stitches along her ribs.</p>
+        <div class="sec">Intake</div>
+        <div class="chart">
+          <div class="row"><b>Presenting · 1</b>Something alive is tracking under the rib stitches. It twitches when pressed.</div>
+          <div class="row"><b>Presenting · 2</b>Left forearm hangs wrong — joint won’t load weight; bone-wood ground audibly when moved.</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="col">
+      <div class="label">Option B</div>
+      <div class="pair">DRAIN + CLOSE/SEAL</div>
+      <article class="card">
+        <div class="num">09</div>
+        <div class="title">Rooted Dryad</div>
+        <div class="sec">Arrive</div>
+        <p class="arrive">Wheeled in upright, gripping the litter rail: a dryad — bark-skinned fey, leaf-hair, sap in place of blood. Face flushed dark amber. A palm-sized split in her side shines wet and will not crust over.</p>
+        <div class="sec">Intake</div>
+        <div class="chart">
+          <div class="row"><b>Presenting · 1</b>Sap-pressure fever — skin too hot; veins stand proud; pulse hammering in the throat.</div>
+          <div class="row"><b>Presenting · 2</b>Side split stays open. Every breath pushes a bead of clear fluid out; nothing scabs.</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="col">
+      <div class="label">Option C</div>
+      <div class="pair">CUT AWAY + ADD/FILL</div>
+      <article class="card">
+        <div class="num">09</div>
+        <div class="title">Rooted Dryad</div>
+        <div class="sec">Arrive</div>
+        <p class="arrive">Two bearers tip her onto the ward grass: a dryad — living wood shaped into a person, leaf-crown dull and brittle. A blackened plate of bark on her thigh looks dead. Lips cracked white; no sap-sheen on the eyes.</p>
+        <div class="sec">Intake</div>
+        <div class="chart">
+          <div class="row"><b>Presenting · 1</b>A plate of bark on the thigh is dead, soft, and spreading a gray ring into living wood.</div>
+          <div class="row"><b>Presenting · 2</b>Body running dry — cracked lips, matte eyes, no give under the thumb at the wrist-sap.</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="col">
+      <div class="label">Option D</div>
+      <div class="pair">JOIN + STOP MOTION</div>
+      <article class="card">
+        <div class="num">09</div>
+        <div class="title">Rooted Dryad</div>
+        <div class="sec">Arrive</div>
+        <p class="arrive">She walks in under her own power, then nearly falls: a dryad — fey of bark and leaf, sap-blooded. One vine-tendril arm hangs by a few fibers. The other hand keeps spasmodically slamming her own chest.</div>
+        <div class="sec">Intake</div>
+        <div class="chart">
+          <div class="row"><b>Presenting · 1</b>Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.</div>
+          <div class="row"><b>Presenting · 2</b>Whole torso jolts in hard spasms; she cannot hold still long enough for anyone to work.</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="col">
+      <div class="label">Option E</div>
+      <div class="pair">REMOVE + RESTORE RHYTHM</div>
+      <article class="card">
+        <div class="num">09</div>
+        <div class="title">Rooted Dryad</div>
+        <div class="sec">Arrive</div>
+        <p class="arrive">Dropped on a clean sheet, still damp from the river road: a dryad — bark body, leaf-hair, sap for blood. A cold-iron nail sits flush in the sternum bark. Her chest hitches in uneven, skipping heaves.</p>
+        <div class="sec">Intake</div>
+        <div class="chart">
+          <div class="row"><b>Presenting · 1</b>Cold-iron nail driven into the chest-wood. Bark around it is black and numb.</div>
+          <div class="row"><b>Presenting · 2</b>Heartwood rhythm is wrong — uneven heaves, long pauses, sudden double-thumps.</div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
