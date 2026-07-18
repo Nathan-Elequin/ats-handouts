@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patient Cards v3 — Ambervale (14)</title>
+<title>Patient Cards v4 — Ambervale (14)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
@@ -24,6 +24,7 @@ h1 { font-family:'Cinzel',serif; font-size:14pt; color:#14271d; margin-bottom:0.
 .num { font-family:'Cinzel',serif; font-size:8pt; letter-spacing:0.1em; color:#8a7a60; text-transform:uppercase; }
 .title { font-family:'Cinzel',serif; font-weight:700; font-size:12pt; color:#14271d; margin:0.02in 0; }
 .origin { font-size:8pt; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.04in; color:#4a3d28; }
+.notes { font-size:7pt; letter-spacing:0.08em; text-transform:uppercase; color:#8a7a60; margin-bottom:0.02in; }
 .desc { font-size:9pt; line-height:1.35; }
 .start { font-size:8pt; margin-top:0.06in; font-weight:600; }
 .gm { font-size:7.5pt; font-style:italic; color:#7a6a50; margin-top:0.04in; border-top:1px dotted #c0b090; padding-top:0.03in; }
@@ -32,57 +33,63 @@ h1 { font-family:'Cinzel',serif; font-size:14pt; color:#14271d; margin-bottom:0.
 </style>
 </head>
 <body>
-<div class="screen-only"><b>v3:</b> One-word titles for table shout. Flavor in the body. Neighbor Seams. Green/Gold/Scarlet/Ink.</div>
+<div class="screen-only"><b>v4:</b> Title = adjective + ancestry (table shout). Injuries live in Notes. Neighbor Seams. Green/Gold/Scarlet/Ink.</div>
 <div class="wrap">
 
 <section class="sheet">
   <h1>Patients 01–06</h1>
-  <p class="sub">Neighbor Seams · titles are for table banter</p>
+  <p class="sub">Title format: simple adjective + ancestry</p>
   <div class="grid">
     <div class="card dart">
       <div class="num">01</div>
-      <div class="title">Buzz</div>
-      <div class="origin">Pale Ring residual · nameless quickling</div>
-      <div class="desc">Tiny scorched quickling-shape; veins strobe copper-static. Smells like ozone and clove. Thanks you for “the buzz.” Has no name left to give.</div>
+      <div class="title">Scorched Quickling</div>
+      <div class="origin">Pale Ring residual</div>
+      <div class="notes">Notes</div>
+      <div class="desc">Veins strobe copper-static. Smells like ozone and clove. Thanks you for “the buzz.” Has no name left to give.</div>
       <div class="start">Start: Gold</div>
       <div class="gm">Was Dart — name lost last session. EMP wrinkle. Creative defibrillator if used on others — spikes his charge.</div>
     </div>
     <div class="card soldier">
       <div class="num">02 · SOLDIER</div>
-      <div class="title">Ribs</div>
+      <div class="title">Cracked Spriggan</div>
       <div class="origin">North of Gray Reach · Summer levy</div>
-      <div class="desc">Bark-skin cracked at the ribs; sap like honey. Hums a half-march. “The horns never looked back.”</div>
+      <div class="notes">Notes</div>
+      <div class="desc">Bark-skin split at the ribs; sap like honey. Hums a half-march. “The horns never looked back.”</div>
       <div class="start">Start: Scarlet</div>
       <div class="gm">Bones + smell. Court abandonment lore.</div>
     </div>
     <div class="card soldier">
       <div class="num">03 · SOLDIER</div>
-      <div class="title">Coins</div>
+      <div class="title">Muddy Gnome</div>
       <div class="origin">Gray Reach ford · Gloaming levy</div>
+      <div class="notes">Notes</div>
       <div class="desc">Tries to pay with even coins; panics at odds. Leg won’t clot; river-mud in the dressing.</div>
       <div class="start">Start: Gold</div>
       <div class="gm">Odd counts / still water soft truths.</div>
     </div>
     <div class="card soldier">
       <div class="num">04 · SOLDIER</div>
-      <div class="title">Arrows</div>
+      <div class="title">Pierced Elf</div>
       <div class="origin">Gray Reach · Summer skirmisher</div>
+      <div class="notes">Notes</div>
       <div class="desc">Shafts still in a wrong-bent shoulder. Jokes constantly. Pupils blown. Asks for quiet.</div>
       <div class="start">Start: Scarlet</div>
       <div class="gm">Mallet / Claw / Gigglecap comedy.</div>
     </div>
     <div class="card locale">
       <div class="num">05</div>
-      <div class="title">Bites</div>
+      <div class="title">Bitten Dryad</div>
       <div class="origin">Mushroom pilgrim road · Ambervale verge</div>
-      <div class="desc">Soft body marked by cold-iron bites. Whispers names it no longer owns. Blue-black soil under claws.</div>
+      <div class="notes">Notes</div>
+      <div class="desc">Body marked by cold-iron bites. Whispers names it no longer owns. Blue-black soil under claws.</div>
       <div class="start">Start: Green</div>
       <div class="gm">Future Ambervale recognition.</div>
     </div>
     <div class="card locale">
       <div class="num">06</div>
-      <div class="title">Foot</div>
+      <div class="title">Limping Human</div>
       <div class="origin">River-still village · south of Ambervale</div>
+      <div class="notes">Notes</div>
       <div class="desc">Nonchalant. “Just my foot.” Wants to go home. Dew on his blade already halfway down. Pepperbark smell.</div>
       <div class="start">Start: Gold (looks Green)</div>
       <div class="gm">Dew tell. Hidden structural.</div>
@@ -96,48 +103,54 @@ h1 { font-family:'Cinzel',serif; font-size:14pt; color:#14271d; margin-bottom:0.
   <div class="grid">
     <div class="card lover">
       <div class="num">07 · LOVER A</div>
-      <div class="title">Ribbon</div>
+      <div class="title">Bandaged Satyr</div>
       <div class="origin">Summer fringe orchard fair</div>
+      <div class="notes">Notes</div>
       <div class="desc">Chest wrapped; keeps touching a ribbon that smells of frost-lilac. Hums a tune that doesn’t belong to Summer.</div>
       <div class="start">Start: Gold</div>
       <div class="gm">Pair with #12 → both +1 stage once.</div>
     </div>
     <div class="card locale">
       <div class="num">08</div>
-      <div class="title">Fever</div>
+      <div class="title">Fevered Changeling</div>
       <div class="origin">Mist-hamlet on Gloaming verge</div>
+      <div class="notes">Notes</div>
       <div class="desc">Temp swings hot/cold. Veins argue — gold flicker, then blue. Begs you not to “pick a side.”</div>
       <div class="start">Start: Scarlet</div>
       <div class="gm">Drii blood echo candy — light touch.</div>
     </div>
     <div class="card locale">
       <div class="num">09</div>
-      <div class="title">Vines</div>
+      <div class="title">Rooted Dryad</div>
       <div class="origin">Herb-market of the Summer road</div>
+      <div class="notes">Notes</div>
       <div class="desc">Tried to sew herself with living vines; vines took root wrong. Seams weep nectar. Demands better technique.</div>
       <div class="start">Start: Scarlet</div>
       <div class="gm">Pitch / Claw / Stick find wrong root.</div>
     </div>
     <div class="card soldier">
       <div class="num">10 · SOLDIER</div>
-      <div class="title">Boots</div>
-      <div class="origin">Gloaming levy · redcap cousin</div>
+      <div class="title">Dry Redcap</div>
+      <div class="origin">Gloaming levy</div>
+      <div class="notes">Notes</div>
       <div class="desc">Iron boots still on; refuses running water. Cap dry and panicking. Kick-bruises on anyone close.</div>
       <div class="start">Start: Green</div>
-      <div class="gm">4th soldier. Stillwater / superstition.</div>
+      <div class="gm">4th soldier. Stillwater / superstition. Cousin energy to Cameron — not named as such on the card.</div>
     </div>
     <div class="card locale">
       <div class="num">11</div>
-      <div class="title">Horn</div>
+      <div class="title">Split Satyr</div>
       <div class="origin">Candle-canopy choir camp</div>
+      <div class="notes">Notes</div>
       <div class="desc">One horn split; hears a note nobody else hears. Nosebleeds when the ward gets loud.</div>
       <div class="start">Start: Gold</div>
       <div class="gm">Claw / song as pleasant smell.</div>
     </div>
     <div class="card lover">
       <div class="num">12 · LOVER B</div>
-      <div class="title">Burns</div>
+      <div class="title">Burned Elf</div>
       <div class="origin">Night-candle scout post · Gloaming hills</div>
+      <div class="notes">Notes</div>
       <div class="desc">Burns under bandages smell like lilac frost. Won’t explain the Summer ribbon in their fist. Calms near a march-hum.</div>
       <div class="start">Start: Gold</div>
       <div class="gm">Lover pair with #07.</div>
@@ -150,23 +163,25 @@ h1 { font-family:'Cinzel',serif; font-size:14pt; color:#14271d; margin-bottom:0.
   <div class="grid">
     <div class="card locale">
       <div class="num">13</div>
-      <div class="title">Hive</div>
+      <div class="title">Empty Bee-kin</div>
       <div class="origin">Bee-knight apiary · far Summer fringe</div>
+      <div class="notes">Notes</div>
       <div class="desc">Armor full of empty cells; swarm won’t return. Stings themselves calling. Honey-fever; proud eyes.</div>
       <div class="start">Start: Scarlet</div>
       <div class="gm">Later apiary recognition.</div>
     </div>
     <div class="card locale">
       <div class="num">14</div>
-      <div class="title">Hands</div>
+      <div class="title">Exhausted Human</div>
       <div class="origin">Litter-bearer · Gray Reach road civilian</div>
+      <div class="notes">Notes</div>
       <div class="desc">Dragged three others here before collapsing. Hands ruined. Apologizes to empty air for “leaving the rest.”</div>
       <div class="start">Start: Ink</div>
       <div class="gm">Early Cap temptation. Not a soldier — camp follower.</div>
     </div>
     <div class="card locale" style="grid-column:1/-1;min-height:auto;">
       <div class="title" style="font-size:10pt;">Open set suggestion</div>
-      <div class="desc">01 Buzz · 02 Ribs · 04 Arrows · 06 Foot · 07 Ribbon · 14 Hands. After 4 Saved, ramp toward 10 including #12 Burns and #08 Fever.</div>
+      <div class="desc">01 Scorched Quickling · 02 Cracked Spriggan · 04 Pierced Elf · 06 Limping Human · 07 Bandaged Satyr · 14 Exhausted Human. After 4 Saved, ramp toward 10 including #12 Burned Elf and #08 Fevered Changeling.</div>
     </div>
   </div>
 </section>
