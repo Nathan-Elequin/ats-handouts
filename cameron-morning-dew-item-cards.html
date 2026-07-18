@@ -28,36 +28,51 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
 .card {
   width:2.5in; height:3.5in;
   border:1.75px solid var(--line); border-radius:0.12in;
-  background:var(--parchment); padding:0.08in 0.09in 0.07in;
+  background:var(--parchment); padding:0.07in 0.08in 0.06in;
   display:flex; flex-direction:column; overflow:hidden;
-  position:relative;
-  /* light cut hint */
   box-shadow:0 0 0 1px #c0b09055;
 }
 .card.stick { background:var(--stick); border-color:#a07830; }
 .art {
-  flex:0 0 auto; height:0.95in; display:flex; align-items:center; justify-content:center;
-  background:#f0e6d0; border:1px solid #d0c0a0; border-radius:0.08in; margin-bottom:0.05in;
+  flex:0 0 auto; height:0.72in; display:flex; align-items:center; justify-content:center;
+  background:#f0e6d0; border:1px solid #d0c0a0; border-radius:0.07in; margin-bottom:0.04in;
 }
-.art img { width:0.78in; height:0.78in; object-fit:contain; }
+.art img { width:0.58in; height:0.58in; object-fit:contain; }
 .label {
   font-family:'Cinzel',serif; font-size:5.5pt; letter-spacing:0.12em; text-transform:uppercase;
   color:#8a6d3b; text-align:center;
 }
 .name {
-  font-family:'Cinzel',serif; font-weight:700; font-size:8.5pt; color:var(--teal);
-  text-align:center; line-height:1.15; margin:0.02in 0 0.04in;
+  font-family:'Cinzel',serif; font-weight:700; font-size:8.8pt; color:var(--teal);
+  text-align:center; line-height:1.12; margin:0.015in 0 0.035in;
 }
 .prose {
-  font-size:6.6pt; line-height:1.28; color:#3a3228; flex:1 1 auto; overflow:hidden;
+  font-size:6.5pt; line-height:1.28; color:#3a3228; flex:0 1 auto;
+  margin-bottom:0.04in;
 }
 .acts {
-  list-style:none; font-size:6.3pt; line-height:1.25; border-top:1px dotted #c0b090;
-  padding-top:0.04in; margin-top:0.04in; flex:0 0 auto;
+  list-style:none; flex:0 0 auto;
+  background:#f4ead3; border:1.5px solid #c8902f88; border-radius:0.06in;
+  padding:0.06in 0.07in; margin-bottom:0.05in;
 }
-.acts li { padding-left:0.45em; position:relative; margin-bottom:0.02in; color:#3a3228; }
-.acts li::before { content:"·"; position:absolute; left:0; color:var(--amber); font-weight:700; }
-.acts em { font-style:italic; color:var(--soft); }
+.acts li {
+  font-size:7.4pt; line-height:1.3; color:#2a2218; font-weight:600;
+  padding-left:0.5em; position:relative; margin-bottom:0.035in;
+}
+.acts li:last-child { margin-bottom:0; }
+.acts li::before { content:"▸"; position:absolute; left:0; color:var(--amber); font-size:6pt; top:0.1em; }
+.acts em { font-style:italic; font-weight:700; color:#5a3a08; }
+.notes {
+  flex:1 1 auto; min-height:0.42in;
+  border:1px dashed #b0a080; border-radius:0.05in;
+  margin-top:auto; padding:0.03in 0.05in;
+  background:#fffef8;
+}
+.notes::before {
+  content:"Notes"; display:block;
+  font-family:'Cinzel',serif; font-size:5pt; letter-spacing:0.1em; text-transform:uppercase;
+  color:#b0a080;
+}
 .gm { display:none; }
 .credit {
   max-width:7.8in; margin:0 auto 1rem; font-size:7.5pt; color:#6a5a48; text-align:center; font-style:italic;
@@ -72,85 +87,91 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
 <body>
 
 <div class="howto">
-  <p><strong>Print · cut · deal.</strong> Letter · <strong>Actual size / 100%</strong> · Background graphics ON. Cards are <strong>poker size (2.5″ × 3.5″)</strong> — 6 per page, 2 pages, 12 cards. Cut on the card borders.</p>
-  <p>Icons: <strong>game-icons.net</strong> (CC BY 3.0 · Lorc / Delapouite / sbed) — hosted locally in <code>implement-art/</code> so print works offline.</p>
+  <p><strong>Print · cut · deal.</strong> Letter · Actual size / 100% · Background graphics ON. Poker size <strong>2.5″ × 3.5″</strong> — 6/page, 2 pages. Cut on borders. Dashed strip at bottom = player notes.</p>
+  <p>Icons: game-icons.net (CC BY 3.0) in <code>implement-art/</code>.</p>
 </div>
 
-<!-- Page 1: 4 sticks + Hushbulb + Dewgut -->
 <section class="sheet">
   <article class="card stick">
     <div class="art"><img src="implement-art/accord-twig.svg" alt=""></div>
     <div class="label">Object</div>
-    <div class="name">Accord Twig</div>
-    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth. No markings — only the green smell of snapped twigs after rain.</p>
+    <div class="name">Poking Stick</div>
+    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth by countless pokes. No markings — only the green smell of snapped twigs after rain.</p>
     <ul class="acts"><li><em>Tap a table</em> — dull dry <em>tok</em>; nothing answers</li></ul>
-    <div class="gm">Stick</div>
+    <div class="notes"></div>
+    <div class="gm">Universal Stick. Cameron oversells as Rod of Medicinal Accord.</div>
   </article>
   <article class="card stick">
     <div class="art"><img src="implement-art/accord-twig.svg" alt=""></div>
     <div class="label">Object</div>
-    <div class="name">Accord Twig</div>
-    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth. No markings — only the green smell of snapped twigs after rain.</p>
+    <div class="name">Poking Stick</div>
+    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth by countless pokes. No markings — only the green smell of snapped twigs after rain.</p>
     <ul class="acts"><li><em>Tap a table</em> — dull dry <em>tok</em>; nothing answers</li></ul>
+    <div class="notes"></div>
   </article>
   <article class="card stick">
     <div class="art"><img src="implement-art/accord-twig.svg" alt=""></div>
     <div class="label">Object</div>
-    <div class="name">Accord Twig</div>
-    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth. No markings — only the green smell of snapped twigs after rain.</p>
+    <div class="name">Poking Stick</div>
+    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth by countless pokes. No markings — only the green smell of snapped twigs after rain.</p>
     <ul class="acts"><li><em>Tap a table</em> — dull dry <em>tok</em>; nothing answers</li></ul>
+    <div class="notes"></div>
   </article>
   <article class="card stick">
     <div class="art"><img src="implement-art/accord-twig.svg" alt=""></div>
     <div class="label">Object</div>
-    <div class="name">Accord Twig</div>
-    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth. No markings — only the green smell of snapped twigs after rain.</p>
+    <div class="name">Poking Stick</div>
+    <p class="prose">A forearm of pale wood, bark scraped unevenly. Still slightly warm. Light enough for one fist at the middle. Blunt tip worn smooth by countless pokes. No markings — only the green smell of snapped twigs after rain.</p>
     <ul class="acts"><li><em>Tap a table</em> — dull dry <em>tok</em>; nothing answers</li></ul>
+    <div class="notes"></div>
   </article>
   <article class="card">
     <div class="art"><img src="implement-art/hushbulb-maul.svg" alt=""></div>
     <div class="label">Object</div>
     <div class="name">Hushbulb Maul</div>
-    <p class="prose">Crooked ash-root capped with a swollen night-bloom bulb. Velvet-soft and clove-sweet outside; a stone pit waits under the petals. A stamens wrist-loop. The bloom never quite stops quivering.</p>
+    <p class="prose">Crooked ash-root capped with a swollen night-bloom bulb. Velvet-soft and clove-sweet outside; a stone pit waits under the petals. Stamens wrist-loop. The bloom never quite stops quivering.</p>
     <ul class="acts">
-      <li><em>Squeeze the bulb</em> — yields, then a hard core</li>
+      <li><em>Squeeze the bulb</em> — yields like fruit, then a hard core</li>
       <li><em>Swing through air</em> — late soft <em>whumpf</em></li>
     </ul>
-    <div class="gm">Mercy Mallet</div>
+    <div class="notes"></div>
+    <div class="gm">Mercy Mallet — sedate</div>
   </article>
   <article class="card">
     <div class="art"><img src="implement-art/dewgut-choir.svg" alt=""></div>
     <div class="label">Object</div>
     <div class="name">Dewgut Choir</div>
-    <p class="prose">A stoppered glass mug, heavier than empty. Inside: fat segmented dew-guts with iridescent side-flaps leaving wet silver trails. Smell of rain on warm stone and copper.</p>
+    <p class="prose">A thick glass jar, mug-sized, stoppered with cork. Inside: a dozen <strong>living siphon-beasts</strong> — soft pale gut-bodies the length of a thumb, each with iridescent side-flaps like wet moth wings. They are flesh and slime, not glass. Silver mucus trails the walls. Smell: rain on warm stone and copper.</p>
     <ul class="acts">
-      <li><em>Warm hand near glass</em> — they surge and thin continuous <em>eee</em></li>
+      <li><em>Warm hand near the glass</em> — they surge toward heat and sing a thin continuous <em>eee</em></li>
     </ul>
-    <div class="gm">Leech-kin</div>
+    <div class="notes"></div>
+    <div class="gm">Leech-kin — drain</div>
   </article>
 </section>
 
-<!-- Page 2: remaining 6 -->
 <section class="sheet">
   <article class="card">
     <div class="art"><img src="implement-art/magpie-ice-foot.svg" alt=""></div>
     <div class="label">Object</div>
     <div class="name">Magpie’s Ice-Foot</div>
-    <p class="prose">Palm-sized brass grown around a spool of pale silk. Line ends in three crystal talons — a bird’s foot of winter ice that never melts. Cold, faintly sticky. Brass smells of oil and old storms.</p>
+    <p class="prose">A palm-sized <strong>brass reel</strong> (metal, oiled, smelling of storms) wound with pale <strong>silk line</strong>. The line ends in a <strong>three-taloned foot</strong> carved from never-melting crystal-ice — cold, faintly sticky, sharp enough to pinch. The crank turns brass gears; the foot is the working end.</p>
     <ul class="acts">
-      <li><em>Turn the crank</em> — click, click, click</li>
-      <li><em>Near iron</em> — one high hungry ring</li>
+      <li><em>Turn the crank</em> — the ice-foot opens and closes: click, click, click</li>
+      <li><em>Open talons near iron</em> — one high short ring, hungry for metal</li>
     </ul>
+    <div class="notes"></div>
     <div class="gm">Extractor</div>
   </article>
   <article class="card">
     <div class="art"><img src="implement-art/mudmouth-tar.svg" alt=""></div>
     <div class="label">Object</div>
     <div class="name">Mudmouth Tar</div>
-    <p class="prose">A warm ceramic pot painted with a smiling cow that has too many eyes. Black-green paste stretches in living strings from a notched spatula. Wet leaves and barnyard-sweet. Labels in three smudged scripts.</p>
+    <p class="prose">A warm ceramic pot painted with a smiling cow that has too many eyes. Inside: black-green paste that stretches in living strings from a notched spatula. Wet leaves and barnyard-sweet. Labels in three smudged scripts.</p>
     <ul class="acts">
       <li><em>Dab on skin</em> — grips like a mouth; needs oil to wipe</li>
     </ul>
+    <div class="notes"></div>
     <div class="gm">Sealant</div>
   </article>
   <article class="card">
@@ -161,17 +182,19 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
     <ul class="acts">
       <li><em>Squeeze gently</em> — spore puff; something nearby wants to laugh</li>
     </ul>
+    <div class="notes"></div>
     <div class="gm">Laugh mushroom</div>
   </article>
   <article class="card">
     <div class="art"><img src="implement-art/etiquette-blade.svg" alt=""></div>
     <div class="label">Object</div>
-    <div class="name">Etiquette Blade</div>
-    <p class="prose">A short-sword pretending it belongs on a tea tray. Hard white strip of lamp-light on the polish. Hash marks near the ricasso like a tally of apologies. Surgical edge; chopping spine.</p>
+    <div class="name">Excalpelur</div>
+    <p class="prose">A blade the length of a short-sword pretending it belongs on a tea tray. Hard white strip of lamp-light on the polish. Hash marks near the ricasso like a tally of apologies. Surgical edge; chopping spine.</p>
     <ul class="acts">
-      <li><em>Draw from scabbard</em> — metallic rattle, then intentional silence</li>
+      <li><em>Draw from the scabbard</em> — metallic rattle, then intentional silence</li>
     </ul>
-    <div class="gm">Scalpel / amputate</div>
+    <div class="notes"></div>
+    <div class="gm">Scandal Blade / amputate</div>
   </article>
   <article class="card">
     <div class="art"><img src="implement-art/nurse-vine.svg" alt=""></div>
@@ -179,9 +202,10 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
     <div class="name">Nurse-Vine Ampoule</div>
     <p class="prose">Transparent pouch on a hollow living vine ending in a bone needle. Twist-cap. Empty. Frayed tag: one crooked word — <em>YES</em>.</p>
     <ul class="acts">
-      <li><em>Blow into cap</em> — swells, sighs; vine drinks toward needle</li>
+      <li><em>Blow into the cap</em> — swells, sighs; vine drinks toward the needle</li>
       <li><em>Shake</em> — dry rustle in the vine wall</li>
     </ul>
+    <div class="notes"></div>
     <div class="gm">IV</div>
   </article>
   <article class="card">
@@ -191,8 +215,9 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
     <p class="prose">Hinged pale-wood bracer banded in brass, felt-lined to a forearm’s ghost. Side-crank, too many briar-teeth inside. Jewelry that learned cruelty and then apologized.</p>
     <ul class="acts">
       <li><em>Turn the crank</em> — each click narrows a finger-width</li>
-      <li><em>Open hinge</em> — music-box run backward</li>
+      <li><em>Open the hinge</em> — music-box run backward</li>
     </ul>
+    <div class="notes"></div>
     <div class="gm">Splint / brace</div>
   </article>
 </section>
