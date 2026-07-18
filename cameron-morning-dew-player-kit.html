@@ -3,131 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player Kit — Ambervale Triage</title>
+<title>Player Kit v2 — Ambervale Triage</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cinzel+Decorative:wght@700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
 @page { size:8.5in 11in; margin:0.45in; }
 @page landscape { size:11in 8.5in; margin:0.35in; }
-:root {
-  --green-deep:#14271d; --green-mid:#2c5440; --amber:#c8902f; --amber-soft:#f0d9a0;
-  --parchment:#f4ead3; --ink:#2a2218; --ink-soft:#4a3d28; --teal:#2d6e6e;
-  --pearl:#6a9e6e; --thirst:#c8902f; --snap:#c04a32; --dry:#5a4a3a;
-}
+:root { --green-deep:#14271d; --green-mid:#2c5440; --amber:#c8902f; --amber-soft:#f0d9a0; --parchment:#f4ead3; --ink:#2a2218; --soft:#4a3d28; }
 body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--ink); font-size:10.5pt; line-height:1.45; }
 .wrap { max-width:8in; margin:0 auto; padding:0.2in 0; }
-.sheet {
-  background:var(--parchment); border:1.5px solid var(--green-mid); border-top:6px solid var(--amber);
-  box-shadow:0 0 0 4px var(--parchment), 0 0 0 5.5px var(--amber); padding:0.4in 0.5in; margin-bottom:0.35in;
-}
+.sheet { background:var(--parchment); border:1.5px solid var(--green-mid); border-top:6px solid var(--amber); box-shadow:0 0 0 4px var(--parchment), 0 0 0 5.5px var(--amber); padding:0.4in 0.5in; margin-bottom:0.35in; }
 .sheet + .sheet { page-break-before:always; }
 .masthead { background:var(--green-deep); border:1.5px solid var(--amber); padding:0.1in 0.18in; margin-bottom:0.12in; }
 .mtitle { font-family:'Cinzel Decorative','Cinzel',serif; color:var(--amber-soft); font-size:13pt; }
 .mtitle small { display:block; font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.14em; color:var(--amber); text-transform:uppercase; margin-top:2px; }
-h2 { font-family:'Cinzel Decorative','Cinzel',serif; font-size:15pt; color:var(--green-deep); border-bottom:2px solid var(--amber); margin:0.08in 0 0.08in; padding-bottom:0.04in; }
+h2 { font-family:'Cinzel Decorative','Cinzel',serif; font-size:14pt; color:var(--green-deep); border-bottom:2px solid var(--amber); margin:0.08in 0; padding-bottom:0.04in; }
 ul { margin:0.05in 0 0.1in 0.2in; } li { margin-bottom:0.04in; }
 .stages { display:grid; grid-template-columns:1fr 1fr; gap:0.08in; margin:0.1in 0; }
 .st { border-radius:4px; padding:0.08in 0.1in; font-size:9.5pt; }
-.st b { font-family:'Cinzel',serif; display:block; font-size:10pt; }
-.pearl { background:#d4e8d4; border:1.5px solid var(--pearl); }
-.thirst { background:#f5e6c0; border:1.5px solid var(--thirst); }
-.snap { background:#f0c8bc; border:1.5px solid var(--snap); }
-.dry { background:#ddd4c4; border:1.5px solid var(--dry); }
+.st b { font-family:'Cinzel',serif; display:block; }
+.g { background:#d4e8d4; border:1.5px solid #6a9e6e; } .y { background:#f5e6c0; border:1.5px solid #c8902f; }
+.r { background:#f0c8bc; border:1.5px solid #c04a32; } .k { background:#ddd4c4; border:1.5px solid #5a4a3a; }
 .note { background:#ebdcbd; border-left:3px solid var(--amber); padding:0.08in 0.12in; font-size:9.5pt; margin:0.08in 0; }
 .screen-only { max-width:8in; margin:0.12in auto; background:#1d3a2a; color:#f0d9a0; border:1px solid #c8902f; border-radius:6px; padding:0.12in 0.2in; font-size:10pt; }
 @media print { .screen-only { display:none !important; } body { background:#fff; } }
-
-/* Landscape triage board */
-.board-sheet {
-  page: landscape; page-break-before:always;
-  max-width:10.5in; min-height:7.2in;
-}
-.board {
-  display:grid; grid-template-columns:repeat(5, 1fr); gap:0.1in; margin-top:0.1in; min-height:5.8in;
-}
-.col {
-  border:2px dashed var(--green-mid); border-radius:6px; padding:0.08in; background:rgba(255,255,255,0.35);
-  display:flex; flex-direction:column;
-}
-.col h3 { font-family:'Cinzel',serif; font-size:9pt; text-align:center; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.06in; padding:0.04in; border-radius:3px; }
-.col.pearl h3 { background:#d4e8d4; } .col.thirst h3 { background:#f5e6c0; }
-.col.snap h3 { background:#f0c8bc; } .col.dry h3 { background:#ddd4c4; } .col.saved h3 { background:#c5d9e8; }
-.slot { flex:1; border:1px dotted #8a7a60; border-radius:4px; margin-top:0.05in; min-height:0.7in; background:rgba(255,255,255,0.5); }
-.blood {
-  margin-top:0.15in; border:2px solid var(--snap); border-radius:6px; padding:0.12in; background:#f8e8e4;
-  display:flex; align-items:center; justify-content:space-between; gap:0.2in;
-}
-.blood .pips { display:flex; gap:0.12in; }
-.blood .pip {
-  width:0.55in; height:0.55in; border-radius:50%; border:2.5px solid #6e1f1f; background:#c04a32;
-  box-shadow:inset 0 0 8px rgba(0,0,0,0.25);
-}
-.dewbox { margin-top:0.12in; border-left:4px solid var(--teal); padding:0.08in 0.12in; background:#e8f0e8; font-size:9.5pt; font-style:italic; }
+.board-sheet { page: landscape; max-width:10.5in; }
+.board { display:grid; grid-template-columns:repeat(5, 1fr); gap:0.1in; margin-top:0.1in; min-height:5.5in; }
+.col { border:2px dashed var(--green-mid); border-radius:6px; padding:0.08in; background:rgba(255,255,255,0.35); }
+.col h3 { font-family:'Cinzel',serif; font-size:9pt; text-align:center; text-transform:uppercase; margin-bottom:0.06in; padding:0.04in; border-radius:3px; }
+.col.g h3 { background:#d4e8d4; } .col.y h3 { background:#f5e6c0; } .col.r h3 { background:#f0c8bc; } .col.k h3 { background:#ddd4c4; } .col.s h3 { background:#c5d9e8; }
+.slot { border:1px dotted #8a7a60; border-radius:4px; margin-top:0.05in; min-height:0.7in; background:rgba(255,255,255,0.5); }
+.blood { margin-top:0.12in; border:2px solid #c04a32; border-radius:6px; padding:0.1in; background:#f8e8e4; display:flex; justify-content:space-between; align-items:center; }
+.pips { display:flex; gap:0.12in; }
+.pip { width:0.5in; height:0.5in; border-radius:50%; border:2.5px solid #6e1f1f; background:#c04a32; }
+.dewbox { margin-top:0.1in; border-left:4px solid #2d6e6e; padding:0.08in 0.12in; background:#e8f0e8; font-size:9.5pt; font-style:italic; }
 </style>
 </head>
 <body>
-<div class="screen-only"><b>Print:</b> Page 1 rules (portrait) · Page 2 triage board + blood (landscape) · cut/use as table center.</div>
+<div class="screen-only"><b>Print:</b> page 1 rules · page 2 landscape board + blood.</div>
 <div class="wrap">
 
 <section class="sheet">
   <div class="masthead">
-    <div class="mtitle">Ambervale Ward Rules<small>Player reference · hand to the table</small></div>
+    <div class="mtitle">Ambervale Ward Rules<small>v2 · Throw → Claim · obfuscated tools</small></div>
   </div>
+
   <h2>The deal</h2>
-  <p>Help clear this field hospital. If <strong>everyone</strong> is Saved, the Red Cap gives you the Lann <em>The Morning Dew</em> (Quack). Work with him — he’s your attending, not your boss fight.</p>
+  <p>Help clear the ward. If <strong>everyone</strong> is Saved, the Red Cap gives you <em>The Morning Dew</em> (Quack). He’s your attending — chaotic ally, not a boss fight.</p>
 
-  <h2>On your turn</h2>
-  <ul>
-    <li>Hold at most <strong>2 patient cards</strong>. Pass extras.</li>
-    <li>Pick one held patient. Describe how you use a <strong>taught implement</strong> and/or your own abilities.</li>
-    <li>Roll the check Nathan calls. Success → patient improves one stage (or Saved from Pearldew).</li>
-    <li>Patients not in anyone’s hand are <strong>unattended</strong> and take Fear hits first.</li>
-  </ul>
+  <h2>Every round</h2>
+  <ol style="margin-left:0.2in;">
+    <li>You are <strong>dealt</strong> patient cards (hands may be uneven).</li>
+    <li><strong>30 seconds</strong> to read. Tools at your seat stay face-up.</li>
+    <li>Countdown from 10. On zero: <strong>throw all patients to the center</strong> (you cannot keep).</li>
+    <li><strong>Claim:</strong> grab up to <strong>2</strong>. If two people grab the same card, it goes to Overflow (untreated). Leftovers = untreated.</li>
+    <li>On your turn, treat a claimed patient with your <strong>Stick</strong>, seat implements, and/or your own abilities. Persuade Nathan. Roll.</li>
+  </ol>
 
-  <h2>Triage (Dew Garden names)</h2>
+  <div class="note"><strong>Tools:</strong> Descriptions are vague on purpose. Learn by trying them on patients. There is no answer key — only “that’s clever enough.”</div>
+
+  <h2>Triage</h2>
   <div class="stages">
-    <div class="st pearl"><b>Pearldew</b>Stable / minor — can wait</div>
-    <div class="st thirst"><b>Thirstleaf</b>Delayed — soon</div>
-    <div class="st snap"><b>Snapped Stem</b>Immediate — now</div>
-    <div class="st dry"><b>Dry Earth</b>Expectant — nearly impossible alone</div>
+    <div class="st g"><b>Green</b>Holding — can wait</div>
+    <div class="st y"><b>Gold</b>Waiting — soon</div>
+    <div class="st r"><b>Scarlet</b>Urgent — now</div>
+    <div class="st k"><b>Ink</b>Beyond — nearly impossible alone</div>
   </div>
-  <div class="note"><strong>Dry Earth:</strong> Don’t be surprised if the math says “not worth it.” The Red Cap disagrees. When he squeezes his cap, he’s spending his own life (public blood pips). If those hit zero, bad things.</div>
+  <div class="note"><strong>Ink:</strong> The attending may squeeze his blood-cap to force a miracle. Watch the red pips. If they hit zero, the ward loses him — and the Lann.</div>
 
-  <h2>Soft clue example (not a real ward solution)</h2>
-  <p class="note">If you ever notice that <em>pleasant smells</em> seem to help certain structural hurts, share it. Discoveries stack for the whole table. There are other Fey medical truths — find them by doing, not by asking for a spoiler list.</p>
-
-  <h2>Other ward facts</h2>
+  <h2>Also</h2>
   <ul>
-    <li>After the first stretchers clear, more arrive — expect up to <strong>10 in play</strong>.</li>
-    <li>Exhaustion stacks as the shift wears on. Clever healers may notice a <strong>break room</strong>.</li>
-    <li>Some patients can talk. Listen. War stories are not flavor only.</li>
-    <li>One patient still crackles with Pale Ring charge. That’s a problem for later.</li>
+    <li>Exhaustion stacks. A break room exists. The attending will trash-talk it.</li>
+    <li>Some patients talk. Listen for where they’re from.</li>
+    <li>One patient still crackles with Pale Ring charge.</li>
   </ul>
 </section>
 
 <section class="sheet board-sheet">
   <div class="masthead">
-    <div class="mtitle">Triage Board · Dew Stages<small>Slide patient cards into columns · Saved leaves the ward</small></div>
+    <div class="mtitle">Triage Board<small>Green · Gold · Scarlet · Ink · Saved</small></div>
   </div>
   <div class="board">
-    <div class="col pearl"><h3>Pearldew</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
-    <div class="col thirst"><h3>Thirstleaf</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
-    <div class="col snap"><h3>Snapped Stem</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
-    <div class="col dry"><h3>Dry Earth</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
-    <div class="col saved"><h3>Saved</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+    <div class="col g"><h3>Green</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+    <div class="col y"><h3>Gold</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+    <div class="col r"><h3>Scarlet</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+    <div class="col k"><h3>Ink</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
+    <div class="col s"><h3>Saved</h3><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div></div>
   </div>
   <div class="blood">
     <div>
       <div style="font-family:'Cinzel',serif;font-weight:700;color:#6e1f1f;letter-spacing:0.08em;text-transform:uppercase;font-size:10pt;">Cap Blood Bank</div>
-      <div style="font-size:9pt;color:#4a3d28;">Start at 4 · each Cap Transfusion removes one · 0 = attending down</div>
+      <div style="font-size:9pt;color:#4a3d28;">4 pips · Cap Transfusion removes one · 0 = attending down</div>
     </div>
-    <div class="pips" aria-label="4 blood pips">
-      <div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div>
-    </div>
+    <div class="pips"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
   </div>
-  <div class="dewbox">
-    <strong>Dew Garden:</strong> Beyond the mushrooms, pale grass wears morning dew even at dusk. High bead = holding. Sliding bead = worsening. Bead gone into dirt = Dry Earth. Some patients joke they’re fine while their blade is already thirsting.
-  </div>
+  <div class="dewbox"><strong>Dew Garden:</strong> Beads on the grass track prognosis. Sliding bead = worsening. Bead into dirt = Ink. Some patients swear they’re fine while their blade is already thirsting.</div>
 </section>
 
 </div>

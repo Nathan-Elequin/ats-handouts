@@ -3,236 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GM Bible — Morning Dew / Ambervale Field Hospital</title>
+<title>GM Bible v2 — Ambervale Field Hospital</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878;
-  --amber:#e6b34d; --teal:#3d9a8a; --line:#2c5440; --moss:#6a9e6e;
-  --thirst:#c8902f; --snap:#c04a32; --dry:#5a4a3a;
-}
+:root { --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878; --amber:#e6b34d; --teal:#3d9a8a; --line:#2c5440; --snap:#c04a32; }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Source Sans 3',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; padding:1.5rem; }
 .wrap { max-width:920px; margin:0 auto; padding-bottom:3rem; }
-h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.75rem; margin-bottom:0.25rem; }
-.sub { color:var(--muted); margin-bottom:1.5rem; font-size:0.95rem; }
-h2 { font-family:'Cinzel',serif; color:var(--teal); font-size:1.15rem; letter-spacing:0.06em; text-transform:uppercase; margin:2rem 0 0.75rem; border-top:2px solid var(--line); padding-top:1rem; }
-h3 { color:var(--amber); font-size:1rem; margin:1.1rem 0 0.4rem; }
-p, li { margin-bottom:0.45rem; }
-ul, ol { margin-left:1.2rem; margin-bottom:0.75rem; }
-.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.15rem; margin:0.75rem 0; }
-.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.7rem; }
+.sub { color:var(--muted); margin-bottom:1.25rem; }
+h2 { font-family:'Cinzel',serif; color:var(--teal); font-size:1.1rem; letter-spacing:0.06em; text-transform:uppercase; margin:1.75rem 0 0.65rem; border-top:2px solid var(--line); padding-top:0.9rem; }
+h3 { color:var(--amber); font-size:1rem; margin:0.9rem 0 0.35rem; }
+p, li { margin-bottom:0.4rem; } ul, ol { margin-left:1.15rem; margin-bottom:0.7rem; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0.95rem 1.1rem; margin:0.65rem 0; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; }
 @media (max-width:700px){ .grid2 { grid-template-columns:1fr; } }
 .tag { display:inline-block; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--bg); background:var(--amber); padding:2px 8px; border-radius:4px; font-weight:700; }
-.warn { border-left:4px solid var(--snap); }
-.good { border-left:4px solid var(--moss); }
-.stage { display:flex; gap:0.5rem; flex-wrap:wrap; margin:0.75rem 0; }
-.pip { padding:0.45rem 0.7rem; border-radius:6px; font-size:0.85rem; font-weight:700; }
-.pearldew { background:#2a4a32; color:#b8e0b8; }
-.thirstleaf { background:#4a3a18; color:#f0d9a0; }
-.snapped { background:#4a1a18; color:#f0b0a0; }
-.dryearth { background:#2a2218; color:#c0b090; border:1px solid #6a5a40; }
-table { width:100%; border-collapse:collapse; font-size:0.9rem; margin:0.5rem 0 1rem; }
-th, td { border:1px solid var(--line); padding:0.4rem 0.55rem; text-align:left; }
-th { background:#14241c; color:var(--amber); font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.06em; }
-.mono { font-family:ui-monospace,Consolas,monospace; font-size:0.85rem; }
-footer { margin-top:2.5rem; color:var(--muted); font-size:0.85rem; font-style:italic; text-align:center; }
+.warn { border-left:4px solid var(--snap); } .good { border-left:4px solid #6a9e6e; }
+.stages { display:flex; flex-wrap:wrap; gap:0.45rem; margin:0.6rem 0; }
+.pip { padding:0.4rem 0.65rem; border-radius:6px; font-size:0.85rem; font-weight:700; }
+.g { background:#2a4a32; color:#b8e0b8; } .y { background:#4a3a18; color:#f0d9a0; }
+.r { background:#4a1a18; color:#f0b0a0; } .k { background:#1a1a1a; color:#c0b090; border:1px solid #6a5a40; }
+table { width:100%; border-collapse:collapse; font-size:0.9rem; margin:0.4rem 0 0.9rem; }
+th, td { border:1px solid var(--line); padding:0.35rem 0.5rem; text-align:left; }
+th { background:#14241c; color:var(--amber); font-family:'Cinzel',serif; font-size:0.75rem; }
+footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:italic; text-align:center; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="tag">GM only · As They Seem</p>
+  <p class="tag">GM only · v2 · Jul 17 night revision</p>
   <h1>Ambervale Field Hospital</h1>
-  <p class="sub">Lann: <strong>The Morning Dew</strong> (Experience: Quack) · Guest: Cameron (Red Cap) · Spotlight: Edmund · ~3 hours · Canon override Jul 17 2026</p>
+  <p class="sub">Quack / The Morning Dew · Cameron Red Cap · ~3 hours · Items obfuscated · Deal → Throw → Claim</p>
 
-  <h2>1. Encounter brief (canon freeze)</h2>
-  <div class="card good">
-    <p><strong>Sensory:</strong> Care, confidence, smells of herbs and spices.</p>
-    <p><strong>Who:</strong> A Red Cap field doctor who already held Quack before the party arrives. Care + confidence became absolute: <em>I can save everyone. I will.</em> He soaks his cap in his own life-blood to power healing — flipped folklore (gauze/transfusion, not murder-trophy).</p>
-    <p><strong>Where:</strong> Ambervale — reddish earth, mushroom beds, herb gardens fed by blood in the soil (organ-donor / battlefield runoff, not “he kills patients”). Near a river (he washes only in still water).</p>
-    <p><strong>Why hurt:</strong> Casualties left behind after Summer Court vs Gloaming Court fighting north of the Gray Reach. He dragged them here.</p>
-    <p><strong>Dart wrinkle:</strong> Residual positive charge in Dart’s body (patient #01). Mid-run EMP / charge spike — continuity from Pale Ring, not the cause of the ward.</p>
-    <p><strong>Table:</strong> Ayla absent. Healers = Ennalyn, Drii, Edmund, Cameron (4). Max <strong>2 patient cards in hand</strong> each.</p>
+  <h2>What changed (v2)</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Items:</strong> Fantastical, generic, intentionally vague. Physical <em>look</em> cards only — purpose learned by testing on patients (humor + puzzle).</li>
+      <li><strong>The Stick:</strong> Universal / innate — not part of the 8. Mythically oversold. Optional fake “charge” die that does nothing useful.</li>
+      <li><strong>Teach beat:</strong> Cameron: “Find your stick. Figure the rest out. No time.”</li>
+      <li><strong>Round loop:</strong> Deal hands → 30s read → countdown → <em>Throw → Claim</em> (anti-hoard) → treat.</li>
+      <li><strong>Patients:</strong> Only ~4 soldiers; rest from scattered Feywild locales (future recognition). Lovers are not soldiers.</li>
+      <li><strong>Triage names:</strong> Green / Gold / Scarlet / Ink (shoutable; MCI-homage without Pearldew).</li>
+    </ul>
   </div>
 
-  <h2>2. Session flow (~3 hours)</h2>
+  <h2>Design note: why not “keep your two”?</h2>
+  <div class="card warn">
+    <p>If players may <em>keep</em> during the snap, optimal play is calm coordination: everyone holds two, chaos dies.</p>
+    <p><strong>Rule (locked for v2): Throw → Claim.</strong></p>
+    <ol>
+      <li><strong>Deal</strong> patient cards (often uneven on purpose: e.g. 3 / 3 / 2 / 2).</li>
+      <li><strong>30 seconds</strong> to read patients aloud/quietly. Item cards stay face-up at seats.</li>
+      <li>Countdown from 10. On <strong>zero</strong>: everyone simultaneously puts <em>all</em> patients into the center (no keeping).</li>
+      <li>Immediately: <strong>Claim</strong> — each healer may take up to <strong>2</strong>. If two hands hit the same card, it goes to <strong>Overflow</strong> (untreated this round; Fear magnet).</li>
+      <li>Cards left in the pile after claim = untreated.</li>
+    </ol>
+    <p>Coordination becomes <em>reading the table in 30s</em>, then a messy grab — not a polite keep. Overstuffing still happens when two people dive for the “easy” patient.</p>
+    <p><strong>Softer alt (if Claim feels too mean):</strong> Must-Pass-One — if you were dealt ≥2, you must throw at least one before claim. Prefer Throw→Claim first.</p>
+  </div>
+
+  <h2>Round structure</h2>
   <ol>
-    <li><strong>Lead-in (10–20 min):</strong> Court drama / tip — Drii needs blood/heart look; doctor at Ambervale.</li>
-    <li><strong>Approach:</strong> Red soil, mushrooms, iron-boot tracks, blood-soaked gauze-cap vibes. Players may assume villain; they’re wrong.</li>
-    <li><strong>Roadside surgery:</strong> Barely-alive casualty outside. Telegraph group surgery. They almost certainly use it and succeed.</li>
-    <li><strong>Entrance:</strong> Cameron pops from a mushroom / cabinet / ground. “You’re healers. Scrub in. Interns. Now.”</li>
-    <li><strong>Deal (above table):</strong> He will give the Lann <em>if they save every patient</em>.</li>
-    <li><strong>Crash course (5–8 min):</strong> He teaches the 8 item-abilities; divvy ~2 each (including himself).</li>
-    <li><strong>Hospital loop:</strong> Triage board + patient cards + Fear escalations + Dew Garden tells.</li>
-    <li><strong>Wave ramp:</strong> Start smaller; after <strong>first 4 cleared</strong>, ramp to <strong>10 in play</strong> (8 attended max → 2 always unattended).</li>
-    <li><strong>Modules:</strong> Break-room exhaustion, lovers bump, Dart charge/EMP, blood-bank spends on Dry Earth.</li>
-    <li><strong>Climax:</strong> Final simultaneous batch of remaining criticals.</li>
-    <li><strong>Resolution:</strong> Win → heartfelt give + optional arm surgery. Fail paths → fixed outcomes below. Puck exit if Lann leaves him.</li>
+    <li>Fear / Dew / blood bookkeeping from last round.</li>
+    <li><strong>Deal</strong> from the Active stack (ramp: after 4 Saved, keep ~10 in the ecosystem).</li>
+    <li><strong>30s read</strong> → <strong>10-count</strong> → Throw → Claim.</li>
+    <li>Each healer with 1–2 patients: creative use of Stick + seat items + own abilities; Duality rolls.</li>
+    <li>Cameron may Bark Advice / Cap Transfusion / Never Rest as before.</li>
+    <li>Modules (break room, lovers, Dart EMP, climax) unchanged in intent.</li>
   </ol>
 
-  <h2>3. Win / lose (fairly fixed)</h2>
+  <h2>Triage (renamed)</h2>
+  <div class="stages">
+    <span class="pip g">Green — holding / minor</span>
+    <span class="pip y">Gold — waiting / delayed</span>
+    <span class="pip r">Scarlet — urgent / immediate</span>
+    <span class="pip k">Ink — beyond / expectant</span>
+  </div>
+  <div class="card">
+    <p>Ink ≈ impossible PC DC (~40). Cap Transfusion +~20, costs 1 blood pip (bank of 4).</p>
+    <p>Improve one step on success; Saved removes from play.</p>
+  </div>
+
+  <h2>The Stick (universal)</h2>
+  <div class="card good">
+    <p>Every healer forages / is “chosen by” a plain wood stick within five feet of the ward. Cameron hyperexaggerates it: wisdom-on-contact, medicinal destiny, never for sale.</p>
+    <p><strong>Truth:</strong> it’s a poking stick. Diagnosis via poke. Optional prop: d6 “charges” that count down on use — nothing happens at zero except maybe it snaps after the 6th poke (comedy).</p>
+    <p>Not one of the eight seat items.</p>
+  </div>
+
+  <h2>Eight seat items (obfuscated)</h2>
+  <div class="card">
+    <p>Place two item cards at each of four seats before play. Players grab nearest. <strong>Do not explain purpose.</strong> Print look-cards only (see teaching/item kit).</p>
+    <table>
+      <tr><th>#</th><th>Prop name</th><th>Secret purpose (GM)</th></tr>
+      <tr><td>1</td><td>Mercy Mallet</td><td>Sedate / knock out; stabilize but drop one triage step</td></tr>
+      <tr><td>2</td><td>Thirstlings (leech-kin)</td><td>Blood / humor / fever-magic drain</td></tr>
+      <tr><td>3</td><td>Crystal Claw Reel</td><td>Remove foreign bodies / shrapnel / “bad things inside”</td></tr>
+      <tr><td>4</td><td>Mooncalf Pitch</td><td>Seal / close wounds (fey dung resin — do not over-explain)</td></tr>
+      <tr><td>5</td><td>Gigglecap</td><td>Feed mushroom → make patient laugh → effect lands</td></tr>
+      <tr><td>6</td><td>Scandal Blade</td><td>“Mega scalpel” / sword — amputate / cut away</td></tr>
+      <tr><td>7</td><td>Whatever-Drip</td><td>IV — player invents fluid contents; you rule</td></tr>
+      <tr><td>8</td><td>Gearvise Bracer</td><td>Splint / crank-vise — hold / set / brace</td></tr>
+    </table>
+    <p>Optional comedy combo: Mallet + Scandal at same seat = bloodlust ward. Prefer player self-select unless you want that bit.</p>
+    <p>Hidden soft truths still apply (bones ↔ pleasant smell, etc.) — discovered by play, not handout.</p>
+    <p><strong>Creative Dart:</strong> if someone uses Dart’s charged body as a defibrillator on Ink/Scarlet arrhythmia, allow a free save; trade-off = spike Dart’s charge.</p>
+  </div>
+
+  <h2>Patients</h2>
+  <div class="card">
+    <p><strong>14 total.</strong> ~4 court soldiers (plot: both courts leave wounded). Rest: civilians / travelers from map locales (Ambervale environs, Pale Ring fallout adjacent, Gray Reach road, Summer fringe villages, Gloaming mist-hamlets, river folk, mushroom pilgrims). Lovers = non-soldiers from different regions.</p>
+    <p>Reward later: returning to a locale and recognizing someone they saved.</p>
+  </div>
+
+  <h2>Win / lose / blood / modules</h2>
   <div class="grid2">
     <div class="card good">
-      <h3>Party / Cameron “succeed”</h3>
+      <h3>Still fixed</h3>
       <ul>
-        <li>All living patients leave Dry Earth / are Saved.</li>
-        <li>Blood bank may be spent but not emptied fatally at the end (at least 1 pip left) <em>or</em> emptied only as heroic last-act (see arm surgery).</li>
-        <li>Cameron gives Quack freely. Optional: last-act surgery unlocks Edmund’s arms (moderate DC; may spend 1 blood).</li>
+        <li>Save everyone → give Quack</li>
+        <li>Blood 0 → Lann lost with him</li>
+        <li>Death on watch → may gift Lann to dying sketch</li>
+        <li>Break room, lovers bump, EMP, climax batch, arm surgery</li>
       </ul>
     </div>
-    <div class="card warn">
-      <h3>Fail / lose Lann</h3>
-      <ul>
-        <li><strong>Blood bank hits 0:</strong> Cameron dies (or ceases); Lann lost/explodes with him — party does not reclaim.</li>
-        <li><strong>Any patient dies while he still has blood:</strong> He may try to gift the Lann to the dying sketch (final act). Party must persuade him otherwise (Jordan-twist allowed only as <em>his</em> choice after the fail is real).</li>
-        <li>Beating him up for the Lann is available but boring — telegraphed as the lesser story.</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>4. Triage stages (Dew Garden)</h2>
-  <div class="stage">
-    <span class="pip pearldew">Pearldew — stable / minor</span>
-    <span class="pip thirstleaf">Thirstleaf — delayed</span>
-    <span class="pip snapped">Snapped Stem — immediate</span>
-    <span class="pip dryearth">Dry Earth — expectant</span>
-  </div>
-  <div class="card">
-    <p>Homage to real MCI: Minor → Delayed → Immediate → Expectant.</p>
-    <ul>
-      <li><strong>Pearldew:</strong> Holding. Low DC. Can wait.</li>
-      <li><strong>Thirstleaf:</strong> Needs care soon. Medium DC.</li>
-      <li><strong>Snapped Stem:</strong> Critical. High DC. Priority.</li>
-      <li><strong>Dry Earth:</strong> For PCs, treat DC as effectively impossible (~40). Cameron’s <strong>Cap Transfusion</strong> adds ~+20 and lets him attempt; each attempt costs <strong>1 blood pip</strong>.</li>
-    </ul>
-    <p><strong>Saved:</strong> Remove card from board to the Saved stack. Counts toward the “first 4 cleared” ramp.</p>
-  </div>
-
-  <h2>5. Core loop (one turn)</h2>
-  <ol>
-    <li>On your turn, you may hold ≤2 patients. Untended patients in play are vulnerable to Fear.</li>
-    <li>Choose one held patient. Creatively apply an <strong>item</strong> and/or your own experience/domain ability.</li>
-    <li>If fiction matches a soft Fey medical truth (GM cheat sheet), grant advantage / +die / lower DC.</li>
-    <li>Roll Duality (or appropriate DH check). Success → improve one stage (or Saved from Pearldew). Failure → no improve; optional complication.</li>
-    <li>Fear on the roll → escalate per Fear table.</li>
-    <li>Cameron may use reaction <strong>Bark Advice</strong> between PC actions (see score).</li>
-  </ol>
-
-  <h2>6. Patient economy (14 total)</h2>
-  <div class="card">
-    <p><strong>14 patients</strong> (cards). One is Dart. Others: Summer / Gloaming Fey soldiers &amp; camp followers.</p>
-    <table>
-      <tr><th>Phase</th><th>In play</th><th>Notes</th></tr>
-      <tr><td>Open</td><td>6</td><td>Includes roadside success already Saved or Pearldew; introduce Dart early but don’t EMP yet</td></tr>
-      <tr><td>After 4 Saved</td><td>Ramp to 10</td><td>Bring remaining cards in waves; keep 10 out until endgame</td></tr>
-      <tr><td>Hands</td><td>Max 8 attended</td><td>4 healers × 2 → <strong>2 always unattended</strong> while 10 are out</td></tr>
-      <tr><td>Climax</td><td>Final batch</td><td>Force simultaneous pressure on last 3–4 criticals</td></tr>
-    </table>
-  </div>
-
-  <h2>7. Fear distribution (~45% of Duality rolls)</h2>
-  <div class="card">
-    <p><strong>Default scheme (use this):</strong> When Fear is rolled, escalate <em>one</em> patient:</p>
-    <ol>
-      <li>Prefer an <strong>unattended</strong> patient in play.</li>
-      <li>Else prefer Thirstleaf / Snapped Stem over Pearldew.</li>
-      <li>Else escalate a random held patient (the work got harder mid-procedure).</li>
-    </ol>
-    <p>Pearldew → Thirstleaf → Snapped Stem → Dry Earth.</p>
-    <p><strong>Soft dial:</strong> If the table is crushing it, Fear may escalate <em>all unattended</em> one step (announce once when you flip this dial). If struggling, Fear only ticks unattended Pearldew→Thirstleaf.</p>
-  </div>
-
-  <h2>8. Blood bank (4 pips)</h2>
-  <div class="card warn">
-    <p>Public bad-countdown prop. Each Cap Transfusion on Dry Earth: −1 pip, +~20 to that attempt.</p>
-    <p>At 1 pip: telegraph death. At 0: he dies; Lann gone. Players should fear this like Denton’s meter.</p>
-    <p>He may stubbornly re-spend on the same doomed patient (foil: “always worth it”) while PCs argue triage ethics.</p>
-  </div>
-
-  <h2>9. Modules (all core)</h2>
-  <div class="grid2">
     <div class="card">
-      <h3>Break room</h3>
-      <p>After each wave, stack <strong>exhaustion</strong> (−1 / stacking disadvantage on checks). An action spent resting in the break room clears exhaustion for that healer for the rest of the encounter (first rest reveals the rule). Cameron never rests; he trash-talks the break room as reverse telegraph.</p>
-    </div>
-    <div class="card">
-      <h3>Lovers</h3>
-      <p>Patients <strong>#07 Lark-Split Banner</strong> (Summer) and <strong>#12 Ash-Under-Snow</strong> (Gloaming) share mirrored sensory tells. If the party seats them adjacent / treats them as a pair / names the bond, both jump one stage better immediately (once).</p>
-    </div>
-    <div class="card">
-      <h3>Dart charge / EMP</h3>
-      <p>Patient #01 still carries Pale Ring charge. Hint: dangerous to the ward. Edmund/Cameron foil if someone says dump him. Mid-run: EMP drops <strong>every</strong> in-play patient one stage (or surge his personal meter). Negating charge = lean into “negative” thoughts / roleplay (callback).</p>
-    </div>
-    <div class="card">
-      <h3>Climax batch</h3>
-      <p>When ≤4 remain unsaved (or blood ≤2), declare Code Dew: all remaining must be stabilized this round/wave or they slide toward Dry Earth. Encourage cross-pass of patients.</p>
-    </div>
-    <div class="card">
-      <h3>Edmund arm surgery</h3>
-      <p>On good ending with ≥1 blood left: Cameron may attempt one surgery to restore Edmund’s arms. Moderate DC. May spend last blood for the +20. Success = permanent unlock; fails gracefully if not.</p>
-    </div>
-    <div class="card">
-      <h3>Dew Garden</h3>
-      <p>Required visual/narration. See §11. Dew height = patient prognosis. Nonchalant “my foot hurts” guy still dripping toward Dry Earth.</p>
+      <h3>Fear</h3>
+      <p>Prefer Overflow / unclaimed / untreated, then Gold/Scarlet. Soft dial: escalate all untreated if table is crushing it.</p>
     </div>
   </div>
 
-  <h2>10. Soft Fey medical truths (GM cheat — do not print for players)</h2>
-  <div class="card">
-    <ul>
-      <li><strong>Bones</strong> answer to <em>pleasant smell</em> (herbs, spice, song, perfume, flowers).</li>
-      <li><strong>Iron / cold wounds</strong> hate running river water; prefer stillwater / bowl.</li>
-      <li><strong>Summer patients</strong> brighten under warm candle/orange light metaphors; <strong>Gloaming</strong> under blue/night candle.</li>
-      <li><strong>Odd counts</strong> soothe Red Cap superstition (3 sutures, 1+2 leeches, etc.).</li>
-      <li><strong>Open wounds</strong> care that they’re closed more than how (Sealing Pitch comedy).</li>
-      <li><strong>Head / memory / spirit pressure</strong> → Trepaner’s Spool / extract.</li>
-      <li><strong>Bad humors / “poison blood”</strong> → Blue-Wing Leeches.</li>
-      <li><strong>Finding the hidden hurt</strong> → Pointing Reed first, then treat.</li>
-    </ul>
-  </div>
-
-  <h2>11. Dew Garden — narration tools</h2>
-  <div class="card">
-    <p><strong>Enter blurb:</strong></p>
-    <p class="mono">Beyond the mushroom ring, a plot of pale grass drinks the red soil. Every blade wears a bead of morning dew — even at dusk — and the beads do not fall equally. Some shine fat and high. Some cling halfway. Some are already sliding toward the dirt. If you lean close, each bead holds a tiny reflection of a face in the ward.</p>
-    <p><strong>During play:</strong> When a patient worsens, narrate their bead slipping. When Saved, the bead soaks into the blade and the grass stands taller. Cameron’s morning ritual: he walks the rows to remember why he won’t quit.</p>
-    <p><strong>Table prop:</strong> Optional small tray of grass/wheat stalks with water beads, or just print the Dew card and point at stages on the triage board as “dew height.”</p>
-  </div>
-
-  <h2>12. DC bands (starting points — dial live)</h2>
-  <table>
-    <tr><th>Stage</th><th>Base DC</th><th>Notes</th></tr>
-    <tr><td>Pearldew</td><td>12</td><td>Easy wins build confidence</td></tr>
-    <tr><td>Thirstleaf</td><td>15</td><td></td></tr>
-    <tr><td>Snapped Stem</td><td>18–20</td><td></td></tr>
-    <tr><td>Dry Earth</td><td>~40</td><td>PC solo nearly impossible; Cap Transfusion +20</td></tr>
-  </table>
-
-  <h2>13. Balance dials (3-hour)</h2>
+  <h2>Assets</h2>
   <ul>
-    <li>Expected blood spends: 1–3 if they triage well; 4 = tragedy ending.</li>
-    <li>EMP once, mid-late, not opener.</li>
-    <li>If &gt;30 min ahead of pace, spawn an extra Thirstleaf pair from “late stretchers.”</li>
-    <li>If drowning, quiet a Fear escalation or reveal one soft truth aloud via Cameron’s Bark Advice success.</li>
+    <li>cameron-morning-dew-secret-score.html</li>
+    <li>cameron-morning-dew-item-cards.html (obfuscated look cards + Stick)</li>
+    <li>cameron-morning-dew-player-kit.html</li>
+    <li>cameron-morning-dew-patient-cards.html</li>
   </ul>
 
-  <h2>14. Lore drip (patients may say)</h2>
-  <ul>
-    <li>Both courts left their wounded.</li>
-    <li>Queens’ war is real; Summer hospitality hasn’t mentioned it.</li>
-    <li>Gray Reach crossings; odd numbers; blood in soil = why Ambervale herbs grow.</li>
-    <li>Drii blood: two courts’ changeling lineages (only if investigation scene happens — do not dump).</li>
-  </ul>
-
-  <h2>15. Asset checklist</h2>
-  <ul>
-    <li>cameron-morning-dew-secret-score.html — Cameron</li>
-    <li>cameron-morning-dew-teaching-kit.html — 8 items (he teaches from this)</li>
-    <li>cameron-morning-dew-player-kit.html — rules + triage board + blood + Dew</li>
-    <li>cameron-morning-dew-patient-cards.html — 14 cards</li>
-  </ul>
-
-  <footer>As They Seem · Quack / The Morning Dew · Ambervale · GM Bible v1</footer>
+  <footer>As They Seem · Morning Dew · GM Bible v2</footer>
 </div>
 </body>
 </html>

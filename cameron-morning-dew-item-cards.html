@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item Cards — Obfuscated Ward Implements</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cinzel+Decorative:wght@700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size:8.5in 11in; margin:0.4in; }
+:root { --green-deep:#14271d; --green-mid:#2c5440; --amber:#c8902f; --parchment:#f4ead3; --ink:#2a2218; --soft:#4a3d28; --teal:#2d6e6e; }
+body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--ink); font-size:10pt; }
+.wrap { max-width:8.2in; margin:0 auto; padding:0.15in 0; }
+.sheet { background:var(--parchment); border:1.5px solid var(--green-mid); box-shadow:0 0 0 3px var(--parchment), 0 0 0 4.5px var(--amber); padding:0.28in; margin-bottom:0.3in; }
+.sheet + .sheet { page-break-before:always; }
+h1 { font-family:'Cinzel Decorative','Cinzel',serif; font-size:14pt; color:var(--green-deep); }
+.sub { font-size:9pt; color:var(--soft); font-style:italic; margin:0.05in 0 0.12in; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:0.12in; }
+.card {
+  border:1.5px solid var(--green-mid); border-radius:6px; padding:0.12in 0.14in; background:#fffef8;
+  min-height:2.35in; break-inside:avoid;
+}
+.card.stick { border-left:5px solid var(--amber); background:#fff8e8; }
+.card .label { font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.12em; text-transform:uppercase; color:#8a6d3b; }
+.card .name { font-family:'Cinzel',serif; font-weight:700; font-size:12pt; color:var(--teal); margin:0.03in 0; }
+.card .look { font-size:9.5pt; line-height:1.4; }
+.card .hint { margin-top:0.08in; font-size:8.5pt; font-style:italic; color:var(--soft); border-top:1px dotted #c0b090; padding-top:0.05in; }
+.gm { font-size:7.5pt; color:#9a7a50; margin-top:0.05in; }
+.screen-only { max-width:8.2in; margin:0.1in auto; background:#1d3a2a; color:#f0d9a0; border:1px solid #c8902f; border-radius:6px; padding:0.1in 0.18in; font-size:10pt; }
+@media print { .screen-only, .gm { display:none !important; } body { background:#fff; } }
+</style>
+</head>
+<body>
+<div class="screen-only"><b>Print &amp; cut.</b> Stick card ×4 (one per healer). Seat items: 2 per seat, face-up, unexplained. GM lines hide on print.</div>
+<div class="wrap">
+
+<section class="sheet">
+  <h1>The Stick · Universal</h1>
+  <p class="sub">Print four copies. Cameron’s only “lesson.” Mythically oversold. It’s a stick.</p>
+  <div class="grid">
+    <div class="card stick">
+      <div class="label">Innate · finds you</div>
+      <div class="name">Rod of Medicinal Accord</div>
+      <div class="look">A length of pale wood, still warm from the soil. Grain that seems to lean toward suffering. The attending swears it cannot be bought — only answered when it calls your name (preferably within five feet of the ward).</div>
+      <div class="hint">“Gives wisdom to every user on the patient upon contact. The power of having been poked.”</div>
+      <div class="gm">GM: just a poking stick. Optional d6 “charges” → nothing; may snap after 6 uses.</div>
+    </div>
+    <div class="card stick">
+      <div class="label">Innate · finds you</div>
+      <div class="name">Rod of Medicinal Accord</div>
+      <div class="look">A length of pale wood, still warm from the soil. Grain that seems to lean toward suffering. The attending swears it cannot be bought — only answered when it calls your name (preferably within five feet of the ward).</div>
+      <div class="hint">“Gives wisdom to every user on the patient upon contact. The power of having been poked.”</div>
+    </div>
+    <div class="card stick">
+      <div class="label">Innate · finds you</div>
+      <div class="name">Rod of Medicinal Accord</div>
+      <div class="look">A length of pale wood, still warm from the soil. Grain that seems to lean toward suffering. The attending swears it cannot be bought — only answered when it calls your name (preferably within five feet of the ward).</div>
+      <div class="hint">“Gives wisdom to every user on the patient upon contact. The power of having been poked.”</div>
+    </div>
+    <div class="card stick">
+      <div class="label">Innate · finds you</div>
+      <div class="name">Rod of Medicinal Accord</div>
+      <div class="look">A length of pale wood, still warm from the soil. Grain that seems to lean toward suffering. The attending swears it cannot be bought — only answered when it calls your name (preferably within five feet of the ward).</div>
+      <div class="hint">“Gives wisdom to every user on the patient upon contact. The power of having been poked.”</div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <h1>Seat implements 1–4</h1>
+  <p class="sub">Vague on purpose. Experiment. Persuade Nathan your use is good.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Mercy Mallet</div>
+      <div class="look">Short wooden mallet wrapped in spice-stained cloth. Smells like cloves and apologies. The head is soft. The intention is not.</div>
+      <div class="hint">Heavy enough to change a mind — or at least a shift.</div>
+      <div class="gm">Sedate; drop one triage step when used to “stabilize.”</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Thirstlings</div>
+      <div class="look">A jar of fat, singing worms with iridescent blue wing-nubs. They press against the glass whenever blood is near. They look helpful. They look hungry.</div>
+      <div class="hint">Living things that take what you offer them.</div>
+      <div class="gm">Leech-kin — drain humors / fever / bad blood-magic.</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Crystal Claw Reel</div>
+      <div class="look">A brass-and-quartz hand-crane with silk line and a tiny grasping claw. Looks stolen from a carnival. Hums when pointed at metal or regret.</div>
+      <div class="hint">For retrieving what should not remain.</div>
+      <div class="gm">Foreign body / shrapnel / extract broadly.</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Mooncalf Pitch</div>
+      <div class="look">A pot of black-green sticky resin. Label illegible in three languages. Warm. Wrong. Effective-looking. Harvest notes mention “merry paddocks” and then stop.</div>
+      <div class="hint">If it closes, it counts.</div>
+      <div class="gm">Fey dung sealant — close wounds. Comedy, not forced RP gross-out.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <h1>Seat implements 5–8</h1>
+  <p class="sub">Same rules. No correct answer list — only persuasion.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Gigglecap</div>
+      <div class="look">A pale mushroom that faintly giggles when squeezed. Spores smell like orchard wine. Comes with a wooden spoon and no instructions.</div>
+      <div class="hint">Feed. Then something must be funny.</div>
+      <div class="gm">Patient must laugh (roleplay) for effect — anesthesia / ease / weird cure.</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Scandal Blade</div>
+      <div class="look">A full short-sword polished like a surgical tray. Too big for a scalpel. Too clean for a battlefield. The attending calls it a scalpel anyway.</div>
+      <div class="hint">For decisive separations.</div>
+      <div class="gm">Amputation / cut away lesions / parasites / limbs.</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Whatever-Drip</div>
+      <div class="look">A clear bladder on a vine-tube with a bone needle. Empty. Waiting. The tag says only: CONTENTS — YES.</div>
+      <div class="hint">Fill it with whatever the forest (or your pockets) provide.</div>
+      <div class="gm">IV — player invents fluid; you rule outcome.</div>
+    </div>
+    <div class="card">
+      <div class="label">Ward implement</div>
+      <div class="name">Gearvise Bracer</div>
+      <div class="look">A wooden-and-brass cuff with a hand-crank and too many teeth. Clicks when tightened. Looks like it could hold a bone — or a door — or a secret.</div>
+      <div class="hint">For things that must not move.</div>
+      <div class="gm">Splint / set / brace / hold in place.</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
