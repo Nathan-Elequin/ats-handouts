@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM Console · Morning Dew</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878;
+  --amber:#e6b34d; --teal:#3d9a8a; --line:#2c5440; --snap:#c04a32;
+  --soldier:#7c3a1d; --lover:#8a4a7a; --dart:#8a1c14; --locale:#2d6e6e;
+  --green:#2a4a32; --green-fg:#b8e0b8;
+  --gold:#4a3a18; --gold-fg:#f0d9a0;
+  --scarlet:#4a1a18; --scarlet-fg:#f0b0a0;
+  --ink-tri:#1a1a1a; --ink-fg:#c0b090;
+  --drawer-w:420px;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { height:100%; }
+body {
+  font-family:'Source Sans 3',system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.45;
+  display:flex; flex-direction:column; min-height:100vh;
+}
+button, select, input { font:inherit; color:inherit; }
+button { cursor:pointer; border:none; background:none; }
+button:focus-visible, select:focus-visible, input:focus-visible {
+  outline:2px solid var(--amber); outline-offset:2px;
+}
+
+/* ── Top bar ── */
+.topbar {
+  position:sticky; top:0; z-index:40;
+  background:#0c1510ee; backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  padding:0.55rem 0.85rem 0.65rem;
+  display:flex; flex-wrap:wrap; align-items:center; gap:0.65rem 1rem;
+}
+.topbar h1 {
+  font-family:'Cinzel',serif; color:var(--amber); font-size:1.05rem;
+  white-space:nowrap;
+}
+.priv {
+  font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:#14271d; background:var(--snap); padding:0.15rem 0.45rem;
+  border-radius:3px; font-weight:700;
+}
+.controls { display:flex; flex-wrap:wrap; align-items:center; gap:0.55rem 0.85rem; flex:1; }
+.ctrl {
+  display:flex; align-items:center; gap:0.35rem;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:8px; padding:0.28rem 0.5rem;
+}
+.ctrl label {
+  font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted);
+}
+.ctrl .val { font-weight:700; min-width:1.4rem; text-align:center; color:var(--amber); }
+.btn-sm {
+  width:1.55rem; height:1.55rem; border-radius:5px;
+  background:#14241c; border:1px solid var(--line); color:var(--amber);
+  font-weight:700; line-height:1; display:inline-flex; align-items:center; justify-content:center;
+}
+.btn-sm:hover { background:#1e3328; border-color:var(--amber); }
+.btn-reset {
+  font-size:0.75rem; font-weight:700; padding:0.35rem 0.65rem;
+  border-radius:6px; background:#3a1a18; border:1px solid #6a3a30;
+  color:#f0b0a0;
+}
+.btn-reset:hover { background:#4a2220; }
+
+/* Blood pips */
+.pips { display:flex; gap:0.28rem; }
+.pip {
+  width:1.35rem; height:1.35rem; border-radius:50%;
+  border:2px solid #8a3030; background:#2a1010; cursor:pointer;
+  transition:background .15s, box-shadow .15s;
+}
+.pip.on { background:#c04a32; box-shadow:0 0 8px #c04a3288; }
+.pip:hover { border-color:var(--amber); }
+
+/* Fear dial */
+.fear-btns { display:flex; gap:0.2rem; }
+.fear-btns button {
+  font-size:0.72rem; font-weight:700; padding:0.25rem 0.45rem;
+  border-radius:5px; border:1px solid var(--line); background:#14241c; color:var(--muted);
+}
+.fear-btns button.active[data-f="low"] { background:var(--green); color:var(--green-fg); border-color:#4a7a52; }
+.fear-btns button.active[data-f="med"] { background:var(--gold); color:var(--gold-fg); border-color:#8a6a28; }
+.fear-btns button.active[data-f="high"] { background:var(--scarlet); color:var(--scarlet-fg); border-color:#8a3a30; }
+
+.saved-chip {
+  font-family:'Cinzel',serif; font-size:0.72rem; color:var(--teal);
+  font-weight:700;
+}
+.saved-chip b { color:var(--amber); font-size:1rem; }
+
+/* Progress */
+.progress-wrap {
+  width:100%; display:flex; gap:0.75rem; flex-wrap:wrap;
+  margin-top:0.15rem;
+}
+.prog {
+  flex:1; min-width:140px;
+}
+.prog-label {
+  font-size:0.65rem; color:var(--muted); text-transform:uppercase;
+  letter-spacing:0.06em; margin-bottom:0.15rem; display:flex; justify-content:space-between;
+}
+.bar {
+  height:6px; background:#0a100c; border-radius:4px; overflow:hidden; border:1px solid var(--line);
+}
+.bar > i {
+  display:block; height:100%; background:linear-gradient(90deg, var(--teal), var(--amber));
+  width:0%; transition:width .25s ease;
+}
+
+/* Tabs */
+.tabs {
+  display:flex; gap:0.25rem; padding:0.45rem 0.85rem 0;
+  background:#0c1510; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:30;
+}
+.tab {
+  font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.06em;
+  padding:0.5rem 1.1rem; border-radius:8px 8px 0 0;
+  color:var(--muted); border:1px solid transparent; border-bottom:none;
+}
+.tab:hover { color:var(--ink); }
+.tab.active {
+  color:var(--amber); background:var(--bg);
+  border-color:var(--line); position:relative;
+}
+.tab.active::after {
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--bg);
+}
+
+/* Panels */
+.panels { flex:1; display:flex; flex-direction:column; min-height:0; }
+.panel { display:none; flex:1; padding:0.85rem; overflow:auto; }
+.panel.active { display:block; }
+
+/* ── Run tab ── */
+.run-layout {
+  display:grid; grid-template-columns:1fr 300px; gap:0.9rem; align-items:start;
+  max-width:1200px; margin:0 auto;
+}
+@media (max-width:960px) {
+  .run-layout { grid-template-columns:1fr; }
+  .sticky-ref { position:static !important; }
+}
+.collapse {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  margin-bottom:0.55rem; overflow:hidden;
+}
+.collapse > summary {
+  list-style:none; cursor:pointer; padding:0.7rem 0.9rem;
+  font-family:'Cinzel',serif; color:var(--teal); font-size:0.88rem;
+  letter-spacing:0.04em; display:flex; align-items:center; gap:0.5rem;
+  user-select:none;
+}
+.collapse > summary::-webkit-details-marker { display:none; }
+.collapse > summary::before {
+  content:'▸'; color:var(--amber); font-size:0.75rem; transition:transform .15s;
+}
+.collapse[open] > summary::before { transform:rotate(90deg); }
+.collapse .body { padding:0 0.9rem 0.85rem; color:var(--ink); font-size:0.9rem; }
+.collapse .body ul, .collapse .body ol { margin:0.35rem 0 0.35rem 1.15rem; }
+.collapse .body li { margin-bottom:0.25rem; }
+.collapse .body p { margin-bottom:0.4rem; }
+.collapse .body strong { color:var(--amber); }
+
+.round-checks {
+  background:#14241c; border:1px solid var(--line); border-radius:8px;
+  padding:0.65rem 0.75rem; margin-top:0.5rem;
+}
+.round-checks h3 {
+  font-family:'Cinzel',serif; font-size:0.75rem; color:var(--amber);
+  letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.45rem;
+}
+.check-row {
+  display:flex; align-items:flex-start; gap:0.45rem;
+  padding:0.28rem 0; border-bottom:1px dotted #2c544088; font-size:0.88rem;
+}
+.check-row:last-child { border-bottom:none; }
+.check-row input { margin-top:0.2rem; accent-color:var(--amber); width:1rem; height:1rem; }
+.check-row.done span { text-decoration:line-through; color:var(--muted); }
+
+.sticky-ref {
+  position:sticky; top:0.5rem;
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:0.75rem 0.85rem;
+}
+.sticky-ref h3 {
+  font-family:'Cinzel',serif; color:var(--amber); font-size:0.8rem;
+  letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem;
+}
+.sticky-ref .tag-row { display:flex; flex-wrap:wrap; gap:0.3rem; margin:0.4rem 0; }
+.pip-tag {
+  font-size:0.72rem; font-weight:700; padding:0.25rem 0.45rem; border-radius:5px;
+}
+.pip-tag.g { background:var(--green); color:var(--green-fg); }
+.pip-tag.y { background:var(--gold); color:var(--gold-fg); }
+.pip-tag.r { background:var(--scarlet); color:var(--scarlet-fg); }
+.pip-tag.k { background:var(--ink-tri); color:var(--ink-fg); border:1px solid #6a5a40; }
+.sticky-ref dl { font-size:0.82rem; }
+.sticky-ref dt { color:var(--teal); font-weight:700; margin-top:0.4rem; }
+.sticky-ref dd { color:var(--muted); margin-left:0; }
+
+/* ── Ward tab ── */
+.ward-toolbar {
+  display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center;
+  margin-bottom:0.7rem; max-width:1400px; margin-left:auto; margin-right:auto;
+}
+.filter-chip {
+  font-size:0.75rem; font-weight:700; padding:0.3rem 0.65rem;
+  border-radius:999px; border:1px solid var(--line); background:var(--card);
+  color:var(--muted);
+}
+.filter-chip.active {
+  background:var(--amber); color:#14271d; border-color:var(--amber);
+}
+.filter-chip:hover:not(.active) { border-color:var(--teal); color:var(--ink); }
+
+.ward-shell {
+  display:grid; grid-template-columns:1fr; gap:0;
+  max-width:1400px; margin:0 auto; position:relative;
+}
+.ward-shell.drawer-open {
+  grid-template-columns:1fr var(--drawer-w);
+  gap:0.75rem;
+}
+@media (max-width:900px) {
+  .ward-shell.drawer-open { grid-template-columns:1fr; }
+  .drawer {
+    position:relative !important; width:100% !important;
+    max-height:none !important; border-radius:10px !important;
+  }
+}
+
+.roster {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:0.55rem;
+}
+
+.tile {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:0.55rem 0.6rem 0.6rem; cursor:pointer; position:relative;
+  border-left:5px solid var(--locale);
+  transition:border-color .15s, box-shadow .15s, transform .1s;
+  text-align:left; width:100%; color:inherit;
+}
+.tile:hover { border-color:var(--amber); box-shadow:0 0 0 1px var(--amber); }
+.tile.selected { box-shadow:0 0 0 2px var(--amber); background:#1e3428; }
+.tile.role-soldier { border-left-color:var(--soldier); }
+.tile.role-lover { border-left-color:var(--lover); }
+.tile.role-dart { border-left-color:var(--dart); }
+.tile.role-locale { border-left-color:var(--locale); }
+.tile.saved-tile { opacity:0.72; }
+.tile .num {
+  font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.1em;
+  color:var(--muted); text-transform:uppercase;
+}
+.tile .title {
+  font-family:'Cinzel',serif; font-size:0.92rem; color:var(--amber);
+  margin:0.1rem 0 0.35rem; line-height:1.2;
+}
+.tile-meta { display:flex; flex-wrap:wrap; gap:0.3rem; align-items:center; margin-bottom:0.35rem; }
+.role-badge {
+  font-size:0.62rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  padding:0.12rem 0.4rem; border-radius:3px; color:#fff;
+}
+.role-badge.soldier { background:var(--soldier); }
+.role-badge.lover { background:var(--lover); }
+.role-badge.dart { background:var(--dart); }
+.role-badge.locale { background:var(--locale); }
+
+.tile-ctrls {
+  display:flex; flex-wrap:wrap; gap:0.35rem; align-items:center;
+  font-size:0.75rem;
+}
+.tile-ctrls select {
+  background:#0a100c; border:1px solid var(--line); border-radius:4px;
+  padding:0.15rem 0.3rem; font-size:0.72rem; color:var(--ink);
+}
+.tile-ctrls select.tri-Green { background:var(--green); color:var(--green-fg); }
+.tile-ctrls select.tri-Gold { background:var(--gold); color:var(--gold-fg); }
+.tile-ctrls select.tri-Scarlet { background:var(--scarlet); color:var(--scarlet-fg); }
+.tile-ctrls select.tri-Ink { background:var(--ink-tri); color:var(--ink-fg); }
+.tile-ctrls label {
+  display:inline-flex; align-items:center; gap:0.2rem; cursor:pointer; color:var(--muted);
+}
+.tile-ctrls input { accent-color:var(--amber); }
+.mini-probs { display:flex; gap:0.25rem; margin-left:auto; }
+.mini-prob {
+  width:1.4rem; height:1.4rem; border-radius:4px; font-size:0.65rem; font-weight:700;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); background:#0a100c; color:var(--muted);
+}
+.mini-prob.a { border-color:#3d9a8a; }
+.mini-prob.b { border-color:#a85a28; }
+.mini-prob.done { background:#2a4a32; color:#b8e0b8; border-color:#6a9e6e; }
+
+/* Drawer */
+.drawer {
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:0.85rem 0.95rem 1.1rem; position:sticky; top:0.5rem;
+  max-height:calc(100vh - 2rem); overflow:auto;
+  display:none;
+}
+.ward-shell.drawer-open .drawer { display:block; }
+.drawer-close {
+  float:right; width:2rem; height:2rem; border-radius:6px;
+  background:#14241c; border:1px solid var(--line); color:var(--amber);
+  font-size:1.1rem; line-height:1;
+}
+.drawer-close:hover { background:#1e3328; }
+.drawer .big-title {
+  font-family:'Cinzel',serif; color:var(--amber); font-size:1.35rem;
+  margin:0.2rem 0 0.35rem; clear:both;
+}
+.drawer .origin { color:var(--muted); font-size:0.85rem; margin-bottom:0.65rem; }
+.voice-box {
+  background:#0a100c; border:2px solid var(--amber); border-radius:8px;
+  padding:0.7rem 0.8rem; margin-bottom:0.7rem;
+}
+.voice-box .lbl {
+  font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--amber); margin-bottom:0.25rem;
+}
+.voice-box .txt { font-size:1.15rem; font-weight:700; line-height:1.35; color:#fff8e8; }
+
+.chips { display:flex; flex-wrap:wrap; gap:0.35rem; margin-bottom:0.7rem; }
+.chip {
+  background:#14241c; border:1px solid var(--line); border-radius:999px;
+  padding:0.25rem 0.6rem; font-size:0.8rem; color:var(--ink);
+}
+.sec-lbl {
+  font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--teal); margin:0.55rem 0 0.3rem;
+}
+.moment { font-size:0.92rem; margin-bottom:0.35rem; }
+.field-notes {
+  font-size:0.8rem; font-style:italic; color:var(--muted);
+  margin-bottom:0.7rem; line-height:1.4;
+}
+.prob-btn {
+  display:block; width:100%; text-align:left;
+  background:#0a100c; border:1.5px solid #3d9a8a; border-left:5px solid #3d9a8a;
+  border-radius:8px; padding:0.55rem 0.7rem; margin-bottom:0.4rem;
+  color:var(--ink); position:relative; padding-right:2.2rem;
+}
+.prob-btn.b { border-color:#a85a28; border-left-color:#a85a28; }
+.prob-btn .plabel {
+  font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--muted); font-weight:700; margin-bottom:0.15rem;
+}
+.prob-btn.done {
+  background:#1a2e22; border-color:#6a9e6e;
+  text-decoration:line-through; color:var(--muted);
+}
+.prob-btn.done::after {
+  content:'✓'; position:absolute; right:0.7rem; top:50%; transform:translateY(-50%);
+  color:#6a9e6e; font-size:1.2rem; font-weight:700; text-decoration:none;
+}
+.verbs-hint {
+  font-size:0.7rem; color:#6a5a48; font-style:italic; margin:-0.15rem 0 0.5rem;
+  opacity:0.85;
+}
+.bonus-strip {
+  display:flex; flex-wrap:wrap; gap:0.4rem; margin:0.5rem 0 0.7rem;
+}
+.bonus-pill {
+  flex:1; min-width:5.5rem; padding:0.55rem 0.5rem;
+  background:linear-gradient(160deg, #2a3a28, #1a2e22);
+  border:1.5px solid var(--amber); border-radius:999px;
+  font-family:'Cinzel',serif; font-size:0.78rem; font-weight:700;
+  color:var(--amber); text-align:center;
+}
+.bonus-pill:hover { background:#2e4434; }
+.bonus-pill.tapped { background:var(--amber); color:#14271d; }
+.drawer-actions { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.5rem; }
+.btn-act {
+  font-size:0.8rem; font-weight:700; padding:0.4rem 0.75rem;
+  border-radius:6px; background:#14241c; border:1px solid var(--line);
+  color:var(--teal);
+}
+.btn-act:hover { border-color:var(--teal); color:var(--ink); }
+.pair-link {
+  font-size:0.85rem; color:var(--lover); margin-top:0.5rem;
+  cursor:pointer; text-decoration:underline; text-underline-offset:2px;
+}
+
+/* ── Art tab ── */
+.art-toolbar {
+  display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;
+  margin-bottom:0.75rem; max-width:1200px; margin-left:auto; margin-right:auto;
+}
+.art-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+  gap:0.65rem; max-width:1200px; margin:0 auto;
+}
+.art-card {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  overflow:hidden; cursor:pointer; text-align:left; color:inherit; width:100%;
+  padding:0;
+}
+.art-card:hover { border-color:var(--amber); outline:1px solid var(--amber); }
+.art-card img {
+  display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  object-position:center top; background:#0a100c;
+}
+.art-card .cap {
+  padding:0.4rem 0.5rem 0.5rem;
+  font-family:'Cinzel',serif; font-size:0.75rem; color:var(--amber);
+}
+.art-card .cap span { color:var(--muted); font-size:0.65rem; margin-right:0.3rem; }
+
+/* Lightbox */
+.lightbox {
+  display:none; position:fixed; inset:0; z-index:100;
+  background:#0a100cee; align-items:center; justify-content:center;
+  padding:1.5rem; flex-direction:column; gap:0.75rem;
+}
+.lightbox.open { display:flex; }
+.lightbox img {
+  max-width:min(960px, 95vw); max-height:80vh; object-fit:contain;
+  border-radius:8px; border:1px solid var(--line);
+}
+.lightbox .lb-cap {
+  font-family:'Cinzel',serif; color:var(--amber); font-size:1rem;
+}
+.lightbox .lb-close {
+  position:absolute; top:1rem; right:1rem;
+  width:2.4rem; height:2.4rem; border-radius:8px;
+  background:var(--card); border:1px solid var(--line); color:var(--amber);
+  font-size:1.3rem;
+}
+
+.hint-keys {
+  font-size:0.72rem; color:var(--muted); margin-left:auto;
+}
+@media print {
+  body::before {
+    content:'SCREEN-ONLY GM TOOL — do not print for players';
+    display:block; padding:2rem; font-size:1.5rem; color:#c04a32;
+  }
+  .topbar, .tabs, .panels { display:none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="priv">GM laptop · not for players</span>
+  <h1>GM Console · Morning Dew</h1>
+  <div class="controls">
+    <div class="ctrl" title="Round counter">
+      <label>Round</label>
+      <button type="button" class="btn-sm" id="round-minus" aria-label="Decrease round">−</button>
+      <span class="val" id="round-val">1</span>
+      <button type="button" class="btn-sm" id="round-plus" aria-label="Increase round">+</button>
+    </div>
+    <div class="ctrl" title="Blood bank — click pips">
+      <label>Blood</label>
+      <div class="pips" id="blood-pips" aria-label="Blood bank"></div>
+    </div>
+    <div class="ctrl" title="Fear dial">
+      <label>Fear</label>
+      <div class="fear-btns" id="fear-btns">
+        <button type="button" data-f="low">Low</button>
+        <button type="button" data-f="med">Med</button>
+        <button type="button" data-f="high">High</button>
+      </div>
+    </div>
+    <div class="saved-chip">Saved <b id="saved-count">0</b><span style="color:var(--muted)">/14</span></div>
+    <button type="button" class="btn-reset" id="btn-reset">Reset state</button>
+    <span class="hint-keys">Esc closes · 1–9 open patients</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog">
+      <div class="prog-label"><span>Problems resolved</span><span id="prob-frac">0/28</span></div>
+      <div class="bar"><i id="prob-bar"></i></div>
+    </div>
+    <div class="prog">
+      <div class="prog-label"><span>Patients saved</span><span id="saved-frac">0/14</span></div>
+      <div class="bar"><i id="saved-bar"></i></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button type="button" class="tab active" data-tab="run" role="tab" aria-selected="true">Run</button>
+  <button type="button" class="tab" data-tab="ward" role="tab" aria-selected="false">Ward</button>
+  <button type="button" class="tab" data-tab="art" role="tab" aria-selected="false">Art</button>
+</nav>
+
+<div class="panels">
+  <!-- ═══ RUN ═══ -->
+  <section class="panel active" id="panel-run" role="tabpanel">
+    <div class="run-layout">
+      <div class="run-main">
+        <details class="collapse" open>
+          <summary>1 · Round loop (Neighbor Seams)</summary>
+          <div class="body">
+            <ol>
+              <li><strong>Seed:</strong> 2 patient cards per neighbor seam (4 seams = 8 cards).</li>
+              <li><strong>30s read:</strong> each healer studies only their two seams (≤4 cards).</li>
+              <li><strong>10-count</strong> → per seam: Grab one / Pass one.</li>
+              <li><strong>Conflict</strong> (same pick) → roll; loser takes leftover or refuses → Overflow.</li>
+              <li><strong>Overflow</strong> / untreated → Fear magnet.</li>
+            </ol>
+          </div>
+        </details>
+        <details class="collapse" open>
+          <summary>2 · Bookkeeping</summary>
+          <div class="body">
+            <ul>
+              <li><strong>Fear</strong> — prefer Overflow / unclaimed, then Gold/Scarlet. Soft dial if table is crushing it.</li>
+              <li><strong>Dew</strong> — conveyor grass; patients already on toadstool beds.</li>
+              <li><strong>Blood pips</strong> — bank of 4 (top bar). Cap Transfusion costs 1.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="collapse">
+          <summary>3 · Cameron tools</summary>
+          <div class="body">
+            <ul>
+              <li><strong>Stick</strong> — universal poking stick (not one of the 8). Optional fake charge die.</li>
+              <li><strong>Bark Advice</strong> — shout a verb / assign Overflow.</li>
+              <li><strong>Cap Transfusion</strong> — −1 blood, +~20 to a roll / Ink break.</li>
+              <li><strong>Never Rest</strong> — keep pressure; no calm beats unless earned.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="collapse">
+          <summary>4 · Win / lose</summary>
+          <div class="body">
+            <ul>
+              <li><strong>Save all</strong> → give Quack Lann.</li>
+              <li><strong>Blood 0</strong> → Cameron dies / Lann lost with him.</li>
+              <li><strong>Death on watch</strong> → may gift Lann to dying sketch.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="collapse">
+          <summary>5 · Admission canon</summary>
+          <div class="body">
+            <p>Redcaps dragged the wounded here. Once on the grass, <strong>dew</strong> moves them like a conveyor onto toadstool-cap beds per the doctor’s orders. Healers never leave the ward — don’t invent new arrival gags.</p>
+          </div>
+        </details>
+        <details class="collapse">
+          <summary>6 · Soft ramp</summary>
+          <div class="body">
+            <ul>
+              <li>All patients arrive <strong>Green</strong>.</li>
+              <li>After <strong>4 Saved</strong>, denser deal (~10 in ecosystem; extras in draw/Overflow).</li>
+            </ul>
+          </div>
+        </details>
+        <details class="collapse">
+          <summary>7 · Modules checklist</summary>
+          <div class="body">
+            <ul>
+              <li>Break room beat</li>
+              <li>Lovers bump (07 ↔ 12)</li>
+              <li>EMP quickling (01 as defib → spikes his charge)</li>
+              <li>Climax batch</li>
+              <li>Arm surgery</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="round-checks">
+          <h3>This Round</h3>
+          <div id="round-check-list"></div>
+        </div>
+      </div>
+
+      <aside class="sticky-ref">
+        <h3>Sticky reference</h3>
+        <div class="tag-row">
+          <span class="pip-tag g">Green</span>
+          <span class="pip-tag y">Gold</span>
+          <span class="pip-tag r">Scarlet</span>
+          <span class="pip-tag k">Ink</span>
+        </div>
+        <dl>
+          <dt>Triage</dt>
+          <dd>Improve one step on success · Saved removes from play · Ink ≈ DC ~40</dd>
+          <dt>Cap Transfusion</dt>
+          <dd>−1 blood · +~20</dd>
+          <dt>Seams</dt>
+          <dd>2 cards × 4 gaps · 30s · 10-count · Grab/Pass</dd>
+          <dt>Roles</dt>
+          <dd>Soldier · Lover · Dart · Locale</dd>
+          <dt>Items</dt>
+          <dd>Obfuscated look cards — purpose by trial</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ═══ WARD ═══ -->
+  <section class="panel" id="panel-ward" role="tabpanel">
+    <div class="ward-toolbar" id="filter-bar">
+      <button type="button" class="filter-chip active" data-filter="all">All</button>
+      <button type="button" class="filter-chip" data-filter="soldiers">Soldiers</button>
+      <button type="button" class="filter-chip" data-filter="lovers">Lovers</button>
+      <button type="button" class="filter-chip" data-filter="unsaved">Unsaved</button>
+      <button type="button" class="filter-chip" data-filter="critical">Scarlet+Ink</button>
+    </div>
+    <div class="ward-shell" id="ward-shell">
+      <div class="roster" id="roster"></div>
+      <aside class="drawer" id="drawer" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <!-- ═══ ART ═══ -->
+  <section class="panel" id="panel-art" role="tabpanel">
+    <div class="art-toolbar">
+      <button type="button" class="btn-act" id="btn-popout">Pop out art board</button>
+      <a class="btn-act" href="cameron-morning-dew-ancestry-art.html" target="_blank" rel="noopener">Open ancestry-art.html</a>
+      <span style="font-size:0.8rem;color:var(--muted)">Click tile = lightbox · Pop out = HDMI window</span>
+    </div>
+    <div class="art-grid" id="art-grid"></div>
+  </section>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button type="button" class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'ats-morning-dew-gm-v1';
+
+  const PATIENTS = [
+    {
+      id: 1, title: 'Scorched Quickling', ancestry: 'Quickling', role: 'dart',
+      origin: 'Pale Ring fallout',
+      voice: 'Stuttered blur-speech — no name left to give.',
+      mannerisms: ['Skids off bed', 'Sparks when metal near', 'Empty stare mid-sentence'],
+      moment: 'Keeps skidding off his toadstool — scorched, twitching, reeking of ozone and clove. No name left to give.',
+      fieldNotes: 'Quickling — ~2 ft slender fey; pale skin, feral features. Metabolism and nerves run far hotter than mortal norms — short natural lifespan; speech and motion often too fast to parse unless they deliberately slow.',
+      probA: 'Veins strobe with leftover Pale Ring charge; sparks jump to metal nearby.',
+      probB: 'Chest hitches in uneven, skipping heaves — long pauses, then double-thumps.',
+      verbsA: 'DRAIN / charge', verbsB: 'RESTORE RHYTHM / arrhythmia',
+      bonuses: ['Drain charge', 'Restore rhythm', 'Ground metal'],
+      art: 'ancestry-art/01-quickling.webp', pair: null
+    },
+    {
+      id: 2, title: 'Cracked Spriggan', ancestry: 'Spriggan', role: 'soldier',
+      origin: 'Summer Court levy',
+      voice: 'Silent stoic — eyes open; not talking.',
+      mannerisms: ['Stares without blinking', 'Sap drips ignored', "Won't speak"],
+      moment: 'Half-sitting on a wide cap in Summer levy colors; ribs split like a dry log, honey-sap pooling under him. Eyes open; not talking.',
+      fieldNotes: 'Spriggan — gnome-descended fey warped by old magic. Natural form ~3 ft, thick-bodied and foul-smelling; can swell to giant size. Same organs, violently redistributed mass — denser and oilier than ordinary gnomes.',
+      probA: 'Rib-bark is cracked wide; the chest wall flexes wrong and won’t take a breath deep.',
+      probB: 'Honey-thick sap pours from the splits faster than it should — sticky, sweet, pooling under him.',
+      verbsA: 'BRACE / cracked ribs', verbsB: 'SEAL / pouring sap',
+      bonuses: ['Brace ribs', 'Seal sap', 'Stop flex'],
+      art: 'ancestry-art/02-spriggan.webp', pair: null
+    },
+    {
+      id: 3, title: 'Muddy Gnome', ancestry: 'Gnome', role: 'soldier',
+      origin: 'River ford levy',
+      voice: 'Nervous counter — shaking hands, odd-number flinch.',
+      mannerisms: ['Clinks coins', 'Flinches at odd numbers', 'Muddy boots drip'],
+      moment: 'Sits upright on a muddy cap, boots still dripping river-gray, trying to count coins with shaking hands.',
+      fieldNotes: 'Gnome — small humanoid; stout bones, keen fine-motor nerves, warm red blood like mortals. Earth-attuned gut and skin — hardy, not plant-bodied.',
+      probA: 'Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won’t clot.',
+      probB: 'Whole body seizes in short, violent shakes whenever anyone says an odd number aloud nearby.',
+      verbsA: 'SEAL / muddy leg', verbsB: 'STOP SHAKES / odd-number seizures',
+      bonuses: ['Seal wound', 'Stop shakes', 'Even counts'],
+      art: 'ancestry-art/03-gnome.webp', pair: null
+    },
+    {
+      id: 4, title: 'Pierced Eladrin', ancestry: 'Eladrin', role: 'soldier',
+      origin: 'Court levy (Summer/Winter mixed)',
+      voice: 'Manic locked grin — silent laugh convulsions.',
+      mannerisms: ['Silent laugh convulsions', 'Pupils blown', "Won't unclench jaw"],
+      moment: 'Propped against the stalk of his bed-cap — two shafts in a wrong-bent shoulder, pupils blown, jaw locked in a grin that won’t quit.',
+      fieldNotes: 'Eladrin — Feywild elf-kin; tall, sharp-eared, long-lived. Blood and mood carry seasonal court magic. Soft tissue like elves; cold iron irritates; emotion and physiology couple tightly.',
+      probA: 'Two arrow shafts sit deep in the shoulder; the joint is bent the wrong way around them.',
+      probB: 'He cannot stop laughing — hard, silent convulsions that bounce the shafts and tear the wound wider.',
+      verbsA: 'PULL / shafts wrong-bent', verbsB: 'STOP LAUGH / tears wound',
+      bonuses: ['Pull shafts', 'Stop laugh', 'Steady joint'],
+      art: 'ancestry-art/04-eladrin.webp', pair: null
+    },
+    {
+      id: 5, title: 'Bitten Dryad', ancestry: 'Dryad', role: 'locale',
+      origin: 'Ambervale woods',
+      voice: 'Quiet watchful — presents wounds like evidence.',
+      mannerisms: ['Presents arms like evidence', 'Claws dirty', 'Tracks healers with eyes'],
+      moment: 'Kneels carefully on a clean white-cap, arms held out so the cold-iron bites show; blue-black soil still under her claws. Watching the healers.',
+      fieldNotes: 'Dryad — tree-bound fey; bark-and-leaf integument, sap for blood, body grown as much as born. Life force tethered to a living tree. Cold iron is toxic; plant chemistry, not mammalian clotting.',
+      probA: 'Cold-iron tooth-heads are still lodged under the bark along both forearms.',
+      probB: 'Sap-level is crashing — matte eyes, no give at the wrist, leaf-hair going brittle at the tips.',
+      verbsA: 'EXTRACT / iron teeth', verbsB: 'REFILL / sap crash',
+      bonuses: ['Extract iron', 'Refill sap', 'Warm bark'],
+      art: 'ancestry-art/05-dryad.webp', pair: null
+    },
+    {
+      id: 6, title: 'Limping Human', ancestry: 'Human', role: 'locale',
+      origin: 'Ambervale village (Dew tell)',
+      voice: 'Casual downplayer — “just this.”',
+      mannerisms: ['Sips leaf tea', 'Shrugs', 'Underreacts'],
+      moment: 'Sits on the edge of a toadstool with one boot off, sipping bitter tea from a leaf-cup. Shrugs and points at the foot: “just this.”',
+      fieldNotes: 'Human — baseline mortal humanoid: soft skin, red blood, no bark, horns, or innate season-magic. Ordinary organs and healing rates — the reference body against which fey anatomies are compared.',
+      probA: 'Right foot sits wrong in the boot; bone grinds when he puts weight on it.',
+      probB: 'A dark line is climbing the calf under the skin — cold to the touch, moving upward by the minute.',
+      verbsA: 'SET / wrong foot', verbsB: 'CUT·DRAIN / climbing chill',
+      bonuses: ['Set bone', 'Cut line', 'Drain chill'],
+      art: 'ancestry-art/06-human.jpg', pair: null
+    },
+    {
+      id: 7, title: 'Bandaged Satyr', ancestry: 'Satyr', role: 'lover',
+      origin: 'Summer fringe orchard',
+      voice: 'Soft romantic hum — listening for one voice.',
+      mannerisms: ['Clutches frost-lilac ribbon', 'Taps silent rhythm', 'Chest whistle on breath'],
+      moment: 'Reclines on a soft-cap bed, chest wrapped, humming under his breath; a frost-lilac ribbon clenched in one fist, free hand tapping a silent rhythm.',
+      fieldNotes: 'Satyr — fey with humanoid torso and goatlike legs/hooves; horns common, keen hearing. Dual gait (person above, ungulate below). Warm mammalian blood; gut suited to forage and wine as much as rations.',
+      probA: 'Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn’t.',
+      probB: 'Fingers of the left hand have gone stiff and wooden — freezing from the tips toward the palm.',
+      verbsA: 'SEAL / chest seam', verbsB: 'WARM / freezing fingers',
+      bonuses: ['Seal chest', 'Warm hands', 'Soft music'],
+      art: 'ancestry-art/07-satyr.webp', pair: 12
+    },
+    {
+      id: 8, title: 'Fevered Pixie', ancestry: 'Pixie', role: 'locale',
+      origin: 'Mushroom pilgrim trail',
+      voice: 'Tiny urgent — failing at a dewdrop drink.',
+      mannerisms: ['Fails at dewdrop drink', 'Dust gold/blue flashes', 'Curled in thimble'],
+      moment: 'Curled in a thimble nest set on a toadstool — wings trembling, dust flashing gold then blue; trying (and failing) to drink from a dewdrop.',
+      fieldNotes: 'Pixie — palm-scale winged fey; hollow bones, delicate wing membranes, often luminous dust on the wings. Tiny organ volumes — heat and fluid balance swing easily. Full person-scale mind in a thimble body.',
+      probA: 'Fever swings hard — one moment scorching, next shivering; neither state holds.',
+      probB: 'Wing-joints lock mid-beat; one wing sticks open, the other won’t extend.',
+      verbsA: 'COOL / fever swing', verbsB: 'BRACE / locked wings',
+      bonuses: ['Cool fever', 'Free wings', 'Tiny brace'],
+      art: 'ancestry-art/08-pixie.webp', pair: null
+    },
+    {
+      id: 9, title: 'Rooted Wood Woad', ancestry: 'Wood Woad', role: 'locale',
+      origin: 'Ambervale market fringe',
+      voice: 'Wordless plant — knothole eye-track only.',
+      mannerisms: ['Tips off bed', 'Knothole eye-track', 'Spasmodic torso'],
+      moment: 'Keeps tipping off its bed-cap — market twine still knotted around one wrist. Knothole eyes track whoever gets close; body won’t stay still.',
+      fieldNotes: 'Wood Woad — plant guardian in humanoid shape; thick bark, branch-hands, root-feet, deep-set eyes. No ordinary animal heart — sustains on sun, soil, water, and air. True plant tissue.',
+      probA: 'Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.',
+      probB: 'Whole torso jolts in hard spasms; it cannot hold still long enough for anyone to work.',
+      verbsA: 'JOIN / tendril-arm', verbsB: 'STILL / torso spasms',
+      bonuses: ['Join arm', 'Still body', 'Secure bed'],
+      art: 'ancestry-art/09-woad.jpg', pair: null
+    },
+    {
+      id: 10, title: 'Soaked Kelpie', ancestry: 'Kelpie', role: 'soldier',
+      origin: 'River ford levy',
+      voice: 'Hostile wet predator — damp smile through coughs.',
+      mannerisms: ['Refuses towels by kicking', "Won't lie flat", 'Damp smile through coughs'],
+      moment: 'Sits bolt upright on a wet cap (won’t lie down), levy sash still on, dripping riverwater, kicking anyone who offers a towel.',
+      fieldNotes: 'Kelpie — aquatic shapeshifter; horse-form and person-form share one wet anatomy. Tissue stays damp; can hold and move water through lungs and hide. Predatory fey by nature.',
+      probA: 'Lungs full of black river-water; every cough brings more; they will not lie flat.',
+      probB: 'One leg is twisted wrong from the haul out of the ford — joint will not take weight.',
+      verbsA: 'DRAIN / black-water lungs', verbsB: 'BRACE / twisted leg',
+      bonuses: ['Drain lungs', 'Brace leg', 'Allow upright'],
+      art: 'ancestry-art/10-kelpie.png', pair: null
+    },
+    {
+      id: 11, title: 'Split Centaur', ancestry: 'Centaur', role: 'locale',
+      origin: 'Gloaming grass roads',
+      voice: 'Irritable proud — pins ears at noise.',
+      mannerisms: ['Pins ears at noise', 'Glares while oatcake', 'Needs two beds'],
+      moment: 'Sprawled across two toadstool beds lashed together — split fore-hoof dangling, ears pinned flat whenever the ward gets loud. Gnawing a dry oatcake and glaring.',
+      fieldNotes: 'Centaur — single creature, dual architecture: humanoid torso fused to equine trunk and four legs. Two weight systems, one bloodstream. Digestion and balance horse-forward; hands and speech person-forward.',
+      probA: 'Fore-hoof is split lengthwise; the two halves grind and catch on every shift of weight.',
+      probB: 'Every loud sound triggers a bright nosebleed and a blackout flicker behind the eyes.',
+      verbsA: 'JOIN / split hoof', verbsB: 'QUIET / nosebleed pressure',
+      bonuses: ['Join hoof', 'Quiet ward', 'Ease pressure'],
+      art: 'ancestry-art/11-centaur.webp', pair: null
+    },
+    {
+      id: 12, title: 'Burned Nymph', ancestry: 'Nymph', role: 'lover',
+      origin: 'Summer fringe / frost-lilac',
+      voice: 'Still listener — eyes seek one voice.',
+      mannerisms: ['Very still', 'Ribbon in fist', 'Eyes seek one voice'],
+      moment: 'Lies very still on a pale-cap, lilac-frost bandages neat; a Summer ribbon hidden in one fist. Eyes open, listening for one particular voice.',
+      fieldNotes: 'Nymph — nature-beauty fey; soft-skinned, elflike frame, presence that can dazzle mortal senses when healthy. Flesh like fine mortal tissue; danger is often the aura and wild-place bond, not armored hide.',
+      probA: 'Burn-cloth sticks to living skin; peeling any edge takes flesh with it.',
+      probB: 'Under the wraps, patches of skin have gone ash-gray and hard — dead plates spreading at the edges.',
+      verbsA: 'SOAK / stuck cloth', verbsB: 'CUT / ash-gray plates',
+      bonuses: ['Soak burns', 'Cut dead', 'Soft cover'],
+      art: 'ancestry-art/12-nymph.jpg', pair: 7
+    },
+    {
+      id: 13, title: 'Empty Bee-kin', ancestry: 'Bee-kin', role: 'locale',
+      origin: 'Honey Apiary',
+      voice: 'Proud hollow — no hum.',
+      mannerisms: ['Stiff sit', 'No hum', 'Picks own wrists calling swarm'],
+      moment: 'Sits stiff on a honey-stained cap — empty armor plates, no hum. Proud eyes open; keeps picking at their own wrists as if calling something home.',
+      fieldNotes: 'Bee-kin — fey whose outer plates are living hive-cells — chitin architecture with a colony interface, soft body beneath. Healthy specimens hum; empty or collapsing cells stress the whole organism.',
+      probA: 'Hive-armor cells are vacant and collapsing inward, pinching the body underneath.',
+      probB: 'Honey-fever burns behind the eyes; they keep stinging their own wrists calling a swarm that does not answer.',
+      verbsA: 'OPEN / collapsing cells', verbsB: 'COOL / self-sting fever',
+      bonuses: ['Open plates', 'Cool fever', 'Stop self-harm'],
+      art: 'ancestry-art/13-beekin.jpg', pair: null
+    },
+    {
+      id: 14, title: 'Exhausted Brownie', ancestry: 'Brownie', role: 'locale',
+      origin: 'Gray Reach road',
+      voice: 'Apologetic servant — mid-apology collapse.',
+      mannerisms: ['Mid-apology collapse', 'Refuses broth', 'Hands under chin'],
+      moment: 'Collapsed face-down on a low cap mid-apology for “leaving the rest”; crushed hands tucked under their chin. Still trying to refuse a cup of broth.',
+      fieldNotes: 'Brownie — ~2 ft household-and-road fey; plain-looking, tough for size, extreme manual dexterity. Warm blood, mortal-like organs scaled small. Built for long quiet labor.',
+      probA: 'Both hands are crushed — bones like gravel under the skin; fingers will not open.',
+      probB: 'They are running on nothing — pulse thready, lips gray; the body is about to stop volunteering.',
+      verbsA: 'BRACE / crushed hands', verbsB: 'FEED·REST / thready collapse',
+      bonuses: ['Brace hands', 'Feed broth', 'Let rest'],
+      art: 'ancestry-art/14-brownie.webp', pair: null
+    }
+  ];
+
+  const ROUND_CHECKS = [
+    'Fear / Dew / blood from last round',
+    'Seed seams (2 per gap)',
+    '30s read → 10-count → Grab/Pass',
+    'Resolve conflicts / Overflow',
+    'Healing beats (Stick + items)',
+    'Cameron tools used?',
+    'Triage escalate / Saved?',
+    'Module beat this round?'
+  ];
+
+  function defaultState() {
+    const patients = {};
+    PATIENTS.forEach(p => {
+      patients[p.id] = { triage: 'Green', saved: false, probA: false, probB: false };
+    });
+    return {
+      round: 1,
+      blood: 4,
+      fear: 'low',
+      patients,
+      roundChecks: ROUND_CHECKS.map(() => false),
+      selectedId: null,
+      filter: 'all'
+    };
+  }
+
+  let state = loadState();
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      const base = defaultState();
+      return {
+        ...base,
+        ...parsed,
+        patients: { ...base.patients, ...(parsed.patients || {}) },
+        roundChecks: Array.isArray(parsed.roundChecks) && parsed.roundChecks.length === ROUND_CHECKS.length
+          ? parsed.roundChecks
+          : base.roundChecks
+      };
+    } catch (e) {
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    const { selectedId, filter, ...persist } = state;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(persist));
+  }
+
+  function patientById(id) {
+    return PATIENTS.find(p => p.id === id);
+  }
+
+  function savedCount() {
+    return PATIENTS.filter(p => state.patients[p.id].saved).length;
+  }
+
+  function probResolved() {
+    let n = 0;
+    PATIENTS.forEach(p => {
+      const s = state.patients[p.id];
+      if (s.probA) n++;
+      if (s.probB) n++;
+    });
+    return n;
+  }
+
+  /* ── Top bar ── */
+  function renderBlood() {
+    const el = document.getElementById('blood-pips');
+    el.innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pip' + (i <= state.blood ? ' on' : '');
+      b.setAttribute('aria-label', 'Blood pip ' + i);
+      b.addEventListener('click', () => {
+        // Toggle: click pip N sets blood to N if currently below, else to N-1
+        if (state.blood === i) state.blood = i - 1;
+        else state.blood = i;
+        saveState();
+        renderBlood();
+      });
+      el.appendChild(b);
+    }
+  }
+
+  function renderFear() {
+    document.querySelectorAll('#fear-btns button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.f === state.fear);
+    });
+  }
+
+  function renderProgress() {
+    const saved = savedCount();
+    const probs = probResolved();
+    document.getElementById('round-val').textContent = state.round;
+    document.getElementById('saved-count').textContent = saved;
+    document.getElementById('saved-frac').textContent = saved + '/14';
+    document.getElementById('prob-frac').textContent = probs + '/28';
+    document.getElementById('saved-bar').style.width = ((saved / 14) * 100) + '%';
+    document.getElementById('prob-bar').style.width = ((probs / 28) * 100) + '%';
+  }
+
+  document.getElementById('round-minus').addEventListener('click', () => {
+    state.round = Math.max(1, state.round - 1);
+    // Clear this-round checks on round change? Keep — GM may want history mid-round.
+    saveState();
+    renderProgress();
+  });
+  document.getElementById('round-plus').addEventListener('click', () => {
+    state.round += 1;
+    state.roundChecks = ROUND_CHECKS.map(() => false);
+    saveState();
+    renderProgress();
+    renderRoundChecks();
+  });
+
+  document.querySelectorAll('#fear-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.fear = btn.dataset.f;
+      saveState();
+      renderFear();
+    });
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('Reset all GM Console state? (round, blood, fear, triage, saved, problems, checks)')) return;
+    state = defaultState();
+    saveState();
+    renderAll();
+  });
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t === tab);
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      document.querySelectorAll('.panel').forEach(p => {
+        p.classList.toggle('active', p.id === 'panel-' + tab.dataset.tab);
+      });
+    });
+  });
+
+  /* ── Round checks ── */
+  function renderRoundChecks() {
+    const list = document.getElementById('round-check-list');
+    list.innerHTML = '';
+    ROUND_CHECKS.forEach((label, i) => {
+      const row = document.createElement('label');
+      row.className = 'check-row' + (state.roundChecks[i] ? ' done' : '');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = !!state.roundChecks[i];
+      cb.addEventListener('change', () => {
+        state.roundChecks[i] = cb.checked;
+        saveState();
+        row.classList.toggle('done', cb.checked);
+      });
+      const span = document.createElement('span');
+      span.textContent = label;
+      row.appendChild(cb);
+      row.appendChild(span);
+      list.appendChild(row);
+    });
+  }
+
+  /* ── Ward ── */
+  function matchesFilter(p) {
+    const s = state.patients[p.id];
+    switch (state.filter) {
+      case 'soldiers': return p.role === 'soldier';
+      case 'lovers': return p.role === 'lover';
+      case 'unsaved': return !s.saved;
+      case 'critical': return s.triage === 'Scarlet' || s.triage === 'Ink';
+      default: return true;
+    }
+  }
+
+  function renderRoster() {
+    const roster = document.getElementById('roster');
+    roster.innerHTML = '';
+    PATIENTS.filter(matchesFilter).forEach(p => {
+      const s = state.patients[p.id];
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'tile role-' + p.role
+        + (state.selectedId === p.id ? ' selected' : '')
+        + (s.saved ? ' saved-tile' : '');
+      tile.dataset.id = p.id;
+
+      tile.innerHTML =
+        '<div class="num">' + String(p.id).padStart(2, '0') + '</div>' +
+        '<div class="title">' + p.title + '</div>' +
+        '<div class="tile-meta"><span class="role-badge ' + p.role + '">' + p.role + '</span></div>' +
+        '<div class="tile-ctrls">' +
+          '<select class="tri-' + s.triage + '" data-act="triage" aria-label="Triage">' +
+            ['Green','Gold','Scarlet','Ink'].map(t =>
+              '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
+            ).join('') +
+          '</select>' +
+          '<label><input type="checkbox" data-act="saved"' + (s.saved ? ' checked' : '') + '> Saved</label>' +
+          '<div class="mini-probs">' +
+            '<span class="mini-prob a' + (s.probA ? ' done' : '') + '" title="Problem A">' + (s.probA ? '✓' : 'A') + '</span>' +
+            '<span class="mini-prob b' + (s.probB ? ' done' : '') + '" title="Problem B">' + (s.probB ? '✓' : 'B') + '</span>' +
+          '</div>' +
+        '</div>';
+
+      tile.addEventListener('click', (e) => {
+        if (e.target.closest('[data-act]')) return;
+        openDrawer(p.id);
+      });
+
+      tile.querySelector('[data-act="triage"]').addEventListener('change', (e) => {
+        e.stopPropagation();
+        state.patients[p.id].triage = e.target.value;
+        saveState();
+        renderRoster();
+        if (state.selectedId === p.id) renderDrawer();
+        renderProgress();
+      });
+      tile.querySelector('[data-act="triage"]').addEventListener('click', e => e.stopPropagation());
+
+      tile.querySelector('[data-act="saved"]').addEventListener('change', (e) => {
+        e.stopPropagation();
+        state.patients[p.id].saved = e.target.checked;
+        saveState();
+        renderRoster();
+        if (state.selectedId === p.id) renderDrawer();
+        renderProgress();
+      });
+      tile.querySelector('[data-act="saved"]').addEventListener('click', e => e.stopPropagation());
+
+      roster.appendChild(tile);
+    });
+  }
+
+  function openDrawer(id) {
+    state.selectedId = id;
+    document.getElementById('ward-shell').classList.add('drawer-open');
+    // Switch to Ward tab if needed
+    document.querySelector('.tab[data-tab="ward"]').click();
+    renderRoster();
+    renderDrawer();
+  }
+
+  function closeDrawer() {
+    state.selectedId = null;
+    document.getElementById('ward-shell').classList.remove('drawer-open');
+    document.getElementById('drawer').innerHTML = '';
+    renderRoster();
+  }
+
+  function renderDrawer() {
+    const drawer = document.getElementById('drawer');
+    const p = patientById(state.selectedId);
+    if (!p) { drawer.innerHTML = ''; return; }
+    const s = state.patients[p.id];
+
+    drawer.innerHTML =
+      '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">×</button>' +
+      '<div class="num" style="font-family:Cinzel,serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">' +
+        String(p.id).padStart(2, '0') + ' · ' + p.ancestry +
+      '</div>' +
+      '<div class="big-title">' + p.title + '</div>' +
+      '<div style="margin-bottom:0.35rem"><span class="role-badge ' + p.role + '">' + p.role + '</span></div>' +
+      '<div class="origin">' + p.origin + '</div>' +
+      '<div class="voice-box"><div class="lbl">Voice</div><div class="txt">' + p.voice + '</div></div>' +
+      '<div class="sec-lbl">Mannerisms</div>' +
+      '<div class="chips">' + p.mannerisms.map(m => '<span class="chip">' + m + '</span>').join('') + '</div>' +
+      '<div class="sec-lbl">Moment</div>' +
+      '<p class="moment">' + p.moment + '</p>' +
+      '<div class="sec-lbl">Field notes</div>' +
+      '<p class="field-notes">' + p.fieldNotes + '</p>' +
+      '<div class="sec-lbl">Problems</div>' +
+      '<button type="button" class="prob-btn a' + (s.probA ? ' done' : '') + '" data-prob="A">' +
+        '<div class="plabel">Problem A</div>' + p.probA +
+      '</button>' +
+      '<div class="verbs-hint">' + p.verbsA + '</div>' +
+      '<button type="button" class="prob-btn b' + (s.probB ? ' done' : '') + '" data-prob="B">' +
+        '<div class="plabel">Problem B</div>' + p.probB +
+      '</button>' +
+      '<div class="verbs-hint">' + p.verbsB + '</div>' +
+      '<div class="sec-lbl">Bonus cues</div>' +
+      '<div class="bonus-strip">' +
+        p.bonuses.map((b, i) => '<button type="button" class="bonus-pill" data-bonus="' + i + '">' + b + '</button>').join('') +
+      '</div>' +
+      '<div class="drawer-actions">' +
+        '<button type="button" class="btn-act" id="btn-show-art">Show art</button>' +
+        '<label style="display:inline-flex;align-items:center;gap:0.35rem;font-size:0.85rem;color:var(--muted)">' +
+          '<input type="checkbox" id="drawer-saved"' + (s.saved ? ' checked' : '') + '> Saved' +
+        '</label>' +
+        '<select id="drawer-triage" class="tri-' + s.triage + '" style="background:#0a100c;border:1px solid var(--line);border-radius:4px;padding:0.3rem 0.4rem">' +
+          ['Green','Gold','Scarlet','Ink'].map(t =>
+            '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
+          ).join('') +
+        '</select>' +
+      '</div>' +
+      (p.pair
+        ? '<div class="pair-link" id="pair-link">♥ Lover pair → #' + String(p.pair).padStart(2, '0') + ' ' + patientById(p.pair).title + '</div>'
+        : '');
+
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+    drawer.querySelectorAll('[data-prob]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.prob === 'A' ? 'probA' : 'probB';
+        state.patients[p.id][key] = !state.patients[p.id][key];
+        saveState();
+        renderDrawer();
+        renderRoster();
+        renderProgress();
+      });
+    });
+
+    drawer.querySelectorAll('[data-bonus]').forEach(btn => {
+      btn.addEventListener('click', () => btn.classList.toggle('tapped'));
+    });
+
+    document.getElementById('btn-show-art').addEventListener('click', () => openLightbox(p));
+
+    document.getElementById('drawer-saved').addEventListener('change', (e) => {
+      state.patients[p.id].saved = e.target.checked;
+      saveState();
+      renderRoster();
+      renderProgress();
+    });
+
+    const tri = document.getElementById('drawer-triage');
+    tri.addEventListener('change', () => {
+      state.patients[p.id].triage = tri.value;
+      saveState();
+      renderRoster();
+      renderDrawer();
+    });
+
+    const pair = document.getElementById('pair-link');
+    if (pair) {
+      pair.addEventListener('click', () => openDrawer(p.pair));
+    }
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      state.filter = chip.dataset.filter;
+      document.querySelectorAll('.filter-chip').forEach(c =>
+        c.classList.toggle('active', c === chip)
+      );
+      renderRoster();
+    });
+  });
+
+  /* ── Art ── */
+  function renderArtGrid() {
+    const grid = document.getElementById('art-grid');
+    grid.innerHTML = '';
+    PATIENTS.forEach(p => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'art-card';
+      card.innerHTML =
+        '<img src="' + p.art + '" alt="' + p.ancestry + '" loading="lazy">' +
+        '<div class="cap"><span>' + String(p.id).padStart(2, '0') + '</span>' + p.title + '</div>';
+      card.addEventListener('click', () => openLightbox(p));
+      grid.appendChild(card);
+    });
+  }
+
+  function openLightbox(p) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lb-img').src = p.art;
+    document.getElementById('lb-img').alt = p.title;
+    document.getElementById('lb-cap').textContent =
+      String(p.id).padStart(2, '0') + ' · ' + p.title;
+    lb.classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+
+  document.getElementById('btn-popout').addEventListener('click', () => {
+    const w = window.open(
+      'cameron-morning-dew-ancestry-art.html',
+      'ats-morning-dew-art',
+      'width=1280,height=800,menubar=no,toolbar=no,location=no'
+    );
+    if (!w) {
+      // Fallback: minimal popout with first selected or #1
+      const p = patientById(state.selectedId) || PATIENTS[0];
+      const html = '<!DOCTYPE html><html><head><title>' + p.title +
+        '</title><style>body{margin:0;background:#0a100c;display:flex;align-items:center;justify-content:center;min-height:100vh}' +
+        'img{max-width:100vw;max-height:100vh;object-fit:contain}</style></head><body>' +
+        '<img src="' + p.art + '" alt="' + p.title + '"></body></html>';
+      const blob = new Blob([html], { type: 'text/html' });
+      window.open(URL.createObjectURL(blob), 'ats-hdmi-art', 'width=1280,height=800');
+    }
+  });
+
+  /* ── Keyboard ── */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('lightbox').classList.contains('open')) {
+        closeLightbox();
+        return;
+      }
+      if (state.selectedId) closeDrawer();
+      return;
+    }
+    // Digits 1-9 (and 0 for 10) — only when not typing in input
+    if (e.target.matches('input, select, textarea')) return;
+    const map = { '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'0':10 };
+    if (map[e.key] && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      openDrawer(map[e.key]);
+    }
+  });
+
+  function renderAll() {
+    renderBlood();
+    renderFear();
+    renderProgress();
+    renderRoundChecks();
+    renderRoster();
+    if (state.selectedId) {
+      document.getElementById('ward-shell').classList.add('drawer-open');
+      renderDrawer();
+    }
+    renderArtGrid();
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
