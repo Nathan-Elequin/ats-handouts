@@ -3,171 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patient Cards v4 — Ambervale (14)</title>
+<title>Patient Cards v5 — Ambervale (14)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
 @page { size:8.5in 11in; margin:0.4in; }
-:root { --ink:#2a2218; --parchment:#f4ead3; --green-mid:#2c5440; --amber:#c8902f; --soldier:#7c3a1d; --locale:#2d6e6e; --dart:#8a1c14; --lover:#8a4a7a; }
+:root {
+  --ink:#2a2218; --parchment:#f4ead3; --green-mid:#2c5440; --amber:#c8902f;
+  --soldier:#7c3a1d; --locale:#2d6e6e; --dart:#8a1c14; --lover:#8a4a7a;
+  --prob-a:#2d6e6e; --prob-b:#a85a28;
+}
 body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--ink); font-size:9.5pt; }
 .wrap { max-width:8.2in; margin:0 auto; padding:0.15in 0; }
-.sheet { background:var(--parchment); border:1.5px solid var(--green-mid); padding:0.25in; margin-bottom:0.3in; box-shadow:0 0 0 3px var(--parchment), 0 0 0 4.5px var(--amber); }
+.sheet {
+  background:var(--parchment); border:1.5px solid var(--green-mid); padding:0.22in;
+  margin-bottom:0.3in; box-shadow:0 0 0 3px var(--parchment), 0 0 0 4.5px var(--amber);
+}
 .sheet + .sheet { page-break-before:always; }
-h1 { font-family:'Cinzel',serif; font-size:14pt; color:#14271d; margin-bottom:0.06in; }
-.sub { font-size:9pt; color:#4a3d28; margin-bottom:0.12in; font-style:italic; }
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:0.12in; }
-.card { border:1.5px solid var(--green-mid); border-radius:5px; padding:0.1in 0.12in; background:#fffef8; min-height:2.1in; }
+h1 { font-family:'Cinzel',serif; font-size:13pt; color:#14271d; margin-bottom:0.05in; }
+.sub { font-size:8.5pt; color:#4a3d28; margin-bottom:0.1in; font-style:italic; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:0.11in; }
+.card {
+  border:1.5px solid var(--green-mid); border-radius:5px; padding:0.09in 0.11in;
+  background:#fffef8; min-height:3.15in; break-inside:avoid;
+}
 .card.soldier { border-left:5px solid var(--soldier); }
 .card.locale { border-left:5px solid var(--locale); }
-.card.dart { border-left:5px solid var(--dart); background:#fff5f2; }
+.card.dart { border-left:5px solid var(--dart); background:#fffaf8; }
 .card.lover { border-left:5px solid var(--lover); }
-.num { font-family:'Cinzel',serif; font-size:8pt; letter-spacing:0.1em; color:#8a7a60; text-transform:uppercase; }
-.title { font-family:'Cinzel',serif; font-weight:700; font-size:12pt; color:#14271d; margin:0.02in 0; }
-.origin { font-size:8pt; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.04in; color:#4a3d28; }
-.notes { font-size:7pt; letter-spacing:0.08em; text-transform:uppercase; color:#8a7a60; margin-bottom:0.02in; }
-.desc { font-size:9pt; line-height:1.35; }
-.gm { font-size:7.5pt; font-style:italic; color:#7a6a50; margin-top:0.04in; border-top:1px dotted #c0b090; padding-top:0.03in; }
-.screen-only { max-width:8.2in; margin:0.1in auto; background:#1d3a2a; color:#f0d9a0; border:1px solid #c8902f; border-radius:6px; padding:0.1in 0.18in; font-size:10pt; }
-@media print { .screen-only, .gm { display:none !important; } body { background:#fff; } }
+.num { font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.1em; color:#8a7a60; text-transform:uppercase; }
+.title { font-family:'Cinzel',serif; font-weight:700; font-size:11.5pt; color:#14271d; margin:0.02in 0 0.05in; }
+.primer {
+  font-size:8.2pt; line-height:1.3; color:#3a3228;
+  border-bottom:1px dotted #c0b090; padding-bottom:0.05in; margin-bottom:0.05in;
+}
+.aside {
+  font-size:8.4pt; line-height:1.35; font-style:italic; color:#4a3d28;
+  margin-bottom:0.07in;
+}
+.problems { display:grid; gap:0.06in; }
+.prob {
+  border-radius:4px; padding:0.06in 0.08in; font-size:8.5pt; line-height:1.32;
+  background:#fffef8;
+}
+.prob.a { border:1.5px solid var(--prob-a); border-left:5px solid var(--prob-a); background:#f2f8f6; }
+.prob.b { border:1.5px solid var(--prob-b); border-left:5px solid var(--prob-b); background:#fbf6f0; }
+.gm {
+  font-size:7pt; font-style:italic; color:#7a6a50; margin-top:0.05in;
+  border-top:1px dotted #c0b090; padding-top:0.03in;
+}
+.screen-only {
+  max-width:8.2in; margin:0.1in auto; background:#1d3a2a; color:#f0d9a0;
+  border:1px solid #c8902f; border-radius:6px; padding:0.1in 0.18in; font-size:10pt;
+}
+@media print {
+  .screen-only, .gm { display:none !important; }
+  body { background:#fff; }
+}
 </style>
 </head>
 <body>
-<div class="screen-only"><b>v4:</b> Title = adjective + ancestry (table shout). Injuries live in Notes. Neighbor Seams. All arrive Green; escalate in narration. No printed start stage.</div>
+<div class="screen-only"><b>v5:</b> Primer → italic admission aside (read-aloud) → two color problems. All arrive Green. Forest admits patients to the ward. GM keys hide on print.</div>
 <div class="wrap">
 
 <section class="sheet">
-  <h1>Patients 01–06</h1>
-  <p class="sub">Title format: simple adjective + ancestry</p>
+  <h1>Patients 01–04</h1>
+  <p class="sub">Teal box ≠ amber box — two jobs, two solutions</p>
   <div class="grid">
+
     <div class="card dart">
       <div class="num">01</div>
       <div class="title">Scorched Quickling</div>
-      <div class="origin">Pale Ring residual</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Veins strobe copper-static. Smells like ozone and clove. Thanks you for “the buzz.” Has no name left to give.</div>
-      <div class="gm">Was Dart — name lost last session. EMP wrinkle. Creative defibrillator if used on others — spikes his charge.</div>
+      <div class="primer"><strong>Quickling</strong> — a tiny fey blur, usually too fast to hold still; copper-veined, fox-quick, hard to keep in one place.</div>
+      <div class="aside">Ambervale’s mushroom-mouth opens and coughs him onto the litter — scorched, twitching, smelling of ozone and clove. He has no name left to give.</div>
+      <div class="problems">
+        <div class="prob a">Veins strobe with leftover Pale Ring charge; sparks jump to metal nearby.</div>
+        <div class="prob b">Chest hitches in uneven, skipping heaves — long pauses, then double-thumps.</div>
+      </div>
+      <div class="gm">Was Dart. A=DRAIN/bleed charge (leeches / ground out). B=RESTORE RHYTHM (creative defib — using him on others spikes his charge). EMP module.</div>
     </div>
+
     <div class="card soldier">
       <div class="num">02 · SOLDIER</div>
       <div class="title">Cracked Spriggan</div>
-      <div class="origin">North of Gray Reach · Summer levy</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Bark-skin split at the ribs; sap like honey. Hums a half-march. “The horns never looked back.”</div>
-      <div class="gm">Bones + smell. Court abandonment lore.</div>
+      <div class="primer"><strong>Spriggan</strong> — a bark-skinned forest fey; wooden bones, sap-scented breath, skin like rough living timber.</div>
+      <div class="aside">Roots push a litter through the ward grass and tip him out — Summer levy colors still on the bark, ribs split open like a dry log.</div>
+      <div class="problems">
+        <div class="prob a">Rib-bark is cracked wide; the chest wall flexes wrong and won’t take a breath deep.</div>
+        <div class="prob b">Honey-thick sap pours from the splits faster than it should — sticky, sweet, pooling under him.</div>
+      </div>
+      <div class="gm">A=SET/BRACE (cuff). B=CLOSE/SEAL (pitch). Soldier lore: courts left them.</div>
     </div>
+
     <div class="card soldier">
       <div class="num">03 · SOLDIER</div>
       <div class="title">Muddy Gnome</div>
-      <div class="origin">Gray Reach ford · Gloaming levy</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Tries to pay with even coins; panics at odds. Leg won’t clot; river-mud in the dressing.</div>
-      <div class="gm">Odd counts / still water soft truths.</div>
+      <div class="primer"><strong>Gnome</strong> — small earth-fey; sturdy, quick-fingered, often mud-stained from river and ford work.</div>
+      <div class="aside">A circle of toadstools blooms, collapses, and leaves him sitting in river-mud on the ward floor — still trying to count coins with shaking hands.</div>
+      <div class="problems">
+        <div class="prob a">Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won’t clot.</div>
+        <div class="prob b">Whole body seizes in short, violent shakes whenever anyone says an odd number aloud nearby.</div>
+      </div>
+      <div class="gm">A=CLOSE/SEAL or CLEAN+seal (pitch). B=STOP MOTION (mallet) so work can happen. Soft truth: odd counts.</div>
     </div>
+
     <div class="card soldier">
       <div class="num">04 · SOLDIER</div>
       <div class="title">Pierced Elf</div>
-      <div class="origin">Gray Reach · Summer skirmisher</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Shafts still in a wrong-bent shoulder. Jokes constantly. Pupils blown. Asks for quiet.</div>
-      <div class="gm">Mallet / Claw / Gigglecap comedy.</div>
+      <div class="primer"><strong>Elf</strong> — tall fey-blooded; long bones, sharp ears, skin that bruises like fruit.</div>
+      <div class="aside">The forest slides him in on a shield-litter — shafts still in a wrong-bent shoulder, pupils blown wide, jaw locked in a grin that isn’t funny anymore.</div>
+      <div class="problems">
+        <div class="prob a">Two arrow shafts sit deep in the shoulder; the joint is bent the wrong way around them.</div>
+        <div class="prob b">He cannot stop laughing — hard, silent convulsions that bounce the shafts and tear the wound wider.</div>
+      </div>
+      <div class="gm">A=REMOVE (crane). B=STOP MOTION then maybe laugh-shroom irony / mallet. Comedy seat.</div>
     </div>
-    <div class="card locale">
-      <div class="num">05</div>
-      <div class="title">Bitten Dryad</div>
-      <div class="origin">Mushroom pilgrim road · Ambervale verge</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Body marked by cold-iron bites. Whispers names it no longer owns. Blue-black soil under claws.</div>
-      <div class="gm">Future Ambervale recognition.</div>
-    </div>
-    <div class="card locale">
-      <div class="num">06</div>
-      <div class="title">Limping Human</div>
-      <div class="origin">River-still village · south of Ambervale</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Nonchalant. “Just my foot.” Wants to go home. Dew on his blade already halfway down. Pepperbark smell.</div>
-      <div class="gm">Dew tell. Hidden structural.</div>
-    </div>
+
   </div>
 </section>
 
 <section class="sheet">
-  <h1>Patients 07–12</h1>
-  <p class="sub">Lovers #07 + #12 — not soldiers</p>
+  <h1>Patients 05–08</h1>
   <div class="grid">
+
+    <div class="card locale">
+      <div class="num">05</div>
+      <div class="title">Bitten Dryad</div>
+      <div class="primer"><strong>Dryad</strong> — a fey of living bark and leaf-hair; sap for blood, body grown as much as born.</div>
+      <div class="aside">Vines lower her onto a clean sheet like a hospital admit — cold-iron bite marks ring her arms, blue-black soil still under her claws.</div>
+      <div class="problems">
+        <div class="prob a">Cold-iron tooth-heads are still lodged under the bark along both forearms.</div>
+        <div class="prob b">Sap-level is crashing — matte eyes, no give at the wrist, leaf-hair going brittle at the tips.</div>
+      </div>
+      <div class="gm">A=REMOVE (crane). B=ADD/FILL (IV invent — sap/tea/honey). Ambervale recognition later.</div>
+    </div>
+
+    <div class="card locale">
+      <div class="num">06</div>
+      <div class="title">Limping Human</div>
+      <div class="primer"><strong>Human</strong> — mortal; soft skin, red blood, no bark, no horns — looks ordinary until he doesn’t.</div>
+      <div class="aside">A path of glowing mushrooms walks him in, then goes dark — he shrugs, points at his boot, and says it’s “just the foot.”</div>
+      <div class="problems">
+        <div class="prob a">Right foot sits wrong in the boot; bone grinds when he puts weight on it.</div>
+        <div class="prob b">A dark line is climbing the calf under the skin — cold to the touch, moving upward by the minute.</div>
+      </div>
+      <div class="gm">A=SET/BRACE (cuff). B=DRAIN or CUT AWAY climbing infection (leeches / knife). Dew tell — looks fine, isn’t.</div>
+    </div>
+
     <div class="card lover">
       <div class="num">07 · LOVER A</div>
       <div class="title">Bandaged Satyr</div>
-      <div class="origin">Summer fringe orchard fair</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Chest wrapped; keeps touching a ribbon that smells of frost-lilac. Hums a tune that doesn’t belong to Summer.</div>
-      <div class="gm">Pair with #12 → both +1 stage once.</div>
+      <div class="primer"><strong>Satyr</strong> — goat-legged fey; horns, warm breath, music always somewhere in the posture.</div>
+      <div class="aside">The orchard-edge opens like a door and admits him on a woven litter — chest wrapped, a frost-lilac ribbon clenched in one fist.</div>
+      <div class="problems">
+        <div class="prob a">Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn’t.</div>
+        <div class="prob b">Fingers of the left hand have gone stiff and wooden — freezing from the tips toward the palm.</div>
+      </div>
+      <div class="gm">A=CLOSE/SEAL (pitch). B=WARM/ADD or CUT? Prefer ADD warmth via IV invent / creative. Pair with #12 once both present → +1 stage each.</div>
     </div>
+
     <div class="card locale">
       <div class="num">08</div>
       <div class="title">Fevered Changeling</div>
-      <div class="origin">Mist-hamlet on Gloaming verge</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Temp swings hot/cold. Veins argue — gold flicker, then blue. Begs you not to “pick a side.”</div>
-      <div class="gm">Drii blood echo candy — light touch.</div>
+      <div class="primer"><strong>Changeling</strong> — a borrowed-blood fey shape; features shift slightly when the fever spikes; veins argue colors.</div>
+      <div class="aside">Mist beads into a stretcher and sets them down — skin flashing gold, then blue, breath fogging hot and cold in the same minute.</div>
+      <div class="problems">
+        <div class="prob a">Fever swings hard — one moment scorching, next shivering blue; neither state holds.</div>
+        <div class="prob b">Two heartbeats fight in the chest — gold flicker, then blue — out of phase with each other.</div>
+      </div>
+      <div class="gm">A=DRAIN/COOL or balance (leeches / IV). B=RESTORE RHYTHM (Buzz/defib creative). Light Drii echo — don’t overplay.</div>
     </div>
+
+  </div>
+</section>
+
+<section class="sheet">
+  <h1>Patients 09–12</h1>
+  <div class="grid">
+
     <div class="card locale">
       <div class="num">09</div>
       <div class="title">Rooted Dryad</div>
-      <div class="origin">Herb-market of the Summer road</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Tried to sew herself with living vines; vines took root wrong. Seams weep nectar. Demands better technique.</div>
-      <div class="gm">Pitch / Claw / Stick find wrong root.</div>
+      <div class="primer"><strong>Dryad</strong> — a fey of living bark and leaf-hair; sap for blood, body grown as much as born.</div>
+      <div class="aside">She walks in under her own power through a ring of opening toadstools, then nearly falls — market twine still knotted in her dress hem.</div>
+      <div class="problems">
+        <div class="prob a">Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.</div>
+        <div class="prob b">Whole torso jolts in hard spasms; she cannot hold still long enough for anyone to work.</div>
+      </div>
+      <div class="gm">A=JOIN (pitch + cuff / creative). B=STOP MOTION (mallet). Option D language locked.</div>
     </div>
+
     <div class="card soldier">
       <div class="num">10 · SOLDIER</div>
       <div class="title">Dry Redcap</div>
-      <div class="origin">Gloaming levy</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Iron boots still on; refuses running water. Cap dry and panicking. Kick-bruises on anyone close.</div>
-      <div class="gm">4th soldier. Stillwater / superstition. Cousin energy to Cameron — not named as such on the card.</div>
+      <div class="primer"><strong>Redcap</strong> — small, viciously strong fey; iron boots, blood-thirsty hat — dangerous when the cap goes dry.</div>
+      <div class="aside">Gloaming fog rolls a litter into the ward and dumps him — boots still on, cap the color of old brick, kicking anyone who gets close.</div>
+      <div class="problems">
+        <div class="prob a">Cap is bone-dry and cracking; he panics harder every minute it stays that way.</div>
+        <div class="prob b">Iron boots are locked on — ankles swelling against the metal; he will not let water near them.</div>
+      </div>
+      <div class="gm">A=ADD/FILL (IV / creative wet the cap). B=REMOVE or CUT boots / SET after. Cousin energy — don’t name Cameron.</div>
     </div>
+
     <div class="card locale">
       <div class="num">11</div>
       <div class="title">Split Satyr</div>
-      <div class="origin">Candle-canopy choir camp</div>
-      <div class="notes">Notes</div>
-      <div class="desc">One horn split; hears a note nobody else hears. Nosebleeds when the ward gets loud.</div>
-      <div class="gm">Claw / song as pleasant smell.</div>
+      <div class="primer"><strong>Satyr</strong> — goat-legged fey; horns, warm breath, music always somewhere in the posture.</div>
+      <div class="aside">Candle-moths guide a choir litter through the grass and leave him — one horn split clean down the middle, ears bleeding thin red.</div>
+      <div class="problems">
+        <div class="prob a">Horn is split lengthwise; the two halves grind and catch when he turns his head.</div>
+        <div class="prob b">Every loud sound in the ward triggers a bright nosebleed and a blackout flicker.</div>
+      </div>
+      <div class="gm">A=JOIN/SET horn (pitch + cuff). B=STOP MOTION / quiet ward / drain pressure (mallet / leeches). Sound sensitivity.</div>
     </div>
+
     <div class="card lover">
       <div class="num">12 · LOVER B</div>
       <div class="title">Burned Elf</div>
-      <div class="origin">Night-candle scout post · Gloaming hills</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Burns under bandages smell like lilac frost. Won’t explain the Summer ribbon in their fist. Calms near a march-hum.</div>
-      <div class="gm">Lover pair with #07.</div>
+      <div class="primer"><strong>Elf</strong> — tall fey-blooded; long bones, sharp ears, skin that bruises like fruit.</div>
+      <div class="aside">Night-candle smoke forms a door and admits them on a scout-cloak litter — bandages smell of lilac frost; a Summer ribbon hidden in one fist.</div>
+      <div class="problems">
+        <div class="prob a">Burn-cloth sticks to living skin; peeling any edge takes flesh with it.</div>
+        <div class="prob b">Under the wraps, patches of skin have gone ash-gray and hard — dead plates spreading at the edges.</div>
+      </div>
+      <div class="gm">A=ADD soak / careful release (IV invent oil?). B=CUT AWAY dead plates (knife) then SEAL. Lover pair with #07.</div>
     </div>
+
   </div>
 </section>
 
 <section class="sheet">
   <h1>Patients 13–14</h1>
   <div class="grid">
+
     <div class="card locale">
       <div class="num">13</div>
       <div class="title">Empty Bee-kin</div>
-      <div class="origin">Bee-knight apiary · far Summer fringe</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Armor full of empty cells; swarm won’t return. Stings themselves calling. Honey-fever; proud eyes.</div>
-      <div class="gm">Later apiary recognition.</div>
+      <div class="primer"><strong>Bee-kin</strong> — armored fey with living hive-plates; usually a soft constant hum of an attending swarm.</div>
+      <div class="aside">A hollow tree-mouth at the ward edge exhales them onto the grass — armor full of empty cells, no hum, proud eyes still open.</div>
+      <div class="problems">
+        <div class="prob a">Hive-armor cells are vacant and collapsing inward, pinching the body underneath.</div>
+        <div class="prob b">Honey-fever burns behind the eyes; they keep stinging their own wrists calling a swarm that does not answer.</div>
+      </div>
+      <div class="gm">A=SET/BRACE or carefully OPEN/REMOVE crushing plates (cuff / crane). B=DRAIN fever + STOP MOTION self-harm (leeches / mallet). Apiary recognition later.</div>
     </div>
+
     <div class="card locale">
       <div class="num">14</div>
       <div class="title">Exhausted Human</div>
-      <div class="origin">Litter-bearer · Gray Reach road civilian</div>
-      <div class="notes">Notes</div>
-      <div class="desc">Dragged three others here before collapsing. Hands ruined. Apologizes to empty air for “leaving the rest.”</div>
-      <div class="gm">Early Cap temptation. Not a soldier — camp follower.</div>
+      <div class="primer"><strong>Human</strong> — mortal; soft skin, red blood, no bark, no horns — looks ordinary until he doesn’t.</div>
+      <div class="aside">The Gray Reach road itself seems to spit a litter through the mushrooms — he collapses mid-apology for “leaving the rest,” hands ruined.</div>
+      <div class="problems">
+        <div class="prob a">Both hands are crushed — bones like gravel under the skin; fingers will not open.</div>
+        <div class="prob b">He is running on nothing — pulse thready, lips gray; the body is about to stop volunteering.</div>
+      </div>
+      <div class="gm">A=SET/BRACE (cuff) maybe after STOP MOTION. B=ADD/FILL (IV) — Cap temptation if Ink via escalation. Camp follower, not soldier.</div>
     </div>
+
     <div class="card locale" style="grid-column:1/-1;min-height:auto;">
-      <div class="title" style="font-size:10pt;">Open set suggestion</div>
-      <div class="desc">01 Scorched Quickling · 02 Cracked Spriggan · 04 Pierced Elf · 06 Limping Human · 07 Bandaged Satyr · 14 Exhausted Human. After 4 Saved, ramp toward 10 including #12 Burned Elf and #08 Fevered Changeling.</div>
+      <div class="title" style="font-size:10pt;">Admission (table fiction)</div>
+      <div class="aside" style="margin:0;">Ambervale’s ward is a mouth the forest feeds. Patients arrive by root, mushroom-ring, mist-stretcher, and toadstool cough — admitted like a hospital, so the four healers never have to leave the grass.</div>
+      <div class="gm">Open set: 01 · 02 · 04 · 06 · 07 · 14. After 4 Saved, ramp including 12 + 08. All start Green; narrate escalations.</div>
     </div>
+
   </div>
 </section>
 
