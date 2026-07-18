@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adrian Fairchild — Fantasy Illustration Moodboard</title>
+<title>Adrian Fairchild — LOCKED (Option B)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878; --amber:#e6b34d; --line:#2c5440; --teal:#3d9a8a; }
+:root { --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878; --amber:#e6b34d; --line:#2c5440; --teal:#3d9a8a; --lock:#c8902f; }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Source Sans 3',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.45; padding:1.25rem; }
 .wrap { max-width:1100px; margin:0 auto; padding-bottom:3rem; }
@@ -17,16 +17,28 @@ h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.55rem; }
   border-radius:8px; padding:0.85rem 1rem; margin-bottom:1.25rem; font-size:0.92rem;
 }
 .note strong { color:var(--amber); }
+.lockbox {
+  background:#1a2818; border:2px solid var(--lock); border-radius:12px; padding:1rem 1.1rem;
+  margin-bottom:1.4rem; display:grid; grid-template-columns:minmax(160px,220px) 1fr; gap:1rem; align-items:center;
+}
+.lockbox img { width:100%; border-radius:8px; border:1px solid var(--line); display:block; }
+.lockbox .lbl { font-family:'Cinzel',serif; color:var(--lock); letter-spacing:0.12em; text-transform:uppercase; font-size:0.72rem; margin-bottom:0.35rem; }
+.lockbox .name { font-family:'Cinzel',serif; color:var(--amber); font-size:1.2rem; margin-bottom:0.35rem; }
+.lockbox .why { color:var(--muted); font-size:0.92rem; }
+.lockbox .src { margin-top:0.5rem; font-size:0.8rem; }
+.lockbox .src a { color:var(--teal); }
 .sec { font-family:'Cinzel',serif; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; font-size:0.78rem; margin:1.4rem 0 0.6rem; }
 .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:0.9rem; }
 .card {
   background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden;
-  display:flex; flex-direction:column;
+  display:flex; flex-direction:column; opacity:0.72;
 }
+.card.locked { opacity:1; border-color:var(--lock); box-shadow:0 0 0 1px #c8902f55; }
 .card a.img { display:block; background:#0a100c; }
 .card img { display:block; width:100%; aspect-ratio:1/1.2; object-fit:cover; object-position:center top; }
 .card .body { padding:0.7rem 0.8rem 0.85rem; }
 .tag { display:inline-block; font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; background:var(--amber); color:#14271d; font-weight:700; padding:0.12rem 0.4rem; border-radius:3px; margin-bottom:0.35rem; }
+.tag.lock { background:var(--lock); color:#14271d; }
 .tag.warn { background:#6a3a18; color:#f0d9a0; }
 .name { font-family:'Cinzel',serif; color:var(--amber); font-size:0.95rem; margin-bottom:0.25rem; }
 .why { font-size:0.84rem; color:var(--muted); }
@@ -35,34 +47,45 @@ h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.55rem; }
 ul { margin:0.35rem 0 0 1.1rem; }
 li { margin-bottom:0.25rem; }
 li a { color:var(--teal); }
+@media (max-width:640px) { .lockbox { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Adrian — fantasy illustration candidates</h1>
-  <p class="sub">Character art / digital painting only (ArtStation + DeviantArt). Early–mid 20s Fairchild heir, Feywild-raised, dream appearance OK. Photos retired to an archive folder.</p>
+  <h1>Adrian Fairchild — look locked</h1>
+  <p class="sub">Dream / Seeming appearance for Adrian. Early–mid 20s Fairchild heir, Feywild-raised. Nathan locked <strong>Option B</strong> on 2026-07-18.</p>
 
-  <div class="note">
-    <strong>Best dream-Adrian fits first.</strong> Credit the artist if you lock one. For table use, prefer pieces you’d be comfortable commissioning / licensing — these are reference picks, not a claim of commercial rights.
+  <div class="lockbox">
+    <a href="adrian-portrait-candidates/LOCKED-adrian-B-gisalmeida-northern-baron.jpg" target="_blank"><img src="adrian-portrait-candidates/LOCKED-adrian-B-gisalmeida-northern-baron.jpg" alt="Locked Adrian — Option B"></a>
+    <div>
+      <div class="lbl">Canonical · Option B</div>
+      <div class="name">Aurora-crowned sidhe</div>
+      <p class="why">GisAlmeida — <em>Phillip O'Niel, Northern Baron</em>. Fey / Summer Court energy: crown of light, dark void, mysterious gaze. Use this as the visual reference for dream-Adrian (credit the artist; reference pick, not a commercial rights claim).</p>
+      <p class="src">File: <code>LOCKED-adrian-B-gisalmeida-northern-baron.jpg</code> · <a href="https://www.deviantart.com/gisalmeida/art/Phillip-O-Niel-Northern-Baron-866462372" target="_blank" rel="noopener">DeviantArt source</a></p>
+    </div>
   </div>
 
-  <p class="sec">Shortlist</p>
+  <div class="note">
+    <strong>Archive below</strong> — shortlist kept for context. Only B is locked for play.
+  </div>
+
+  <p class="sec">Shortlist (archive)</p>
   <div class="grid">
     <article class="card">
       <a class="img" href="adrian-portrait-candidates/F06-lozano-benedict-face.jpg" target="_blank"><img src="adrian-portrait-candidates/F06-lozano-benedict-face.jpg" alt="Benedict face"></a>
       <div class="body">
-        <span class="tag">A · Top</span>
+        <span class="tag">A</span>
         <div class="name">Solemn heir (face crop)</div>
         <p class="why">Painterly portrait, parchment wash, intense quiet eyes. Feels like a dream-memory of a man, not a cosplay photo. Human-coded.</p>
         <p class="src">Santiago Lozano — <a href="https://santilozano.artstation.com/projects/NG5Axz" target="_blank" rel="noopener">Benedict, Prince of Amber</a></p>
       </div>
     </article>
-    <article class="card">
+    <article class="card locked">
       <a class="img" href="adrian-portrait-candidates/F08-gisalmeida-northern-baron.jpg" target="_blank"><img src="adrian-portrait-candidates/F08-gisalmeida-northern-baron.jpg" alt="Northern Baron"></a>
       <div class="body">
-        <span class="tag">B · Top</span>
+        <span class="tag lock">B · LOCKED</span>
         <div class="name">Aurora-crowned sidhe</div>
-        <p class="why">Explicitly fey / changeling-adjacent energy — crown of light, dark void, mysterious gaze. Great if dream-Adrian is more Summer Court than mortal.</p>
+        <p class="why">Explicitly fey / changeling-adjacent energy — crown of light, dark void, mysterious gaze. Dream-Adrian leans Summer Court over mortal Fairchild.</p>
         <p class="src">GisAlmeida — <a href="https://www.deviantart.com/gisalmeida/art/Phillip-O-Niel-Northern-Baron-866462372" target="_blank" rel="noopener">Phillip O'Niel, Northern Baron</a></p>
       </div>
     </article>

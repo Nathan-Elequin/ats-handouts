@@ -3,416 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRINT · Patient Cards — fold-line · stack numbers</title>
+<title>PRINT · Patient Cards — Ambervale (player-facing)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<style>* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
-@page { size: letter; margin: 0.3in; }
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size: letter; margin: 0.35in; }
 :root {
   --ink:#2a2218; --line:#2c5440; --prob-a:#2d6e6e; --prob-b:#a85a28; --muted:#6a5a48;
-  --y:#c8902f; --r:#c04a32; --g:#6a9e6e; --k:#1a1a1a;
 }
 body { font-family:'Source Sans 3',sans-serif; background:#e8dcc0; color:var(--ink); }
 .howto {
-  max-width:8in; margin:0.5rem auto 0.85rem; background:#1d3a2a; color:#f0d9a0;
-  border:1px solid #c8902f; border-radius:8px; padding:0.7rem 1rem; font-size:0.9rem; line-height:1.4;
+  max-width:8in; margin:0.6rem auto 1rem; background:#1d3a2a; color:#f0d9a0;
+  border:1px solid #c8902f; border-radius:8px; padding:0.75rem 1rem; font-size:0.92rem; line-height:1.45;
 }
-.howto h1 { font-family:'Cinzel',serif; color:#e6b34d; font-size:1.05rem; margin-bottom:0.3rem; }
-.howto ol { margin-left:1.15rem; }
-.howto code { background:#0f1a14; padding:0.08rem 0.3rem; border-radius:3px; }
+.howto h1 { font-family:'Cinzel',serif; color:#e6b34d; font-size:1.05rem; margin-bottom:0.35rem; }
+.howto ol { margin-left:1.2rem; }
+.howto code { background:#0f1a14; padding:0.1rem 0.35rem; border-radius:3px; font-size:0.85em; }
+
 .sheet {
-  width:7.9in; height:10.35in; margin:0 auto 0.35in;
+  width:7.8in; height:10.3in; margin:0 auto 0.4in;
   display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
-  gap:0; background:#fff; box-shadow:0 2px 12px #0002;
+  gap:0; background:#fff;
+  box-shadow:0 2px 12px #0002;
 }
 .card {
-  position:relative; border:1.5px solid var(--line); background:#fffef8;
-  display:flex; flex-direction:column; overflow:hidden;
+  position:relative; padding:0.14in 0.15in 0.12in;
+  border:1.5px solid var(--line);
+  background:#fffef8;
+  overflow:hidden;
+  /* cut guides */
   background-image:
     linear-gradient(to right, transparent calc(100% - 1px), #c0b090 1px),
     linear-gradient(to bottom, transparent calc(100% - 1px), #c0b090 1px);
 }
 .card:nth-child(2n) { border-left-style:dashed; }
 .card:nth-child(n+3) { border-top-style:dashed; }
-.card.backup { box-shadow: inset 0 0 0 3px #8a303055; }
-.card.blank { background:#f4ead3; opacity:0.55; }
-.face { flex:1 1 auto; padding:0.11in 0.12in 0.06in; display:flex; flex-direction:column; min-height:0; }
-.toprow { display:flex; align-items:center; gap:0.06in; margin-bottom:0.04in; }
-.tri {
-  font-family:'Cinzel',serif; font-size:6.5pt; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
-  padding:0.02in 0.05in; border-radius:3px; border:1px solid;
-}
-.tri.y { background:#f5e6c0; border-color:var(--y); color:#5a3a08; }
-.tri.r { background:#f0c8bc; border-color:var(--r); color:#5a1810; }
-.tri.g { background:#d4e8d4; border-color:var(--g); color:#1a3a22; }
-.tri.k { background:#1a1a1a; border-color:#000; color:#e8dcc0; }
-.backup-pill {
-  font-size:6pt; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
-  background:#8a3030; color:#f0d9a0; padding:0.015in 0.045in; border-radius:3px;
-}
-.title { font-family:'Cinzel',serif; font-weight:700; font-size:11pt; color:#14271d; line-height:1.12; margin-bottom:0.045in; }
+.num { font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.12em; color:#8a7a60; text-transform:uppercase; }
+.title { font-family:'Cinzel',serif; font-weight:700; font-size:12pt; color:#14271d; margin:0.03in 0 0.06in; line-height:1.15; }
 .moment {
-  font-size:8pt; line-height:1.28; color:#2a2218;
-  border-bottom:1px dotted #c0b090; padding-bottom:0.04in; margin-bottom:0.04in;
+  font-size:8.6pt; line-height:1.32; color:#2a2218;
+  border-bottom:1px dotted #c0b090; padding-bottom:0.05in; margin-bottom:0.05in;
 }
-.field { font-size:6.8pt; line-height:1.25; font-style:italic; color:var(--muted); margin-bottom:0.05in; flex:0 1 auto; }
+.field {
+  font-size:7.5pt; line-height:1.28; font-style:italic; color:var(--muted);
+  margin-bottom:0.07in;
+}
+.problems { display:grid; gap:0.055in; }
 .prob {
-  border-radius:4px; padding:0.045in 0.06in; font-size:7.6pt; line-height:1.25; margin-top:auto;
-}
-.prob .plab {
-  display:block; font-family:'Cinzel',serif; font-size:5.5pt; letter-spacing:0.1em; text-transform:uppercase;
-  margin-bottom:0.015in; opacity:0.85;
+  border-radius:4px; padding:0.055in 0.07in; font-size:8.2pt; line-height:1.28;
 }
 .prob.a { border:1.5px solid var(--prob-a); border-left:5px solid var(--prob-a); background:#f2f8f6; }
 .prob.b { border:1.5px solid var(--prob-b); border-left:5px solid var(--prob-b); background:#fbf6f0; }
-.fold {
-  flex:0 0 auto; border-top:1.5px dashed #a07830; background:#fff8ec;
-  padding:0.05in 0.12in 0.28in; min-height:0.95in;
+.cut-hint {
+  position:absolute; bottom:0.04in; right:0.08in;
+  font-size:6pt; color:#b0a080; letter-spacing:0.04em; text-transform:uppercase;
 }
-.fold-mark {
-  font-family:'Cinzel',serif; font-size:5.5pt; letter-spacing:0.1em; text-transform:uppercase;
-  color:#8a6d3b; text-align:center; margin-bottom:0.03in;
-}
-.stack {
-  position:absolute; right:0.08in; bottom:0.05in;
-  font-family:'Cinzel',serif; font-weight:700; font-size:14pt; color:#14271d;
-  background:#fffef8cc; padding:0 0.04in; border-radius:3px; line-height:1;
-}
+
 @media print {
   .howto { display:none !important; }
   body { background:#fff; }
-  .sheet { box-shadow:none; margin:0; page-break-after:always; width:100%; height:10.35in; }
+  .sheet {
+    box-shadow:none; margin:0; page-break-after:always;
+    width:100%; height:10.3in;
+  }
   .sheet:last-child { page-break-after:auto; }
-}</style>
+}
+</style>
 </head>
 <body>
+
 <div class="howto">
-  <h1>Print · cut · fold — patient hand cards</h1>
+  <h1>Print · cut · deal — player patient cards (HANDS)</h1>
   <ol>
-    <li><strong>Main deck 01–14</strong> then optional <strong>Backup 15–18</strong> (marked). Letter · Actual size 100% · color on.</li>
-    <li>Cut on dashed midlines. Bottom-right number = <strong>stack order</strong>.</li>
-    <li><strong>Fold</strong> the amber “Escalation” flap backward so only Presenting shows. Reveal when it escalates.</li>
-    <li>01–06 start <strong>Delayed</strong> (simpler). Most 07–14 start <strong>Urgent</strong> (Bee-kin Delayed). Quickling = 10.</li>
-    <li>Also print kanban tokens. Treating quiets a problem for now — Fear can flare it; goal is keep people <strong>alive / Stable</strong>.</li>
+    <li><strong>Print</strong> this page (4 sheets / 14 cards). Use <strong>Letter</strong>, <strong>Actual size / 100%</strong> (not "Fit to page"). Color on.</li>
+    <li><strong>Cut</strong> along the dashed midlines (2 cuts per sheet → 4 cards). Trim outer edges if your printer added margin.</li>
+    <li>These are the <strong>hand / ward cards</strong> for gameplay. Also print <strong>Kanban Tokens</strong> (name + art) for the triage board — one matching token per patient.</li>
+    <li>Cards are <strong>player-facing only</strong> — no soldier/lover tags, no GM keys.</li>
+    <li>Optional: sleeve in card sleeves or glue to chipboard for table durability.</li>
   </ol>
 </div>
-<section class="sheet" data-label="main">
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Limping Human</div>
-    <div class="moment">Sits on the edge of a toadstool with one boot off, sipping bitter tea from a leaf-cup. Shrugs and points at the foot: &quot;just this.&quot;</div>
-    <div class="field"><strong>Human </strong> — baseline mortal humanoid: soft skin, red blood, no bark, horns, or innate season-magic. Ordinary organs and healing rates — the reference body against which fey anatomies are compared.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Right foot sits wrong in the boot; bone grinds when he puts weight on it.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>A dark line is climbing the calf under the skin — cold to the touch, moving upward by the minute.</div>
-  </div>
-  <div class="stack">01</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Fevered Pixie</div>
-    <div class="moment">Curled in a thimble nest set on a toadstool — wings trembling, dust flashing gold then blue; trying (and failing) to drink from a dewdrop.</div>
-    <div class="field"><strong>Pixie </strong> — palm-scale winged fey; hollow bones, delicate wing membranes, often luminous dust on the wings. Tiny organ volumes — heat and fluid balance swing easily. Full person-scale mind in a thimble body.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Fever swings hard — one moment scorching, next shivering; neither state holds.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Wing-joints lock mid-beat; one wing sticks open, the other won’t extend.</div>
-  </div>
-  <div class="stack">02</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Bandaged Satyr</div>
-    <div class="moment">Reclines on a soft-cap bed, chest wrapped, humming under his breath; a frost-lilac ribbon clenched in one fist, free hand tapping a silent rhythm.</div>
-    <div class="field"><strong>Satyr </strong> — fey with humanoid torso and goatlike legs/hooves; horns common, keen hearing. Dual gait (person above, ungulate below). Warm mammalian blood; gut suited to forage and wine as much as rations.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn’t.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Fingers of the left hand have gone stiff and wooden — freezing from the tips toward the palm.</div>
-  </div>
-  <div class="stack">03</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Muddy Gnome</div>
-    <div class="moment">Sits upright on a muddy cap, boots still dripping river-gray, trying to count coins with shaking hands.</div>
-    <div class="field"><strong>Gnome </strong> — small humanoid; stout bones, keen fine-motor nerves, warm red blood like mortals. Earth-attuned gut and skin — hardy, not plant-bodied.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won’t clot.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Whole body seizes in short, violent shakes whenever anyone says an odd number aloud nearby.</div>
-  </div>
-  <div class="stack">04</div>
-</article>
-</section>
-<section class="sheet" data-label="main">
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Bitten Dryad</div>
-    <div class="moment">Kneels carefully on a clean white-cap, arms held out so the cold-iron bites show; blue-black soil still under her claws. Watching the healers.</div>
-    <div class="field"><strong>Dryad </strong> — tree-bound fey; bark-and-leaf integument, sap for blood, body grown as much as born. Life force tethered to a living tree. Cold iron is toxic; plant chemistry, not mammalian clotting.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Cold-iron tooth-heads are still lodged under the bark along both forearms.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Sap-level is crashing — matte eyes, no give at the wrist, leaf-hair going brittle at the tips.</div>
-  </div>
-  <div class="stack">05</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
-    </div>
-    <div class="title">Exhausted Brownie</div>
-    <div class="moment">Collapsed face-down on a low cap mid-apology for &quot;leaving the rest&quot;; crushed hands tucked under their chin. Still trying to refuse a cup of broth.</div>
-    <div class="field"><strong>Brownie </strong> — ~2 ft household-and-road fey; plain-looking, tough for size, extreme manual dexterity. Warm blood, mortal-like organs scaled small. Built for long quiet labor.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Both hands are crushed — bones like gravel under the skin; fingers will not open.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>They are running on nothing — pulse thready, lips gray; the body is about to stop volunteering.</div>
-  </div>
-  <div class="stack">06</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
-    </div>
-    <div class="title">Burned Nymph</div>
-    <div class="moment">Lies very still on a pale-cap, lilac-frost bandages neat; a Summer ribbon hidden in one fist. Eyes open, listening for one particular voice.</div>
-    <div class="field"><strong>Nymph </strong> — nature-beauty fey; soft-skinned, elflike frame, presence that can dazzle mortal senses when healthy. Flesh like fine mortal tissue; danger is often the aura and wild-place bond, not armored hide.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Burn-cloth sticks to living skin; peeling any edge takes flesh with it.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Under the wraps, patches of skin have gone ash-gray and hard — dead plates spreading at the edges.</div>
-  </div>
-  <div class="stack">07</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
-    </div>
-    <div class="title">Cracked Spriggan</div>
-    <div class="moment">Half-sitting on a wide cap in Summer levy colors; ribs split like a dry log, honey-sap pooling under him. Eyes open; not talking.</div>
-    <div class="field"><strong>Spriggan </strong> — gnome-descended fey warped by old magic. Natural form ~3 ft, thick-bodied and foul-smelling; can swell to giant size. Same organs, violently redistributed mass — denser and oilier than ordinary gnomes.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Rib-bark is cracked wide; the chest wall flexes wrong and won’t take a breath deep.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Honey-thick sap pours from the splits faster than it should — sticky, sweet, pooling under him.</div>
-  </div>
-  <div class="stack">08</div>
-</article>
-</section>
-<section class="sheet" data-label="main">
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
-    </div>
-    <div class="title">Split Centaur</div>
-    <div class="moment">Sprawled across two toadstool beds lashed together — split fore-hoof dangling, ears pinned flat whenever the ward gets loud. Gnawing a dry oatcake and glaring.</div>
-    <div class="field"><strong>Centaur </strong> — single creature, dual architecture: humanoid torso fused to equine trunk and four legs. Two weight systems, one bloodstream. Digestion and balance horse-forward; hands and speech person-forward.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Fore-hoof is split lengthwise; the two halves grind and catch on every shift of weight.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Every loud sound triggers a bright nosebleed and a blackout flicker behind the eyes.</div>
-  </div>
-  <div class="stack">09</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
-    </div>
+
+<!-- Sheet 1: 01–04 -->
+<section class="sheet">
+  <article class="card">
+    <div class="num">01</div>
     <div class="title">Scorched Quickling</div>
     <div class="moment">Keeps skidding off his toadstool — scorched, twitching, reeking of ozone and clove. No name left to give.</div>
-    <div class="field"><strong>Quickling </strong> — ~2 ft slender fey; pale skin, feral features. Metabolism and nerves run far hotter than mortal norms — short natural lifespan; speech and motion often too fast to parse unless they deliberately slow.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Veins strobe with leftover Pale Ring charge; sparks jump to metal nearby.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Chest hitches in uneven, skipping heaves — long pauses, then double-thumps.</div>
-  </div>
-  <div class="stack">10</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
+    <div class="field"><strong>Quickling</strong> — ~2 ft slender fey; pale skin, feral features. Metabolism and nerves run far hotter than mortal norms — short natural lifespan; speech and motion often too fast to parse unless they deliberately slow.</div>
+    <div class="problems">
+      <div class="prob a">Veins strobe with leftover Pale Ring charge; sparks jump to metal nearby.</div>
+      <div class="prob b">Chest hitches in uneven, skipping heaves — long pauses, then double-thumps.</div>
     </div>
-    <div class="title">Soaked Kelpie</div>
-    <div class="moment">Sits bolt upright on a wet cap (won’t lie down), levy sash still on, dripping riverwater, kicking anyone who offers a towel.</div>
-    <div class="field"><strong>Kelpie </strong> — aquatic shapeshifter; horse-form and person-form share one wet anatomy. Tissue stays damp; can hold and move water through lungs and hide. Predatory fey by nature.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Lungs full of black river-water; every cough brings more; they will not lie flat.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>One leg is twisted wrong from the haul out of the ford — joint will not take weight.</div>
-  </div>
-  <div class="stack">11</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">02</div>
+    <div class="title">Cracked Spriggan</div>
+    <div class="moment">Half-sitting on a wide cap in Summer levy colors; ribs split like a dry log, honey-sap pooling under him. Eyes open; not talking.</div>
+    <div class="field"><strong>Spriggan</strong> — gnome-descended fey warped by old magic. Natural form ~3 ft, thick-bodied and foul-smelling; can swell to giant size. Same organs, violently redistributed mass — denser and oilier than ordinary gnomes.</div>
+    <div class="problems">
+      <div class="prob a">Rib-bark is cracked wide; the chest wall flexes wrong and won’t take a breath deep.</div>
+      <div class="prob b">Honey-thick sap pours from the splits faster than it should — sticky, sweet, pooling under him.</div>
     </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">03</div>
+    <div class="title">Muddy Gnome</div>
+    <div class="moment">Sits upright on a muddy cap, boots still dripping river-gray, trying to count coins with shaking hands.</div>
+    <div class="field"><strong>Gnome</strong> — small humanoid; stout bones, keen fine-motor nerves, warm red blood like mortals. Earth-attuned gut and skin — hardy, not plant-bodied.</div>
+    <div class="problems">
+      <div class="prob a">Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won’t clot.</div>
+      <div class="prob b">Whole body seizes in short, violent shakes whenever anyone says an odd number aloud nearby.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">04</div>
     <div class="title">Pierced Eladrin</div>
     <div class="moment">Propped against the stalk of his bed-cap — two shafts in a wrong-bent shoulder, pupils blown, jaw locked in a grin that won’t quit.</div>
-    <div class="field"><strong>Eladrin </strong> — Feywild elf-kin; tall, sharp-eared, long-lived. Blood and mood carry seasonal court magic. Soft tissue like elves; cold iron irritates; emotion and physiology couple tightly.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Two arrow shafts sit deep in the shoulder; the joint is bent the wrong way around them.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>He cannot stop laughing — hard, silent convulsions that bounce the shafts and tear the wound wider.</div>
-  </div>
-  <div class="stack">12</div>
-</article>
-</section>
-<section class="sheet" data-label="main">
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      
+    <div class="field"><strong>Eladrin</strong> — Feywild elf-kin; tall, sharp-eared, long-lived. Blood and mood carry seasonal court magic. Soft tissue like elves; cold iron irritates; emotion and physiology couple tightly.</div>
+    <div class="problems">
+      <div class="prob a">Two arrow shafts sit deep in the shoulder; the joint is bent the wrong way around them.</div>
+      <div class="prob b">He cannot stop laughing — hard, silent convulsions that bounce the shafts and tear the wound wider.</div>
     </div>
-    <div class="title">Empty Bee-kin</div>
-    <div class="moment">Sits stiff on a honey-stained cap — empty armor plates, no hum. Proud eyes open; keeps picking at their own wrists as if calling something home.</div>
-    <div class="field"><strong>Bee-kin </strong> — fey whose outer plates are living hive-cells — chitin architecture with a colony interface, soft body beneath. Healthy specimens hum; empty or collapsing cells stress the whole organism.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Hive-armor cells are vacant and collapsing inward, pinching the body underneath.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Honey-fever burns behind the eyes; they keep stinging their own wrists calling a swarm that does not answer.</div>
-  </div>
-  <div class="stack">13</div>
-</article>
-<article class="card">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      
-    </div>
-    <div class="title">Rooted Wood Woad</div>
-    <div class="moment">Keeps tipping off its bed-cap — market twine still knotted around one wrist. Knothole eyes track whoever gets close; body won’t stay still.</div>
-    <div class="field"><strong>Wood Woad </strong> — plant guardian in humanoid shape; thick bark, branch-hands, root-feet, deep-set eyes. No ordinary animal heart — sustains on sun, soil, water, and air. True plant tissue.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Whole torso jolts in hard spasms; it cannot hold still long enough for anyone to work.</div>
-  </div>
-  <div class="stack">14</div>
-</article>
-<article class="card blank"><div class="face"><div class="moment" style="border:none;font-style:italic;color:#8a7a60;">Spare / discard after cut.</div></div><div class="stack">—</div></article>
-<article class="card blank"><div class="face"><div class="moment" style="border:none;font-style:italic;color:#8a7a60;">Spare / discard after cut.</div></div><div class="stack">—</div></article>
+    <span class="cut-hint">cut</span>
+  </article>
 </section>
 
-<section class="sheet" data-label="backup">
-<article class="card backup">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      <span class="backup-pill">Backup</span>
+<!-- Sheet 2: 05–08 -->
+<section class="sheet">
+  <article class="card">
+    <div class="num">05</div>
+    <div class="title">Bitten Dryad</div>
+    <div class="moment">Kneels carefully on a clean white-cap, arms held out so the cold-iron bites show; blue-black soil still under her claws. Watching the healers.</div>
+    <div class="field"><strong>Dryad</strong> — tree-bound fey; bark-and-leaf integument, sap for blood, body grown as much as born. Life force tethered to a living tree. Cold iron is toxic; plant chemistry, not mammalian clotting.</div>
+    <div class="problems">
+      <div class="prob a">Cold-iron tooth-heads are still lodged under the bark along both forearms.</div>
+      <div class="prob b">Sap-level is crashing — matte eyes, no give at the wrist, leaf-hair going brittle at the tips.</div>
     </div>
-    <div class="title">Winded Pooka</div>
-    <div class="moment">Keeps flickering between rabbit-ears and a lanky youth on the same toadstool — laughing wrong, then choking mid-laugh. Hay stuck in wet fur.</div>
-    <div class="field"><strong>Pooka </strong> — shapeshifting trickster fey; common forms include black horse, goat, or oversized rabbit-headed youth. One body, many silhouettes; lungs and throat reconfigure mid-shift. Mischief is metabolism.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Stuck mid-shift — throat is half-hare, half-person; air whistles and catches.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Whenever someone nearby lies, they begin to drown on dry air — panic, blue lips, no water in sight.</div>
-  </div>
-  <div class="stack">15</div>
-</article>
-<article class="card backup">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      <span class="backup-pill">Backup</span>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">06</div>
+    <div class="title">Limping Human</div>
+    <div class="moment">Sits on the edge of a toadstool with one boot off, sipping bitter tea from a leaf-cup. Shrugs and points at the foot: “just this.”</div>
+    <div class="field"><strong>Human</strong> — baseline mortal humanoid: soft skin, red blood, no bark, horns, or innate season-magic. Ordinary organs and healing rates — the reference body against which fey anatomies are compared.</div>
+    <div class="problems">
+      <div class="prob a">Right foot sits wrong in the boot; bone grinds when he puts weight on it.</div>
+      <div class="prob b">A dark line is climbing the calf under the skin — cold to the touch, moving upward by the minute.</div>
     </div>
-    <div class="title">Bleached Huldra</div>
-    <div class="moment">Sits sideways so no one sees her back; bark-hollow showing under a torn cloak. Cow-tail lashing. Smile too wide for the pain.</div>
-    <div class="field"><strong>Huldra </strong> — forest seducer fey; human-beautiful from the front, hollow or bark-backed behind, often with a cow’s tail. Soft mortal-facing flesh; the hollow is the true vulnerability.</div>
-    <div class="prob a"><span class="plab">Presenting</span>The hollow in her back is packing with dry rot — edges crumbling inward when she breathes.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Tail has gone dead-weight and ice-cold; frost is climbing the spine from the tip.</div>
-  </div>
-  <div class="stack">16</div>
-</article>
-<article class="card backup">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri y">Delayed</span>
-      <span class="backup-pill">Backup</span>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">07</div>
+    <div class="title">Bandaged Satyr</div>
+    <div class="moment">Reclines on a soft-cap bed, chest wrapped, humming under his breath; a frost-lilac ribbon clenched in one fist, free hand tapping a silent rhythm.</div>
+    <div class="field"><strong>Satyr</strong> — fey with humanoid torso and goatlike legs/hooves; horns common, keen hearing. Dual gait (person above, ungulate below). Warm mammalian blood; gut suited to forage and wine as much as rations.</div>
+    <div class="problems">
+      <div class="prob a">Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn’t.</div>
+      <div class="prob b">Fingers of the left hand have gone stiff and wooden — freezing from the tips toward the palm.</div>
     </div>
-    <div class="title">Snared Twigjack</div>
-    <div class="moment">Tangled in its own briar-snare on a low cap — tiny, furious, picking at wire-thorns with stick fingers. Spits seeds at anyone who leans in.</div>
-    <div class="field"><strong>Twigjack </strong> — tiny plant-fey of briar and stick; sharp, springy, mean for its size. No red blood — sap and fiber. Built to snare, not to be snared.</div>
-    <div class="prob a"><span class="plab">Presenting</span>Own thorns are driven through both palms — stuck to the bed-cap by its own snare.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>Seed-spit becomes choking burrs in its own throat when it gets angry — and it is always angry.</div>
-  </div>
-  <div class="stack">17</div>
-</article>
-<article class="card backup">
-  <div class="face">
-    <div class="toprow">
-      <span class="tri r">Urgent</span>
-      <span class="backup-pill">Backup</span>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">08</div>
+    <div class="title">Fevered Pixie</div>
+    <div class="moment">Curled in a thimble nest set on a toadstool — wings trembling, dust flashing gold then blue; trying (and failing) to drink from a dewdrop.</div>
+    <div class="field"><strong>Pixie</strong> — palm-scale winged fey; hollow bones, delicate wing membranes, often luminous dust on the wings. Tiny organ volumes — heat and fluid balance swing easily. Full person-scale mind in a thimble body.</div>
+    <div class="problems">
+      <div class="prob a">Fever swings hard — one moment scorching, next shivering; neither state holds.</div>
+      <div class="prob b">Wing-joints lock mid-beat; one wing sticks open, the other won’t extend.</div>
     </div>
-    <div class="title">Hollow Sylph</div>
-    <div class="moment">Hovers an inch above the toadstool, too light — translucent ribs showing, wind circling her like a worried pet. Speaks in gasps of cold air.</div>
-    <div class="field"><strong>Sylph </strong> — air-elemental fey; light bones, translucent skin, breath and breeze as one system. Needs moving air the way lungs need oxygen; still rooms starve them.</div>
-    <div class="prob a"><span class="plab">Presenting</span>She is too light — ribs show, lift is failing; she cannot stay grounded or truly fly.</div>
-  </div>
-  <div class="fold">
-    <div class="fold-mark">Fold back to hide · Escalation</div>
-    <div class="prob b"><span class="plab">Escalation</span>A dead still-pocket has formed in her chest; when the ward goes quiet, she begins to gray out.</div>
-  </div>
-  <div class="stack">18</div>
-</article>
+    <span class="cut-hint">cut</span>
+  </article>
+</section>
+
+<!-- Sheet 3: 09–12 -->
+<section class="sheet">
+  <article class="card">
+    <div class="num">09</div>
+    <div class="title">Rooted Wood Woad</div>
+    <div class="moment">Keeps tipping off its bed-cap — market twine still knotted around one wrist. Knothole eyes track whoever gets close; body won’t stay still.</div>
+    <div class="field"><strong>Wood Woad</strong> — plant guardian in humanoid shape; thick bark, branch-hands, root-feet, deep-set eyes. No ordinary animal heart — sustains on sun, soil, water, and air. True plant tissue.</div>
+    <div class="problems">
+      <div class="prob a">Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.</div>
+      <div class="prob b">Whole torso jolts in hard spasms; it cannot hold still long enough for anyone to work.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">10</div>
+    <div class="title">Soaked Kelpie</div>
+    <div class="moment">Sits bolt upright on a wet cap (won’t lie down), levy sash still on, dripping riverwater, kicking anyone who offers a towel.</div>
+    <div class="field"><strong>Kelpie</strong> — aquatic shapeshifter; horse-form and person-form share one wet anatomy. Tissue stays damp; can hold and move water through lungs and hide. Predatory fey by nature.</div>
+    <div class="problems">
+      <div class="prob a">Lungs full of black river-water; every cough brings more; they will not lie flat.</div>
+      <div class="prob b">One leg is twisted wrong from the haul out of the ford — joint will not take weight.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">11</div>
+    <div class="title">Split Centaur</div>
+    <div class="moment">Sprawled across two toadstool beds lashed together — split fore-hoof dangling, ears pinned flat whenever the ward gets loud. Gnawing a dry oatcake and glaring.</div>
+    <div class="field"><strong>Centaur</strong> — single creature, dual architecture: humanoid torso fused to equine trunk and four legs. Two weight systems, one bloodstream. Digestion and balance horse-forward; hands and speech person-forward.</div>
+    <div class="problems">
+      <div class="prob a">Fore-hoof is split lengthwise; the two halves grind and catch on every shift of weight.</div>
+      <div class="prob b">Every loud sound triggers a bright nosebleed and a blackout flicker behind the eyes.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">12</div>
+    <div class="title">Burned Nymph</div>
+    <div class="moment">Lies very still on a pale-cap, lilac-frost bandages neat; a Summer ribbon hidden in one fist. Eyes open, listening for one particular voice.</div>
+    <div class="field"><strong>Nymph</strong> — nature-beauty fey; soft-skinned, elflike frame, presence that can dazzle mortal senses when healthy. Flesh like fine mortal tissue; danger is often the aura and wild-place bond, not armored hide.</div>
+    <div class="problems">
+      <div class="prob a">Burn-cloth sticks to living skin; peeling any edge takes flesh with it.</div>
+      <div class="prob b">Under the wraps, patches of skin have gone ash-gray and hard — dead plates spreading at the edges.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+</section>
+
+<!-- Sheet 4: 13–14 + blanks -->
+<section class="sheet">
+  <article class="card">
+    <div class="num">13</div>
+    <div class="title">Empty Bee-kin</div>
+    <div class="moment">Sits stiff on a honey-stained cap — empty armor plates, no hum. Proud eyes open; keeps picking at their own wrists as if calling something home.</div>
+    <div class="field"><strong>Bee-kin</strong> — fey whose outer plates are living hive-cells — chitin architecture with a colony interface, soft body beneath. Healthy specimens hum; empty or collapsing cells stress the whole organism.</div>
+    <div class="problems">
+      <div class="prob a">Hive-armor cells are vacant and collapsing inward, pinching the body underneath.</div>
+      <div class="prob b">Honey-fever burns behind the eyes; they keep stinging their own wrists calling a swarm that does not answer.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card">
+    <div class="num">14</div>
+    <div class="title">Exhausted Brownie</div>
+    <div class="moment">Collapsed face-down on a low cap mid-apology for “leaving the rest”; crushed hands tucked under their chin. Still trying to refuse a cup of broth.</div>
+    <div class="field"><strong>Brownie</strong> — ~2 ft household-and-road fey; plain-looking, tough for size, extreme manual dexterity. Warm blood, mortal-like organs scaled small. Built for long quiet labor.</div>
+    <div class="problems">
+      <div class="prob a">Both hands are crushed — bones like gravel under the skin; fingers will not open.</div>
+      <div class="prob b">They are running on nothing — pulse thready, lips gray; the body is about to stop volunteering.</div>
+    </div>
+    <span class="cut-hint">cut</span>
+  </article>
+  <article class="card" style="background:#f4ead3; opacity:0.55;">
+    <div class="num">—</div>
+    <div class="title" style="color:#8a7a60;">(blank)</div>
+    <div class="moment" style="border:none;font-style:italic;color:#8a7a60;">Spare panel — discard after cut, or use as a spare bed card.</div>
+  </article>
+  <article class="card" style="background:#f4ead3; opacity:0.55;">
+    <div class="num">—</div>
+    <div class="title" style="color:#8a7a60;">(blank)</div>
+    <div class="moment" style="border:none;font-style:italic;color:#8a7a60;">Spare panel — discard after cut.</div>
+  </article>
 </section>
 
 </body>

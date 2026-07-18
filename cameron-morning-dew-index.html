@@ -12,20 +12,41 @@ h1 { font-family:'Cinzel',serif; color:#e6b34d; font-size:1.65rem; margin:0 0 0.
 .sub { color:#b8a878; margin:0 0 0.25rem; line-height:1.4; }
 .meta { color:#7a9078; font-size:0.88rem; margin-bottom:0.2rem; }
 .sec { font-family:'Cinzel',serif; color:#3d9a8a; font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; margin:1.5rem 0 0.45rem; }
+.sec.print { color:#e6b34d; }
 a {
   display:block; background:#1a2e22; border:1px solid #2c5440; border-radius:10px;
   padding:0.95rem 1.1rem; margin:0.5rem 0; color:#f0d9a0; text-decoration:none;
 }
 a:hover { border-color:#e6b34d; }
 a.hot { border-color:#e6b34d; box-shadow:0 0 0 1px #e6b34d44; }
-a.guest { border-color:#c04a32; }
-a strong { color:#e6b34d; display:block; font-family:'Cinzel',serif; margin-bottom:0.25rem; }
+a.print {
+  background:#1f2a18;
+  border-color:#c8902f;
+  box-shadow:0 0 0 1px #c8902f33;
+}
+a.print strong::before { content:"🖨 "; }
+a.guest {
+  border-color:#c04a32;
+  background:#241814;
+}
 a.guest strong { color:#f0a090; }
+a.guest strong::before { content:"🖨 "; }
+a strong { color:#e6b34d; display:block; font-family:'Cinzel',serif; margin-bottom:0.25rem; }
 a span { color:#b8a878; font-size:0.9rem; }
+.print-box {
+  background:#1a2818;
+  border:2px solid #c8902f;
+  border-radius:12px;
+  padding:0.85rem 1rem 1rem;
+  margin:1rem 0 0.4rem;
+}
+.print-box .sec { margin-top:0.35rem; }
+.print-box .hint { color:#b8a878; font-size:0.9rem; margin:0 0 0.35rem; line-height:1.4; }
 .warn {
   background:#2a1814; border:1px solid #c04a32; border-radius:8px;
-  padding:0.75rem 1rem; color:#f0c8bc; font-size:0.92rem; margin:0.8rem 0 0.2rem; line-height:1.4;
+  padding:0.65rem 0.9rem; color:#f0c8bc; font-size:0.9rem; margin:0.55rem 0 0.15rem; line-height:1.4;
 }
+.screen { opacity:0.92; }
 </style>
 </head>
 <body>
@@ -34,27 +55,27 @@ a span { color:#b8a878; font-size:0.9rem; }
   <p class="sub">As They Seem · Quack field hospital · Dr. Aggron Partmin (“Dr. A”)</p>
   <p class="meta">Waiting Area pass · capacity 2 · Stable / Delayed / Urgent / Expectant · patients v6</p>
 
-  <p class="sec">Run at the table</p>
-  <a class="hot" href="cameron-morning-dew-gm-console.html"><strong>★ GM Console (laptop)</strong><span>Ward · voices · problem toggles · round loop · art for HDMI · blood / Fear</span></a>
-  <a href="cameron-morning-dew-patient-cards-print.html"><strong>PRINT · Patient Cards (hands)</strong><span>01–14 + backup 15–18 · fold flaps · stack numbers · Delayed / Urgent starts</span></a>
-  <a href="cameron-morning-dew-kanban-tokens.html"><strong>PRINT · Kanban Tokens</strong><span>01–18 name + ancestry art · red border = backup · slide under triage</span></a>
-  <a href="cameron-morning-dew-triage-labels.html"><strong>PRINT · Triage Labels</strong><span>Stable / Delayed / Urgent / Expectant · 3″ · +d6 icons</span></a>
-  <a href="cameron-morning-dew-item-cards.html"><strong>PRINT · Implement Cards</strong><span>Stick ×4 + 8 seat implements · look cards only (GM truth separate)</span></a>
-  <a href="cameron-morning-dew-player-ref.html"><strong>PRINT · Player Ref</strong><span>Waiting Area · soft “implements” language · capacity 2 · 4-up</span></a>
+  <div class="print-box" id="print">
+    <p class="sec print">Print these (7)</p>
+    <p class="hint">Final versions. Letter · 100% · Background graphics ON. Cut where noted.</p>
 
-  <p class="sec">For Cameron only (Dr. A)</p>
-  <div class="warn">Do not leave these face-up for the party. Secret score = Cameron’s eyes. Teaching kit = face-up for him while he drafts interns.</div>
-  <a class="guest" href="cameron-morning-dew-secret-score.html"><strong>Dr. A Secret Score</strong><span>Dr. Aggron Partmin · who you are, win/lose, secret moves · print for Cameron</span></a>
-  <a class="guest" href="cameron-morning-dew-teaching-kit.html"><strong>Teaching Kit (face-up)</strong><span>Crash cart · eight implements · Cameron teaches from this, then gets out of the way</span></a>
+    <a class="print" href="cameron-morning-dew-patient-cards-print.html"><strong>1 · Patient Cards (hands)</strong><span>01–14 + backup 15–18 · fold flaps · stack numbers</span></a>
+    <a class="print" href="cameron-morning-dew-kanban-tokens.html"><strong>2 · Kanban Tokens</strong><span>01–18 name + ancestry art · red border = backup</span></a>
+    <a class="print" href="cameron-morning-dew-triage-labels.html"><strong>3 · Triage Labels</strong><span>Stable / Delayed / Urgent / Expectant · 3″</span></a>
+    <a class="print" href="cameron-morning-dew-item-cards.html"><strong>4 · Implement Cards</strong><span>Stick ×4 + 8 seat implements · look cards only</span></a>
+    <a class="print" href="cameron-morning-dew-player-ref.html"><strong>5 · Player Refs</strong><span>Waiting Area · soft implements language · 4-up</span></a>
 
-  <p class="sec">GM reference</p>
-  <a href="cameron-morning-dew-gm-bible.html"><strong>GM Rules Bible</strong><span>Waiting Area · Stick truth · implements · win/lose · Dr. A</span></a>
-  <a href="cameron-morning-dew-ancestry-art.html"><strong>Ancestry Art board</strong><span>Also linked inside the Console Art tab</span></a>
-  <a href="cameron-morning-dew-patient-cards.html"><strong>Patient Cards (design source)</strong><span>Includes GM keys — use the PRINT file for the table</span></a>
+    <div class="warn">Cameron only — do not leave with the party pile.</div>
+    <a class="guest" href="cameron-morning-dew-secret-score.html"><strong>6 · Dr. A Secret Score</strong><span>His eyes only · who you are, win/lose, secret moves</span></a>
+    <a class="guest" href="cameron-morning-dew-teaching-kit.html"><strong>7 · Teaching Kit</strong><span>Face-up for Cameron while he drafts interns</span></a>
+  </div>
 
-  <p class="sec">Optional / WIP</p>
-  <a href="cameron-morning-dew-adrian-moodboard.html"><strong>Adrian Fairchild moodboard</strong><span>Fantasy illustration shortlist — not locked</span></a>
-  <a href="cameron-morning-dew-player-kit.html"><strong>Old player kit redirect</strong><span>Superseded → player ref + triage labels</span></a>
+  <p class="sec">Screen only (don’t print)</p>
+  <a class="hot screen" href="cameron-morning-dew-gm-console.html"><strong>★ GM Console (laptop)</strong><span>Ward · voices · problem toggles · round loop · art for HDMI · blood / Fear</span></a>
+  <a class="screen" href="cameron-morning-dew-gm-bible.html"><strong>GM Rules Bible</strong><span>Waiting Area · Stick truth · implements · win/lose · Dr. A</span></a>
+  <a class="screen" href="cameron-morning-dew-ancestry-art.html"><strong>Ancestry Art board</strong><span>Also linked inside the Console Art tab</span></a>
+  <a class="screen" href="cameron-morning-dew-adrian-moodboard.html"><strong>Adrian Fairchild look</strong><span>LOCKED · Option B — GisAlmeida Northern Baron</span></a>
+  <a class="screen" href="cameron-morning-dew-patient-cards.html"><strong>Patient Cards (design source)</strong><span>GM keys — not the table print</span></a>
 </div>
 </body>
 </html>

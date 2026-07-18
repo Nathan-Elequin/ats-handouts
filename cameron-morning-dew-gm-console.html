@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GM Console · Morning Dew</title>
+<title>GM Console ? Morning Dew</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -29,7 +29,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   outline:2px solid var(--amber); outline-offset:2px;
 }
 
-/* ── Top bar ── */
+/* ?? Top bar ?? */
 .topbar {
   position:sticky; top:0; z-index:40;
   background:#0c1510ee; backdrop-filter:blur(8px);
@@ -140,7 +140,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 .panel { display:none; flex:1; padding:0.85rem; overflow:auto; }
 .panel.active { display:block; }
 
-/* ── Run tab ── */
+/* ?? Run tab ?? */
 .run-layout {
   display:grid; grid-template-columns:1fr 300px; gap:0.9rem; align-items:start;
   max-width:1200px; margin:0 auto;
@@ -161,7 +161,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 }
 .collapse > summary::-webkit-details-marker { display:none; }
 .collapse > summary::before {
-  content:'▸'; color:var(--amber); font-size:0.75rem; transition:transform .15s;
+  content:'?'; color:var(--amber); font-size:0.75rem; transition:transform .15s;
 }
 .collapse[open] > summary::before { transform:rotate(90deg); }
 .collapse .body { padding:0 0.9rem 0.85rem; color:var(--ink); font-size:0.9rem; }
@@ -207,7 +207,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 .sticky-ref dt { color:var(--teal); font-weight:700; margin-top:0.4rem; }
 .sticky-ref dd { color:var(--muted); margin-left:0; }
 
-/* ── Ward tab ── */
+/* ?? Ward tab ?? */
 .ward-toolbar {
   display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center;
   margin-bottom:0.7rem; max-width:1400px; margin-left:auto; margin-right:auto;
@@ -223,18 +223,13 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 .filter-chip:hover:not(.active) { border-color:var(--teal); color:var(--ink); }
 
 .ward-shell {
-  display:grid; grid-template-columns:1fr; gap:0;
+  display:block;
   max-width:1400px; margin:0 auto; position:relative;
 }
-.ward-shell.drawer-open {
-  grid-template-columns:1fr var(--drawer-w);
-  gap:0.75rem;
-}
-@media (max-width:900px) {
-  .ward-shell.drawer-open { grid-template-columns:1fr; }
-  .drawer {
-    position:relative !important; width:100% !important;
-    max-height:none !important; border-radius:10px !important;
+/* When drawer is open, leave room on wide screens so roster isn't fully covered */
+@media (min-width:901px) {
+  .ward-shell.drawer-open .roster {
+    margin-right:calc(var(--drawer-w) + 0.75rem);
   }
 }
 
@@ -302,20 +297,40 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 .mini-prob.b { border-color:#a85a28; }
 .mini-prob.done { background:#2a4a32; color:#b8e0b8; border-color:#6a9e6e; }
 
-/* Drawer */
-.drawer {
-  background:var(--card); border:1px solid var(--line); border-radius:12px;
-  padding:0.85rem 0.95rem 1.1rem; position:sticky; top:0.5rem;
-  max-height:calc(100vh - 2rem); overflow:auto;
+/* Drawer ? fixed slide-over (Firefox sticky+overflow is unreliable) */
+.drawer-backdrop {
   display:none;
+  position:fixed; inset:0; z-index:55;
+  background:#00000066;
+  border:none; padding:0; cursor:pointer;
+}
+.ward-shell.drawer-open .drawer-backdrop { display:block; }
+.drawer {
+  display:none;
+  position:fixed;
+  top:0; right:0; bottom:0;
+  width:min(var(--drawer-w), 94vw);
+  z-index:60;
+  background:var(--card);
+  border-left:1px solid var(--line);
+  border-radius:0;
+  padding:0.85rem 0.95rem 1.25rem;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  box-shadow:-8px 0 28px #00000066;
 }
 .ward-shell.drawer-open .drawer { display:block; }
 .drawer-close {
-  float:right; width:2rem; height:2rem; border-radius:6px;
+  position:sticky; top:0; float:right; z-index:2;
+  width:2.1rem; height:2.1rem; border-radius:6px;
   background:#14241c; border:1px solid var(--line); color:var(--amber);
-  font-size:1.1rem; line-height:1;
+  font-size:1.2rem; line-height:1;
+  margin:-0.15rem -0.15rem 0.35rem 0.35rem;
 }
 .drawer-close:hover { background:#1e3328; }
+@media (max-width:900px) {
+  .drawer { width:min(100vw, 420px); }
+}
 .drawer .big-title {
   font-family:'Cinzel',serif; color:var(--amber); font-size:1.35rem;
   margin:0.2rem 0 0.35rem; clear:both;
@@ -361,7 +376,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   text-decoration:line-through; color:var(--muted);
 }
 .prob-btn.done::after {
-  content:'✓'; position:absolute; right:0.7rem; top:50%; transform:translateY(-50%);
+  content:'?'; position:absolute; right:0.7rem; top:50%; transform:translateY(-50%);
   color:#6a9e6e; font-size:1.2rem; font-weight:700; text-decoration:none;
 }
 .verbs-hint {
@@ -392,7 +407,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   cursor:pointer; text-decoration:underline; text-underline-offset:2px;
 }
 
-/* ── Art tab ── */
+/* ?? Art tab ?? */
 .art-toolbar {
   display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;
   margin-bottom:0.75rem; max-width:1200px; margin-left:auto; margin-right:auto;
@@ -444,7 +459,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 }
 @media print {
   body::before {
-    content:'SCREEN-ONLY GM TOOL — do not print for players';
+    content:'SCREEN-ONLY GM TOOL ? do not print for players';
     display:block; padding:2rem; font-size:1.5rem; color:#c04a32;
   }
   .topbar, .tabs, .panels { display:none !important; }
@@ -454,16 +469,16 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 <body>
 
 <header class="topbar">
-  <span class="priv">GM laptop · not for players</span>
-  <h1>GM Console · Morning Dew</h1>
+  <span class="priv">GM laptop ? not for players</span>
+  <h1>GM Console ? Morning Dew</h1>
   <div class="controls">
     <div class="ctrl" title="Round counter">
       <label>Round</label>
-      <button type="button" class="btn-sm" id="round-minus" aria-label="Decrease round">−</button>
+      <button type="button" class="btn-sm" id="round-minus" aria-label="Decrease round">?</button>
       <span class="val" id="round-val">1</span>
       <button type="button" class="btn-sm" id="round-plus" aria-label="Increase round">+</button>
     </div>
-    <div class="ctrl" title="Blood bank — click pips">
+    <div class="ctrl" title="Blood bank ? click pips">
       <label>Blood</label>
       <div class="pips" id="blood-pips" aria-label="Blood bank"></div>
     </div>
@@ -475,9 +490,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
         <button type="button" data-f="high">High</button>
       </div>
     </div>
-    <div class="saved-chip">Discharged <b id="saved-count">0</b><span style="color:var(--muted)">/14 main</span></div>
+    <div class="saved-chip">Saved <b id="saved-count">0</b><span style="color:var(--muted)">/14</span></div>
     <button type="button" class="btn-reset" id="btn-reset">Reset state</button>
-    <span class="hint-keys">Esc closes · 1–9 open patients</span>
+    <span class="hint-keys">Esc closes ? 1?9 open patients</span>
   </div>
   <div class="progress-wrap">
     <div class="prog">
@@ -498,16 +513,16 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 </nav>
 
 <div class="panels">
-  <!-- ═══ RUN ═══ -->
+  <!-- ??? RUN ??? -->
   <section class="panel active" id="panel-run" role="tabpanel">
     <div class="run-layout">
       <div class="run-main">
         <details class="collapse" open>
-          <summary>1 · Round loop (Waiting Area)</summary>
+          <summary>1 ? Round loop (Waiting Area)</summary>
           <div class="body">
             <ol>
               <li><strong>Deal 2</strong> into each healer's ward (capacity hard-cap).</li>
-              <li><strong>30s read</strong> — own hand only.</li>
+              <li><strong>30s read</strong> ? own hand only.</li>
               <li><strong>30-count pass:</strong> place into center Waiting Area; call for pickup. Never drop into another ward.</li>
               <li><strong>Take yourself</strong> from Waiting Area into your ward. Full? Drop one first.</li>
               <li><strong>Count hits 0:</strong> leftovers in Waiting Area = untreated / Fear magnet.</li>
@@ -516,59 +531,59 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           </div>
         </details>
         <details class="collapse" open>
-          <summary>2 · Bookkeeping</summary>
+          <summary>2 ? Bookkeeping</summary>
           <div class="body">
             <ul>
-              <li><strong>Fear</strong> — prefer Waiting Area leftovers / untreated, then Delayed/Urgent. Soft dial if table is crushing it.</li>
-              <li><strong>Dew</strong> — conveyor grass; patients already on toadstool beds.</li>
-              <li><strong>Blood pips</strong> — bank of 4 (top bar). Cap Transfusion costs 1.</li>
+              <li><strong>Fear</strong> ? prefer Waiting Area leftovers / untreated, then Delayed/Urgent. Soft dial if table is crushing it.</li>
+              <li><strong>Dew</strong> ? conveyor grass; patients already on toadstool beds.</li>
+              <li><strong>Blood pips</strong> ? bank of 4 (top bar). Cap Transfusion costs 1.</li>
             </ul>
           </div>
         </details>
         <details class="collapse">
-          <summary>3 · Dr. A implements</summary>
+          <summary>3 ? Cameron tools</summary>
           <div class="body">
             <ul>
-              <li><strong>Poking Stick</strong> — universal Stick (not one of the 8). Dr. A oversells as Rod of Medicinal Accord. Optional fake charge die.</li>
-              <li><strong>Bark Advice</strong> — shout a verb / assign Waiting Area leftovers.</li>
-              <li><strong>Cap Transfusion</strong> — −1 blood, +~20 to a roll / Expectant break.</li>
-              <li><strong>Never Rest</strong> — keep pressure; no calm beats unless earned.</li>
+              <li><strong>Poking Stick</strong> ? universal Stick (not one of the 8). Cameron oversells as Rod of Medicinal Accord. Optional fake charge die.</li>
+              <li><strong>Bark Advice</strong> ? shout a verb / assign Waiting Area leftovers.</li>
+              <li><strong>Cap Transfusion</strong> ? ?1 blood, +~20 to a roll / Expectant break.</li>
+              <li><strong>Never Rest</strong> ? keep pressure; no calm beats unless earned.</li>
             </ul>
           </div>
         </details>
         <details class="collapse" open>
-          <summary>3b · Implements (player name → purpose)</summary>
+          <summary>3b ? Implements (player name ? purpose)</summary>
           <div class="body">
             <ul>
-              <li><strong>Hushbulb Maul</strong> → sedate / knock out (−1 triage step)</li>
-              <li><strong>Dewgut Choir</strong> → drain (living siphon-beasts in a jar)</li>
-              <li><strong>Magpie’s Ice-Foot</strong> → extract (brass reel + ice talons)</li>
-              <li><strong>Mudmouth Tar</strong> → seal / close</li>
-              <li><strong>Jubilee Cap</strong> → feed; laughter required</li>
-              <li><strong>Excalpelur</strong> → cut away / amputate</li>
-              <li><strong>Nurse-Vine Ampoule</strong> → IV; player invents fluid</li>
-              <li><strong>Kindjailer’s Briarvise</strong> → brace / set / hold still</li>
+              <li><strong>Hushbulb Maul</strong> ? sedate / knock out (?1 triage step)</li>
+              <li><strong>Dewgut Choir</strong> ? drain (living siphon-beasts in a jar)</li>
+              <li><strong>Magpie?s Ice-Foot</strong> ? extract (brass reel + ice talons)</li>
+              <li><strong>Mudmouth Tar</strong> ? seal / close</li>
+              <li><strong>Jubilee Cap</strong> ? feed; laughter required</li>
+              <li><strong>Excalpelur</strong> ? cut away / amputate</li>
+              <li><strong>Nurse-Vine Ampoule</strong> ? IV; player invents fluid</li>
+              <li><strong>Kindjailer?s Briarvise</strong> ? brace / set / hold still</li>
             </ul>
           </div>
         </details>
         <details class="collapse">
-          <summary>4 · Win / lose</summary>
+          <summary>4 ? Win / lose</summary>
           <div class="body">
             <ul>
-              <li><strong>Save all</strong> → give Quack Lann.</li>
-              <li><strong>Blood 0</strong> → Dr. A dies / Lann lost with him.</li>
-              <li><strong>Death on watch</strong> → may gift Lann to dying sketch.</li>
+              <li><strong>Save all</strong> ? give Quack Lann.</li>
+              <li><strong>Blood 0</strong> ? Cameron dies / Lann lost with him.</li>
+              <li><strong>Death on watch</strong> ? may gift Lann to dying sketch.</li>
             </ul>
           </div>
         </details>
         <details class="collapse">
-          <summary>5 · Admission canon</summary>
+          <summary>5 ? Admission canon</summary>
           <div class="body">
-            <p>Redcaps dragged the wounded here. Once on the grass, <strong>dew</strong> moves them like a conveyor onto toadstool-cap beds per the doctor’s orders. Healers never leave the ward — don’t invent new arrival gags.</p>
+            <p>Redcaps dragged the wounded here. Once on the grass, <strong>dew</strong> moves them like a conveyor onto toadstool-cap beds per the doctor?s orders. Healers never leave the ward ? don?t invent new arrival gags.</p>
           </div>
         </details>
         <details class="collapse">
-          <summary>6 · Soft ramp</summary>
+          <summary>6 ? Soft ramp</summary>
           <div class="body">
             <ul>
               <li>All patients arrive <strong>Stable</strong>. Delayed/Urgent +1d6 each; Expectant +4d6.</li>
@@ -577,12 +592,12 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           </div>
         </details>
         <details class="collapse">
-          <summary>7 · Modules checklist</summary>
+          <summary>7 ? Modules checklist</summary>
           <div class="body">
             <ul>
               <li>Break room beat</li>
-              <li>Lovers bump (07 ↔ 12)</li>
-              <li>EMP quickling (01 as defib → spikes his charge)</li>
+              <li>Lovers bump (07 ? 12)</li>
+              <li>EMP quickling (01 as defib ? spikes his charge)</li>
               <li>Climax batch</li>
               <li>Arm surgery</li>
             </ul>
@@ -605,21 +620,21 @@ button:focus-visible, select:focus-visible, input:focus-visible {
         </div>
         <dl>
           <dt>Triage</dt>
-          <dd>Success quiets a problem and pushes toward Stable — not permanent. Fear can flare problems again. Keep them alive. Delayed/Urgent +1d6 · Expectant +4d6. Backups 15–18 stay filtered until needed.</dd>
+          <dd>Improve one step on success ? Saved removes from play ? Delayed/Urgent +1d6 ? Expectant +4d6</dd>
           <dt>Cap Transfusion</dt>
-          <dd>−1 blood · +~20</dd>
+          <dd>?1 blood ? +~20</dd>
           <dt>Pass</dt>
-          <dd>Hand 2 · 30s read · 30-count Waiting Area · capacity 2</dd>
+          <dd>Hand 2 ? 30s read ? 30-count Waiting Area ? capacity 2</dd>
           <dt>Roles</dt>
-          <dd>Soldier · Lover · Dart · Locale</dd>
+          <dd>Soldier ? Lover ? Dart ? Locale</dd>
           <dt>Items</dt>
-          <dd>Poking Stick · Hushbulb · Dewgut · Ice-Foot · Mudmouth · Jubilee · Excalpelur · Nurse-Vine · Briarvise</dd>
+          <dd>Poking Stick ? Hushbulb ? Dewgut ? Ice-Foot ? Mudmouth ? Jubilee ? Excalpelur ? Nurse-Vine ? Briarvise</dd>
         </dl>
       </aside>
     </div>
   </section>
 
-  <!-- ═══ WARD ═══ -->
+  <!-- ??? WARD ??? -->
   <section class="panel" id="panel-ward" role="tabpanel">
     <div class="ward-toolbar" id="filter-bar">
       <button type="button" class="filter-chip active" data-filter="all">All</button>
@@ -631,24 +646,25 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       <button type="button" class="filter-chip" data-filter="main">Main 01-14</button>
     </div>
     <div class="ward-shell" id="ward-shell">
+      <button type="button" class="drawer-backdrop" id="drawer-backdrop" aria-label="Close patient panel"></button>
       <div class="roster" id="roster"></div>
-      <aside class="drawer" id="drawer" aria-live="polite"></aside>
+      <aside class="drawer" id="drawer" aria-live="polite" tabindex="-1"></aside>
     </div>
   </section>
 
-  <!-- ═══ ART ═══ -->
+  <!-- ??? ART ??? -->
   <section class="panel" id="panel-art" role="tabpanel">
     <div class="art-toolbar">
       <button type="button" class="btn-act" id="btn-popout">Pop out art board</button>
       <a class="btn-act" href="cameron-morning-dew-ancestry-art.html" target="_blank" rel="noopener">Open ancestry-art.html</a>
-      <span style="font-size:0.8rem;color:var(--muted)">Click tile = lightbox · Pop out = HDMI window</span>
+      <span style="font-size:0.8rem;color:var(--muted)">Click tile = lightbox ? Pop out = HDMI window</span>
     </div>
     <div class="art-grid" id="art-grid"></div>
   </section>
 </div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-  <button type="button" class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <button type="button" class="lb-close" id="lb-close" aria-label="Close">?</button>
   <img id="lb-img" src="" alt="">
   <div class="lb-cap" id="lb-cap"></div>
 </div>
@@ -664,19 +680,19 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 1, title: "Limping Human", ancestry: "Human", role: "locale",
       startTriage: "Delayed", backup: false,
       moment: "Sits on the edge of a toadstool with one boot off, sipping bitter tea from a leaf-cup. Shrugs and points at the foot: \"just this.\"",
-      fieldNotes: "Human — baseline mortal humanoid: soft skin, red blood, no bark, horns, or innate season-magic. Ordinary organs and healing rates — the reference body against which fey anatomies are compared.",
+      fieldNotes: "Human ? baseline mortal humanoid: soft skin, red blood, no bark, horns, or innate season-magic. Ordinary organs and healing rates ? the reference body against which fey anatomies are compared.",
       probA: "Right foot sits wrong in the boot; bone grinds when he puts weight on it.",
-      probB: "A dark line is climbing the calf under the skin — cold to the touch, moving upward by the minute.",
+      probB: "A dark line is climbing the calf under the skin ? cold to the touch, moving upward by the minute.",
       gm: "A=SET/BRACE. B=DRAIN or CUT AWAY. Easy open; flare = infection line.",
       art: "ancestry-art/06-human.jpg", pair: null
     },
     {
       id: 2, title: "Fevered Pixie", ancestry: "Pixie", role: "locale",
       startTriage: "Delayed", backup: false,
-      moment: "Curled in a thimble nest set on a toadstool — wings trembling, dust flashing gold then blue; trying (and failing) to drink from a dewdrop.",
-      fieldNotes: "Pixie — palm-scale winged fey; hollow bones, delicate wing membranes, often luminous dust on the wings. Tiny organ volumes — heat and fluid balance swing easily. Full person-scale mind in a thimble body.",
-      probA: "Fever swings hard — one moment scorching, next shivering; neither state holds.",
-      probB: "Wing-joints lock mid-beat; one wing sticks open, the other won’t extend.",
+      moment: "Curled in a thimble nest set on a toadstool ? wings trembling, dust flashing gold then blue; trying (and failing) to drink from a dewdrop.",
+      fieldNotes: "Pixie ? palm-scale winged fey; hollow bones, delicate wing membranes, often luminous dust on the wings. Tiny organ volumes ? heat and fluid balance swing easily. Full person-scale mind in a thimble body.",
+      probA: "Fever swings hard ? one moment scorching, next shivering; neither state holds.",
+      probB: "Wing-joints lock mid-beat; one wing sticks open, the other won?t extend.",
       gm: "A=DRAIN/COOL. B=SET tiny joints. Small = easy to underestimate.",
       art: "ancestry-art/08-pixie.webp", pair: null
     },
@@ -684,18 +700,18 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 3, title: "Bandaged Satyr", ancestry: "Satyr", role: "lover",
       startTriage: "Delayed", backup: false,
       moment: "Reclines on a soft-cap bed, chest wrapped, humming under his breath; a frost-lilac ribbon clenched in one fist, free hand tapping a silent rhythm.",
-      fieldNotes: "Satyr — fey with humanoid torso and goatlike legs/hooves; horns common, keen hearing. Dual gait (person above, ungulate below). Warm mammalian blood; gut suited to forage and wine as much as rations.",
-      probA: "Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn’t.",
-      probB: "Fingers of the left hand have gone stiff and wooden — freezing from the tips toward the palm.",
-      gm: "LOVER A · pair #07. A=SEAL. B=ADD warmth. Ribbon matches nymph.",
+      fieldNotes: "Satyr ? fey with humanoid torso and goatlike legs/hooves; horns common, keen hearing. Dual gait (person above, ungulate below). Warm mammalian blood; gut suited to forage and wine as much as rations.",
+      probA: "Chest wrapping hides a seam that opens on every inhale; air whistles where it shouldn?t.",
+      probB: "Fingers of the left hand have gone stiff and wooden ? freezing from the tips toward the palm.",
+      gm: "LOVER A ? pair #07. A=SEAL. B=ADD warmth. Ribbon matches nymph.",
       art: "ancestry-art/07-satyr.webp", pair: 7
     },
     {
       id: 4, title: "Muddy Gnome", ancestry: "Gnome", role: "soldier",
       startTriage: "Delayed", backup: false,
       moment: "Sits upright on a muddy cap, boots still dripping river-gray, trying to count coins with shaking hands.",
-      fieldNotes: "Gnome — small humanoid; stout bones, keen fine-motor nerves, warm red blood like mortals. Earth-attuned gut and skin — hardy, not plant-bodied.",
-      probA: "Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won’t clot.",
+      fieldNotes: "Gnome ? small humanoid; stout bones, keen fine-motor nerves, warm red blood like mortals. Earth-attuned gut and skin ? hardy, not plant-bodied.",
+      probA: "Leg wound packed with gray ford-mud; the dressing stays wet and the flesh underneath won?t clot.",
       probB: "Whole body seizes in short, violent shakes whenever anyone says an odd number aloud nearby.",
       gm: "SOLDIER (early). A=SEAL. B=STOP MOTION. Soft truth: odd counts.",
       art: "ancestry-art/03-gnome.webp", pair: null
@@ -704,9 +720,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 5, title: "Bitten Dryad", ancestry: "Dryad", role: "locale",
       startTriage: "Delayed", backup: false,
       moment: "Kneels carefully on a clean white-cap, arms held out so the cold-iron bites show; blue-black soil still under her claws. Watching the healers.",
-      fieldNotes: "Dryad — tree-bound fey; bark-and-leaf integument, sap for blood, body grown as much as born. Life force tethered to a living tree. Cold iron is toxic; plant chemistry, not mammalian clotting.",
+      fieldNotes: "Dryad ? tree-bound fey; bark-and-leaf integument, sap for blood, body grown as much as born. Life force tethered to a living tree. Cold iron is toxic; plant chemistry, not mammalian clotting.",
       probA: "Cold-iron tooth-heads are still lodged under the bark along both forearms.",
-      probB: "Sap-level is crashing — matte eyes, no give at the wrist, leaf-hair going brittle at the tips.",
+      probB: "Sap-level is crashing ? matte eyes, no give at the wrist, leaf-hair going brittle at the tips.",
       gm: "A=EXTRACT. B=FILL/IV. Looks composed; sap crash is the fold.",
       art: "ancestry-art/05-dryad.webp", pair: null
     },
@@ -714,9 +730,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 6, title: "Exhausted Brownie", ancestry: "Brownie", role: "locale",
       startTriage: "Delayed", backup: false,
       moment: "Collapsed face-down on a low cap mid-apology for \"leaving the rest\"; crushed hands tucked under their chin. Still trying to refuse a cup of broth.",
-      fieldNotes: "Brownie — ~2 ft household-and-road fey; plain-looking, tough for size, extreme manual dexterity. Warm blood, mortal-like organs scaled small. Built for long quiet labor.",
-      probA: "Both hands are crushed — bones like gravel under the skin; fingers will not open.",
-      probB: "They are running on nothing — pulse thready, lips gray; the body is about to stop volunteering.",
+      fieldNotes: "Brownie ? ~2 ft household-and-road fey; plain-looking, tough for size, extreme manual dexterity. Warm blood, mortal-like organs scaled small. Built for long quiet labor.",
+      probA: "Both hands are crushed ? bones like gravel under the skin; fingers will not open.",
+      probB: "They are running on nothing ? pulse thready, lips gray; the body is about to stop volunteering.",
       gm: "A=SET hands. B=ADD/FILL + rest. Collapse is the fold.",
       art: "ancestry-art/14-brownie.webp", pair: null
     },
@@ -724,27 +740,27 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 7, title: "Burned Nymph", ancestry: "Nymph", role: "lover",
       startTriage: "Urgent", backup: false,
       moment: "Lies very still on a pale-cap, lilac-frost bandages neat; a Summer ribbon hidden in one fist. Eyes open, listening for one particular voice.",
-      fieldNotes: "Nymph — nature-beauty fey; soft-skinned, elflike frame, presence that can dazzle mortal senses when healthy. Flesh like fine mortal tissue; danger is often the aura and wild-place bond, not armored hide.",
+      fieldNotes: "Nymph ? nature-beauty fey; soft-skinned, elflike frame, presence that can dazzle mortal senses when healthy. Flesh like fine mortal tissue; danger is often the aura and wild-place bond, not armored hide.",
       probA: "Burn-cloth sticks to living skin; peeling any edge takes flesh with it.",
-      probB: "Under the wraps, patches of skin have gone ash-gray and hard — dead plates spreading at the edges.",
-      gm: "LOVER B · pair #03. A=careful dress. B=CUT AWAY dead. Urgent face.",
+      probB: "Under the wraps, patches of skin have gone ash-gray and hard ? dead plates spreading at the edges.",
+      gm: "LOVER B ? pair #03. A=careful dress. B=CUT AWAY dead. Urgent face.",
       art: "ancestry-art/12-nymph.jpg", pair: 3
     },
     {
       id: 8, title: "Cracked Spriggan", ancestry: "Spriggan", role: "soldier",
       startTriage: "Urgent", backup: false,
       moment: "Half-sitting on a wide cap in Summer levy colors; ribs split like a dry log, honey-sap pooling under him. Eyes open; not talking.",
-      fieldNotes: "Spriggan — gnome-descended fey warped by old magic. Natural form ~3 ft, thick-bodied and foul-smelling; can swell to giant size. Same organs, violently redistributed mass — denser and oilier than ordinary gnomes.",
-      probA: "Rib-bark is cracked wide; the chest wall flexes wrong and won’t take a breath deep.",
-      probB: "Honey-thick sap pours from the splits faster than it should — sticky, sweet, pooling under him.",
+      fieldNotes: "Spriggan ? gnome-descended fey warped by old magic. Natural form ~3 ft, thick-bodied and foul-smelling; can swell to giant size. Same organs, violently redistributed mass ? denser and oilier than ordinary gnomes.",
+      probA: "Rib-bark is cracked wide; the chest wall flexes wrong and won?t take a breath deep.",
+      probB: "Honey-thick sap pours from the splits faster than it should ? sticky, sweet, pooling under him.",
       gm: "SOLDIER. A=BRACE. B=SEAL. Courts left them.",
       art: "ancestry-art/02-spriggan.webp", pair: null
     },
     {
       id: 9, title: "Split Centaur", ancestry: "Centaur", role: "locale",
       startTriage: "Urgent", backup: false,
-      moment: "Sprawled across two toadstool beds lashed together — split fore-hoof dangling, ears pinned flat whenever the ward gets loud. Gnawing a dry oatcake and glaring.",
-      fieldNotes: "Centaur — single creature, dual architecture: humanoid torso fused to equine trunk and four legs. Two weight systems, one bloodstream. Digestion and balance horse-forward; hands and speech person-forward.",
+      moment: "Sprawled across two toadstool beds lashed together ? split fore-hoof dangling, ears pinned flat whenever the ward gets loud. Gnawing a dry oatcake and glaring.",
+      fieldNotes: "Centaur ? single creature, dual architecture: humanoid torso fused to equine trunk and four legs. Two weight systems, one bloodstream. Digestion and balance horse-forward; hands and speech person-forward.",
       probA: "Fore-hoof is split lengthwise; the two halves grind and catch on every shift of weight.",
       probB: "Every loud sound triggers a bright nosebleed and a blackout flicker behind the eyes.",
       gm: "A=BRACE hoof. B=quiet ward / DRAIN head pressure.",
@@ -753,38 +769,38 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     {
       id: 10, title: "Scorched Quickling", ancestry: "Quickling", role: "dart",
       startTriage: "Urgent", backup: false,
-      moment: "Keeps skidding off his toadstool — scorched, twitching, reeking of ozone and clove. No name left to give.",
-      fieldNotes: "Quickling — ~2 ft slender fey; pale skin, feral features. Metabolism and nerves run far hotter than mortal norms — short natural lifespan; speech and motion often too fast to parse unless they deliberately slow.",
+      moment: "Keeps skidding off his toadstool ? scorched, twitching, reeking of ozone and clove. No name left to give.",
+      fieldNotes: "Quickling ? ~2 ft slender fey; pale skin, feral features. Metabolism and nerves run far hotter than mortal norms ? short natural lifespan; speech and motion often too fast to parse unless they deliberately slow.",
       probA: "Veins strobe with leftover Pale Ring charge; sparks jump to metal nearby.",
-      probB: "Chest hitches in uneven, skipping heaves — long pauses, then double-thumps.",
-      gm: "DART · EMP module. A=DRAIN charge. B=RESTORE RHYTHM (defib spikes charge).",
+      probB: "Chest hitches in uneven, skipping heaves ? long pauses, then double-thumps.",
+      gm: "DART ? EMP module. A=DRAIN charge. B=RESTORE RHYTHM (defib spikes charge).",
       art: "ancestry-art/01-quickling.jpg", pair: null
     },
     {
       id: 11, title: "Soaked Kelpie", ancestry: "Kelpie", role: "soldier",
       startTriage: "Urgent", backup: false,
-      moment: "Sits bolt upright on a wet cap (won’t lie down), levy sash still on, dripping riverwater, kicking anyone who offers a towel.",
-      fieldNotes: "Kelpie — aquatic shapeshifter; horse-form and person-form share one wet anatomy. Tissue stays damp; can hold and move water through lungs and hide. Predatory fey by nature.",
+      moment: "Sits bolt upright on a wet cap (won?t lie down), levy sash still on, dripping riverwater, kicking anyone who offers a towel.",
+      fieldNotes: "Kelpie ? aquatic shapeshifter; horse-form and person-form share one wet anatomy. Tissue stays damp; can hold and move water through lungs and hide. Predatory fey by nature.",
       probA: "Lungs full of black river-water; every cough brings more; they will not lie flat.",
-      probB: "One leg is twisted wrong from the haul out of the ford — joint will not take weight.",
-      gm: "SOLDIER. A=DRAIN lungs. B=BRACE leg. Won’t recline.",
+      probB: "One leg is twisted wrong from the haul out of the ford ? joint will not take weight.",
+      gm: "SOLDIER. A=DRAIN lungs. B=BRACE leg. Won?t recline.",
       art: "ancestry-art/10-kelpie.png", pair: null
     },
     {
       id: 12, title: "Pierced Eladrin", ancestry: "Eladrin", role: "soldier",
       startTriage: "Urgent", backup: false,
-      moment: "Propped against the stalk of his bed-cap — two shafts in a wrong-bent shoulder, pupils blown, jaw locked in a grin that won’t quit.",
-      fieldNotes: "Eladrin — Feywild elf-kin; tall, sharp-eared, long-lived. Blood and mood carry seasonal court magic. Soft tissue like elves; cold iron irritates; emotion and physiology couple tightly.",
+      moment: "Propped against the stalk of his bed-cap ? two shafts in a wrong-bent shoulder, pupils blown, jaw locked in a grin that won?t quit.",
+      fieldNotes: "Eladrin ? Feywild elf-kin; tall, sharp-eared, long-lived. Blood and mood carry seasonal court magic. Soft tissue like elves; cold iron irritates; emotion and physiology couple tightly.",
       probA: "Two arrow shafts sit deep in the shoulder; the joint is bent the wrong way around them.",
-      probB: "He cannot stop laughing — hard, silent convulsions that bounce the shafts and tear the wound wider.",
+      probB: "He cannot stop laughing ? hard, silent convulsions that bounce the shafts and tear the wound wider.",
       gm: "SOLDIER. A=EXTRACT. B=STOP MOTION. Only eladrin.",
       art: "ancestry-art/04-eladrin.webp", pair: null
     },
     {
       id: 13, title: "Empty Bee-kin", ancestry: "Bee-kin", role: "locale",
       startTriage: "Delayed", backup: false,
-      moment: "Sits stiff on a honey-stained cap — empty armor plates, no hum. Proud eyes open; keeps picking at their own wrists as if calling something home.",
-      fieldNotes: "Bee-kin — fey whose outer plates are living hive-cells — chitin architecture with a colony interface, soft body beneath. Healthy specimens hum; empty or collapsing cells stress the whole organism.",
+      moment: "Sits stiff on a honey-stained cap ? empty armor plates, no hum. Proud eyes open; keeps picking at their own wrists as if calling something home.",
+      fieldNotes: "Bee-kin ? fey whose outer plates are living hive-cells ? chitin architecture with a colony interface, soft body beneath. Healthy specimens hum; empty or collapsing cells stress the whole organism.",
       probA: "Hive-armor cells are vacant and collapsing inward, pinching the body underneath.",
       probB: "Honey-fever burns behind the eyes; they keep stinging their own wrists calling a swarm that does not answer.",
       gm: "Late but Delayed (not all red). A=FILL/brace cells. B=COOL fever.",
@@ -793,9 +809,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     {
       id: 14, title: "Rooted Wood Woad", ancestry: "Wood Woad", role: "locale",
       startTriage: "Urgent", backup: false,
-      moment: "Keeps tipping off its bed-cap — market twine still knotted around one wrist. Knothole eyes track whoever gets close; body won’t stay still.",
-      fieldNotes: "Wood Woad — plant guardian in humanoid shape; thick bark, branch-hands, root-feet, deep-set eyes. No ordinary animal heart — sustains on sun, soil, water, and air. True plant tissue.",
-      probA: "Tendril-arm almost severed — only a few living fibers still connect it to the shoulder.",
+      moment: "Keeps tipping off its bed-cap ? market twine still knotted around one wrist. Knothole eyes track whoever gets close; body won?t stay still.",
+      fieldNotes: "Wood Woad ? plant guardian in humanoid shape; thick bark, branch-hands, root-feet, deep-set eyes. No ordinary animal heart ? sustains on sun, soil, water, and air. True plant tissue.",
+      probA: "Tendril-arm almost severed ? only a few living fibers still connect it to the shoulder.",
       probB: "Whole torso jolts in hard spasms; it cannot hold still long enough for anyone to work.",
       gm: "A=JOIN. B=STOP MOTION. Late urgent.",
       art: "ancestry-art/09-woad.jpg", pair: null
@@ -803,10 +819,10 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     {
       id: 15, title: "Winded Pooka", ancestry: "Pooka", role: "locale",
       startTriage: "Urgent", backup: true,
-      moment: "Keeps flickering between rabbit-ears and a lanky youth on the same toadstool — laughing wrong, then choking mid-laugh. Hay stuck in wet fur.",
-      fieldNotes: "Pooka — shapeshifting trickster fey; common forms include black horse, goat, or oversized rabbit-headed youth. One body, many silhouettes; lungs and throat reconfigure mid-shift. Mischief is metabolism.",
-      probA: "Stuck mid-shift — throat is half-hare, half-person; air whistles and catches.",
-      probB: "Whenever someone nearby lies, they begin to drown on dry air — panic, blue lips, no water in sight.",
+      moment: "Keeps flickering between rabbit-ears and a lanky youth on the same toadstool ? laughing wrong, then choking mid-laugh. Hay stuck in wet fur.",
+      fieldNotes: "Pooka ? shapeshifting trickster fey; common forms include black horse, goat, or oversized rabbit-headed youth. One body, many silhouettes; lungs and throat reconfigure mid-shift. Mischief is metabolism.",
+      probA: "Stuck mid-shift ? throat is half-hare, half-person; air whistles and catches.",
+      probB: "Whenever someone nearby lies, they begin to drown on dry air ? panic, blue lips, no water in sight.",
       gm: "BACKUP. A=BRACE/settle form. B=truth-quiet or DRAIN panic. Only pooka.",
       art: "ancestry-art/15-pooka.svg", pair: null
     },
@@ -814,8 +830,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       id: 16, title: "Bleached Huldra", ancestry: "Huldra", role: "locale",
       startTriage: "Urgent", backup: true,
       moment: "Sits sideways so no one sees her back; bark-hollow showing under a torn cloak. Cow-tail lashing. Smile too wide for the pain.",
-      fieldNotes: "Huldra — forest seducer fey; human-beautiful from the front, hollow or bark-backed behind, often with a cow’s tail. Soft mortal-facing flesh; the hollow is the true vulnerability.",
-      probA: "The hollow in her back is packing with dry rot — edges crumbling inward when she breathes.",
+      fieldNotes: "Huldra ? forest seducer fey; human-beautiful from the front, hollow or bark-backed behind, often with a cow?s tail. Soft mortal-facing flesh; the hollow is the true vulnerability.",
+      probA: "The hollow in her back is packing with dry rot ? edges crumbling inward when she breathes.",
       probB: "Tail has gone dead-weight and ice-cold; frost is climbing the spine from the tip.",
       gm: "BACKUP. A=SEAL/FILL hollow. B=WARMTH. Do not force her to turn.",
       art: "ancestry-art/16-huldra.svg", pair: null
@@ -823,19 +839,19 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     {
       id: 17, title: "Snared Twigjack", ancestry: "Twigjack", role: "locale",
       startTriage: "Delayed", backup: true,
-      moment: "Tangled in its own briar-snare on a low cap — tiny, furious, picking at wire-thorns with stick fingers. Spits seeds at anyone who leans in.",
-      fieldNotes: "Twigjack — tiny plant-fey of briar and stick; sharp, springy, mean for its size. No red blood — sap and fiber. Built to snare, not to be snared.",
-      probA: "Own thorns are driven through both palms — stuck to the bed-cap by its own snare.",
-      probB: "Seed-spit becomes choking burrs in its own throat when it gets angry — and it is always angry.",
-      gm: "BACKUP · Delayed. A=EXTRACT thorns carefully. B=CLEAR airway / calm.",
+      moment: "Tangled in its own briar-snare on a low cap ? tiny, furious, picking at wire-thorns with stick fingers. Spits seeds at anyone who leans in.",
+      fieldNotes: "Twigjack ? tiny plant-fey of briar and stick; sharp, springy, mean for its size. No red blood ? sap and fiber. Built to snare, not to be snared.",
+      probA: "Own thorns are driven through both palms ? stuck to the bed-cap by its own snare.",
+      probB: "Seed-spit becomes choking burrs in its own throat when it gets angry ? and it is always angry.",
+      gm: "BACKUP ? Delayed. A=EXTRACT thorns carefully. B=CLEAR airway / calm.",
       art: "ancestry-art/17-twigjack.svg", pair: null
     },
     {
       id: 18, title: "Hollow Sylph", ancestry: "Sylph", role: "locale",
       startTriage: "Urgent", backup: true,
-      moment: "Hovers an inch above the toadstool, too light — translucent ribs showing, wind circling her like a worried pet. Speaks in gasps of cold air.",
-      fieldNotes: "Sylph — air-elemental fey; light bones, translucent skin, breath and breeze as one system. Needs moving air the way lungs need oxygen; still rooms starve them.",
-      probA: "She is too light — ribs show, lift is failing; she cannot stay grounded or truly fly.",
+      moment: "Hovers an inch above the toadstool, too light ? translucent ribs showing, wind circling her like a worried pet. Speaks in gasps of cold air.",
+      fieldNotes: "Sylph ? air-elemental fey; light bones, translucent skin, breath and breeze as one system. Needs moving air the way lungs need oxygen; still rooms starve them.",
+      probA: "She is too light ? ribs show, lift is failing; she cannot stay grounded or truly fly.",
       probB: "A dead still-pocket has formed in her chest; when the ward goes quiet, she begins to gray out.",
       gm: "BACKUP. A=WEIGHT/anchor + FILL. B=keep air moving (fan, breath, Jubilee irony).",
       art: "ancestry-art/18-sylph.svg", pair: null
@@ -846,11 +862,11 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   const ROUND_CHECKS = [
     'Fear / Dew / blood from last round',
     'Seed seams (2 per gap)',
-    '30s read → 30-count Waiting Area pass',
+    '30s read ? 30-count Waiting Area pass',
     'Clear Waiting Area leftovers / untreated',
     'Healing beats (Stick + items)',
-    'Dr. A implements used?',
-    'Triage escalate / flare / discharge?',
+    'Cameron tools used?',
+    'Triage escalate / Saved?',
     'Module beat this round?'
   ];
 
@@ -866,7 +882,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       patients,
       roundChecks: ROUND_CHECKS.map(() => false),
       selectedId: null,
-      filter: 'main'
+      filter: 'all'
     };
   }
 
@@ -910,7 +926,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   }
 
   function savedCount() {
-    return PATIENTS.filter(p => !p.backup && state.patients[p.id] && state.patients[p.id].saved).length;
+    return PATIENTS.filter(p => state.patients[p.id].saved).length;
   }
 
   function probResolved() {
@@ -923,7 +939,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     return n;
   }
 
-  /* ── Top bar ── */
+  /* ?? Top bar ?? */
   function renderBlood() {
     const el = document.getElementById('blood-pips');
     el.innerHTML = '';
@@ -962,7 +978,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 
   document.getElementById('round-minus').addEventListener('click', () => {
     state.round = Math.max(1, state.round - 1);
-    // Clear this-round checks on round change? Keep — GM may want history mid-round.
+    // Clear this-round checks on round change? Keep ? GM may want history mid-round.
     saveState();
     renderProgress();
   });
@@ -989,7 +1005,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     renderAll();
   });
 
-  /* ── Tabs ── */
+  /* ?? Tabs ?? */
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(t => {
@@ -1002,7 +1018,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     });
   });
 
-  /* ── Round checks ── */
+  /* ?? Round checks ?? */
   function renderRoundChecks() {
     const list = document.getElementById('round-check-list');
     list.innerHTML = '';
@@ -1025,7 +1041,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     });
   }
 
-  /* ── Ward ── */
+  /* ?? Ward ?? */
   function matchesFilter(p) {
     const s = state.patients[p.id];
     switch (state.filter) {
@@ -1063,8 +1079,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           '</select>' +
           '<label><input type="checkbox" data-act="saved"' + (s.saved ? ' checked' : '') + '> Saved</label>' +
           '<div class="mini-probs">' +
-            '<span class="mini-prob a' + (s.probA ? ' done' : '') + '" title="Problem A">' + (s.probA ? '✓' : 'A') + '</span>' +
-            '<span class="mini-prob b' + (s.probB ? ' done' : '') + '" title="Problem B">' + (s.probB ? '✓' : 'B') + '</span>' +
+            '<span class="mini-prob a' + (s.probA ? ' done' : '') + '" title="Problem A">' + (s.probA ? '?' : 'A') + '</span>' +
+            '<span class="mini-prob b' + (s.probB ? ' done' : '') + '" title="Problem B">' + (s.probB ? '?' : 'B') + '</span>' +
           '</div>' +
         '</div>';
 
@@ -1099,11 +1115,20 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 
   function openDrawer(id) {
     state.selectedId = id;
-    document.getElementById('ward-shell').classList.add('drawer-open');
+    const shell = document.getElementById('ward-shell');
+    const drawer = document.getElementById('drawer');
+    shell.classList.add('drawer-open');
     // Switch to Ward tab if needed
     document.querySelector('.tab[data-tab="ward"]').click();
     renderRoster();
     renderDrawer();
+    // Firefox / Mac: ensure panel is on-screen and scrolled to top
+    requestAnimationFrame(() => {
+      drawer.scrollTop = 0;
+      const closeBtn = document.getElementById('drawer-close');
+      if (closeBtn) closeBtn.focus({ preventScroll: true });
+      else drawer.focus({ preventScroll: true });
+    });
   }
 
   function closeDrawer() {
@@ -1120,9 +1145,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     const s = state.patients[p.id];
 
     drawer.innerHTML =
-      '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">×</button>' +
+      '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">?</button>' +
       '<div class="num" style="font-family:Cinzel,serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">' +
-        String(p.id).padStart(2, '0') + ' · ' + p.ancestry +
+        String(p.id).padStart(2, '0') + ' ? ' + p.ancestry +
       '</div>' +
       '<div class="big-title">' + p.title + '</div>' +
       '<div style="margin-bottom:0.35rem"><span class="role-badge ' + p.role + '">' + p.role + '</span></div>' +
@@ -1159,7 +1184,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
         '</select>' +
       '</div>' +
       (p.pair
-        ? '<div class="pair-link" id="pair-link">♥ Lover pair → #' + String(p.pair).padStart(2, '0') + ' ' + patientById(p.pair).title + '</div>'
+        ? '<div class="pair-link" id="pair-link">? Lover pair ? #' + String(p.pair).padStart(2, '0') + ' ' + patientById(p.pair).title + '</div>'
         : '');
 
     document.getElementById('drawer-close').addEventListener('click', closeDrawer);
@@ -1212,7 +1237,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     });
   });
 
-  /* ── Art ── */
+  /* ?? Art ?? */
   function renderArtGrid() {
     const grid = document.getElementById('art-grid');
     grid.innerHTML = '';
@@ -1233,7 +1258,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     document.getElementById('lb-img').src = p.art;
     document.getElementById('lb-img').alt = p.title;
     document.getElementById('lb-cap').textContent =
-      String(p.id).padStart(2, '0') + ' · ' + p.title;
+      String(p.id).padStart(2, '0') + ' ? ' + p.title;
     lb.classList.add('open');
   }
 
@@ -1245,6 +1270,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   document.getElementById('lightbox').addEventListener('click', (e) => {
     if (e.target.id === 'lightbox') closeLightbox();
   });
+  document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
 
   document.getElementById('btn-popout').addEventListener('click', () => {
     const w = window.open(
@@ -1264,7 +1290,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     }
   });
 
-  /* ── Keyboard ── */
+  /* ?? Keyboard ?? */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (document.getElementById('lightbox').classList.contains('open')) {
@@ -1274,7 +1300,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       if (state.selectedId) closeDrawer();
       return;
     }
-    // Digits 1-9 (and 0 for 10) — only when not typing in input
+    // Digits 1-9 (and 0 for 10) ? only when not typing in input
     if (e.target.matches('input, select, textarea')) return;
     const map = { '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'0':10 };
     if (map[e.key] && !e.metaKey && !e.ctrlKey && !e.altKey) {
