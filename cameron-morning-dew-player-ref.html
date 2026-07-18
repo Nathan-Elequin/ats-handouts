@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Ref — Ambervale Ward (4-up)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size:8.5in 11in; margin:0.35in; }
+:root {
+  --green-deep:#14271d; --green-mid:#2c5440; --amber:#c8902f;
+  --parchment:#f4ead3; --ink:#2a2218; --soft:#4a3d28;
+  --fear:#6e1f1f; --fear-bg:#f3e0dc;
+}
+body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--ink); }
+.screen-only {
+  max-width:8.2in; margin:0.12in auto; background:#1d3a2a; color:#f0d9a0;
+  border:1px solid #c8902f; border-radius:6px; padding:0.1in 0.18in; font-size:10pt;
+}
+.page {
+  width:7.8in; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
+  gap:0.12in; min-height:10.1in;
+}
+.card {
+  background:var(--parchment); border:1.5px solid var(--green-mid);
+  box-shadow:0 0 0 2px var(--parchment), 0 0 0 3px var(--amber);
+  padding:0.1in 0.12in; display:flex; flex-direction:column; gap:0.06in;
+  break-inside:avoid;
+}
+.head {
+  background:var(--green-deep); border:1px solid var(--amber);
+  padding:0.05in 0.08in; color:#f0d9a0;
+}
+.head .t { font-family:'Cinzel',serif; font-size:9.5pt; font-weight:700; line-height:1.1; }
+.head .s { font-size:6.5pt; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-top:1px; }
+h3 {
+  font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--green-deep); border-bottom:1.5px solid var(--amber); padding-bottom:1px; margin-top:0.02in;
+}
+ul, ol { margin:0.02in 0 0 0.14in; font-size:7.6pt; line-height:1.28; }
+li { margin-bottom:0.015in; }
+.goal { font-size:7.8pt; line-height:1.3; }
+.stages { display:grid; grid-template-columns:1fr 1fr; gap:0.03in; font-size:7pt; }
+.st { border-radius:3px; padding:0.03in 0.05in; font-weight:600; }
+.st b { font-family:'Cinzel',serif; font-size:7pt; }
+.g { background:#d4e8d4; border:1px solid #6a9e6e; }
+.y { background:#f5e6c0; border:1px solid #c8902f; }
+.r { background:#f0c8bc; border:1px solid #c04a32; }
+.k { background:#ddd4c4; border:1px solid #5a4a3a; }
+.fear {
+  background:var(--fear-bg); border:1.5px solid var(--fear); border-radius:4px;
+  padding:0.05in 0.07in;
+}
+.fear h3 { color:var(--fear); border-bottom-color:var(--fear); }
+.fear ul { font-size:7.5pt; }
+.tiny { font-size:6.8pt; color:var(--soft); font-style:italic; margin-top:auto; }
+@media print {
+  .screen-only { display:none !important; }
+  body { background:#fff; }
+}
+</style>
+</head>
+<body>
+<div class="screen-only"><b>Print 100% · cut on borders.</b> Draft for review — 4 identical refs. No exhaustion / break room / blood bank / Dew Garden spoilers.</div>
+
+<div class="page">
+
+<article class="card">
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
+  <div>
+    <h3>Assign patients</h3>
+    <ol>
+      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
+      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
+      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
+      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
+      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+    </ol>
+  </div>
+  <div>
+    <h3>Treat</h3>
+    <ul>
+      <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
+      <li>Tools are vague on purpose — learn by trying them.</li>
+      <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Triage</h3>
+    <div class="stages">
+      <div class="st g"><b>Green</b> can wait</div>
+      <div class="st y"><b>Gold</b> soon</div>
+      <div class="st r"><b>Scarlet</b> now</div>
+      <div class="st k"><b>Ink</b> beyond</div>
+    </div>
+  </div>
+  <div class="fear">
+    <h3>Fear &amp; escalation</h3>
+    <ul>
+      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Gold</strong> &amp; <strong>Scarlet</strong>.</li>
+      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Ink).</li>
+      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
+      <li>When the ward is crushing it, more patients may escalate at once.</li>
+    </ul>
+  </div>
+  <p class="tiny">Ink ≈ nearly impossible alone. Watch the Red Cap’s countdown.</p>
+</article>
+
+<article class="card">
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
+  <div>
+    <h3>Assign patients</h3>
+    <ol>
+      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
+      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
+      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
+      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
+      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+    </ol>
+  </div>
+  <div>
+    <h3>Treat</h3>
+    <ul>
+      <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
+      <li>Tools are vague on purpose — learn by trying them.</li>
+      <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Triage</h3>
+    <div class="stages">
+      <div class="st g"><b>Green</b> can wait</div>
+      <div class="st y"><b>Gold</b> soon</div>
+      <div class="st r"><b>Scarlet</b> now</div>
+      <div class="st k"><b>Ink</b> beyond</div>
+    </div>
+  </div>
+  <div class="fear">
+    <h3>Fear &amp; escalation</h3>
+    <ul>
+      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Gold</strong> &amp; <strong>Scarlet</strong>.</li>
+      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Ink).</li>
+      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
+      <li>When the ward is crushing it, more patients may escalate at once.</li>
+    </ul>
+  </div>
+  <p class="tiny">Ink ≈ nearly impossible alone. Watch the Red Cap’s countdown.</p>
+</article>
+
+<article class="card">
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
+  <div>
+    <h3>Assign patients</h3>
+    <ol>
+      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
+      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
+      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
+      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
+      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+    </ol>
+  </div>
+  <div>
+    <h3>Treat</h3>
+    <ul>
+      <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
+      <li>Tools are vague on purpose — learn by trying them.</li>
+      <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Triage</h3>
+    <div class="stages">
+      <div class="st g"><b>Green</b> can wait</div>
+      <div class="st y"><b>Gold</b> soon</div>
+      <div class="st r"><b>Scarlet</b> now</div>
+      <div class="st k"><b>Ink</b> beyond</div>
+    </div>
+  </div>
+  <div class="fear">
+    <h3>Fear &amp; escalation</h3>
+    <ul>
+      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Gold</strong> &amp; <strong>Scarlet</strong>.</li>
+      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Ink).</li>
+      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
+      <li>When the ward is crushing it, more patients may escalate at once.</li>
+    </ul>
+  </div>
+  <p class="tiny">Ink ≈ nearly impossible alone. Watch the Red Cap’s countdown.</p>
+</article>
+
+<article class="card">
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
+  <div>
+    <h3>Assign patients</h3>
+    <ol>
+      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
+      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
+      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
+      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
+      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+    </ol>
+  </div>
+  <div>
+    <h3>Treat</h3>
+    <ul>
+      <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
+      <li>Tools are vague on purpose — learn by trying them.</li>
+      <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Triage</h3>
+    <div class="stages">
+      <div class="st g"><b>Green</b> can wait</div>
+      <div class="st y"><b>Gold</b> soon</div>
+      <div class="st r"><b>Scarlet</b> now</div>
+      <div class="st k"><b>Ink</b> beyond</div>
+    </div>
+  </div>
+  <div class="fear">
+    <h3>Fear &amp; escalation</h3>
+    <ul>
+      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Gold</strong> &amp; <strong>Scarlet</strong>.</li>
+      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Ink).</li>
+      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
+      <li>When the ward is crushing it, more patients may escalate at once.</li>
+    </ul>
+  </div>
+  <p class="tiny">Ink ≈ nearly impossible alone. Watch the Red Cap’s countdown.</p>
+</article>
+
+</div>
+</body>
+</html>
