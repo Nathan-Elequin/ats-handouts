@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRINT · Triage Labels — Ambervale (3″)</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Source+Sans+3:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Source+Sans+3:wght@600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
 @page { size: letter; margin: 0.5in; }
@@ -21,23 +21,52 @@ body { font-family:'Source Sans 3',sans-serif; background:#e8dcc0; color:#2a2218
 h1 { font-family:'Cinzel',serif; font-size:12pt; margin-bottom:0.15in; color:#14271d; }
 .sub { font-size:9pt; font-style:italic; color:#5a4a38; margin-bottom:0.25in; }
 .grid {
-  display:grid; grid-template-columns:repeat(2, 3in); gap:0.35in 0.5in;
+  display:grid; grid-template-columns:repeat(2, 3in); gap:0.4in 0.5in;
   justify-content:center;
 }
 .label {
-  width:3in; height:0.85in;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 0.16in; border:2.5px solid; border-radius:6px;
-  font-family:'Cinzel',serif; font-weight:700;
-  /* dashed outer cut box */
+  width:3in; height:1.05in;
+  display:flex; align-items:center; justify-content:space-between; gap:0.08in;
+  padding:0.08in 0.12in 0.08in 0.14in; border:2.5px solid; border-radius:6px;
   outline:1px dashed #b0a080; outline-offset:6px;
 }
-.name { font-size:20pt; letter-spacing:0.06em; text-transform:uppercase; }
-.hint { font-family:'Source Sans 3',sans-serif; font-size:9pt; font-weight:600; opacity:0.85; }
+.left { display:flex; flex-direction:column; justify-content:center; min-width:0; }
+.name {
+  font-family:'Cinzel',serif; font-weight:700;
+  font-size:15pt; letter-spacing:0.04em; text-transform:uppercase; line-height:1.05;
+}
+.hint { font-size:7.5pt; font-weight:600; opacity:0.8; margin-top:0.02in; }
+.dc {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  flex:0 0 auto; gap:0.03in;
+}
+.dc-tag {
+  font-family:'Cinzel',serif; font-size:6.5pt; font-weight:700;
+  letter-spacing:0.06em; text-transform:uppercase; white-space:nowrap;
+}
+.dice { display:flex; flex-wrap:wrap; gap:0.03in; justify-content:center; max-width:0.95in; }
+.die {
+  width:0.2in; height:0.2in; border-radius:0.03in;
+  border:1.25px solid currentColor; background:currentColor;
+  position:relative; opacity:0.92;
+  box-shadow:inset 0 0 0 1.5px #fff8;
+}
+.die::after {
+  content:""; position:absolute; inset:28%;
+  border-radius:50%; background:#fff; opacity:0.95;
+}
 .g { background:#d4e8d4; border-color:#6a9e6e; color:#1a3a22; }
 .y { background:#f5e6c0; border-color:#c8902f; color:#5a3a08; }
 .r { background:#f0c8bc; border-color:#c04a32; color:#5a1810; }
-.k { background:#ddd4c4; border-color:#5a4a3a; color:#2a2218; }
+.k { background:#1a1a1a; border-color:#000; color:#e8dcc0; }
+.k .die { box-shadow:inset 0 0 0 1.5px #e8dcc044; }
+.k .die::after { background:#e8dcc0; }
+.base-mark {
+  width:0.42in; height:0.28in; border:1.5px solid currentColor; border-radius:0.04in;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cinzel',serif; font-size:7pt; font-weight:700; letter-spacing:0.04em;
+  opacity:0.85;
+}
 @media print {
   .howto { display:none !important; }
   body { background:#fff; }
@@ -48,15 +77,55 @@ h1 { font-family:'Cinzel',serif; font-size:12pt; margin-bottom:0.15in; color:#14
 <body>
 <div class="howto">
   <p><strong>Print once.</strong> Letter, Actual size / 100%, color on. Four labels, each <strong>3 inches wide</strong>. Cut on the dashed outlines. One set only — place as column headers on the table.</p>
+  <p><strong>DC icons:</strong> Delayed / Urgent each show <strong>+1d6</strong>. Expectant shows <strong>+4d6</strong> (the cliff).</p>
 </div>
 <div class="sheet">
   <h1>Triage labels · one set</h1>
-  <p class="sub">Slide patient cards under the matching header. All patients start Green.</p>
+  <p class="sub">Slide patient cards under the matching header. All patients start Stable.</p>
   <div class="grid">
-    <div class="label g"><span class="name">Green</span><span class="hint">can wait</span></div>
-    <div class="label y"><span class="name">Gold</span><span class="hint">soon</span></div>
-    <div class="label r"><span class="name">Scarlet</span><span class="hint">now</span></div>
-    <div class="label k"><span class="name">Ink</span><span class="hint">beyond</span></div>
+    <div class="label g">
+      <div class="left">
+        <span class="name">Stable</span>
+        <span class="hint">holding · can wait</span>
+      </div>
+      <div class="dc">
+        <span class="dc-tag">Base DC</span>
+        <div class="base-mark">—</div>
+      </div>
+    </div>
+    <div class="label y">
+      <div class="left">
+        <span class="name">Delayed</span>
+        <span class="hint">soon · waiting</span>
+      </div>
+      <div class="dc">
+        <span class="dc-tag">+1d6</span>
+        <div class="dice" aria-hidden="true"><span class="die"></span></div>
+      </div>
+    </div>
+    <div class="label r">
+      <div class="left">
+        <span class="name">Urgent</span>
+        <span class="hint">now · immediate</span>
+      </div>
+      <div class="dc">
+        <span class="dc-tag">+1d6</span>
+        <div class="dice" aria-hidden="true"><span class="die"></span></div>
+      </div>
+    </div>
+    <div class="label k">
+      <div class="left">
+        <span class="name">Expectant</span>
+        <span class="hint">beyond · dire</span>
+      </div>
+      <div class="dc">
+        <span class="dc-tag">+4d6</span>
+        <div class="dice" aria-hidden="true">
+          <span class="die"></span><span class="die"></span>
+          <span class="die"></span><span class="die"></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </body>

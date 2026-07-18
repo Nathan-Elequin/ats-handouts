@@ -284,10 +284,10 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   background:#0a100c; border:1px solid var(--line); border-radius:4px;
   padding:0.15rem 0.3rem; font-size:0.72rem; color:var(--ink);
 }
-.tile-ctrls select.tri-Green { background:var(--green); color:var(--green-fg); }
-.tile-ctrls select.tri-Gold { background:var(--gold); color:var(--gold-fg); }
-.tile-ctrls select.tri-Scarlet { background:var(--scarlet); color:var(--scarlet-fg); }
-.tile-ctrls select.tri-Ink { background:var(--ink-tri); color:var(--ink-fg); }
+.tile-ctrls select.tri-Stable { background:var(--green); color:var(--green-fg); }
+.tile-ctrls select.tri-Delayed { background:var(--gold); color:var(--gold-fg); }
+.tile-ctrls select.tri-Urgent { background:var(--scarlet); color:var(--scarlet-fg); }
+.tile-ctrls select.tri-Expectant { background:var(--ink-tri); color:var(--ink-fg); }
 .tile-ctrls label {
   display:inline-flex; align-items:center; gap:0.2rem; cursor:pointer; color:var(--muted);
 }
@@ -518,7 +518,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <summary>2 · Bookkeeping</summary>
           <div class="body">
             <ul>
-              <li><strong>Fear</strong> — prefer Overflow / unclaimed, then Gold/Scarlet. Soft dial if table is crushing it.</li>
+              <li><strong>Fear</strong> — prefer Overflow / unclaimed, then Delayed/Urgent. Soft dial if table is crushing it.</li>
               <li><strong>Dew</strong> — conveyor grass; patients already on toadstool beds.</li>
               <li><strong>Blood pips</strong> — bank of 4 (top bar). Cap Transfusion costs 1.</li>
             </ul>
@@ -530,7 +530,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
             <ul>
               <li><strong>Poking Stick</strong> — universal Stick (not one of the 8). Cameron oversells as Rod of Medicinal Accord. Optional fake charge die.</li>
               <li><strong>Bark Advice</strong> — shout a verb / assign Overflow.</li>
-              <li><strong>Cap Transfusion</strong> — −1 blood, +~20 to a roll / Ink break.</li>
+              <li><strong>Cap Transfusion</strong> — −1 blood, +~20 to a roll / Expectant break.</li>
               <li><strong>Never Rest</strong> — keep pressure; no calm beats unless earned.</li>
             </ul>
           </div>
@@ -570,7 +570,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <summary>6 · Soft ramp</summary>
           <div class="body">
             <ul>
-              <li>All patients arrive <strong>Green</strong>.</li>
+              <li>All patients arrive <strong>Stable</strong>. Delayed/Urgent +1d6 each; Expectant +4d6.</li>
               <li>After <strong>4 Saved</strong>, denser deal (~10 in ecosystem; extras in draw/Overflow).</li>
             </ul>
           </div>
@@ -597,14 +597,14 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       <aside class="sticky-ref">
         <h3>Sticky reference</h3>
         <div class="tag-row">
-          <span class="pip-tag g">Green</span>
-          <span class="pip-tag y">Gold</span>
-          <span class="pip-tag r">Scarlet</span>
-          <span class="pip-tag k">Ink</span>
+          <span class="pip-tag g">Stable</span>
+          <span class="pip-tag y">Delayed +1d6</span>
+          <span class="pip-tag r">Urgent +1d6</span>
+          <span class="pip-tag k">Expectant +4d6</span>
         </div>
         <dl>
           <dt>Triage</dt>
-          <dd>Improve one step on success · Saved removes from play · Ink ≈ DC ~40</dd>
+          <dd>Improve one step on success · Saved removes from play · Delayed/Urgent +1d6 · Expectant +4d6</dd>
           <dt>Cap Transfusion</dt>
           <dd>−1 blood · +~20</dd>
           <dt>Seams</dt>
@@ -625,7 +625,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       <button type="button" class="filter-chip" data-filter="soldiers">Soldiers</button>
       <button type="button" class="filter-chip" data-filter="lovers">Lovers</button>
       <button type="button" class="filter-chip" data-filter="unsaved">Unsaved</button>
-      <button type="button" class="filter-chip" data-filter="critical">Scarlet+Ink</button>
+      <button type="button" class="filter-chip" data-filter="critical">Urgent+Expectant</button>
     </div>
     <div class="ward-shell" id="ward-shell">
       <div class="roster" id="roster"></div>
@@ -653,6 +653,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 <script>
 (function () {
   const STORAGE_KEY = 'ats-morning-dew-gm-v1';
+  const TRIAGE_MIGRATE = { Green: 'Stable', Gold: 'Delayed', Scarlet: 'Urgent', Ink: 'Expectant' };
+  function migrateTriage(t) { return TRIAGE_MIGRATE[t] || t || 'Stable'; }
 
   const PATIENTS = [
     {
@@ -853,7 +855,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   function defaultState() {
     const patients = {};
     PATIENTS.forEach(p => {
-      patients[p.id] = { triage: 'Green', saved: false, probA: false, probB: false };
+      patients[p.id] = { triage: 'Stable', saved: false, probA: false, probB: false };
     });
     return {
       round: 1,
@@ -877,7 +879,16 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       return {
         ...base,
         ...parsed,
-        patients: { ...base.patients, ...(parsed.patients || {}) },
+        patients: (() => {
+          const mergedPatients = { ...base.patients, ...(parsed.patients || {}) };
+          Object.keys(mergedPatients).forEach(id => {
+            mergedPatients[id] = {
+              ...mergedPatients[id],
+              triage: migrateTriage(mergedPatients[id].triage)
+            };
+          });
+          return mergedPatients;
+        })(),
         roundChecks: Array.isArray(parsed.roundChecks) && parsed.roundChecks.length === ROUND_CHECKS.length
           ? parsed.roundChecks
           : base.roundChecks
@@ -1019,7 +1030,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
       case 'soldiers': return p.role === 'soldier';
       case 'lovers': return p.role === 'lover';
       case 'unsaved': return !s.saved;
-      case 'critical': return s.triage === 'Scarlet' || s.triage === 'Ink';
+      case 'critical': return s.triage === 'Urgent' || s.triage === 'Expectant';
       default: return true;
     }
   }
@@ -1042,7 +1053,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
         '<div class="tile-meta"><span class="role-badge ' + p.role + '">' + p.role + '</span></div>' +
         '<div class="tile-ctrls">' +
           '<select class="tri-' + s.triage + '" data-act="triage" aria-label="Triage">' +
-            ['Green','Gold','Scarlet','Ink'].map(t =>
+            ['Stable','Delayed','Urgent','Expectant'].map(t =>
               '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
             ).join('') +
           '</select>' +
@@ -1138,7 +1149,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           '<input type="checkbox" id="drawer-saved"' + (s.saved ? ' checked' : '') + '> Saved' +
         '</label>' +
         '<select id="drawer-triage" class="tri-' + s.triage + '" style="background:#0a100c;border:1px solid var(--line);border-radius:4px;padding:0.3rem 0.4rem">' +
-          ['Green','Gold','Scarlet','Ink'].map(t =>
+          ['Stable','Delayed','Urgent','Expectant'].map(t =>
             '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
           ).join('') +
         '</select>' +
