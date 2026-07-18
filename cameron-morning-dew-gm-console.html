@@ -922,7 +922,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   }
 
   function patientById(id) {
-    return PATIENTS.find(p => p.id === id);
+    const n = Number(id);
+    return PATIENTS.find(p => p.id === n || p.id === id);
   }
 
   function savedCount() {
@@ -1114,21 +1115,11 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   }
 
   function openDrawer(id) {
-    state.selectedId = id;
-    const shell = document.getElementById('ward-shell');
-    const drawer = document.getElementById('drawer');
-    shell.classList.add('drawer-open');
-    // Switch to Ward tab if needed
+    state.selectedId = Number(id);
+    document.getElementById('ward-shell').classList.add('drawer-open');
     document.querySelector('.tab[data-tab="ward"]').click();
     renderRoster();
     renderDrawer();
-    // Firefox / Mac: ensure panel is on-screen and scrolled to top
-    requestAnimationFrame(() => {
-      drawer.scrollTop = 0;
-      const closeBtn = document.getElementById('drawer-close');
-      if (closeBtn) closeBtn.focus({ preventScroll: true });
-      else drawer.focus({ preventScroll: true });
-    });
   }
 
   function closeDrawer() {
@@ -1138,92 +1129,104 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     renderRoster();
   }
 
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function renderDrawer() {
     const drawer = document.getElementById('drawer');
-    const p = patientById(state.selectedId);
-    if (!p) { drawer.innerHTML = ''; return; }
-    const s = state.patients[p.id];
+    try {
+      const p = patientById(state.selectedId);
+      if (!p) {
+        drawer.innerHTML = '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">×</button><p style="color:var(--muted);padding:1rem 0">No patient selected.</p>';
+        document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+        return;
+      }
+      const s = state.patients[p.id] || { triage: p.startTriage || 'Delayed', saved: false, probA: false, probB: false };
 
-    drawer.innerHTML =
-      '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">?</button>' +
-      '<div class="num" style="font-family:Cinzel,serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">' +
-        String(p.id).padStart(2, '0') + ' ? ' + p.ancestry +
-      '</div>' +
-      '<div class="big-title">' + p.title + '</div>' +
-      '<div style="margin-bottom:0.35rem"><span class="role-badge ' + p.role + '">' + p.role + '</span></div>' +
-      '<div class="origin">' + p.origin + '</div>' +
-      '<div class="voice-box"><div class="lbl">Voice</div><div class="txt">' + p.voice + '</div></div>' +
-      '<div class="sec-lbl">Mannerisms</div>' +
-      '<div class="chips">' + p.mannerisms.map(m => '<span class="chip">' + m + '</span>').join('') + '</div>' +
-      '<div class="sec-lbl">Moment</div>' +
-      '<p class="moment">' + p.moment + '</p>' +
-      '<div class="sec-lbl">Field notes</div>' +
-      '<p class="field-notes">' + p.fieldNotes + '</p>' +
-      '<div class="sec-lbl">Problems</div>' +
-      '<button type="button" class="prob-btn a' + (s.probA ? ' done' : '') + '" data-prob="A">' +
-        '<div class="plabel">Problem A</div>' + p.probA +
-      '</button>' +
-      '<div class="verbs-hint">' + p.verbsA + '</div>' +
-      '<button type="button" class="prob-btn b' + (s.probB ? ' done' : '') + '" data-prob="B">' +
-        '<div class="plabel">Problem B</div>' + p.probB +
-      '</button>' +
-      '<div class="verbs-hint">' + p.verbsB + '</div>' +
-      '<div class="sec-lbl">Bonus cues</div>' +
-      '<div class="bonus-strip">' +
-        p.bonuses.map((b, i) => '<button type="button" class="bonus-pill" data-bonus="' + i + '">' + b + '</button>').join('') +
-      '</div>' +
-      '<div class="drawer-actions">' +
-        '<button type="button" class="btn-act" id="btn-show-art">Show art</button>' +
-        '<label style="display:inline-flex;align-items:center;gap:0.35rem;font-size:0.85rem;color:var(--muted)">' +
-          '<input type="checkbox" id="drawer-saved"' + (s.saved ? ' checked' : '') + '> Saved' +
-        '</label>' +
-        '<select id="drawer-triage" class="tri-' + s.triage + '" style="background:#0a100c;border:1px solid var(--line);border-radius:4px;padding:0.3rem 0.4rem">' +
-          ['Stable','Delayed','Urgent','Expectant'].map(t =>
-            '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
-          ).join('') +
-        '</select>' +
-      '</div>' +
-      (p.pair
-        ? '<div class="pair-link" id="pair-link">? Lover pair ? #' + String(p.pair).padStart(2, '0') + ' ' + patientById(p.pair).title + '</div>'
-        : '');
+      drawer.innerHTML =
+        '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">×</button>' +
+        '<div class="num" style="font-family:Cinzel,serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">' +
+          String(p.id).padStart(2, '0') + ' · ' + esc(p.ancestry) +
+          (p.backup ? ' · BACKUP' : '') +
+        '</div>' +
+        '<div class="big-title">' + esc(p.title) + '</div>' +
+        '<div style="margin-bottom:0.45rem"><span class="role-badge ' + esc(p.role) + '">' + esc(p.role) + '</span></div>' +
+        '<div class="sec-lbl">Ward moment</div>' +
+        '<p class="moment">' + esc(p.moment) + '</p>' +
+        '<div class="sec-lbl">Field notes</div>' +
+        '<p class="field-notes">' + esc(p.fieldNotes) + '</p>' +
+        '<div class="sec-lbl">Problems</div>' +
+        '<button type="button" class="prob-btn a' + (s.probA ? ' done' : '') + '" data-prob="A">' +
+          '<div class="plabel">Presenting</div>' + esc(p.probA) +
+        '</button>' +
+        '<button type="button" class="prob-btn b' + (s.probB ? ' done' : '') + '" data-prob="B">' +
+          '<div class="plabel">Escalation</div>' + esc(p.probB) +
+        '</button>' +
+        (p.gm
+          ? '<div class="sec-lbl">GM key</div><p class="field-notes" style="font-style:normal;color:var(--amber)">' + esc(p.gm) + '</p>'
+          : '') +
+        '<div class="drawer-actions">' +
+          '<button type="button" class="btn-act" id="btn-show-art">Show art</button>' +
+          '<label style="display:inline-flex;align-items:center;gap:0.35rem;font-size:0.85rem;color:var(--muted)">' +
+            '<input type="checkbox" id="drawer-saved"' + (s.saved ? ' checked' : '') + '> Saved' +
+          '</label>' +
+          '<select id="drawer-triage" class="tri-' + esc(s.triage) + '" style="background:#0a100c;border:1px solid var(--line);border-radius:4px;padding:0.3rem 0.4rem">' +
+            ['Stable','Delayed','Urgent','Expectant'].map(t =>
+              '<option value="' + t + '"' + (s.triage === t ? ' selected' : '') + '>' + t + '</option>'
+            ).join('') +
+          '</select>' +
+        '</div>' +
+        (p.pair
+          ? '<div class="pair-link" id="pair-link">♥ Lover pair → #' + String(p.pair).padStart(2, '0') + ' ' + esc(patientById(p.pair).title) + '</div>'
+          : '');
 
-    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+      document.getElementById('drawer-close').addEventListener('click', closeDrawer);
 
-    drawer.querySelectorAll('[data-prob]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.dataset.prob === 'A' ? 'probA' : 'probB';
-        state.patients[p.id][key] = !state.patients[p.id][key];
+      drawer.querySelectorAll('[data-prob]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.prob === 'A' ? 'probA' : 'probB';
+          state.patients[p.id][key] = !state.patients[p.id][key];
+          saveState();
+          renderDrawer();
+          renderRoster();
+          renderProgress();
+        });
+      });
+
+      document.getElementById('btn-show-art').addEventListener('click', () => openLightbox(p));
+
+      document.getElementById('drawer-saved').addEventListener('change', (e) => {
+        state.patients[p.id].saved = e.target.checked;
         saveState();
-        renderDrawer();
         renderRoster();
         renderProgress();
       });
-    });
 
-    drawer.querySelectorAll('[data-bonus]').forEach(btn => {
-      btn.addEventListener('click', () => btn.classList.toggle('tapped'));
-    });
+      const tri = document.getElementById('drawer-triage');
+      tri.addEventListener('change', () => {
+        state.patients[p.id].triage = tri.value;
+        saveState();
+        renderRoster();
+        renderDrawer();
+        renderProgress();
+      });
 
-    document.getElementById('btn-show-art').addEventListener('click', () => openLightbox(p));
+      const pair = document.getElementById('pair-link');
+      if (pair) pair.addEventListener('click', () => openDrawer(p.pair));
 
-    document.getElementById('drawer-saved').addEventListener('change', (e) => {
-      state.patients[p.id].saved = e.target.checked;
-      saveState();
-      renderRoster();
-      renderProgress();
-    });
-
-    const tri = document.getElementById('drawer-triage');
-    tri.addEventListener('change', () => {
-      state.patients[p.id].triage = tri.value;
-      saveState();
-      renderRoster();
-      renderDrawer();
-    });
-
-    const pair = document.getElementById('pair-link');
-    if (pair) {
-      pair.addEventListener('click', () => openDrawer(p.pair));
+      drawer.scrollTop = 0;
+    } catch (err) {
+      drawer.innerHTML =
+        '<button type="button" class="drawer-close" id="drawer-close" aria-label="Close">×</button>' +
+        '<p style="color:#f0b0a0;padding:0.75rem 0"><strong>Drawer error</strong><br>' + esc(err && err.message) + '</p>';
+      const btn = document.getElementById('drawer-close');
+      if (btn) btn.addEventListener('click', closeDrawer);
+      console.error(err);
     }
   }
 
