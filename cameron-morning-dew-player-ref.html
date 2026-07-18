@@ -25,36 +25,40 @@ body { font-family:'Source Sans 3',sans-serif; background:#d9cba8; color:var(--i
 .card {
   background:var(--parchment); border:1.5px solid var(--green-mid);
   box-shadow:0 0 0 2px var(--parchment), 0 0 0 3px var(--amber);
-  padding:0.1in 0.12in; display:flex; flex-direction:column; gap:0.06in;
+  padding:0.09in 0.11in; display:flex; flex-direction:column; gap:0.05in;
   break-inside:avoid;
 }
 .head {
   background:var(--green-deep); border:1px solid var(--amber);
-  padding:0.05in 0.08in; color:#f0d9a0;
+  padding:0.045in 0.07in; color:#f0d9a0;
 }
-.head .t { font-family:'Cinzel',serif; font-size:9.5pt; font-weight:700; line-height:1.1; }
-.head .s { font-size:6.5pt; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-top:1px; }
+.head .t { font-family:'Cinzel',serif; font-size:9pt; font-weight:700; line-height:1.1; }
+.head .s { font-size:6pt; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-top:1px; }
 h3 {
-  font-family:'Cinzel',serif; font-size:7.5pt; letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--green-deep); border-bottom:1.5px solid var(--amber); padding-bottom:1px; margin-top:0.02in;
+  font-family:'Cinzel',serif; font-size:7pt; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--green-deep); border-bottom:1.5px solid var(--amber); padding-bottom:1px; margin-top:0.015in;
 }
-ul, ol { margin:0.02in 0 0 0.14in; font-size:7.6pt; line-height:1.28; }
-li { margin-bottom:0.015in; }
-.goal { font-size:7.8pt; line-height:1.3; }
-.stages { display:grid; grid-template-columns:1fr 1fr; gap:0.03in; font-size:7pt; }
-.st { border-radius:3px; padding:0.03in 0.05in; font-weight:600; }
-.st b { font-family:'Cinzel',serif; font-size:7pt; }
+ul, ol { margin:0.015in 0 0 0.13in; font-size:7.1pt; line-height:1.25; }
+li { margin-bottom:0.012in; }
+.goal { font-size:7.4pt; line-height:1.28; }
+.stages { display:grid; grid-template-columns:1fr 1fr; gap:0.03in; font-size:6.6pt; }
+.st { border-radius:3px; padding:0.025in 0.045in; font-weight:600; }
+.st b { font-family:'Cinzel',serif; font-size:6.6pt; }
 .g { background:#d4e8d4; border:1px solid #6a9e6e; }
 .y { background:#f5e6c0; border:1px solid #c8902f; }
 .r { background:#f0c8bc; border:1px solid #c04a32; }
 .k { background:#1a1a1a; border:1px solid #000; color:#e8dcc0; }
 .fear {
   background:var(--fear-bg); border:1.5px solid var(--fear); border-radius:4px;
-  padding:0.05in 0.07in;
+  padding:0.045in 0.06in;
 }
 .fear h3 { color:var(--fear); border-bottom-color:var(--fear); }
-.fear ul { font-size:7.5pt; }
-.tiny { font-size:6.8pt; color:var(--soft); font-style:italic; margin-top:auto; }
+.fear ul { font-size:7pt; }
+.tiny { font-size:6.4pt; color:var(--soft); font-style:italic; margin-top:auto; }
+.cap {
+  font-size:6.8pt; background:#e8f0e4; border:1px solid #6a9e6e; border-radius:3px;
+  padding:0.03in 0.05in; font-weight:600;
+}
 @media print {
   .screen-only { display:none !important; }
   body { background:#fff; }
@@ -62,22 +66,24 @@ li { margin-bottom:0.015in; }
 </style>
 </head>
 <body>
-<div class="screen-only"><b>Print 100% · cut on borders.</b> Draft for review — 4 identical refs. No exhaustion / break room / blood bank / Dew Garden spoilers.</div>
+<div class="screen-only"><b>Print 100% · cut on borders.</b> 4 identical refs. Waiting Area pass · capacity 2.</div>
 
 <div class="page">
 
 <article class="card">
-  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Waiting Area</div></div>
   <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
   <div>
-    <h3>Assign patients</h3>
+    <h3>Hand &amp; pass</h3>
     <ol>
-      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
-      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
-      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
-      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
-      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+      <li>You start each round with a <strong>hand of 2</strong> patient cards (your ward).</li>
+      <li><strong>30 seconds</strong> — read your hand. Chaos is the point.</li>
+      <li>Nathan counts down from <strong>30</strong>. During that count you may <strong>pass</strong>.</li>
+      <li>To pass: put a card into the center <strong>Waiting Area</strong> and call for someone to take it.</li>
+      <li>You may <strong>only</strong> place cards into the Waiting Area — never into another player’s ward.</li>
+      <li>Only <strong>you</strong> may take a card from the Waiting Area into <em>your</em> ward.</li>
     </ol>
+    <p class="cap">Capacity 2. Full? Drop one into Waiting Area before you take another.</p>
   </div>
   <div>
     <h3>Treat</h3>
@@ -85,6 +91,7 @@ li { margin-bottom:0.015in; }
       <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
       <li>Tools are vague on purpose — learn by trying them.</li>
       <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+      <li>Kanban token (name + icon) moves on the triage board — keep the full card in your ward while treating.</li>
     </ul>
   </div>
   <div>
@@ -99,27 +106,28 @@ li { margin-bottom:0.015in; }
   <div class="fear">
     <h3>Fear &amp; escalation</h3>
     <ul>
-      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
-      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Expectant).</li>
-      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
-      <li>When the ward is crushing it, more patients may escalate at once.</li>
+      <li>Cards left in the <strong>Waiting Area</strong> when the count ends = untreated / Fear bait.</li>
+      <li><strong>Fear</strong> prefers untreated first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
+      <li><strong>Escalation</strong> = worsen one step (toward Expectant).</li>
     </ul>
   </div>
   <p class="tiny">Expectant ≈ nearly impossible alone (+4d6). Watch the Red Cap’s countdown.</p>
 </article>
 
 <article class="card">
-  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Waiting Area</div></div>
   <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
   <div>
-    <h3>Assign patients</h3>
+    <h3>Hand &amp; pass</h3>
     <ol>
-      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
-      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
-      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
-      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
-      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+      <li>You start each round with a <strong>hand of 2</strong> patient cards (your ward).</li>
+      <li><strong>30 seconds</strong> — read your hand. Chaos is the point.</li>
+      <li>Nathan counts down from <strong>30</strong>. During that count you may <strong>pass</strong>.</li>
+      <li>To pass: put a card into the center <strong>Waiting Area</strong> and call for someone to take it.</li>
+      <li>You may <strong>only</strong> place cards into the Waiting Area — never into another player’s ward.</li>
+      <li>Only <strong>you</strong> may take a card from the Waiting Area into <em>your</em> ward.</li>
     </ol>
+    <p class="cap">Capacity 2. Full? Drop one into Waiting Area before you take another.</p>
   </div>
   <div>
     <h3>Treat</h3>
@@ -127,6 +135,7 @@ li { margin-bottom:0.015in; }
       <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
       <li>Tools are vague on purpose — learn by trying them.</li>
       <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+      <li>Kanban token (name + icon) moves on the triage board — keep the full card in your ward while treating.</li>
     </ul>
   </div>
   <div>
@@ -141,27 +150,28 @@ li { margin-bottom:0.015in; }
   <div class="fear">
     <h3>Fear &amp; escalation</h3>
     <ul>
-      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
-      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Expectant).</li>
-      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
-      <li>When the ward is crushing it, more patients may escalate at once.</li>
+      <li>Cards left in the <strong>Waiting Area</strong> when the count ends = untreated / Fear bait.</li>
+      <li><strong>Fear</strong> prefers untreated first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
+      <li><strong>Escalation</strong> = worsen one step (toward Expectant).</li>
     </ul>
   </div>
   <p class="tiny">Expectant ≈ nearly impossible alone (+4d6). Watch the Red Cap’s countdown.</p>
 </article>
 
 <article class="card">
-  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Waiting Area</div></div>
   <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
   <div>
-    <h3>Assign patients</h3>
+    <h3>Hand &amp; pass</h3>
     <ol>
-      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
-      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
-      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
-      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
-      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+      <li>You start each round with a <strong>hand of 2</strong> patient cards (your ward).</li>
+      <li><strong>30 seconds</strong> — read your hand. Chaos is the point.</li>
+      <li>Nathan counts down from <strong>30</strong>. During that count you may <strong>pass</strong>.</li>
+      <li>To pass: put a card into the center <strong>Waiting Area</strong> and call for someone to take it.</li>
+      <li>You may <strong>only</strong> place cards into the Waiting Area — never into another player’s ward.</li>
+      <li>Only <strong>you</strong> may take a card from the Waiting Area into <em>your</em> ward.</li>
     </ol>
+    <p class="cap">Capacity 2. Full? Drop one into Waiting Area before you take another.</p>
   </div>
   <div>
     <h3>Treat</h3>
@@ -169,6 +179,7 @@ li { margin-bottom:0.015in; }
       <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
       <li>Tools are vague on purpose — learn by trying them.</li>
       <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+      <li>Kanban token (name + icon) moves on the triage board — keep the full card in your ward while treating.</li>
     </ul>
   </div>
   <div>
@@ -183,27 +194,28 @@ li { margin-bottom:0.015in; }
   <div class="fear">
     <h3>Fear &amp; escalation</h3>
     <ul>
-      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
-      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Expectant).</li>
-      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
-      <li>When the ward is crushing it, more patients may escalate at once.</li>
+      <li>Cards left in the <strong>Waiting Area</strong> when the count ends = untreated / Fear bait.</li>
+      <li><strong>Fear</strong> prefers untreated first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
+      <li><strong>Escalation</strong> = worsen one step (toward Expectant).</li>
     </ul>
   </div>
   <p class="tiny">Expectant ≈ nearly impossible alone (+4d6). Watch the Red Cap’s countdown.</p>
 </article>
 
 <article class="card">
-  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Neighbor Seams</div></div>
+  <div class="head"><div class="t">Ambervale Ward</div><div class="s">Player ref · Waiting Area</div></div>
   <div><h3>Goal</h3><p class="goal"><strong>Save everyone.</strong> Then the Red Cap keeps his word.</p></div>
   <div>
-    <h3>Assign patients</h3>
+    <h3>Hand &amp; pass</h3>
     <ol>
-      <li><strong>2 cards</strong> between you &amp; each neighbor (left + right seams).</li>
-      <li><strong>30s</strong> — read <em>your seams only</em> (not the whole table).</li>
-      <li>Countdown from 10. Per seam: <strong>grab one</strong>, other goes to your neighbor.</li>
-      <li><strong>Same grab?</strong> Both roll. Winner takes it. Loser takes the leftover <em>or</em> refuses → <strong>Overflow</strong> (untreated).</li>
-      <li>Clean round = <strong>2 patients</strong> (one from each seam). Then treat.</li>
+      <li>You start each round with a <strong>hand of 2</strong> patient cards (your ward).</li>
+      <li><strong>30 seconds</strong> — read your hand. Chaos is the point.</li>
+      <li>Nathan counts down from <strong>30</strong>. During that count you may <strong>pass</strong>.</li>
+      <li>To pass: put a card into the center <strong>Waiting Area</strong> and call for someone to take it.</li>
+      <li>You may <strong>only</strong> place cards into the Waiting Area — never into another player’s ward.</li>
+      <li>Only <strong>you</strong> may take a card from the Waiting Area into <em>your</em> ward.</li>
     </ol>
+    <p class="cap">Capacity 2. Full? Drop one into Waiting Area before you take another.</p>
   </div>
   <div>
     <h3>Treat</h3>
@@ -211,6 +223,7 @@ li { margin-bottom:0.015in; }
       <li>Stick + seat tools + your abilities. Pitch to Nathan. Roll.</li>
       <li>Tools are vague on purpose — learn by trying them.</li>
       <li>Success usually <strong>improves one triage step</strong>. <strong>Saved</strong> = off the board.</li>
+      <li>Kanban token (name + icon) moves on the triage board — keep the full card in your ward while treating.</li>
     </ul>
   </div>
   <div>
@@ -225,10 +238,9 @@ li { margin-bottom:0.015in; }
   <div class="fear">
     <h3>Fear &amp; escalation</h3>
     <ul>
-      <li><strong>Fear</strong> prefers <em>Overflow / untreated</em> first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
-      <li><strong>Escalation</strong> = a patient worsens <strong>one step</strong> (toward Expectant).</li>
-      <li>Refusing a leftover feeds Overflow — and feeds Fear.</li>
-      <li>When the ward is crushing it, more patients may escalate at once.</li>
+      <li>Cards left in the <strong>Waiting Area</strong> when the count ends = untreated / Fear bait.</li>
+      <li><strong>Fear</strong> prefers untreated first, then <strong>Delayed</strong> &amp; <strong>Urgent</strong>.</li>
+      <li><strong>Escalation</strong> = worsen one step (toward Expectant).</li>
     </ul>
   </div>
   <p class="tiny">Expectant ≈ nearly impossible alone (+4d6). Watch the Red Cap’s countdown.</p>

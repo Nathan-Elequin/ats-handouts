@@ -503,14 +503,15 @@ button:focus-visible, select:focus-visible, input:focus-visible {
     <div class="run-layout">
       <div class="run-main">
         <details class="collapse" open>
-          <summary>1 · Round loop (Neighbor Seams)</summary>
+          <summary>1 · Round loop (Waiting Area)</summary>
           <div class="body">
             <ol>
-              <li><strong>Seed:</strong> 2 patient cards per neighbor seam (4 seams = 8 cards).</li>
-              <li><strong>30s read:</strong> each healer studies only their two seams (≤4 cards).</li>
-              <li><strong>10-count</strong> → per seam: Grab one / Pass one.</li>
-              <li><strong>Conflict</strong> (same pick) → roll; loser takes leftover or refuses → Overflow.</li>
-              <li><strong>Overflow</strong> / untreated → Fear magnet.</li>
+              <li><strong>Deal 2</strong> into each healer's ward (capacity hard-cap).</li>
+              <li><strong>30s read</strong> — own hand only.</li>
+              <li><strong>30-count pass:</strong> place into center Waiting Area; call for pickup. Never drop into another ward.</li>
+              <li><strong>Take yourself</strong> from Waiting Area into your ward. Full? Drop one first.</li>
+              <li><strong>Count hits 0:</strong> leftovers in Waiting Area = untreated / Fear magnet.</li>
+              <li>Then treat. Slide matching <strong>kanban token</strong> on triage board.</li>
             </ol>
           </div>
         </details>
@@ -518,7 +519,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <summary>2 · Bookkeeping</summary>
           <div class="body">
             <ul>
-              <li><strong>Fear</strong> — prefer Overflow / unclaimed, then Delayed/Urgent. Soft dial if table is crushing it.</li>
+              <li><strong>Fear</strong> — prefer Waiting Area leftovers / untreated, then Delayed/Urgent. Soft dial if table is crushing it.</li>
               <li><strong>Dew</strong> — conveyor grass; patients already on toadstool beds.</li>
               <li><strong>Blood pips</strong> — bank of 4 (top bar). Cap Transfusion costs 1.</li>
             </ul>
@@ -529,7 +530,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <div class="body">
             <ul>
               <li><strong>Poking Stick</strong> — universal Stick (not one of the 8). Cameron oversells as Rod of Medicinal Accord. Optional fake charge die.</li>
-              <li><strong>Bark Advice</strong> — shout a verb / assign Overflow.</li>
+              <li><strong>Bark Advice</strong> — shout a verb / assign Waiting Area leftovers.</li>
               <li><strong>Cap Transfusion</strong> — −1 blood, +~20 to a roll / Expectant break.</li>
               <li><strong>Never Rest</strong> — keep pressure; no calm beats unless earned.</li>
             </ul>
@@ -571,7 +572,7 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <div class="body">
             <ul>
               <li>All patients arrive <strong>Stable</strong>. Delayed/Urgent +1d6 each; Expectant +4d6.</li>
-              <li>After <strong>4 Saved</strong>, denser deal (~10 in ecosystem; extras in draw/Overflow).</li>
+              <li>After <strong>4 Saved</strong>, denser deal (~10 in ecosystem; extras in draw / Waiting Area).</li>
             </ul>
           </div>
         </details>
@@ -607,8 +608,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
           <dd>Improve one step on success · Saved removes from play · Delayed/Urgent +1d6 · Expectant +4d6</dd>
           <dt>Cap Transfusion</dt>
           <dd>−1 blood · +~20</dd>
-          <dt>Seams</dt>
-          <dd>2 cards × 4 gaps · 30s · 10-count · Grab/Pass</dd>
+          <dt>Pass</dt>
+          <dd>Hand 2 · 30s read · 30-count Waiting Area · capacity 2</dd>
           <dt>Roles</dt>
           <dd>Soldier · Lover · Dart · Locale</dd>
           <dt>Items</dt>
@@ -844,8 +845,8 @@ button:focus-visible, select:focus-visible, input:focus-visible {
   const ROUND_CHECKS = [
     'Fear / Dew / blood from last round',
     'Seed seams (2 per gap)',
-    '30s read → 10-count → Grab/Pass',
-    'Resolve conflicts / Overflow',
+    '30s read → 30-count Waiting Area pass',
+    'Clear Waiting Area leftovers / untreated',
     'Healing beats (Stick + items)',
     'Cameron tools used?',
     'Triage escalate / Saved?',

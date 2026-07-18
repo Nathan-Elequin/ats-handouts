@@ -32,9 +32,9 @@ footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:ital
 </head>
 <body>
 <div class="wrap">
-  <p class="tag">GM only · v2.1 · Neighbor Seams</p>
+  <p class="tag">GM only · v2.2 · Waiting Area</p>
   <h1>Ambervale Field Hospital</h1>
-  <p class="sub">Quack / The Morning Dew · Cameron Red Cap · ~3 hours · Items obfuscated · Neighbor Seams deal</p>
+  <p class="sub">Quack / The Morning Dew · Cameron Red Cap · ~3 hours · Items obfuscated · Waiting Area pass</p>
 
   <h2>What changed</h2>
   <div class="card">
@@ -42,7 +42,8 @@ footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:ital
       <li><strong>Items:</strong> Fantastical, generic, intentionally vague. Physical <em>look</em> cards only — purpose learned by testing on patients (humor + puzzle).</li>
       <li><strong>The Stick:</strong> Universal / innate — not part of the 8. Mythically oversold. Optional fake “charge” die that does nothing useful.</li>
       <li><strong>Teach beat:</strong> Cameron: “Find your stick. Figure the rest out. No time.”</li>
-      <li><strong>Round loop (v2.1):</strong> <em>Neighbor Seams</em> — 2 cards between each adjacent pair; 30s read; countdown; grab one / pass one per seam; conflict → roll.</li>
+      <li><strong>Round loop (v2.2):</strong> Deal <strong>2 cards</strong> into each healer’s ward → <strong>30s read</strong> → Nathan counts down from <strong>30</strong> while players pass via the center <strong>Waiting Area</strong> (never into each other’s wards; capacity 2; take yourself).</li>
+      <li><strong>Dual components:</strong> Full patient card = hand/gameplay. Matching <strong>kanban token</strong> (name + ancestry art) slides under triage headers.</li>
       <li><strong>Patients:</strong> Only ~4 soldiers; rest from scattered Feywild locales (future recognition). Lovers are not soldiers.</li>
       <li><strong>Triage names:</strong> Stable / Delayed / Urgent / Expectant. DC steps: Delayed <strong>+1d6</strong>, Urgent <strong>+1d6</strong>, Expectant <strong>+4d6</strong>. <strong>All patients arrive Stable</strong> — print no start stage; narrate rapid escalations as needed.</li>
       <li><strong>Admission (canonical):</strong> Redcaps dragged the wounded here. Once on the grass, <em>dew</em> moves them like a conveyor — positions each patient on a toadstool-cap bed per the doctor’s orders. Healers never leave the ward; don’t invent new arrival gags per card.</li>
@@ -50,31 +51,31 @@ footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:ital
     </ul>
   </div>
 
-  <h2>Deal geometry: Neighbor Seams (v2.1)</h2>
+  <h2>Deal geometry: Waiting Area (v2.2)</h2>
   <div class="card warn">
-    <p><strong>Problem with center pile:</strong> grabbing from 8+ cards mid-countdown = too much reading, too much load.</p>
-    <p><strong>Problem with “keep your two”:</strong> calm coordination; chaos dies.</p>
-    <p><strong>Fix (Between Two Castles energy): Neighbor Seams.</strong></p>
+    <p><strong>Goal:</strong> chaos of a real ward — short read window, frantic reassignment, hard capacity.</p>
     <ol>
-      <li>Four healers sit in a square/circle. Between each adjacent pair is a <strong>seam</strong> → <strong>4 seams</strong>.</li>
-      <li>Each round, place <strong>exactly 2 patient cards</strong> in each seam (8 cards total in the deal). Face-up.</li>
-      <li><strong>30 seconds:</strong> each player may only study their <strong>two seams</strong> (left + right) = 4 cards max in attention. Item cards at seats stay face-up.</li>
-      <li>Countdown from 10. On zero, <strong>per seam</strong> (resolve all four seams at once): the two neighbors each choose <strong>one card to Grab</strong> and effectively <strong>Pass</strong> the other.
+      <li>Four healers. Each starts the round with a <strong>hand / ward of exactly 2</strong> full patient cards (face-up in front of them).</li>
+      <li><strong>30 seconds:</strong> read your own two cards only. No formal table-wide study.</li>
+      <li>Nathan counts down aloud from <strong>30</strong>. During that count, players may <strong>pass</strong>:
         <ul>
-          <li><strong>Different picks:</strong> each takes their Grab. Clean.</li>
-          <li><strong>Same pick (conflict):</strong> both roll (d6 or Duality Hope die). Winner takes the contested card; loser takes the remaining card <em>or</em> may refuse it → that leftover goes to <strong>Overflow</strong> (untreated / Fear magnet) and the loser is short a patient this round.</li>
+          <li>Place a card into the shared center <strong>Waiting Area</strong> and ask someone to take it.</li>
+          <li>You may <strong>not</strong> place cards into another player’s ward / hand area.</li>
+          <li>A player who wants a Waiting Area card must <strong>take it themselves</strong> into their own ward.</li>
+          <li><strong>Capacity 2:</strong> if your ward is full, you must first put one of yours into the Waiting Area before taking another.</li>
         </ul>
       </li>
-      <li>Result when clean: everyone ends with <strong>exactly 2</strong> (one from left seam, one from right). Chaos comes from <em>conflicts and refusals</em>, not from reading a pile.</li>
+      <li>When the count hits <strong>0</strong>: anything still in the Waiting Area is <strong>untreated this round</strong> (Fear magnet / Overflow).</li>
+      <li>Then treat: Stick + seat tools + abilities. Duality rolls as usual.</li>
     </ol>
-    <p><strong>Why this works:</strong> cognitive load is local (4 cards). No center scrum. Still punishes “both of us want the easy Stable/Delayed” with rolls and possible under-staffing. Optional spice: deal a 9th–10th card into a center Overflow that only Cameron may Bark-assign after seams resolve.</p>
+    <p><strong>Kanban:</strong> when a patient is in play, its <em>token</em> (name + icon) sits under the triage column. Full card stays with whoever is treating them. On escalate / improve / Saved, slide or remove the token — not the hand card.</p>
   </div>
 
   <h2>Round structure</h2>
   <ol>
     <li>Fear / Dew / blood bookkeeping from last round.</li>
-    <li><strong>Seed seams:</strong> 2 patients per neighbor gap (8). Ramp: after 4 Saved, keep ~10 in the ecosystem (extras wait in draw / Overflow).</li>
-    <li><strong>30s read</strong> (own two seams only) → <strong>10-count</strong> → Grab/Pass per seam → conflict rolls.</li>
+    <li><strong>Deal / top-up:</strong> each healer to 2 cards in ward (draw from deck / ramp pile). Place matching kanban tokens under Stable (or current triage).</li>
+    <li><strong>30s read</strong> → <strong>30-count pass</strong> via Waiting Area → leftovers = untreated.</li>
     <li>Each healer with 1–2 patients: Stick + seat items + own abilities; Duality rolls.</li>
     <li>Cameron may Bark Advice / Cap Transfusion / Never Rest as before.</li>
     <li>Modules (break room, lovers, charged-quickling EMP, climax) unchanged in intent.</li>
@@ -138,7 +139,7 @@ footer { margin-top:2rem; color:var(--muted); font-size:0.85rem; font-style:ital
     </div>
     <div class="card">
       <h3>Fear</h3>
-      <p>Prefer Overflow / unclaimed / untreated, then Delayed/Urgent. Soft dial: escalate all untreated if table is crushing it.</p>
+      <p>Prefer Waiting Area leftovers / untreated, then Delayed/Urgent. Soft dial: escalate all untreated if table is crushing it.</p>
     </div>
   </div>
 
