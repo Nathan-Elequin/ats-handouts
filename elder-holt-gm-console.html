@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM Console — Elder Holt · Little Spine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1a14; --card:#1a2e22; --ink:#f0d9a0; --muted:#b8a878;
+  --amber:#e6b34d; --teal:#3d9a8a; --line:#2c5440; --snap:#c04a32;
+  --heat:#e8a070; --wet:#6ab0d8; --bug:#a0c878; --wind:#c8b8e8; --blank:#e8d0a0;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { height:100%; }
+body {
+  font-family:'Source Sans 3',system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.45;
+  display:flex; flex-direction:column; min-height:100vh;
+}
+button { font:inherit; color:inherit; cursor:pointer; border:none; background:none; }
+button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
+
+.topbar {
+  position:sticky; top:0; z-index:40;
+  background:#0c1510ee; backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  padding:0.55rem 0.85rem 0.65rem;
+  display:flex; flex-wrap:wrap; align-items:center; gap:0.65rem 1rem;
+}
+.topbar h1 { font-family:'Cinzel',serif; color:var(--amber); font-size:1.05rem; }
+.priv {
+  font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:#14271d; background:var(--snap); padding:0.15rem 0.45rem;
+  border-radius:3px; font-weight:700;
+}
+.controls { display:flex; flex-wrap:wrap; align-items:center; gap:0.55rem 0.85rem; flex:1; }
+.ctrl {
+  display:flex; align-items:center; gap:0.35rem;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:8px; padding:0.28rem 0.5rem;
+}
+.ctrl label {
+  font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted);
+}
+.ctrl .val { font-weight:700; min-width:1.4rem; text-align:center; color:var(--amber); }
+.btn-sm {
+  width:1.55rem; height:1.55rem; border-radius:5px;
+  background:#14241c; border:1px solid var(--line); color:var(--amber);
+  font-weight:700; line-height:1; display:inline-flex; align-items:center; justify-content:center;
+}
+.btn-sm:hover { background:#1e3328; border-color:var(--amber); }
+.btn-reset {
+  font-size:0.75rem; font-weight:700; padding:0.35rem 0.65rem;
+  border-radius:6px; background:#3a1a18; border:1px solid #6a3a30; color:#f0b0a0;
+}
+.pips { display:flex; gap:0.22rem; }
+.pip {
+  width:1.2rem; height:1.2rem; border-radius:3px;
+  border:2px solid #8a6a30; background:#2a2010; cursor:pointer;
+}
+.pip.on { background:var(--amber); box-shadow:0 0 8px #e6b34d88; }
+.pip:hover { border-color:var(--teal); }
+
+.tabs {
+  display:flex; gap:0.25rem; padding:0.45rem 0.85rem 0;
+  border-bottom:1px solid var(--line); background:#0c1510;
+}
+.tab {
+  font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.06em;
+  padding:0.45rem 0.85rem; border-radius:8px 8px 0 0;
+  color:var(--muted); border:1px solid transparent; border-bottom:none;
+}
+.tab.active { background:var(--card); color:var(--amber); border-color:var(--line); }
+.panels { flex:1; padding:0.85rem; }
+.panel { display:none; }
+.panel.active { display:block; }
+
+.art-toolbar {
+  display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;
+  margin-bottom:0.75rem; max-width:1100px; margin-left:auto; margin-right:auto;
+}
+.btn-act {
+  font-size:0.8rem; font-weight:700; padding:0.4rem 0.75rem;
+  border-radius:6px; background:#14241c; border:1px solid var(--line); color:var(--teal);
+  text-decoration:none; display:inline-block;
+}
+.btn-act:hover { border-color:var(--teal); color:var(--ink); }
+.art-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  gap:0.75rem; max-width:1100px; margin:0 auto;
+}
+.art-card {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  overflow:hidden; cursor:pointer; text-align:left; color:inherit; width:100%; padding:0;
+}
+.art-card:hover { border-color:var(--amber); }
+.art-card img {
+  display:block; width:100%; aspect-ratio:16/10; object-fit:cover;
+  object-position:center; background:#0a100c;
+}
+.art-card.portrait img { aspect-ratio:1/1; object-position:center top; }
+.art-card .cap {
+  padding:0.45rem 0.55rem 0.55rem;
+  font-family:'Cinzel',serif; font-size:0.78rem; color:var(--amber);
+}
+.art-card .cap span { color:var(--muted); font-size:0.65rem; display:block; margin-bottom:0.15rem; letter-spacing:0.06em; text-transform:uppercase; }
+
+.lightbox {
+  display:none; position:fixed; inset:0; z-index:100;
+  background:#0a100cee; align-items:center; justify-content:center;
+  padding:1.5rem; flex-direction:column; gap:0.75rem;
+}
+.lightbox.open { display:flex; }
+.lightbox img {
+  max-width:min(960px, 95vw); max-height:78vh; object-fit:contain;
+  border-radius:8px; border:1px solid var(--line);
+}
+.lightbox .lb-cap { font-family:'Cinzel',serif; color:var(--amber); font-size:1rem; text-align:center; max-width:40rem; }
+.lightbox .lb-close {
+  position:absolute; top:1rem; right:1rem;
+  width:2.4rem; height:2.4rem; border-radius:8px;
+  background:var(--card); border:1px solid var(--line); color:var(--amber); font-size:1.3rem;
+}
+
+.run-layout {
+  display:grid; grid-template-columns:1.4fr 1fr; gap:0.85rem;
+  max-width:1100px; margin:0 auto;
+}
+@media (max-width:900px){ .run-layout { grid-template-columns:1fr; } }
+.card {
+  background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0.85rem 1rem;
+}
+.card h2 {
+  font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;
+}
+.page-btns { display:flex; flex-wrap:wrap; gap:0.35rem; margin-bottom:0.65rem; }
+.page-btns button {
+  font-size:0.78rem; font-weight:700; padding:0.35rem 0.55rem; border-radius:6px;
+  border:1px solid var(--line); background:#14241c; color:var(--muted);
+}
+.page-btns button.active { color:#0f1a14; font-weight:800; }
+.page-btns button[data-p="1"].active { background:var(--heat); color:#2a1810; }
+.page-btns button[data-p="2"].active { background:var(--wet); color:#102028; }
+.page-btns button[data-p="3"].active { background:var(--bug); color:#1a2410; }
+.page-btns button[data-p="4"].active { background:var(--wind); color:#201828; }
+.page-btns button[data-p="5"].active { background:var(--blank); color:#2a2210; }
+.hero-art {
+  width:100%; border-radius:8px; border:1px solid var(--line);
+  aspect-ratio:16/9; object-fit:cover; margin-bottom:0.65rem; background:#0a100c;
+}
+.clocks { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; }
+.clock {
+  background:#121c16; border-radius:8px; padding:0.5rem 0.55rem; font-size:0.85rem;
+}
+.clock b { display:block; font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.25rem; }
+.clock.ok b { color:#8fd4a8; }
+.clock.bad b { color:#e89098; }
+.clock .row { display:flex; align-items:center; gap:0.35rem; }
+.job { font-size:0.88rem; color:#d8c8a0; margin-top:0.55rem; }
+.job li { margin:0.25rem 0 0.25rem 1.1em; }
+.links { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.65rem; }
+.credit {
+  max-width:1100px; margin:1rem auto 0; font-size:0.72rem; color:var(--muted);
+}
+@media print {
+  body::before {
+    content:'SCREEN-ONLY GM TOOL — do not print for players';
+    display:block; padding:2rem; font-size:1.5rem; color:#c04a32;
+  }
+  .topbar, .tabs, .panels { display:none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="priv">GM laptop — not for players</span>
+  <h1>GM Console · Elder Holt</h1>
+  <div class="controls">
+    <div class="ctrl" title="Shatter Line 0–6">
+      <label>Line</label>
+      <div class="pips" id="line-pips" aria-label="Shatter Line"></div>
+      <span class="val" id="line-val">0</span>
+    </div>
+    <div class="ctrl" title="Fear pool (your call)">
+      <label>Fear</label>
+      <button type="button" class="btn-sm" id="fear-minus" aria-label="Decrease Fear">−</button>
+      <span class="val" id="fear-val">0</span>
+      <button type="button" class="btn-sm" id="fear-plus" aria-label="Increase Fear">+</button>
+    </div>
+    <button type="button" class="btn-reset" id="btn-reset">Reset</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button type="button" class="tab active" data-tab="run" role="tab" aria-selected="true">Run</button>
+  <button type="button" class="tab" data-tab="art" role="tab" aria-selected="false" id="tab-art">Art</button>
+</nav>
+
+<div class="panels">
+  <section class="panel active" id="panel-run" role="tabpanel">
+    <div class="run-layout">
+      <div class="card">
+        <h2>Current page</h2>
+        <div class="page-btns" id="page-btns">
+          <button type="button" data-p="1" class="active">1 Warm</button>
+          <button type="button" data-p="2">2 River</button>
+          <button type="button" data-p="3">3 Choir</button>
+          <button type="button" data-p="4">4 Wind</button>
+          <button type="button" data-p="5">5 Blank</button>
+        </div>
+        <img class="hero-art" id="hero-art" src="elder-holt-art/01-warm.png" alt="Page art">
+        <div class="clocks" id="clocks"></div>
+        <ul class="job" id="job"></ul>
+        <div class="links">
+          <a class="btn-act" href="elder-holt-objectives.html" target="_blank" rel="noopener">Objectives</a>
+          <a class="btn-act" href="elder-holt-dungeon-map.html" target="_blank" rel="noopener">Dungeon map</a>
+          <a class="btn-act" href="little-spine-storybook-print.html" target="_blank" rel="noopener">Chapbook</a>
+          <a class="btn-act" href="little-spine-moves-score.html" target="_blank" rel="noopener">Wes Moves</a>
+        </div>
+      </div>
+      <aside class="card">
+        <h2>Sticky</h2>
+        <ul class="job">
+          <li>CYOA = costume only. Clocks never change with A/B/C.</li>
+          <li>Wes accelerant: hero choices tick Consequence.</li>
+          <li>Scroll of Spelling: 1 use / PC / page (≤2 letters).</li>
+          <li>Shatter Line 0–6 = paper body (separate from page clocks).</li>
+          <li>Page 5 boss: Bookworm = purple worm reskin.</li>
+          <li>Exit: Rain lesson → snap → Wes deadpan → leaves table.</li>
+        </ul>
+        <img class="hero-art" style="aspect-ratio:1/1;margin-top:0.75rem" src="elder-holt-art/00-bookworm-anthro.png" alt="Bookworm anthro" id="boss-thumb">
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.35rem;font-family:'Cinzel',serif;">Bookworm (anthro ref)</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-art" role="tabpanel">
+    <div class="art-toolbar">
+      <button type="button" class="btn-act" id="btn-popout">Pop out art board</button>
+      <span style="font-size:0.8rem;color:var(--muted)">Click tile = lightbox · Pop out = second screen / HDMI</span>
+    </div>
+    <div class="art-grid" id="art-grid"></div>
+    <p class="credit">
+      Generated kit art (pages 1–5 + anthro Bookworm). Optional CC-BY 4.0 alternate:
+      <a class="btn-act" href="elder-holt-art/00-bookworm-revoy-ccby.jpg" target="_blank" rel="noopener">David Revoy “Bookworm”</a>
+      — <a href="https://www.peppercarrot.com/en/viewer/misc__2023-06-11_Bookworm_by-David-Revoy.html" target="_blank" rel="noopener">Pepper &amp; Carrot</a>, credit David Revoy.
+    </p>
+  </section>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button type="button" class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<script>
+(function () {
+  const STORAGE = 'ats-elder-holt-gm-v1';
+  const PAGES = {
+    1: {
+      title: 'The Warm That Eats Stories',
+      art: 'elder-holt-art/01-warm.png',
+      clocks: [
+        { kind:'ok', name:'Sate / Bind Warm', start:7, key:'p1' },
+        { kind:'bad', name:'Wes Volunteers', start:7, key:'c1' }
+      ],
+      jobs: [
+        'Feed/bind Warm without Wes as lunch',
+        'Keep Wes off the smile',
+        'Door opens only when hunger lets go'
+      ]
+    },
+    2: {
+      title: 'The River That Remembers Too Much',
+      art: 'elder-holt-art/02-river.png',
+      clocks: [
+        { kind:'ok', name:'Compose Crossing', start:6, key:'p2a' },
+        { kind:'ok', name:'Pin the Dunker', start:6, key:'p2b' },
+        { kind:'bad', name:'Ink Tide', start:8, key:'c2' }
+      ],
+      jobs: [
+        'Stones are fixed — secure the crossing',
+        'Pin dunking predator (costume only)',
+        'Keep Wes dry until BOTH Progress tracks clear'
+      ]
+    },
+    3: {
+      title: 'The Tiny Hungry Choir',
+      art: 'elder-holt-art/03-choir.png',
+      clocks: [
+        { kind:'ok', name:'Bait & Recover', start:7, key:'p3' },
+        { kind:'bad', name:'Nouns Chewed', start:7, key:'c3' }
+      ],
+      jobs: [
+        'Write bait they prefer',
+        'Herd Choir off Wes / seed-page',
+        'Snatch the real morsel back'
+      ]
+    },
+    4: {
+      title: 'The Wind That Turns Pages Too Fast',
+      art: 'elder-holt-art/04-wind.png',
+      clocks: [
+        { kind:'ok', name:'Hold the Chapter', start:7, key:'p4' },
+        { kind:'bad', name:'Forced Turn', start:7, key:'c4' }
+      ],
+      jobs: [
+        'Anchor / weight the page',
+        'Stop turners (costume only)',
+        'Keep Wes quiet — lose = he tears alone into Page 5'
+      ]
+    },
+    5: {
+      title: 'The Page With No Words',
+      art: 'elder-holt-art/05-blank.png',
+      clocks: [
+        { kind:'ok', name:'Press the Ending', start:6, key:'p5a' },
+        { kind:'ok', name:'Talk Out the Myth', start:8, key:'p5b' },
+        { kind:'bad', name:'Bookworm Eats Ending', start:8, key:'c5' }
+      ],
+      jobs: [
+        'Gift hero-title',
+        'Press (he dies) OR talk-out (harder, he lives)',
+        'Bookworm = purple worm — tank / distract / kill optional'
+      ]
+    }
+  };
+
+  const ART = [
+    { src:'elder-holt-art/00-bookworm-anthro.png', label:'Bookworm (anthro)', sub:'Boss / Page 5 ref', portrait:true },
+    { src:'elder-holt-art/00-bookworm-revoy-ccby.jpg', label:'Bookworm (Revoy CC-BY)', sub:'Optional alternate', portrait:true },
+    { src:'elder-holt-art/01-warm.png', label:'Page 1 · Warm', sub:'Hungry heat / door' },
+    { src:'elder-holt-art/02-river.png', label:'Page 2 · River', sub:'Ink tide + dunker' },
+    { src:'elder-holt-art/03-choir.png', label:'Page 3 · Choir', sub:'Tiny text-eaters' },
+    { src:'elder-holt-art/04-wind.png', label:'Page 4 · Wind', sub:'Page-turners' },
+    { src:'elder-holt-art/05-blank.png', label:'Page 5 · Blank', sub:'Press / talk-out / worm' }
+  ];
+
+  const state = load();
+
+  function load() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORAGE) || '{}');
+      return Object.assign({ page:1, line:0, fear:0, clocks:{} }, raw);
+    } catch (e) { return { page:1, line:0, fear:0, clocks:{} }; }
+  }
+  function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
+
+  function clockVal(key, start) {
+    if (state.clocks[key] == null) state.clocks[key] = start;
+    return state.clocks[key];
+  }
+
+  // Line pips
+  const linePips = document.getElementById('line-pips');
+  for (let i = 1; i <= 6; i++) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pip'; b.dataset.n = String(i);
+    b.setAttribute('aria-label', 'Shatter Line ' + i);
+    b.addEventListener('click', () => {
+      state.line = (state.line === i) ? i - 1 : i;
+      renderLine(); save();
+    });
+    linePips.appendChild(b);
+  }
+  function renderLine() {
+    document.getElementById('line-val').textContent = state.line;
+    linePips.querySelectorAll('.pip').forEach(p => {
+      p.classList.toggle('on', Number(p.dataset.n) <= state.line);
+    });
+  }
+
+  document.getElementById('fear-minus').onclick = () => { state.fear = Math.max(0, state.fear - 1); renderFear(); save(); };
+  document.getElementById('fear-plus').onclick = () => { state.fear = Math.min(12, state.fear + 1); renderFear(); save(); };
+  function renderFear() { document.getElementById('fear-val').textContent = state.fear; }
+
+  document.getElementById('btn-reset').onclick = () => {
+    if (!confirm('Reset Line, Fear, and all countdown ticks?')) return;
+    state.line = 0; state.fear = 0; state.clocks = {}; state.page = 1;
+    save(); renderAll();
+  };
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t === tab);
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Page select
+  document.getElementById('page-btns').addEventListener('click', e => {
+    const b = e.target.closest('button[data-p]');
+    if (!b) return;
+    state.page = Number(b.dataset.p);
+    save(); renderPage();
+  });
+
+  function renderPage() {
+    document.querySelectorAll('#page-btns button').forEach(b => {
+      b.classList.toggle('active', Number(b.dataset.p) === state.page);
+    });
+    const pg = PAGES[state.page];
+    document.getElementById('hero-art').src = pg.art;
+    document.getElementById('hero-art').alt = pg.title;
+    const clocks = document.getElementById('clocks');
+    clocks.innerHTML = '';
+    pg.clocks.forEach(c => {
+      const v = clockVal(c.key, c.start);
+      const div = document.createElement('div');
+      div.className = 'clock ' + c.kind;
+      div.innerHTML = '<b>' + c.name + '</b><div class="row">' +
+        '<button type="button" class="btn-sm" data-k="' + c.key + '" data-d="-1">−</button>' +
+        '<span class="val">' + v + '</span>' +
+        '<button type="button" class="btn-sm" data-k="' + c.key + '" data-d="1">+</button>' +
+        '<span style="color:var(--muted);font-size:0.75rem">/ start ' + c.start + '</span></div>';
+      clocks.appendChild(div);
+    });
+    clocks.querySelectorAll('button[data-k]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.dataset.k;
+        const d = Number(btn.dataset.d);
+        const start = PAGES[state.page].clocks.find(x => x.key === k).start;
+        let v = clockVal(k, start) + d;
+        v = Math.max(0, Math.min(12, v));
+        state.clocks[k] = v;
+        save(); renderPage();
+      });
+    });
+    document.getElementById('job').innerHTML = pg.jobs.map(j => '<li>' + j + '</li>').join('');
+  }
+
+  // Art grid
+  const grid = document.getElementById('art-grid');
+  ART.forEach(a => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'art-card' + (a.portrait ? ' portrait' : '');
+    btn.innerHTML = '<img src="' + a.src + '" alt="' + a.label + '" loading="lazy">' +
+      '<div class="cap"><span>' + a.sub + '</span>' + a.label + '</div>';
+    btn.addEventListener('click', () => openLb(a.src, a.label + ' — ' + a.sub));
+    grid.appendChild(btn);
+  });
+
+  const lb = document.getElementById('lightbox');
+  function openLb(src, cap) {
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb-cap').textContent = cap;
+    lb.classList.add('open');
+  }
+  function closeLb() { lb.classList.remove('open'); }
+  document.getElementById('lb-close').onclick = closeLb;
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  document.getElementById('btn-popout').onclick = () => {
+    const html = '<!DOCTYPE html><html><head><title>Elder Holt Art Board</title><style>' +
+      'body{margin:0;background:#0f1a14;color:#f0d9a0;font-family:system-ui;padding:1rem}' +
+      'h1{font-size:1rem;color:#e6b34d}' +
+      '.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.75rem}' +
+      'img{width:100%;border-radius:8px;border:1px solid #2c5440}' +
+      'figcaption{font-size:0.8rem;margin:0.35rem 0 0;color:#b8a878}</style></head><body>' +
+      '<h1>Elder Holt · art board</h1><div class="g">' +
+      ART.map(a => '<figure><img src="' + a.src + '"><figcaption>' + a.label + '</figcaption></figure>').join('') +
+      '</div></body></html>';
+    const w = window.open('', 'elderHoltArt', 'width=1200,height=800');
+    if (w) { w.document.write(html); w.document.close(); }
+  };
+
+  document.getElementById('boss-thumb').addEventListener('click', () => {
+    openLb('elder-holt-art/00-bookworm-anthro.png', 'Bookworm (anthro) — Page 5 boss ref');
+  });
+
+  function renderAll() { renderLine(); renderFear(); renderPage(); }
+  renderAll();
+
+  // Deep-link: #art opens Art tab
+  if (location.hash.replace('#','') === 'art') {
+    document.getElementById('tab-art').click();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿Elder Holt · Little Spine art pack
+=================================
+
+Generated kit art (for Nathan / ATS table use on GitHub Pages):
+- 00-bookworm-anthro.png — anthropomorphic Bookworm boss reference
+- 01-warm.png … 05-blank.png — Pages 1–5 encounter art
+- Also present: bookworm.png / page-0N-*.png variants from the same art pass
+
+Optional Creative Commons alternate:
+- 00-bookworm-revoy-ccby.jpg — “Bookworm” by David Revoy
+  Source: https://www.peppercarrot.com/en/viewer/misc__2023-06-11_Bookworm_by-David-Revoy.html
+  License: CC-BY 4.0 — https://creativecommons.org/licenses/by/4.0/
+  Attribution required: David Revoy / Pepper & Carrot
