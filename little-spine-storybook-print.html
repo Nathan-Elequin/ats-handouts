@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRINT · Little Spine Finishes the Story — Wes chapbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:ital,wght@0,400;0,600;1,400;1,600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size: letter; margin: 0.45in; }
+body { font-family:'Literata',Georgia,serif; background:#2a3228; color:#2a2218; }
+.howto {
+  max-width:7.5in; margin:0.6rem auto 1rem; background:#1d2a1c; color:#e8dcc0;
+  border:1px solid #c4a86a; border-radius:8px; padding:0.75rem 1rem; font-size:0.9rem; line-height:1.4;
+  font-family:'Source Sans 3',sans-serif;
+}
+.howto h1 { font-family:'Cinzel',serif; color:#c4a86a; font-size:1.05rem; margin-bottom:0.35rem; }
+.howto ol { margin-left:1.2rem; }
+.page {
+  width:7.5in; min-height:9.6in; margin:0 auto 0.35in; background:#f7f0dc;
+  border:1px solid #c4b090; box-shadow:0 4px 0 #8a7040, 0 10px 24px #0004;
+  padding:0.45in 0.55in 0.5in; position:relative; page-break-after:always;
+}
+.page:last-of-type { page-break-after:auto; }
+.page .pgnum {
+  position:absolute; bottom:0.28in; right:0.4in; font-family:'Source Sans 3',sans-serif;
+  font-size:9pt; color:#8a7a60;
+}
+.cover { text-align:center; display:flex; flex-direction:column; justify-content:center; min-height:9.6in; padding:0.6in; }
+.cover .series { font-family:'Source Sans 3',sans-serif; font-size:9pt; letter-spacing:0.18em; text-transform:uppercase; color:#7a6a50; margin-bottom:0.5in; }
+.cover h1 { font-family:'Cinzel',serif; font-size:26pt; line-height:1.15; color:#3a2a10; margin-bottom:0.2in; }
+.cover .by { font-style:italic; font-size:12pt; color:#5a4a30; margin-bottom:0.6in; }
+.cover .blurb { font-size:11.5pt; line-height:1.5; max-width:4.8in; margin:0 auto; color:#3a3020; }
+.cover .how {
+  margin-top:0.7in; text-align:left; font-family:'Source Sans 3',sans-serif; font-size:10pt;
+  background:rgba(255,255,255,.45); border:1px dashed #a89060; border-radius:6px; padding:0.18in 0.22in; line-height:1.4;
+}
+.cover .how b { font-family:'Cinzel',serif; color:#5a4830; }
+.chap-label { font-family:'Source Sans 3',sans-serif; font-size:9pt; letter-spacing:0.16em; text-transform:uppercase; color:#8a7040; margin-bottom:0.08in; }
+.chap-title { font-family:'Cinzel',serif; font-size:18pt; color:#3a2a10; margin-bottom:0.2in; line-height:1.2; }
+.story p { font-size:12pt; line-height:1.55; margin-bottom:0.12in; }
+.story .moral {
+  margin-top:0.18in; padding-top:0.12in; border-top:1px dashed #c4b090;
+  font-size:10.5pt; font-style:italic; color:#5a4a30;
+}
+.choose {
+  margin-top:0.28in; padding:0.16in 0.18in; background:rgba(255,255,255,.5);
+  border:1.5px solid #8a7040; border-radius:6px;
+}
+.choose h3 {
+  font-family:'Cinzel',serif; font-size:11pt; color:#5a4830; margin-bottom:0.1in;
+  letter-spacing:0.04em;
+}
+.choose .hint { font-family:'Source Sans 3',sans-serif; font-size:9pt; color:#7a6a50; margin-bottom:0.1in; font-style:italic; }
+.opt { margin:0.08in 0; font-size:11pt; line-height:1.35; padding-left:0.05in; }
+.opt b { font-family:'Cinzel',serif; color:#6a4030; }
+.opt .box {
+  display:inline-block; width:0.16in; height:0.16in; border:1.5px solid #6a4030;
+  margin-right:0.08in; vertical-align:-2px; border-radius:2px;
+}
+.write { border-bottom:1px dotted #8a7a60; min-width:3.2in; display:inline-block; height:0.9em; }
+@media print {
+  .howto { display:none !important; }
+  body { background:#fff; }
+  .page { box-shadow:none; margin:0; width:100%; min-height:10in; page-break-after:always; }
+}
+</style>
+</head>
+<body>
+
+<div class="howto">
+  <h1>Wes · Little Spine chapbook (print)</h1>
+  <ol>
+    <li>Letter, <strong>100% / Actual size</strong>, color on. ~6 sheets.</li>
+    <li>Hand Wes the whole book. At each page he <strong>reads the story out loud</strong>, then circles A/B/C or invents D.</li>
+    <li>Nathan: choice = costume only. Countdown pillars stay locked (see objectives sheet).</li>
+    <li>Moves are a <strong>separate</strong> score: <code>little-spine-moves-score.html</code></li>
+  </ol>
+</div>
+
+<!-- COVER -->
+<section class="page cover">
+  <div class="series">Elder Holt · Nursery Shelf · Ink Still Warm</div>
+  <h1>Little Spine<br>Finishes the Story</h1>
+  <p class="by">a companion book for brave Companions</p>
+  <p class="blurb">Once there was a thin hero made of paper and hope. He hired friends to walk through his own book with him — because the last page would not write itself, and the moth on his shoulder would not leave until it did.</p>
+  <div class="how">
+    <b>How to use this book (Wes):</b><br>
+    1) Read the chapter out loud like it’s the best story ever.<br>
+    2) Circle what the peril looks like (A / B / C) — or invent D.<br>
+    3) Nathan makes it real. Then walk toward it. Let your Companions be heroic.<br>
+    4) Your Moves score is separate — short names you can also twist with the Scroll of Spelling (once per page).
+  </div>
+  <div class="pgnum">cover</div>
+</section>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="chap-label">Chapter One</div>
+  <h2 class="chap-title">The Warm That Eats Stories</h2>
+  <div class="story">
+    <p>On the first road Little Spine met a friendly heat with a dragon’s smile.</p>
+    <p>“Come close,” said the Warm. “I only want to dry your tears. Brave heroes always let kindness touch them.”</p>
+    <p>But the Warm eats stories. It turns brave words into ash-flakes that look like snow. The door ahead will not open while the Warm is still hungry — and Little Spine, who trusts the book, keeps walking toward the smile.</p>
+    <p class="moral">Moral: Not every kindness is for eating. Feed the Warm something that isn’t you.</p>
+  </div>
+  <div class="choose">
+    <h3>What does the Warm look like?</h3>
+    <p class="hint">Circle one. Nathan will make it real. Underneath, it is still hungry heat.</p>
+    <p class="opt"><span class="box"></span><b>A)</b> A smiling dragon-stove that offers to dry your tears</p>
+    <p class="opt"><span class="box"></span><b>B)</b> A picnic at the lip of a volcano (“the view is character development!”)</p>
+    <p class="opt"><span class="box"></span><b>C)</b> A sun the size of a hug that wants to iron the wrinkles out of you</p>
+    <p class="opt"><span class="box"></span><b>D)</b> Invent: <span class="write"></span></p>
+  </div>
+  <div class="pgnum">1</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <div class="chap-label">Chapter Two</div>
+  <h2 class="chap-title">The River That Remembers Too Much</h2>
+  <div class="story">
+    <p>Then came a river that remembered every word that ever fell in.</p>
+    <p>Letters swam under the surface like fish. Stepping stones sank if you doubted. Something in the current wanted to dunk Little Spine and keep a verb forever — a souvenir of almost-drowning.</p>
+    <p>The Companions would need more than a bridge. They would need to <em>compose</em> a crossing from remembered sentences… and pin the thing that remembers too much… before the ink-tide rose over the chapter.</p>
+    <p class="moral">Moral: Keep your words above the water — or borrow someone else’s dry path. And don’t swim the trial alone.</p>
+  </div>
+  <div class="choose">
+    <h3>What does the River look like?</h3>
+    <p class="hint">Circle one. Still wet. Still stealing words. Still rising.</p>
+    <p class="opt"><span class="box"></span><b>A)</b> Shark-infested ink-tide (the sharks apologize while circling)</p>
+    <p class="opt"><span class="box"></span><b>B)</b> A canyon ford of meltwater where stones sink if you doubt</p>
+    <p class="opt"><span class="box"></span><b>C)</b> A waterfall of yesterday’s tears that runs letters off skin</p>
+    <p class="opt"><span class="box"></span><b>D)</b> Invent: <span class="write"></span></p>
+  </div>
+  <div class="pgnum">2</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <div class="chap-label">Chapter Three</div>
+  <h2 class="chap-title">The Tiny Hungry Choir</h2>
+  <div class="story">
+    <p>Under a narrow bridge sang the prettiest tiny chorus.</p>
+    <p>They were so polite. They apologized in harmony. They only ate writing — proper nouns were dessert — and they already had their teeth in Little Spine’s name.</p>
+    <p>You cannot simply shoo a choir. You must write them something better to sing… herd them onto it… and snatch back what they stole before the last syllable is gone.</p>
+    <p class="moral">Moral: If something is eating your story, feed it a story you can spare.</p>
+  </div>
+  <div class="choose">
+    <h3>What does the Choir look like?</h3>
+    <p class="hint">Circle one. Still hungry for text. Still polite about it.</p>
+    <p class="opt"><span class="box"></span><b>A)</b> Bookworms in tiny opera capes</p>
+    <p class="opt"><span class="box"></span><b>B)</b> Silverfish librarians stamping LATE on your nouns</p>
+    <p class="opt"><span class="box"></span><b>C)</b> Crumb-sized knights who siege the word “brave”</p>
+    <p class="opt"><span class="box"></span><b>D)</b> Invent: <span class="write"></span></p>
+  </div>
+  <div class="pgnum">3</div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <div class="chap-label">Chapter Four</div>
+  <h2 class="chap-title">The Wind That Turns Pages Too Fast</h2>
+  <div class="story">
+    <p>Then the sky became a thumb, flicking the world like a bored reader.</p>
+    <p>Pages flapped. Gusts tasted like ozone. Ragged shapes rode the wind with scissors for manners. The chapter itself tried to skip ahead — and leave Little Spine behind as a torn margin.</p>
+    <p>Loud heroics only made the wind hungrier for the next page. The Companions would have to hold the chapter still… or break the turners… before the book force-turned without them.</p>
+    <p class="moral">Moral: Hold still with friends, and the wind must turn them first.</p>
+  </div>
+  <div class="choose">
+    <h3>What does the Wind look like?</h3>
+    <p class="hint">Circle one. Still tearing. Still hurrying. Still skipping.</p>
+    <p class="opt"><span class="box"></span><b>A)</b> A canyon of flapping pages + scissors-cavalry on the gusts</p>
+    <p class="opt"><span class="box"></span><b>B)</b> A stampede of “NEXT CHAPTER” signs with legs</p>
+    <p class="opt"><span class="box"></span><b>C)</b> A storm that tries to rip you into confetti confetti confetti</p>
+    <p class="opt"><span class="box"></span><b>D)</b> Invent: <span class="write"></span></p>
+  </div>
+  <div class="pgnum">4</div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page">
+  <div class="chap-label">Chapter Five · the last</div>
+  <h2 class="chap-title">The Page With No Words</h2>
+  <div class="story">
+    <p>At last: a page with no words.</p>
+    <p>Little Spine understood too late and too proudly — the last chapter had been living in him the whole time. Nursery law is clear: a hero finishes by becoming the ending. He must press himself into the final page like a leaf in a heavy book.</p>
+    <p>From the blank white rose a Bookworm — long as a tunnel, hungry for endings — to eat the story before it could close.</p>
+    <p>The Companions may gift him a hero-title. They may try to talk him out of pressing. The Bookworm will not wait politely either way.</p>
+    <p class="moral">Moral: An ending can be pressed… or refused. Both require friends who keep watch.</p>
+  </div>
+  <div class="choose">
+    <h3>No costume choice — this is the ending</h3>
+    <p class="hint">Ask the Companions to gift your hero-title before you press. If they freeze, invent one.</p>
+    <p class="opt">My hero-title: <span class="write"></span></p>
+    <p class="opt" style="margin-top:0.12in;font-size:10pt;color:#5a4a30;">Soft seeds if needed: Spine Who Finished · Little Page Brave · Companion of Companions</p>
+    <p class="opt" style="margin-top:0.14in;font-size:10.5pt;">You will try to <b>press</b> (nursery law). If they earn talking you out, you may gift the moth without dying. Nathan handles the Bookworm and the clocks.</p>
+  </div>
+  <div class="pgnum">5 · end?</div>
+</section>
+
+</body>
+</html>

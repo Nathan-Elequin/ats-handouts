@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elder Holt · 5-Room Dungeon Map — Wes CYOA escort</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#141c24; --panel:#1e2a36; --ink:#e8eef5; --muted:#8aa0b5;
+  --gold:#c4a86a; --ice:#7ec8e8; --heat:#e8a070; --wet:#6ab0d8; --bug:#a0c878;
+  --wind:#c8b8e8; --blank:#e8d0a0; --crack:#e89098; --line:#3d4a58;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Source Sans 3',sans-serif; background:var(--bg); color:var(--ink); line-height:1.45; font-size:14.5px; }
+.wrap { max-width:1100px; margin:0 auto; padding:22px 16px 70px; }
+h1 { font-family:'Cinzel',serif; font-size:24px; color:var(--gold); }
+.sub { color:var(--muted); font-size:13px; margin:4px 0 16px; }
+.sys {
+  background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; margin:0 0 18px; display:grid; gap:10px;
+  grid-template-columns:1.2fr 1fr 1fr;
+}
+@media (max-width:860px){ .sys { grid-template-columns:1fr; } }
+.sys h2 { font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ice); margin-bottom:6px; }
+.sys p, .sys li { font-size:13px; color:#c8d4e0; }
+.sys ul { margin-left:1.1em; }
+.sys b { color:var(--gold); }
+.flow {
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;
+  background:#121820; border-radius:10px; padding:14px; margin-bottom:18px;
+  font-family:ui-monospace,Consolas,monospace; font-size:12px; color:#a8c0d0;
+}
+.flow .n { background:#243448; border:1px solid var(--line); border-radius:6px; padding:8px 10px; text-align:center; min-width:90px; }
+.flow .n small { display:block; color:var(--muted); font-size:10px; margin-top:2px; }
+.flow .arr { color:var(--gold); font-size:16px; }
+.rooms { display:grid; gap:12px; }
+.room {
+  background:var(--panel); border-radius:12px; border:1px solid var(--line);
+  overflow:hidden; display:grid; grid-template-columns:160px 1fr 1.15fr;
+}
+@media (max-width:900px){ .room { grid-template-columns:1fr; } }
+.room .head {
+  padding:14px 12px; display:flex; flex-direction:column; justify-content:center; gap:6px;
+  border-right:1px solid var(--line);
+}
+.room.r1 .head { background:linear-gradient(180deg,#3a2818,#2a2018); border-left:4px solid var(--heat); }
+.room.r2 .head { background:linear-gradient(180deg,#183038,#182028); border-left:4px solid var(--wet); }
+.room.r3 .head { background:linear-gradient(180deg,#283018,#202818); border-left:4px solid var(--bug); }
+.room.r4 .head { background:linear-gradient(180deg,#282038,#201828); border-left:4px solid var(--wind); }
+.room.r5 .head { background:linear-gradient(180deg,#383028,#282018); border-left:4px solid var(--blank); }
+.room .num { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+.room .name { font-family:'Cinzel',serif; font-size:16px; color:var(--gold); line-height:1.2; }
+.room .pillar { font-size:12px; font-weight:700; letter-spacing:0.04em; }
+.r1 .pillar { color:var(--heat); }
+.r2 .pillar { color:var(--wet); }
+.r3 .pillar { color:var(--bug); }
+.r4 .pillar { color:var(--wind); }
+.r5 .pillar { color:var(--blank); }
+.room .beat { font-size:11px; color:var(--muted); }
+.mid, .cyoa { padding:12px 14px; }
+.mid { border-right:1px solid var(--line); }
+.mid h3, .cyoa h3 {
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ice); margin-bottom:6px;
+}
+.mid ul, .cyoa ul { margin-left:1.05em; font-size:13px; }
+.mid li, .cyoa li { margin-bottom:4px; }
+.cyoa { background:#182028; }
+.cyoa .page { font-family:'Literata',Georgia,serif; font-style:italic; font-size:12.5px; color:#d0c4a8; margin-bottom:8px; }
+.cyoa .choice { font-size:12.5px; margin:3px 0 3px 0; color:#c8d4e0; }
+.cyoa .choice b { color:var(--crack); font-family:'Cinzel',serif; }
+.lock {
+  display:inline-block; background:#121820; color:var(--gold); font-size:10px;
+  letter-spacing:0.08em; text-transform:uppercase; padding:2px 7px; border-radius:3px; margin-bottom:6px;
+}
+.finale {
+  margin-top:16px; background:var(--panel); border:1px solid var(--blank); border-radius:12px; padding:16px;
+}
+.finale h2 { font-family:'Cinzel',serif; color:var(--blank); font-size:16px; margin-bottom:8px; }
+.finale .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:700px){ .finale .grid { grid-template-columns:1fr; } }
+.finale .card { background:#182028; border-radius:8px; padding:12px; }
+.finale .card b { display:block; font-family:'Cinzel',serif; color:var(--gold); margin-bottom:4px; }
+.tracker {
+  margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+  background:#121820; border-radius:8px; padding:10px 14px; font-size:13px;
+}
+.tracker .dots { display:flex; gap:5px; }
+.tracker .dot {
+  width:18px; height:18px; border-radius:50%; border:2px solid var(--crack); background:transparent;
+}
+.tracker .dot.on { background:var(--crack); }
+footer { margin-top:20px; color:var(--muted); font-size:12px; }
+a { color:var(--ice); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Elder Holt · Inside the Chapbook</h1>
+<p class="sub">
+  Drii · <em>Woven Light Shattering</em> · Guest Wes (paper-boy / Parchdryad) ·
+  Public tracker: <b>Shatter Line 0–6</b> · Full keys:
+  <a href="shatterglass-shelf-gm-module.html">GM module</a> ·
+  <a href="woven-light-shattering-secret-score.html">Wes score</a>
+</p>
+
+<!-- SYSTEM -->
+<div class="sys">
+  <div>
+    <h2>The loop (every room)</h2>
+    <ul>
+      <li><b>Wes</b> reads the nursery page line out loud (excited).</li>
+      <li><b>Wes</b> picks A / B / C / invents D — that becomes what the peril <em>looks like</em>.</li>
+      <li><b>You</b> keep the same pillar underneath (heat / wet / hungry-text / tear / blank).</li>
+      <li>Party solves the pillar. Wes tries heroic assists and mostly fails. Threats prefer him.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>What never changes</h2>
+    <p>Room order. Pillar. Shatter Line math. Who the threat targets (him). Exit condition for that room.</p>
+    <p style="margin-top:8px;">CYOA is <b>costume only</b>. Dragon-stove or volcano picnic = still <b>heat</b>.</p>
+  </div>
+  <div>
+    <h2>Geography</h2>
+    <p><b>Outside:</b> Elder Holt clearing · glowing stump-lectern chapbook.</p>
+    <p style="margin-top:6px;"><b>Inside:</b> five pages made spatial after the party steps through an illuminated page with him.</p>
+    <p style="margin-top:6px;"><b>“Shatterglass”</b> = broken woven light as place (prism / ozone / crack) — not a separate region.</p>
+  </div>
+</div>
+
+<!-- FLOW -->
+<div class="flow">
+  <div class="n">Holt lobby<small>meet · deal · enter page</small></div>
+  <span class="arr">→</span>
+  <div class="n">1 Heat<small>Emberthreshold</small></div>
+  <span class="arr">→</span>
+  <div class="n">2 Wet<small>Thawvein Ford</small></div>
+  <span class="arr">→</span>
+  <div class="n">3 Hungry text<small>Margin Bridge</small></div>
+  <span class="arr">→</span>
+  <div class="n">4 Tear / hurry<small>Fast Gallery</small></div>
+  <span class="arr">→</span>
+  <div class="n">5 Press-in<small>Mosaic Heart</small></div>
+  <span class="arr">→</span>
+  <div class="n">Book closes<small>back in Holt</small></div>
+</div>
+
+<div class="rooms">
+
+  <!-- ROOM 1 -->
+  <article class="room r1">
+    <div class="head">
+      <div class="num">Room 1 · Entrance</div>
+      <div class="name">Emberthreshold</div>
+      <div class="pillar">HEAT / FIRE</div>
+      <div class="beat">Hazard · soft guardian<br>Not a boss fight</div>
+    </div>
+    <div class="mid">
+      <span class="lock">Pillar locked</span>
+      <h3>What you run</h3>
+      <ul>
+        <li>Friendly heat that wants to “help” paper</li>
+        <li>Standing in it / accepting “dry your tears” → <b>Line +1</b> + scorched quote on him</li>
+        <li>Solve by: smother · cold · redirect · feed it scrap text · wrap him and cross</li>
+        <li>Exit when heat is fed, smothered, or crossed with him shielded</li>
+        <li>Fail-forward: lightly toasted (+1) but scorch becomes a clue for Room 2</li>
+      </ul>
+    </div>
+    <div class="cyoa">
+      <h3>Wes storybook · Page 1</h3>
+      <p class="page">“On the first road he met a friendly stove… ‘Come close,’ said the Warm. ‘I only want to dry your tears.’”</p>
+      <p class="choice"><b>A)</b> Smiling dragon-stove offering to dry tears</p>
+      <p class="choice"><b>B)</b> Picnic at a volcano lip (“character development!”)</p>
+      <p class="choice"><b>C)</b> Sun-sized hug that wants to iron his wrinkles</p>
+      <p class="choice"><b>D)</b> Invent (still heat)</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--muted);">He will walk toward whatever he picked. Companions stop him or let comedy hurt.</p>
+    </div>
+  </article>
+
+  <!-- ROOM 2 -->
+  <article class="room r2">
+    <div class="head">
+      <div class="num">Room 2 · Puzzle / skill</div>
+      <div class="name">Thawvein Ford</div>
+      <div class="pillar">WET / WATER</div>
+      <div class="beat">Crossing · ink-run<br>Multiple solutions</div>
+    </div>
+    <div class="mid">
+      <span class="lock">Pillar locked</span>
+      <h3>What you run</h3>
+      <ul>
+        <li>~15–20 ft melt / memory-water channel; letters swim under surface</li>
+        <li>Full dunk him → <b>Line +2</b> + lose a verb until someone “lends a word”</li>
+        <li>Solve by: bridge · carry · freeze path · dry arch · Tree-Meld into wooden gear</li>
+        <li>PCs can swim; he cannot safely</li>
+        <li>Fail-forward: steals a body-sentence into the water — retrieve in Room 3 or rewrite</li>
+      </ul>
+    </div>
+    <div class="cyoa">
+      <h3>Wes storybook · Page 2</h3>
+      <p class="page">“Then came a river that remembered every word that ever fell in…”</p>
+      <p class="choice"><b>A)</b> Shark-infested ink-tide (sharks apologize while circling)</p>
+      <p class="choice"><b>B)</b> Meltwater canyon ford; stones sink if you doubt</p>
+      <p class="choice"><b>C)</b> Waterfall of yesterday’s tears that runs letters off skin</p>
+      <p class="choice"><b>D)</b> Invent (still wet / ink-run)</p>
+    </div>
+  </article>
+
+  <!-- ROOM 3 -->
+  <article class="room r3">
+    <div class="head">
+      <div class="num">Room 3 · Trick / setback</div>
+      <div class="name">Margin Bridge</div>
+      <div class="pillar">HUNGRY TEXT</div>
+      <div class="beat">Polite vermin<br>Shield the charge</div>
+    </div>
+    <div class="mid">
+      <span class="lock">Pillar locked</span>
+      <h3>What you run</h3>
+      <ul>
+        <li>Narrow bridge over a cleft; pretty tiny chorus below</li>
+        <li>They eat <em>writing</em> only — adore him; seed-page is dessert</li>
+        <li>Unshielded on bridge → <b>Line +1 / round</b></li>
+        <li>Solve by: bait with spare text · smash nests · carry him fast · offer the stolen sentence from Room 2 as ransom</li>
+        <li>Cut this room if short on time (merge into Gallery)</li>
+      </ul>
+    </div>
+    <div class="cyoa">
+      <h3>Wes storybook · Page 3</h3>
+      <p class="page">“Under the bridge sang a tiny hungry choir — so polite, and so hungry for proper nouns.”</p>
+      <p class="choice"><b>A)</b> Bookworms in tiny opera capes</p>
+      <p class="choice"><b>B)</b> Silverfish librarians stamping LATE on nouns</p>
+      <p class="choice"><b>C)</b> Crumb-sized knights sieging the word “brave”</p>
+      <p class="choice"><b>D)</b> Invent (still eats text / seed-page)</p>
+    </div>
+  </article>
+
+  <!-- ROOM 4 -->
+  <article class="room r4">
+    <div class="head">
+      <div class="num">Room 4 · Climax combat</div>
+      <div class="name">Fast Gallery</div>
+      <div class="pillar">TEAR / HURRY</div>
+      <div class="beat">Mini-combat + gusts<br>Tank for him</div>
+    </div>
+    <div class="mid">
+      <span class="lock">Pillar locked</span>
+      <h3>What you run</h3>
+      <ul>
+        <li>Corridor of flapping pages; gust cycles (ozone → crack → blast)</li>
+        <li>2–4 shredding foes; aggro loudest story (him)</li>
+        <li>Unbraced gust or foe hit on him → <b>Line +1</b> (tear / rewrite bandage)</li>
+        <li>Solve by: niches · windbreak · ground static · decoy his failed Tree Stride</li>
+        <li>Fail-forward: blown alone to Room 5 early — party chases into worse ritual terms</li>
+      </ul>
+    </div>
+    <div class="cyoa">
+      <h3>Wes storybook · Page 4</h3>
+      <p class="page">“Then a wind that turned pages too fast — and the story tried to skip ahead without him.”</p>
+      <p class="choice"><b>A)</b> Flapping-page canyon + scissors-cavalry on the gusts</p>
+      <p class="choice"><b>B)</b> Stampede of “NEXT CHAPTER” signs with legs</p>
+      <p class="choice"><b>C)</b> Storm trying to rip him into confetti</p>
+      <p class="choice"><b>D)</b> Invent (still tear / hurry / shred)</p>
+    </div>
+  </article>
+
+  <!-- ROOM 5 -->
+  <article class="room r5">
+    <div class="head">
+      <div class="num">Room 5 · Finale</div>
+      <div class="name">Mosaic Heart</div>
+      <div class="pillar">BLANK ENDING</div>
+      <div class="beat">Press-in ritual<br>Tower defense</div>
+    </div>
+    <div class="mid">
+      <span class="lock">No costume CYOA — locked ending + Bookworm</span>
+      <h3>What you run</h3>
+      <ul>
+        <li>Reveal: the <b>last chapter lives in him</b></li>
+        <li>He believes he must <b>press himself into the final page</b></li>
+        <li>Party gifts his <b>hero-title</b> (or he self-names)</li>
+        <li><b>Boss:</b> Bookworm = purple worm reskin (eats story/Wes/page). Run during Press or Talk-out</li>
+        <li>Press succeeds → paper-death → Lann gifted · Talk-out earned → gift without dying</li>
+      </ul>
+    </div>
+    <div class="cyoa">
+      <h3>Wes storybook · Page 5</h3>
+      <p class="page">“At last: a page with no words. Someone must become the ending.”</p>
+      <p class="choice">He names himself early like other guests.</p>
+      <p class="choice">At the press: wants the <b>party to gift his hero-title</b> (he'll invent one if they freeze).</p>
+      <p class="choice">Soft title seeds if needed: Spine Who Finished · Little Page Brave · Companion of Companions</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--muted);">Exit ritual if Lann leaves him: Runs Before Rain lesson → snap → Wes deadpan → leaves table.</p>
+    </div>
+  </article>
+
+</div>
+
+<div class="finale">
+  <h2>Room 5 — press-in vs off-ramp (cheat)</h2>
+  <div class="grid">
+    <div class="card">
+      <b>Bookworm (boss)</b>
+      Purple worm numbers/fiction job. Burrows through story-space, swallows Wes or the blank page, tries to eat the ending before it can be pressed or refused.
+    </div>
+    <div class="card">
+      <b>He “wins” the nursery myth</b>
+      Presses in · dies as paper · purpose fulfilled · moth to Drii/party · exit ritual.
+    </div>
+    <div class="card">
+      <b>Party earns the off-ramp</b>
+      Convince him the last chapter can stay unfinished / living · he gifts the Lann without pressing · Bookworm still must be tanked/killed/driven off or it chews the epilogue.
+    </div>
+    <div class="card">
+      <b>Shatter Line 6 / swallow fail</b>
+      He tears apart or is digested mid-ending · Lann deleted · dump-out at stump.
+    </div>
+  </div>
+</div>
+
+<div class="tracker">
+  <b style="color:var(--gold);font-family:'Cinzel',serif;">Shatter Line</b>
+  <div class="dots" title="0–6">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+  <span style="color:var(--muted);">0 start · telegraph hard at 5 · 6 = shatter / moth gone</span>
+  <span style="color:var(--muted);">| Rise: botched heroics · threat hits him · seed-page ruined · Fear</span>
+  <span style="color:var(--muted);">| Fall: brace · dry · rewrite stolen sentence · clean protect beat</span>
+</div>
+
+<footer>
+  One-screen dungeon map · Jul 25 2026 · Pillars fixed · skins from Wes score · Press-in finale locked from codesign ·
+  Detail room keys: <a href="shatterglass-shelf-gm-module.html">shatterglass-shelf-gm-module.html</a> · Wes menu: <a href="woven-light-shattering-secret-score.html">woven-light-shattering-secret-score.html</a>
+</footer>
+</div>
+</body>
+</html>

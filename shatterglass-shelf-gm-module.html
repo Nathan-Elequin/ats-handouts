@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shatterglass Shelf — GM Module v2 (Wes escort)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1a2430; --panel:#243448; --ink:#e8eef5; --muted:#8aa0b5;
+  --gold:#c4a86a; --ice:#7ec8e8; --crack:#e8a0a8; --paper:#f4ead3; --paper-ink:#2a2218;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Source Sans 3',sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; font-size:15px; }
+.wrap { max-width:920px; margin:0 auto; padding:28px 20px 80px; }
+h1 { font-family:'Cinzel',serif; font-size:28px; color:var(--gold); margin-bottom:4px; }
+h2 { font-family:'Cinzel',serif; font-size:18px; color:var(--ice); margin:28px 0 10px; border-bottom:1px solid #3d4a58; padding-bottom:6px; }
+h3 { font-family:'Cinzel',serif; font-size:15px; color:var(--gold); margin:16px 0 8px; }
+.sub { color:var(--muted); font-size:13px; margin-bottom:18px; }
+.tag { display:inline-block; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:2px 8px; border-radius:3px; margin-right:6px; }
+.box { background:var(--panel); border-left:3px solid var(--gold); padding:12px 14px; margin:12px 0; border-radius:0 8px 8px 0; }
+.box.warn { border-left-color:var(--crack); }
+.box.ice { border-left-color:var(--ice); }
+ul, ol { margin:8px 0 8px 1.25em; } li { margin-bottom:6px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:720px){ .grid2 { grid-template-columns:1fr; } }
+.card { background:var(--panel); padding:12px 14px; border-radius:8px; }
+.card b { color:var(--gold); font-family:'Cinzel',serif; display:block; margin-bottom:4px; }
+table { width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; }
+th, td { border:1px solid #3d4a58; padding:8px 10px; text-align:left; vertical-align:top; }
+th { background:#1e2c3a; color:var(--gold); font-family:'Cinzel',serif; font-weight:600; }
+.room { background:var(--panel); border:1px solid #3d4a58; border-radius:10px; padding:16px; margin:16px 0; }
+.room .rhead { display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; margin-bottom:8px; }
+.room .rname { font-family:'Cinzel',serif; font-size:17px; color:var(--gold); }
+.ra { font-style:italic; color:#c5d4e0; background:#1e2c3a; padding:10px 12px; border-radius:6px; margin:10px 0; }
+.bold { font-weight:700; color:var(--ice); }
+.toc a { color:var(--ice); }
+.toc li { margin-bottom:4px; }
+footer { margin-top:40px; color:var(--muted); font-size:12px; }
+
+/* Children's book pages */
+.book-wrap { background:#2a2218; padding:20px; border-radius:12px; margin:16px 0; }
+.book-page {
+  background:var(--paper); color:var(--paper-ink); font-family:'Literata',Georgia,serif;
+  padding:22px 26px; margin:0 auto 16px; max-width:520px; border-radius:4px;
+  box-shadow:0 4px 0 #c4b090, 0 8px 24px rgba(0,0,0,.35);
+  min-height:220px; position:relative;
+}
+.book-page .pg { position:absolute; bottom:10px; right:16px; font-size:11px; color:#7a6a50; font-family:'Source Sans 3',sans-serif; }
+.book-page h4 { font-family:'Cinzel',serif; font-size:14px; color:#5a4830; margin-bottom:8px; letter-spacing:0.04em; }
+.book-page p { font-size:15px; line-height:1.55; margin-bottom:8px; }
+.book-page .moral { font-size:12px; font-style:italic; color:#6a5a40; margin-top:10px; border-top:1px dashed #c4b090; padding-top:8px; }
+.book-title {
+  text-align:center; background:linear-gradient(180deg,#f7f0dc,#e8d9a8); color:#2a2218;
+  padding:28px 20px; max-width:520px; margin:0 auto 16px; border-radius:4px;
+  font-family:'Cinzel',serif; box-shadow:0 4px 0 #c4b090;
+}
+.book-title small { display:block; font-family:'Literata',serif; font-style:italic; font-size:13px; margin-top:8px; color:#5a4830; }
+
+.map {
+  font-family:ui-monospace,Consolas,monospace; font-size:12px; background:#121820; color:#a8c0d0;
+  padding:14px; border-radius:8px; overflow-x:auto; white-space:pre; line-height:1.35; margin:12px 0;
+}
+.q { color:var(--muted); font-size:13px; }
+.fix { color:#a0e8c0; }
+@media print {
+  body { background:#fff; color:#111; }
+  .room, .box, .card, .book-wrap { break-inside:avoid; }
+  .book-page { box-shadow:none; border:1px solid #ccc; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>The Shatterglass Shelf</h1>
+<p class="sub">
+  <span class="tag">GM Module v2</span>
+  <span class="tag">Escort · 5-beat</span>
+  <span class="tag">~2.5–3.5 hrs</span>
+  As They Seem · Drii Lann: <em>Woven Light Shattering</em> · Guest: Wes (Parchdryad) · No secret score in this file
+</p>
+
+<ul class="toc">
+  <li><a href="#premise">1. Premise &amp; causality</a></li>
+  <li><a href="#place">1b. Map placement — Elder Holt · enter the book</a></li>
+  <li><a href="#woven">1c. What “Woven Light Shattering” actually did</a></li>
+  <li><a href="#names">2. Names &amp; cast</a></li>
+  <li><a href="#book">3. The children’s book (verify this)</a></li>
+  <li><a href="#how">4. How to run the escort</a></li>
+  <li><a href="#map">5. Map &amp; dungeon constants</a></li>
+  <li><a href="#rooms">6. Five beats (room keys)</a></li>
+  <li><a href="#ritual">7. Final ritual</a></li>
+  <li><a href="#outcomes">8. Outcomes</a></li>
+  <li><a href="#audit">9. Twenty questions · self-audit · what changed in v2</a></li>
+</ul>
+
+<!-- ========== 1 ========== -->
+<h2 id="premise">1. Premise &amp; causality</h2>
+<div class="box ice">
+  In the <b>Elder Holt</b> (living archive), a weak seed sprouted inside a children’s chapbook and became a <b>Parchdryad</b> — bonded “tree” = that manuscript. Paper skin, ink-blood, readable body-text. Then the Lann <b>Woven Light Shattering</b> landed. Woven light raced his page-fibers and <em>shattered</em>, cracking the seal between <em>reading</em> a story and <em>walking</em> one. He hires the party as Companions to finish Page Five inside the book. Moth is theirs when the story ends. If he shatters, moth dies with him.
+</div>
+
+<!-- ========== 1b ========== -->
+<h2 id="place">1b. Map placement — Elder Holt · why enter the book</h2>
+<div class="box">
+  <b>Outer map (real Feywild):</b> <em>The Elder Holt</em> — already on your casting map as “living archive / oldest wood / navigate by sound / song &amp; memory.” Perfect host for a chapbook that woke up wrong.<br><br>
+  <b>What the party sees outside:</b> a clearing of archive-trees; a too-large nursery chapbook propped like a lectern, glowing from within; prism cracks crawling the cover; ozone before each soft <em>tick</em> as light-fractures spread; the Parchdryad fretting beside it with a moth on his shoulder.<br><br>
+  <b>Inner “dungeon” (not on the regional map):</b> the five pages made spatial. Fire/water/bugs/wind don’t need a glacier province — they are <em>story-dangers</em> inside Little Spine’s chapbook. Whimsical fey rule: <b>when woven light shatters a living story, the illuminated pages become doors.</b> Stepping into a glowing page works like a dryad’s tree-stride — but for books.
+</div>
+<p><b>Session geography:</b> tip → travel to Elder Holt → meet him at the glowing chapbook → he begs Companions to enter with him → cross the page-threshold → run Beats 1–5 inside → exit when the book closes (rite done / shatter / off-ramp).</p>
+<p><b>Why this justifies the 5 rooms:</b> you’re not inventing a new region that fights the map. You’re using a defined archive-holt as the lobby, and a classic fey trick (places that are stories) as the dungeon. Noveltree/Night Shelf stays court-library; Elder Holt is the wilder “books that grew roots” cousin.</p>
+
+<!-- ========== 1c ========== -->
+<h2 id="woven">1c. What “Woven Light Shattering” actually did</h2>
+<p>Keep two different “weaves” straight at the table:</p>
+<table>
+  <tr><th>Word</th><th>Means</th><th>Do not confuse with</th></tr>
+  <tr><td><b>Page-fiber / parchment weave</b></td><td>His body — dryad grown from book pulp</td><td>The Lann’s name</td></tr>
+  <tr><td><b>Woven light</b></td><td>The Lann itself — memory &amp; magic spun into luminous thread</td><td>Ordinary paper</td></tr>
+</table>
+<div class="box warn">
+  <b>Causal chain (say this if anyone asks):</b><br>
+  1. He was already a Parchdryad (seed in chapbook) — hollow, looping Page One.<br>
+  2. The moth is <em>woven light</em>: Made of Memory and Magic braided until it shines.<br>
+  3. It landed and that light <b>threaded into his page-fibers</b>, then <b>shattered</b> — prism bursts in the ink (kaleidoscope mosaic “in the blood”), a static taste when a filament snaps, a distant crack like ice as each light-strand breaks.<br>
+  4. Shattered woven light doesn’t go out cleanly; it <b>sticks in the text as illumination</b>, overcharging the story until the pages can be entered.<br>
+  5. Inside, “Shatterglass” is what broken woven light <em>looks like</em> when a story hardens into a place — laminated glare, frozen prism, ozone before the next filament pops.
+</div>
+<p>So: paper-weave = species body. <b>Woven Light Shattering</b> = the event that lit him up, cracked him toward protagonist, and opened the book as a dungeon. The escort exists because a dryad alone cannot finish a task; the moth made the unfinished task <em>walkable</em>.</p>
+
+<!-- ========== 2 ========== -->
+<h2 id="names">2. Names &amp; cast</h2>
+<div class="grid2">
+  <div class="card">
+    <b>Species — Parchdryad</b>
+    Pun: parchment + dryad. (Alts if you hate it: Folidryad, Codryad, Quillow.) Not a normal oak-dryad. Bonded ward = the Book.
+  </div>
+  <div class="card">
+    <b>Guest NPC</b>
+    Wes invents the spoken name at the table. He answers to Little Spine if they use the book’s name. Carry-prop: a <b>seed-page</b> (pressed leaf-leaf from the Book) — Tree-Dependent workaround. Lose it = Shatter Line rises fast.
+  </div>
+  <div class="card">
+    <b>Spotlight</b>
+    Drii — soft mirror when ink-mosaic / static / crack language hits Ben. Do not force Kai foil.
+  </div>
+  <div class="card">
+    <b>Not this module</b>
+    Better Monster / Cinderwood. Ennalyn (absent). Wes secret score (later).
+  </div>
+</div>
+
+<!-- ========== 3 ========== -->
+<h2 id="book">3. The children’s book — verify this</h2>
+<p>Bedside allegory. <b>Not</b> a dungeon map in prose — a 1:1 <em>metaphor</em> layer. Each page clues one beat. Wes’s body-text matches these pages; he will quote them aloud as “the Legend.” Print the five pages as a tiny handout <em>or</em> keep GM-only and let him “remember” them.</p>
+
+<div class="book-wrap">
+  <div class="book-title">
+    Little Spine Finishes the Story
+    <small>A Fey Nursery Chapbook · five soft pages · “for children who want endings”</small>
+  </div>
+
+  <div class="book-page">
+    <h4>Page One — The Warm That Eats Stories</h4>
+    <p>Little Spine left the shelf because the elders said the ending was too sharp for soft paper.</p>
+    <p>On the first road he met a friendly stove with a dragon’s smile. “Come close,” said the Warm. “I only want to dry your tears.”</p>
+    <p>But the Warm eats stories. It turns brave words into ash-flakes that look like snow.</p>
+    <p>Little Spine learned: <em>the first danger smiles and offers to help.</em></p>
+    <p class="moral">Clue → Beat 1: a welcoming heat that “helps” by destroying paper.</p>
+    <span class="pg">1 / 5</span>
+  </div>
+
+  <div class="book-page">
+    <h4>Page Two — The River That Remembers Too Much</h4>
+    <p>Next came a river made of yesterday’s rain. It promised to show Little Spine every word he had ever been.</p>
+    <p>When he stepped in, the letters on his arms began to run. The river kept them. It loved memory so much it would not give any back.</p>
+    <p>Little Spine learned: <em>to cross, you must keep your words above the water — or borrow someone else’s dry path.</em></p>
+    <p class="moral">Clue → Beat 2: water / thaw that dissolves ink; puzzle crossing.</p>
+    <span class="pg">2 / 5</span>
+  </div>
+
+  <div class="book-page">
+    <h4>Page Three — The Tiny Hungry Choir</h4>
+    <p>Under a quiet bridge lived a choir no louder than crumbs. They sang the prettiest song Little Spine had ever heard.</p>
+    <p>They sang while they ate his verbs. They apologized between mouthfuls. “We are so small,” they hummed. “Surely you can spare a sentence.”</p>
+    <p>Little Spine learned: <em>polite hunger still leaves holes in the page.</em></p>
+    <p class="moral">Clue → Beat 3: vermin / bookworms; setback that steals text.</p>
+    <span class="pg">3 / 5</span>
+  </div>
+
+  <div class="book-page">
+    <h4>Page Four — The Wind That Turns Pages Too Fast</h4>
+    <p>Then the sky became a thumb. It flicked the world like a book it was bored with.</p>
+    <p>Knights of torn edges rode the gusts. They did not hate Little Spine. They only wanted the story to hurry.</p>
+    <p>Little Spine learned: <em>if you stand alone in a hurry, you tear. Hold still with friends, and the wind must turn <strong>them</strong> first.</em></p>
+    <p class="moral">Clue → Beat 4: physical / mini-combat; shredding wind + foes.</p>
+    <span class="pg">4 / 5</span>
+  </div>
+
+  <div class="book-page">
+    <h4>Page Five — The Page With No Words</h4>
+    <p>At the heart of the cracking light, Little Spine found the last page of his own story.</p>
+    <p>It was blank.</p>
+    <p>He cried, because blank felt like failing. Then he understood: an ending is not found. An ending is written — even a small one — while someone keeps the warm and the wet and the hungry and the hurry away.</p>
+    <p>He wrote one true line. The moth of leaves lifted like a bookmark removed. The book, at last, could close.</p>
+    <p class="moral">Clue → Beat 5: ritual = write on the blank; Companions hold the line; blank-scroll truth.</p>
+    <span class="pg">5 / 5</span>
+  </div>
+</div>
+
+<div class="box">
+  <b>Allegory map (1:1 abstraction)</b>
+  <table>
+    <tr><th>Page</th><th>Metaphor</th><th>Dungeon beat</th><th>Threat to Parchdryad</th></tr>
+    <tr><td>1 Warm</td><td>Friendly fire</td><td>Entrance / guardian-hazard</td><td>Fire / heat / ash</td></tr>
+    <tr><td>2 River</td><td>Memory-water</td><td>Puzzle / skill crossing</td><td>Water / ink-run</td></tr>
+    <tr><td>3 Choir</td><td>Polite vermin</td><td>Trick / setback</td><td>Bugs eating text</td></tr>
+    <tr><td>4 Wind</td><td>Forced page-turn</td><td>Climax mini-combat</td><td>Tear / shred / brittle cold</td></tr>
+    <tr><td>5 Blank</td><td>Ending you write</td><td>Ritual + revelation</td><td>Failure to finish = identity void</td></tr>
+  </table>
+</div>
+
+<!-- ========== 4 ========== -->
+<h2 id="how">4. How to run the escort (lightweight)</h2>
+<p>Inspired by Johnn Four’s 5-room dungeon pacing, OSR pamphlet room keys (read-aloud → boldable facts → fail-forward), and escort best-practice: <b>predictable NPC behavior</b>, <b>telegraphed fail state</b>, threats that target the charge so the party plays defense.</p>
+<div class="grid2">
+  <div class="card">
+    <b>Shatter Line (public)</b>
+    Track 0–6 on the table (tokens / dice). Starts at 0. At 6 he <span class="bold">shatters</span> — Lann deleted. Telegraph hard at 5.
+  </div>
+  <div class="card">
+    <b>His AI (say this once)</b>
+    He always walks toward the next “page.” He narrates the cool version. He fails heroic assists often. He will not stay behind cover without a Companion physically stopping him.
+  </div>
+  <div class="card">
+    <b>When Shatter Line rises</b>
+    Botched heroics · room threat hits him · seed-page lost/wet/burned · Fear spend · invented frailty exploited.
+  </div>
+  <div class="card">
+    <b>When it falls</b>
+    Brace / dry / warm carefully / rewrite a stolen sentence onto him / successful protect beat.
+  </div>
+</div>
+<div class="box warn">
+  <b>Division of labor:</b> Wes wants out loud, reads each page excited, and <b>picks CYOA flavor</b> (A/B/C/invent) for each peril — his pick becomes the fiction. You keep the pillar identical (heat / wet / hungry-text / tear-hurry / blank ending), run Shatter Line, Fear, telegraphs, rulings. Secret score = his menu. You improv the skin.
+</div>
+
+<p><b>Session hook:</b> tip toward the Elder Holt (living archive / cracking light in an old chapbook) → meet him at the glowing lectern-book → deal stated → <b>step through an illuminated page</b> into Beats 1–5.</p>
+
+<!-- ========== 5 ========== -->
+<h2 id="map">5. Map &amp; dungeon constants</h2>
+<div class="map">ELDER HOLT (outer) → PAGE THRESHOLD → INSIDE THE CHAPBOOK
+
+  [Elder Holt clearing]
+  glowing nursery chapbook (lectern-sized)
+  Parchdryad + Lann moth
+         |
+   >>> step into illuminated page <<<
+         |
+   1. EMBERTHRESHOLD  (Warm / fire)
+         |
+   2. THAWVEIN FORD   (River / water)
+         |
+   3. MARGIN BRIDGE   (Choir / bugs)
+         |
+   4. FAST GALLERY    (Wind / tear combat)
+         |
+   5. MOSAIC HEART    (Blank / ritual)
+         |
+   book closes → back in Elder Holt
+
+Inner "Shatterglass" = shattered woven light hardened into story-space
+(prism glare, ozone, crack) — not a separate regional glacier.</div>
+
+<!-- ========== 6 ========== -->
+<h2 id="rooms">6. Five beats — room keys</h2>
+<p>Format: <em>read-feel</em> → facts → threat to him → play loop → fail-forward. Varied pillars as requested.</p>
+
+<div class="room" id="r1">
+  <div class="rhead">
+    <span class="rname">1 · Emberthreshold</span>
+    <span class="tag">Entrance · Hazard / soft guardian</span>
+    <span class="tag">FIRE</span>
+    <span class="tag">Page 1</span>
+  </div>
+  <div class="ra">A curtain of friendly amber heat shimmers between two leaning ice-shelves. Ash falls upward. Something in the warmth chuckles like a stove that learned manners.</div>
+  <p><span class="bold">Landmark:</span> Heat curtain (safe for most PCs; lethal-cute to paper). Ember-wisps (3–5) drift like helpful lanterns. A brass kettle sits on a rock, whistling a welcome.</p>
+  <p><span class="bold">Threat to him:</span> Any wisp that “dries his tears” chars margin-text. Standing in the curtain = Shatter Line +1 and a visible scorch quote.</p>
+  <p><span class="bold">Play:</span> Not a boss fight. <b>Trap/hazard + soft guardian.</b> Wisps offer help. If ignored, they insist. Extinguish with cold / smother / redirect into ice (hiss comedy). Or negotiate: give the Warm a scrap of unimportant writing to eat instead.</p>
+  <p><span class="bold">If he quotes Page 1:</span> he will walk toward the kettle smiling.</p>
+  <p><span class="bold">Fail-forward:</span> He gets lightly toasted (+1 Line) but a scorch-mark forms a usable rune-clue for Beat 2 (“keep words above water”).</p>
+  <p><span class="bold">Exit:</span> Curtain parts when heat is fed, smothered, or bravely crossed with him wrapped/shielded.</p>
+</div>
+
+<div class="room" id="r2">
+  <div class="rhead">
+    <span class="rname">2 · Thawvein Ford</span>
+    <span class="tag">Puzzle / physical skill</span>
+    <span class="tag">WATER</span>
+    <span class="tag">Page 2</span>
+  </div>
+  <div class="ra">A melt-channel cuts the shelf — clear, cold, humming with stolen sentences. Letters ghost by under the surface like fish. The far bank shows prism veins bright as stained glass.</div>
+  <p><span class="bold">Landmark:</span> Ford 15–20 ft. Stepping stones that <em>sink if you doubt</em> (light Gravity Cliff echo — optional). Rope-ice. A dry arch of laminated page-ice upstream (cracked, Skill to traverse).</div>
+  <p><span class="bold">Threat to him:</span> Water runs his ink. Full dunk = Shatter Line +2 and he temporarily loses a verb (cannot declare Heroic Assist until a Companion “lends a word”).</p>
+  <p><span class="bold">Play:</span> <b>Puzzle / skill.</b> Multiple solutions: bridge from gear · carry him · freeze a path · have him Tree-Meld into a companion’s wooden shield/staff for one crossing · step-stones timed to ozone-cracks. Brute swimming works for PCs, bad for him.</p>
+  <p><span class="bold">Clue from book:</span> “keep your words above the water — or borrow someone else’s dry path.”</p>
+  <p><span class="bold">Fail-forward:</span> Partial dunk steals one body-sentence; it appears floating in the river. Retrieve it later in Beat 3 (Choir stole it too) or rewrite.</p>
+</div>
+
+<div class="room" id="r3">
+  <div class="rhead">
+    <span class="rname">3 · Margin Bridge</span>
+    <span class="tag">Trick / setback</span>
+    <span class="tag">BUGS</span>
+    <span class="tag">Page 3</span>
+  </div>
+  <div class="ra">A narrow ice-spine spans a dark cleft. From below: the prettiest tiny chorus. Silver-glints. The song is an apology in harmony.</div>
+  <p><span class="bold">Landmark:</span> Bridge. Under-cleft nests of <b>Margin Moths / bookworms / glass-silverfish</b> (pick one aesthetic). They only eat <em>writing</em> — not raw wood, not people.</p>
+  <p><span class="bold">Threat to him:</span> They adore him. Swarm = polite munching of proper nouns. Shatter Line +1 per round he stands unshielded on the bridge. Seed-page is dessert.</p>
+  <p><span class="bold">Play:</span> <b>Setback / trick</b> — not a slaughter. Distract with bait text (write decoy sentences on ice). Smoke. Soft music that out-apologizes them. Coat him in non-written cloak. If they fight, insects scatter but steal one key word from his chest (“brave” / his invented name).</p>
+  <p><span class="bold">Twist:</span> After “victory,” they leave a thank-you note made of his own eaten verbs — a holey poem. Use holes as a cipher for Beat 5 (optional).</p>
+  <p><span class="bold">Fail-forward:</span> Name stolen → he can’t introduce himself until renamed by a Companion (cute foil beat for Drii/Edmund).</p>
+</div>
+
+<div class="room" id="r4">
+  <div class="rhead">
+    <span class="rname">4 · Fast Gallery</span>
+    <span class="tag">Mini-combat + physical</span>
+    <span class="tag">TEAR / COLD / STATIC</span>
+    <span class="tag">Page 4</span>
+  </div>
+  <div class="ra">The shelf becomes a corridor of flapping ice-pages. Wind turns them too fast. Ozone bites the tongue. Ragged shapes ride the gusts — edges like scissors, manners like bored librarians.</div>
+  <p><span class="bold">Landmark:</span> Long gallery. Gust cycles every few rounds (telegraph: static taste → crack → blast). Cover niches. Prism veins = handholds.</p>
+  <p><span class="bold">Foes:</span> <b>2–4 Page-Turn Knights</b> (shredding wind-fey / living paper-cuts). They aggro the loudest story — usually him. They deal scratch damage to PCs; to him they threaten <b>tearing</b> (Line).</p>
+  <p><span class="bold">Threat to him:</span> Unbraced gust = Line +1. Knight hit = Line +1 and a literal flap of skin-page tears (bandage = rewrite).</p>
+  <p><span class="bold">Play:</span> <b>Mini-combat + physical skill.</b> Hold him in a niche · form a windbreak · ground the static (metal/earth) · use his failed Tree Stride as a decoy (he pops halfway into a dead trunk and gets stuck — extract mid-fight).</p>
+  <p><span class="bold">Book clue:</span> “Hold still with friends, and the wind must turn them first.” Tanking for him is the intended read.</p>
+  <p><span class="bold">Fail-forward:</span> He is blown to the Mosaic Heart early, alone, for 1 beat — panic clock — party catches up into Ritual under worse terms.</p>
+</div>
+
+<div class="room" id="r5">
+  <div class="rhead">
+    <span class="rname">5 · Mosaic Heart</span>
+    <span class="tag">Ritual · tower defense · revelation</span>
+    <span class="tag">BLANK PAGE · PRESS-IN</span>
+    <span class="tag">Page 5</span>
+  </div>
+  <div class="ra">The shelf opens into a hollow where ice-veins braid into a stained-glass circulatory system. At center: a low dais of clear ice — an empty final page standing upright like a pane. Above it, a moth-shaped absence in the light. He realizes, late and proud: the last chapter has been living in him the whole time.</div>
+  <p>See <a href="#ritual">§7 Final ritual</a> for full procedure. One-screen map: <a href="elder-holt-dungeon-map.html">elder-holt-dungeon-map.html</a>.</p>
+</div>
+
+<!-- ========== 7 ========== -->
+<h2 id="ritual">7. Final ritual — press-in (locked)</h2>
+<div class="box ice">
+  <b>What he believes:</b> A hero finishes the book by becoming the ending — he must <b>press himself into the final page</b> like pressed leaves (nursery myth he treats as law).<br><br>
+  <b>What is true:</b> The last chapter <em>is</em> in him. Pressing = paper-death + purpose fulfilled → he <b>willingly gifts</b> the Lann. Talking him out of pressing = <b>earned off-ramp</b> only.<br><br>
+  <b>Hero-title:</b> He names himself early like other guests. At the press he wants the <b>party to gift his hero-title</b>; if they freeze, he invents one.
+</div>
+
+<h3>Procedure (run as clock)</h3>
+<ol>
+  <li><b>Reveal</b> at the Heart: last chapter lives in him; the upright blank page is waiting to receive a pressed hero.</li>
+  <li><b>Title:</b> Party gifts a hero-title (or he self-names). Soft seeds: Spine Who Finished · Little Page Brave · Companion of Companions.</li>
+  <li><b>Press clock:</b> 3 beats of committing / aligning / pressing while Companions run tower defense.</li>
+  <li><b>Waves:</b> leftover wisps · Choir reprise · a Knight · a crack under the dais · Fear spend. Threats prefer him. If Line hits 6 mid-rite → shatter.</li>
+  <li><b>Press succeeds:</b> He becomes the page (dies). Lann moth lifts to Drii / party as agreed.</li>
+  <li><b>Off-ramp (earned):</b> Someone (esp. Drii) convinces the living unfinished book / pre-Legend sapling was already enough — he gifts without pressing.</li>
+  <li><b>Exit ritual:</b> Runs Before Rain pithy lesson → snap → Wes deadpan → leaves table.</li>
+</ol>
+
+<h3>Why this finalizes the journey</h3>
+<ul>
+  <li><b>Dryad / book logic:</b> pressed leaf = finished specimen; he was always pulp waiting for a last chapter.</li>
+  <li><b>Lann logic:</b> Woven Light’s shatter finishes when the story can close; moth’s work is done.</li>
+  <li><b>Escort logic:</b> party win was never “clear rooms” — it was keep the manuscript alive long enough to choose how it ends.</li>
+  <li><b>CYOA note:</b> Rooms 1–4 are Wes’s costume picks; Room 5 has no skin menu — only title + press / talk-out.</li>
+</ul>
+
+<!-- ========== 8 ========== -->
+<h2 id="outcomes">8. Outcomes (cheat sheet)</h2>
+<table>
+  <tr><th>Result</th><th>What happens</th></tr>
+  <tr><td>Press-in completes</td><td>He dies as paper / last chapter. Lann gifted willingly. Exit ritual. Drii reclaim available.</td></tr>
+  <tr><td>Shatter Line 6</td><td>He cracks to loose fibers + ash-snow ink. Lann gone forever. Heavy beat.</td></tr>
+  <tr><td>Forced take</td><td>Possible; make it feel like stealing from a child librarian. He trusted them.</td></tr>
+  <tr><td>Talk-out off-ramp</td><td>Earned only — pre-Legend / living unfinished self was enough; gifts Lann without pressing.</td></tr>
+  <tr><td>Soft gift mid-protect</td><td>If they refuse the press but still shield him like Companions, he may gift anyway (nursery grace).</td></tr>
+</table>
+
+<!-- ========== 9 ========== -->
+<h2 id="audit">9. Twenty questions · self-audit · v2 changes</h2>
+<p class="q">I drafted a v1 spine, asked the questions you would ask, then rewrote into this file as v2. Answers that forced changes are marked <span class="fix">FIX</span>.</p>
+
+<ol>
+  <li><b>Is this actually Drii’s Lann?</b> Yes — Woven Light Shattering. Better Monster untouched.</li>
+  <li><b>Does the place embody the sensory?</b> Yes — crack / ozone / mosaic veins. <span class="fix">FIX:</span> every room telegraphs ozone→crack once.</li>
+  <li><b>Is “dungeon” wrongly underground?</b> No — shelf glacier cathedral. Explicit in map.</li>
+  <li><b>Do all 5 rooms uniquely threaten paper?</b> Fire, water, bugs, tear/cold, blank-identity. Yes.</li>
+  <li><b>Are pillars varied?</b> Hazard, puzzle/skill, setback, mini-combat, ritual TD. Yes.</li>
+  <li><b>Is the children’s book allegory (not spoiler-map)?</b> <span class="fix">FIX:</span> rewrote pages to metaphor (stove/river/choir/thumb-wind/blank) instead of describing ice rooms.</li>
+  <li><b>Can Wes play without reading the module?</b> He only needs the chapbook lines + deal; rooms are your job. Score still later.</li>
+  <li><b>What if they try to do the rite at the entrance?</b> <span class="fix">FIX:</span> blank only glows at Heart; earlier attempts fail — ink won’t stick (book rule).</li>
+  <li><b>What if they leave him and clear rooms first?</b> Allowed; he follows into danger anyway. Escort comedy persists.</li>
+  <li><b>What if they destroy his seed-page?</b> Line rises each beat until improvised rebond (press a new leaf with a written promise).</li>
+  <li><b>Is Charm mind-control?</b> Soft story-compulsion only; no removing player agency.</li>
+  <li><b>Does Tree Stride break the dungeon?</b> <span class="fix">FIX:</span> dead/ice trees — stride fails; stuck-in-trunk gag in Beat 4.</li>
+  <li><b>How long is this?</b> Five tight beats + rite ≈ one session chunk; cut Beat 3 if short on time (merge Choir into Gallery).</li>
+  <li><b>What does Drii feel?</b> Ink-mosaic language; optional Recognized off-ramp. Not a lore lecture.</li>
+  <li><b>Hannah absent?</b> No Ennalyn dependency.</li>
+  <li><b>Ayla/Wes foil?</b> Soft only; don’t lean.</li>
+  <li><b>Numbers?</b> Shatter Line + Fear + soft foes — no CR math. <span class="fix">FIX:</span> removed fake HP blocks from v1 thinking.</li>
+  <li><b>Can the blank-scroll feel mean?</b> Risk. <span class="fix">FIX:</span> Page 5 moral pre-loads grace: ending is written while friends keep watch — reveal is fulfillment, not prank.</li>
+  <li><b>Pun name clear at table?</b> Parchdryad. Alts listed if you hate it.</li>
+  <li><b>Is escort agency preserved?</b> <span class="fix">FIX:</span> stated AI, public Line, multiple solutions per room, fail-forward everywhere — classic “annoying escort” without softlock.</li>
+</ol>
+
+<div class="box">
+  <b>v2 changelog (from internal v1)</b>
+  <ul>
+    <li>Children’s book rewritten as true allegory (not dungeon walkthrough)</li>
+    <li>Ritual locked to Heart only; blank-scroll framed as grace</li>
+    <li>Tree Stride explicitly fails; seed-page rules added</li>
+    <li>Optional time-cut (merge 3→4); loop ledge 4→2 for light Jaquaysing</li>
+    <li>Removed heavy stat blocks; Shatter Line as the only public tracker</li>
+    <li>Species name locked to Parchdryad with alts</li>
+  </ul>
+</div>
+
+<footer>
+  As They Seem · Shatterglass Shelf GM Module v2 · Jul 25 2026 · Inspired by Johnn Four 5-room dungeon pacing, OSR pamphlet room keys, Pathfinder/D&amp;D dryad bond + “coerce help for unfinished tasks,” escort design: predictable charge AI + telegraphed fail state.<br>
+  Next (when you say so): Wes secret score aligned to this module — not before.
+</footer>
+
+</div>
+</body>
+</html>

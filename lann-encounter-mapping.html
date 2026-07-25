@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scattered Lann — Encounter Mapping</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f0e;
+    --bg2: #131815;
+    --border: rgba(180,160,100,0.18);
+    --ennalyn: #c9a84c;
+    --ennalyn-dim: rgba(201,168,76,0.12);
+    --drii: #c45e3a;
+    --drii-dim: rgba(196,94,58,0.12);
+    --edmund: #6a9e6e;
+    --edmund-dim: rgba(106,158,110,0.12);
+    --kai: #7b9fc4;
+    --kai-dim: rgba(123,159,196,0.12);
+    --text: #d6cdb8;
+    --muted: #8a8070;
+    --accent: #bba86e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 5vw, 34px);
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+
+  .header-subtitle {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Section headers */
+  .character-section {
+    margin-bottom: 48px;
+  }
+
+  .character-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .character-pip {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .character-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .character-header .char-name {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* Lann cards */
+  .lann-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .lann-card:hover {
+    border-color: rgba(180,160,100,0.35);
+  }
+
+  .lann-card-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 12px;
+    padding: 18px 20px 14px;
+    cursor: pointer;
+  }
+
+  .lann-name {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .lann-experience {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Cinzel', serif;
+  }
+
+  .lann-toggle {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+    padding-top: 3px;
+    white-space: nowrap;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .lann-card:hover .lann-toggle {
+    color: var(--accent);
+  }
+
+  .lann-body {
+    padding: 0 20px 20px;
+    display: none;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .lann-body.open {
+    display: block;
+  }
+
+  /* Sensory block */
+  .sensory-block {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* Encounter mapping */
+  .encounter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+
+  .encounter-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .encounter-justification {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .encounter-justification strong {
+    font-weight: 600;
+  }
+
+  /* Character color theming */
+  .char-ennalyn .character-pip { background: var(--ennalyn); }
+  .char-ennalyn .char-name { color: var(--ennalyn); }
+  .char-ennalyn .lann-card { background: var(--ennalyn-dim); }
+  .char-ennalyn .lann-name { color: var(--ennalyn); }
+  .char-ennalyn .encounter-name { color: var(--ennalyn); }
+
+  .char-drii .character-pip { background: var(--drii); }
+  .char-drii .char-name { color: var(--drii); }
+  .char-drii .lann-card { background: var(--drii-dim); }
+  .char-drii .lann-name { color: var(--drii); }
+  .char-drii .encounter-name { color: var(--drii); }
+
+  .char-edmund .character-pip { background: var(--edmund); }
+  .char-edmund .char-name { color: var(--edmund); }
+  .char-edmund .lann-card { background: var(--edmund-dim); }
+  .char-edmund .lann-name { color: var(--edmund); }
+  .char-edmund .encounter-name { color: var(--edmund); }
+
+  .char-kai .character-pip { background: var(--kai); }
+  .char-kai .char-name { color: var(--kai); }
+  .char-kai .lann-card { background: var(--kai-dim); }
+  .char-kai .lann-name { color: var(--kai); }
+  .char-kai .encounter-name { color: var(--kai); }
+
+  /* Bonus Lann */
+  .bonus-section {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  .bonus-card {
+    background: rgba(180,160,100,0.06);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 20px;
+  }
+
+  .bonus-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .bonus-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  /* Footer note */
+  .footer-note {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    margin-bottom: 48px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+  }
+
+  .legend-pip {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">As They Seem · Campaign Reference · GM Use Only</div>
+    <h1>The Scattered Lann<br>Encounter Mapping</h1>
+    <p class="header-subtitle">Twelve anchored experiences, scattered into the Feywild. Each one draws the world toward it — and must be reclaimed.</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-pip" style="background:var(--ennalyn)"></div>Ennalyn — Hannah</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--drii)"></div>Drii — Ben</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--edmund)"></div>Edmund — Dan</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--kai)"></div>Kai — Ayla</div>
+  </div>
+
+  <!-- ============ ENNALYN ============ -->
+  <div class="character-section char-ennalyn">
+    <div class="character-header">
+      <div class="character-pip"></div>
+      <div>
+        <div class="char-name">Ennalyn</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;">played by Hannah</div>
+      </div>
+    </div>
+
+    <!-- Lann 1 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Heart Wrapped in Light</div>
+          <div class="lann-experience">Experience: Lead Singer</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">A hand squeezing your heart, light streaming through clouds.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Fey Rock Orchestra</div>
+        <div class="encounter-justification">
+          The Lann's energy is pure performance — the thrill of being witnessed in music, the physical sensation of a song landing in someone's chest like a fist. <strong>Light streaming through clouds is a spotlight.</strong> This Lann has attached itself to the conductor's baton of an eternal fey orchestra making its way to perform for the Fairy Queen. The music it produces has become dangerously beautiful — fey nearby weep without knowing why. The orchestra refuses to part with the Lann: they've never sounded this good, and they know it. The encounter is a negotiation or contest of performance. The party must either <strong>out-perform the orchestra</strong>, offer a replacement instrument of equal emotional weight, or convince the conductor that the beauty they're carrying doesn't belong to them.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 2 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Darkened Sun</div>
+          <div class="lann-experience">Experience: Loss of Heart</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Still darkness before a storm, dead air and dark noon.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Seelie Funeral Parade</div>
+        <div class="encounter-justification">
+          An eclipse — a sun that has gone dark — is the most precise image for this Lann, and the Seelie Funeral Parade is the Feywild's grief made communal and contagious. <strong>The dead air and dark noon is the moment a procession passes your door.</strong> This Lann has become the "beloved deceased" at the center of the parade: all who encounter the procession are charmed into following and re-enacting their own greatest losses rather than the fey's. The parade grows longer with every traveler it absorbs. The party must <strong>honor the grief without being swallowed by it</strong> — breaking the charm requires completing a genuine act of mourning, not fighting their way through. The Lann will not release itself to anyone who hasn't truly lost something.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 3 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Mockingbird Calls</div>
+          <div class="lann-experience">Experience: Brave Little Mockingbird</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Reaching out in the dark, warmth, half-heard humming.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Boggle Problem</div>
+        <div class="encounter-justification">
+          Boggles are summoned into existence by loneliness and the craving for connection — which is precisely what "Brave Little Mockingbird" encodes: <strong>the courage to reach toward another person in the dark.</strong> The half-heard humming is the Lann's presence radiating from wherever it settled, drawing creatures toward it like a hearth light. A cluster of boggles has formed around an isolated fey creature — perhaps an old faun, a child abandoned at the threshold, a spirit that forgot its name — whose loneliness attracted them. The Lann is somewhere inside that tangle of dark-light and warmth. The encounter is about <strong>following the humming through genuine darkness</strong>, and the resolution is not combat but recognition: the party must identify and acknowledge the lonely heart at the center of the problem.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DRII ============ -->
+  <div class="character-section char-drii">
+    <div class="character-header">
+      <div class="character-pip"></div>
+      <div>
+        <div class="char-name">Drii</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;">played by Ben</div>
+      </div>
+    </div>
+
+    <!-- Lann 4 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Walking With Ruin</div>
+          <div class="lann-experience">Experience: Better Monster</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">An overwhelming heat, raging wildfire that consumes and seeks life to burn.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Dryad's Conclave</div>
+        <div class="encounter-justification">
+          Aria's militant dryad group is destruction born from grief — grief that became a wildfire. The Lann has amplified the Conclave's destructive power: <strong>the forest around them is hotter than it should be, fire spreads with unnatural eagerness, and the overgrowth chokes visibility to ten feet.</strong> The Lann didn't corrupt Aria — it just made her more of what she already was. The encounter asks the exact same moral question as Drii's experience: is this creature a monster, or is she someone who was made this way? Combat is possible but shallow. The deeper encounter is a negotiation with Aria, who will only speak honestly to someone who can demonstrate they <strong>also know what it is to walk with ruin</strong> — to have caused damage without meaning to, to be dangerous to things they love.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 5 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Ceaseless Spring</div>
+          <div class="lann-experience">Experience: Silver-Tongued Faerie</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">A bubbling brook that smells slightly of brimstone and salt.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Name-Stealing Fey</div>
+        <div class="encounter-justification">
+          A brook that bubbles freshly but smells of brimstone is <strong>the sensory definition of the silver-tongued: appealing on every surface, subtly dangerous underneath.</strong> This Lann has come to rest at a crossing-stream where a particularly elegant name-stealing fey holds permanent court, using the brook's pleasant sound as cover. The Lann has made the fey's charm almost irresistible — every conversation with them feels like a gentle current pulling you downstream. The party will be three social contracts deep before they understand what's happening. The encounter is a game of <strong>asking the right question three times to force plain speech</strong>, while avoiding every polite trap ("may I have your name," "thank you for coming," "what can I offer you") along the way. Recovery of the Lann requires out-charming someone who has been doing this since before the continent had a name.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 6 — Ben's current Made of Memory and Magic slip -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Woven Light Shattering</div>
+          <div class="lann-experience">Experience: Made of Memory and Magic</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">A shifting kaleidoscopic mosaic in the blood, taste of electricity in the air, the distant crack of shifting ice.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Shatterglass (annoying-escort dryad) · Wes</div>
+        <div class="encounter-justification">
+          Ben's current Made of Memory and Magic slip (Fey name + sensory as written). The place must <em>be</em> the phrase: prismatic ice sheets underfoot (distant crack), ozone-static before every fissure (electricity on the tongue), and blood-warm veins of colored light crawling under the freeze (kaleidoscope mosaic). A frail adolescent dryad absorbed the Lann while reading a hero-legend; now he needs "brave adventurers" to escort him through a domain that literally shatters glass bones and paper leaf-skin. Gameplay is the classic annoying escort — he walks headlong into danger, rolls mostly fail / sometimes clutch, and wins by completing a rite that is secretly lame. Foil: Drii's blood already <em>is</em> that mosaic; the kid romanticizes the shatter as destiny.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ EDMUND ============ -->
+  <div class="character-section char-edmund">
+    <div class="character-header">
+      <div class="character-pip"></div>
+      <div>
+        <div class="char-name">Edmund</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;">played by Dan</div>
+      </div>
+    </div>
+
+    <!-- Lann 7 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Wind Rustling Leaves in the Trees</div>
+          <div class="lann-experience">Experience: Songwriter</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Warm, familiar, new, just out of reach.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Gossip Trees</div>
+        <div class="encounter-justification">
+          The sensory description of this Lann <em>is</em> the Gossip Trees: the rustle of leaves as communication, warmth and familiarity in whispers, the feeling of something important being said just around the next bend. <strong>The Lann has nested into one great old tree, and every secret this tree shares now comes out as a half-remembered song</strong> — travelers leave the grove humming melodies they can't place. The tree has become the most sought-after gossip node in the forest, which means it's well-protected. To recover the Lann, the party must offer a secret that carries the same emotional weight as a song — something warm, something new, something that costs them. The tree isn't malicious; it just <strong>doesn't know the difference between a secret and a song</strong>, and neither does the Lann.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 8 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">The Morning Dew</div>
+          <div class="lann-experience">Experience: Quack</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Care, confidence, smells of herbs and spices.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Druid's Awakened Community</div>
+        <div class="encounter-justification">
+          Morning dew and the smell of herbs and spices is a druid's grove at dawn. The "Quack" experience is Edmund's identity as a healer — care and confidence as a professional posture. <strong>This Lann's energy has been absorbed by one of the druid's awakened animals, who has become a practicing folk healer</strong> drawing every sick creature in the forest to a tiny woodland clinic. The awakened community has built itself around the Lann's influence. The political drama is already in motion: some animals don't want to give up their healer; the druid has lost control of what they created; and at least one awakened creature is secretly reporting to a hag who wants the Lann's healing energy for something much worse. Recovering the Lann means <strong>diagnosing the real illness in this community</strong> before treating it.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 9 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Sinking in Quicksand</div>
+          <div class="lann-experience">Experience: Existential Crisis</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">The light going away, claustrophobic, pressure in the chest.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Forest That Grows Behind You</div>
+        <div class="encounter-justification">
+          The forest that grows when unobserved, consuming the geography behind you as you move forward — this is <strong>existential dread made into a biome.</strong> The light going away is the canopy closing. The claustrophobia is the forest tightening. The pressure in the chest is the moment you turn around and realize there is no path back. The Lann is at the heart of this haunt, and its proximity makes the forest more aggressive: trees grow faster, darkness falls sooner, the ground underfoot softens in ways that suggest depth. <strong>The Chimney Face-Stealer</strong> has moved in, feeding on the identity-void the Lann generates around it. The encounter's resolution isn't navigation — it's the willingness to name what you're afraid of becoming, out loud, in the dark, while the forest listens.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ KAI ============ -->
+  <div class="character-section char-kai">
+    <div class="character-header">
+      <div class="character-pip"></div>
+      <div>
+        <div class="char-name">Kai</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;">played by Ayla</div>
+      </div>
+    </div>
+
+    <!-- Lann 10 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Shifting Spirit</div>
+          <div class="lann-experience">Experience: Be Whoever You Want Me to Be</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">A creature made of different breeds — rapidly shifting waters.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Reflection Pool</div>
+        <div class="encounter-justification">
+          This is the most direct match in the entire set. <strong>Rapidly shifting waters are the Reflection Pool's surface.</strong> A creature made of different breeds is what the Pool shows you when you look in — every version of yourself you could have been, all claiming equal reality. This Lann has been absorbed into the Pool and now generates endlessly shifting reflections of Kai specifically: every possible Kai, from every path not taken. The reflections move independently. Some of them wave. One of them doesn't. To recover the Lann, someone must enter the Pool and choose — not which reflection is real, but <strong>which one Kai is willing to let dissolve.</strong> The unchosen versions don't go quietly.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 11 -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Made of Melody</div>
+          <div class="lann-experience">Experience: Disciple of Song</div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Wind whistling through trees.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Gravity Cliff</div>
+        <div class="encounter-justification">
+          The Gravity Cliff is where <strong>gravity is determined by intention rather than physics</strong> — walk in genuine confidence and the ground holds; doubt yourself and you fall. For a Disciple of Song whose entire identity is devotion to music and to Lliira, this is a perfect structural mirror. The Lann has drifted to a wind-carved stone cliff face where the gaps in the rock produce natural music — not beautiful, not disturbing, just <strong>perpetually incomplete</strong>, as though waiting for the right listener to finish the phrase. Wind spirits have gathered around it, unable to leave, held by the feeling that the song is about to resolve. To cross the cliff and reach the Lann, someone must walk it with <strong>absolute conviction in their purpose</strong> — not performed conviction, not forced confidence, but the real thing. Kai's arc tension with Lliira makes this encounter particularly loaded.
+        </div>
+      </div>
+    </div>
+
+    <!-- Lann 12 — swapped in for Perfected Mask / Hollowed Heart (deleted) -->
+    <div class="lann-card" onclick="toggle(this)">
+      <div class="lann-card-header">
+        <div>
+          <div class="lann-name">Lightless Sparks Ready for Dancing</div>
+          <div class="lann-experience">Experience: — <em style="font-weight:400;color:var(--muted)">(swapped in for Perfected Mask · deleted)</em></div>
+        </div>
+        <div class="lann-toggle">expand ↓</div>
+      </div>
+      <div class="lann-body">
+        <div class="sensory-block">Courses through veins, itches in the amygdala, tastes like static in the air.</div>
+        <div class="encounter-label">Matched Encounter</div>
+        <div class="encounter-name">The Pale Ring — Dart (Denton) · RESOLVED</div>
+        <div class="encounter-justification">
+          <strong>Swapped in for Perfected Mask</strong> (Hollowed Heart / hollow smile / Mushroom Princess — deleted; do not reclaim). Sensory is literal static: courses the veins, itches the amygdala, tastes like copper on the air. Ran at the Pale Ring as poles + charge bar; Denton's quickling Dart absorbed it, Liira-blessed, lightning-legs. Outcome: EMP / Lann destroyed when Kai refused the handoff; blank iridescent Lann offered for Experience rewrite. Foil was Kai's Joy Bringer spark / fear of replacement by Liira's warmth.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bonus Lann -->
+  <div class="bonus-section">
+    <div class="bonus-card">
+      <div class="bonus-eyebrow">Bonus Lann · Rent</div>
+      <div class="bonus-title">Desire to Be Home with Kai</div>
+      <p style="font-size:16px;line-height:1.7;color:var(--text);">
+        This one doesn't get an encounter. <strong>This one follows the party.</strong> A single small rain cloud, persistent and gentle, that appears somewhere in the first session after the scattering and simply... doesn't leave. It rains softly on the party's heads at inconvenient moments. It can be shielded against but never driven away. No one in the Feywild can tell them what it is — or they know, and they're not saying. It is not a threat. It is not a bargain. It is just homesick, in the only language it has.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-note">
+    All 12 Lann mapped to established encounters from the Feywild Encounter Toolkit.<br>
+    One Lann survives the scattering — location classified. Rent's Lann is a campaign-long throughline, not a fetch quest.<br>
+    <em>Encounter details are intentionally high-level; each is designed for deeper development in session prep.</em>
+  </div>
+
+</div>
+
+<script>
+  function toggle(card) {
+    const body = card.querySelector('.lann-body');
+    const toggle = card.querySelector('.lann-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    toggle.textContent = isOpen ? 'expand ↓' : 'collapse ↑';
+  }
+</script>
+</body>
+</html>

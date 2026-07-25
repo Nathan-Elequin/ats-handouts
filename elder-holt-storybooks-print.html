@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRINT · Elder Holt Storybooks — player handouts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@600;700&family=Cinzel:wght@600;700&family=Fredoka:wght@500;600&family=Great+Vibes&family=Literata:ital,wght@0,400;0,600;1,400&family=Nunito:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Teko:wght@500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+@page { size: letter; margin: 0.4in; }
+body { font-family: 'Source Sans 3', sans-serif; background: #2a3228; color: #e8f0e4; }
+
+.howto {
+  max-width: 8in; margin: 0.75rem auto 1.25rem; background: #1d2a1c; color: #e8dcc0;
+  border: 1px solid #c4a86a; border-radius: 8px; padding: 0.85rem 1.1rem; font-size: 0.92rem; line-height: 1.45;
+}
+.howto h1 { font-family: 'Cinzel', serif; color: #c4a86a; font-size: 1.1rem; margin-bottom: 0.4rem; }
+.howto ol { margin: 0.4rem 0 0.4rem 1.25rem; }
+.howto li { margin: 0.25rem 0; }
+.howto .muted { color: #8aa090; font-size: 0.85rem; margin-top: 0.5rem; }
+
+/* —— Finished books: 1 handout per half-page (front | back), 2 per sheet —— */
+.sheet {
+  width: 7.7in; margin: 0 auto 0.5in; background: #fff;
+  box-shadow: 0 4px 20px #0005;
+}
+.sheet.pair {
+  height: 10in;
+  display: flex; flex-direction: column; gap: 0.2in;
+  padding: 0.1in;
+}
+.handout {
+  flex: 1; min-height: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1.5px dashed #9a8a60;
+  background: #faf6ec;
+  position: relative;
+}
+.handout::after {
+  content: "✂ cut · fold here";
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);
+  font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #b0a080;
+  white-space: nowrap; pointer-events: none; opacity: 0.85;
+}
+.face {
+  padding: 0.22in 0.24in; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.face.front { border-right: 1px dashed #c0b090; }
+.face .exam {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 8pt; font-style: italic; line-height: 1.35; color: #5a4a30;
+  margin-bottom: 0.14in;
+}
+.face .exam::before { content: none; }
+.face .label {
+  font-size: 6.5pt; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #8a7a55; margin-bottom: 0.08in; font-family: 'Source Sans 3', sans-serif;
+}
+.face .title {
+  margin: 0.06in 0 0.12in; line-height: 1.12; color: #1a140c;
+}
+.face .blurb {
+  font-family: 'Literata', Georgia, serif;
+  font-size: 9.5pt; line-height: 1.42; color: #2a2218; flex: 1;
+}
+.face .turn {
+  margin-top: auto; padding-top: 0.1in;
+  font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #9a8a60; text-align: center; font-family: 'Source Sans 3', sans-serif;
+}
+
+/* Title voices */
+.t-weave { font-family: 'Cinzel', serif; font-weight: 700; font-size: 15pt; letter-spacing: 0.04em; }
+.t-umbral { font-family: 'Caveat', cursive; font-weight: 700; font-size: 20pt; transform: rotate(-1.2deg); }
+.t-capital { font-family: 'Bangers', cursive; font-size: 18pt; letter-spacing: 0.02em; color: #3a2a08; }
+.t-notorious { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15pt; color: #4a1838; }
+.t-trials { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14.5pt; color: #2a3a28; }
+.t-gccr { font-family: 'Teko', sans-serif; font-weight: 600; font-size: 20pt; letter-spacing: 0.03em; text-transform: uppercase; }
+.t-ats {
+  font-family: 'Great Vibes', cursive; font-size: 22pt; color: #5a4820;
+  text-shadow: 0 0 0.5px #8a7040;
+}
+
+/* Cover atmospheres (subtle, print-safe) */
+.front.weave { background: linear-gradient(165deg, #1a1a32 0%, #2a2848 55%, #1e2038 100%); color: #e8e4f0; }
+.front.weave .exam, .front.weave .label, .front.weave .turn { color: #b8b0d0; }
+.front.weave .title { color: #f0e8ff; }
+.front.umbral { background: linear-gradient(180deg, #2a2a2e, #1a1a1c); color: #e8e4dc; }
+.front.umbral .exam, .front.umbral .label, .front.umbral .turn { color: #a8a098; }
+.front.umbral .title { color: #f4f0e8; }
+.front.capital { background: linear-gradient(145deg, #f2e6b8, #e8d070 40%, #d4b848); }
+.front.notorious { background: linear-gradient(160deg, #2a1220, #4a1838 50%, #1a0c14); color: #f8e0ee; }
+.front.notorious .exam, .front.notorious .label, .front.notorious .turn { color: #d0a0b8; }
+.front.notorious .title { color: #ffe0f0; }
+.front.trials { background: linear-gradient(135deg, #d8e8c8, #f0e0a8 40%, #e8c8a0 70%, #c8d8e8); }
+.front.gccr { background: linear-gradient(90deg, #1a4a38, #2a6a50 35%, #f0e8d0 35%, #f0e8d0 65%, #1a3a5a 65%); }
+.front.gccr .exam { color: #2a2218; background: rgba(255,255,255,.55); padding: 0.06in; border-radius: 3px; }
+.front.gccr .label, .front.gccr .turn { color: #3a3020; }
+.front.gccr .title { color: #102818; mix-blend-mode: multiply; }
+
+.back { background: #f7f0dc; }
+.back .blurb { font-size: 9pt; }
+
+.tag {
+  position: absolute; bottom: 0.08in; left: 0.12in; right: 0.12in;
+  font-size: 6pt; color: #a89870; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+/* —— ATS large handout —— */
+.ats-sheet {
+  width: 7.7in; margin: 0 auto 0.5in; background: #fff;
+  box-shadow: 0 4px 20px #0005; padding: 0.12in;
+}
+.ats-cover {
+  border: 1.5px dashed #9a8a60; min-height: 9.7in;
+  display: grid; grid-template-rows: 1fr 1fr;
+  background: #f7f0dc;
+  position: relative;
+}
+.ats-cover::after {
+  content: "✂ cut outer · fold across middle";
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #b0a080;
+  background: #f7f0dc; padding: 0 0.2in; z-index: 2;
+}
+.ats-face {
+  padding: 0.35in 0.4in; display: flex; flex-direction: column;
+  border-bottom: 1px dashed #c0b090;
+}
+.ats-face:last-child { border-bottom: none; }
+.ats-face.front {
+  background:
+    linear-gradient(165deg, rgba(247,240,220,.92), rgba(232,220,180,.95)),
+    repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(138,112,64,.06) 12px);
+  position: relative;
+}
+.ats-wet {
+  position: absolute; top: 0.22in; right: 0.28in;
+  font-size: 8pt; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #6a4030; background: rgba(255,200,120,.45); padding: 0.04in 0.1in; border-radius: 3px;
+}
+.ats-face .exam { font-family: 'Literata', Georgia, serif; font-size: 10pt; font-style: italic; line-height: 1.4; color: #5a4a30; margin-bottom: 0.2in; }
+.ats-face .title { margin: 0.1in 0 0.2in; line-height: 1.15; }
+.ats-face .blurb { font-family: 'Literata', Georgia, serif; font-size: 11pt; line-height: 1.5; color: #2a2218; }
+.ats-face .turn { margin-top: auto; text-align: center; font-size: 8pt; letter-spacing: 0.14em; text-transform: uppercase; color: #9a8a60; }
+
+.ats-inside {
+  border: 1.5px dashed #9a8a60; padding: 0.28in 0.32in; min-height: 9.7in;
+  background: #faf6ec;
+}
+.ats-inside h2 {
+  font-family: 'Cinzel', serif; font-size: 11pt; color: #5a4820;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.12in;
+}
+.ats-inside .lead {
+  font-family: 'Literata', Georgia, serif; font-size: 10pt; font-style: italic;
+  line-height: 1.45; color: #5a4a30; margin-bottom: 0.18in;
+}
+.mark-row { display: flex; align-items: center; gap: 0.08in; margin-bottom: 0.08in; }
+.mark-row svg { flex-shrink: 0; }
+.passage {
+  border-top: 1px solid rgba(100,80,40,.28); padding: 0.14in 0 0.06in; margin-top: 0.1in;
+  break-inside: avoid;
+}
+.passage:first-of-type { border-top: none; padding-top: 0; }
+.passage .flip {
+  font-family: 'Literata', Georgia, serif; font-size: 9pt; font-style: italic;
+  color: #6a5a40; line-height: 1.35; margin-bottom: 0.08in;
+}
+.passage .quote {
+  font-family: 'Literata', Georgia, serif; font-size: 10.5pt; line-height: 1.4;
+  color: #1a140c; padding: 0.06in 0.1in; margin: 0.06in 0;
+  border-left: 2px solid #8a7040;
+}
+.passage .after {
+  font-family: 'Literata', Georgia, serif; font-size: 9pt; font-style: italic;
+  color: #6a5a40; line-height: 1.35;
+}
+.passage .num {
+  font-family: 'Source Sans 3', sans-serif; font-size: 7pt; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #8a7a55; margin-bottom: 0.04in;
+}
+
+@media print {
+  .howto { display: none !important; }
+  body { background: #fff; }
+  .sheet, .ats-sheet {
+    box-shadow: none; margin: 0; width: 100%;
+    page-break-after: always;
+  }
+  .sheet:last-child, .ats-sheet:last-child { page-break-after: auto; }
+  .ats-sheet.cover-page { page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<div class="howto">
+  <h1>Elder Holt · Storybook handouts (player-facing)</h1>
+  <ol>
+    <li><strong>Print</strong> Letter, <strong>Actual size / 100%</strong>, color on. Hide this strip automatically when printing.</li>
+    <li><strong>Finished books (pages 1–3):</strong> two handouts per sheet. Cut the outer dashed rectangle; fold on the vertical mid-line so Front faces out / Back faces out.</li>
+    <li><strong>ATS wet book (pages 4–5):</strong> larger. Page 4 = cover front + back (fold across middle). Page 5 = inside passages / bookmarks — keep with the cover or tuck inside when folded.</li>
+    <li>No campaign names on the cards — only what the Holt printed for children.</li>
+  </ol>
+  <p class="muted">File: elder-holt-storybooks-print.html · v1 · Jul 25 2026</p>
+</div>
+
+<!-- ========== SHEET 1: Weave + Umbral ========== -->
+<div class="sheet pair">
+  <article class="handout" aria-label="Weave storybook">
+    <div class="face front weave">
+      <div class="label">Front</div>
+      <p class="exam">The cover is deep indigo cloth, dusted with silver foil constellations that flake if you rub them. The lettering is tall and spindly — night-serif, like candle-smoke. Six tiny student silhouettes hold hands under a crack in a school floor that spills glittery dust upward. The endpapers are star-charts drawn wrong on purpose.</p>
+      <h2 class="title t-weave">The Friends Who Would Not Become Stars</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">Once there was a school for brave beginners. Six friends found a secret door under the stairs and a mean old magic that wanted to turn them into stardust for a scrapbook in the sky. This is the story of homework, hiding, and how friends can un-curse a constellation if they stay together until morning.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+
+  <article class="handout" aria-label="Umbral storybook">
+    <div class="face front umbral">
+      <div class="label">Front</div>
+      <p class="exam">Matte charcoal boards; the title in bone-white hand lettering, slightly crooked like a child’s chalk. A single violet umbrella opens over five travelers on a road of ash. Almost no shine — only one soft purple petal stamped on the cover. The book feels cold even in summer.</p>
+      <h2 class="title t-umbral">The Children Who Walked Toward the Quiet Dark</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">A soft purple night began spreading like spilled juice, and monsters grew where the juice touched. Five tired travelers walked into the quiet dark looking for a place where new life could still grow. This is a bedtime story about being scared together, and about planting a seed where everyone said nothing could grow.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+</div>
+
+<!-- ========== SHEET 2: Capital + Notorious ========== -->
+<div class="sheet pair">
+  <article class="handout" aria-label="Capital storybook">
+    <div class="face front capital">
+      <div class="label">Front</div>
+      <p class="exam">A gilded paperback that looks expensive and slightly sticky. Loud carnival typeface in black and coin-yellow. Cover art: a smiling coin-king on a pile of shiny things while five small figures peek from alley shadows. Foil coins peel if you pick at them (the Holt hates that).</p>
+      <h2 class="title t-capital">The Thieves Who Would Not Clap for Gold</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">In a city where money bought the rules, a golden bully made everyone clap. Five plucky troublemakers decided clapping was not the same as kindness. There are cards, airships, bad luck, and a very important lesson: gold is heavy, and friendship is lighter to carry when you run.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+
+  <article class="handout" aria-label="Notorious storybook">
+    <div class="face front notorious">
+      <div class="label">Front</div>
+      <p class="exam">Soft-touch neon boards — rose-pink and stage-black. Bubble-letter title with one guitar string drawn as a glowing vine. Six mismatched musicians mid-jump under paper lanterns; a sly music-mogul silhouette steals notes from the sky like cookies. Sparkle varnish only on the notes.</p>
+      <h2 class="title t-notorious">The Band That Made the Festival Tell the Truth</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">There once was a sparkly festival that clapped too loud. A mean music-boss stole songs so nobody else could feel brave. A band of misfits played anyway — louder, weirder, truer — until the stages told the truth. This is a sing-along book. You are allowed to dance while reading.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+</div>
+
+<!-- ========== SHEET 3: Trials + GCCR ========== -->
+<div class="sheet pair">
+  <article class="handout" aria-label="Trials storybook">
+    <div class="face front trials">
+      <div class="label">Front</div>
+      <p class="exam">Soft watercolor boards that shift tint as you tilt them — spring green, summer gold, autumn rust, winter blue. Title in gentle rounded letters that look hand-repainted over older words. Small pilgrims on a mountain path, each casting a second shadow in a different shape. A quiet figure with a changing cloak waits at the summit. No battle poses — only footsteps mid-step.</p>
+      <h2 class="title t-trials">The Pilgrims Who Changed Before the Summit</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">High on a sacred mountain, the big weather-gods keep a fragile peace — and once in a long while they invite (or nudge, or shove) pure-hearted travelers to climb. The mountain does not only ask if you are brave. It asks if you can change. Can you become the shape a season needs? Can you let go of the you who started walking? A picture-book of earth and air and water and fire… and the hardest trial of all: turning into someone new before you reach the top.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+
+  <article class="handout" aria-label="GCCR storybook">
+    <div class="face front gccr">
+      <div class="label">Front</div>
+      <p class="exam">Glossy racing-stripe boards in emerald, sapphire, and checkered cream. Title in bold rounded sport-poster letters; the word Wrong drinks the light in soft black-jade foil. A rattly cart of mismatched friends streaks past jewel-kingdoms, pockets jingling with odd humming doodads. Endpapers look like race courses if you squint — and treasure hunts if you don’t.</p>
+      <h2 class="title t-gccr">The Racers Who Chased the Wrong Finish</h2>
+      <p class="turn">— turn over —</p>
+    </div>
+    <div class="face back">
+      <div class="label">Back</div>
+      <p class="blurb">Once there was a Great Race of crystal carts through jewel-lands and forgetful green mazes. The hurry-friends thought they were collecting trophies — shiny prizes for going fast. But the doodads in their pockets hummed with a secret job, and the finish line kept changing its mind. This is a picture-book about zooming, gathering, and discovering what a race is really for.</p>
+      <p class="tag">Elder Holt · children’s shelf</p>
+    </div>
+  </article>
+</div>
+
+<!-- ========== ATS COVER (fold) ========== -->
+<div class="ats-sheet cover-page">
+  <article class="ats-cover" aria-label="ATS wet storybook cover">
+    <div class="ats-face front">
+      <div class="ats-wet">Ink still wet</div>
+      <div class="label" style="font-size:7.5pt;letter-spacing:0.16em;text-transform:uppercase;color:#8a7a55;margin-bottom:0.1in;">Front</div>
+      <p class="exam">The boards are soft and unfinished — no finished back cover yet. The title is brushed in green-gold ink that smears if you touch it; some letters still glossy-wet. Front art half-done: four little travelers under a summer palace oak, moths of dry leaves blowing away like bookmarks with wings. Endpapers still blank in places, smelling faintly of rain and wet ink.</p>
+      <h2 class="title t-ats">The Friends Who Went Looking for What Blew Away</h2>
+      <p class="turn">— fold / turn to the back —</p>
+    </div>
+    <div class="ats-face">
+      <div class="label" style="font-size:7.5pt;letter-spacing:0.16em;text-transform:uppercase;color:#8a7a55;margin-bottom:0.1in;">Back</div>
+      <p class="blurb">Once there were four friends who crossed into a land where names blow away on the breeze and feelings wear funny costumes. Little moth-pieces of who they are keep fluttering off — and turning up in the oddest places. This is a story still being written about finding yourself after you’ve been scattered.</p>
+      <p class="exam" style="margin-top:0.25in;">Inside the unfinished boards, four thin slips are pressed like bookmarks. Each bears the same mysterious mark: a tiny round sun at the center, and around it a spray of jagged angles — sharp flecks of light that spiral upward as they thin, like rays that learned how to flicker.</p>
+      <p class="turn">— open to the pressed pages —</p>
+    </div>
+  </article>
+</div>
+
+<!-- ========== ATS INSIDE (bookmarks) ========== -->
+<div class="ats-sheet">
+  <article class="ats-inside" aria-label="ATS pressed bookmarks">
+    <h2>Pressed pages</h2>
+    <p class="lead">You fan the wet book open. The unfinished story doesn’t run page-to-page the way a finished one would — instead, four stamped slips wait in the gutter. You draw the first. Then the next. Each time you turn a slip, the ink seems to speak a little louder than a children’s book should.</p>
+
+    <div class="passage">
+      <div class="num mark-row">
+        <svg viewBox="0 0 20 26" width="11" height="14" fill="#8a6030" aria-hidden="true"><circle cx="10" cy="17.5" r="2.6"/><polygon points="10,1.5 11.1,7.2 14.8,3.8 12.2,8.6 17.2,7.2 13.1,11.2 18.5,13.2 12.8,13.8 15.6,18.2 11.2,15.2 12.4,21.2 10,17.2 7.6,21.2 8.8,15.2 4.4,18.2 7.2,13.8 1.5,13.2 6.9,11.2 2.8,7.2 7.8,8.6 5.2,3.8 8.9,7.2"/></svg>
+        First slip
+      </div>
+      <p class="flip">You flip to the earliest-looking page. It seems here that a fox-eared girl has been told to speak her name into a shimmering wall between worlds, and after a nervous breath she answers aloud:</p>
+      <p class="quote">“I am Joy Incarnate. I am sun and laughter. I am Kai.”</p>
+      <p class="after">The wall rather greedily grabs her, and she vanishes through as if the page itself were hungry. You turn the slip.</p>
+    </div>
+
+    <div class="passage">
+      <div class="num mark-row">
+        <svg viewBox="0 0 20 26" width="11" height="14" fill="#8a6030" aria-hidden="true"><circle cx="10" cy="17.5" r="2.6"/><polygon points="10,1.5 11.1,7.2 14.8,3.8 12.2,8.6 17.2,7.2 13.1,11.2 18.5,13.2 12.8,13.8 15.6,18.2 11.2,15.2 12.4,21.2 10,17.2 7.6,21.2 8.8,15.2 4.4,18.2 7.2,13.8 1.5,13.2 6.9,11.2 2.8,7.2 7.8,8.6 5.2,3.8 8.9,7.2"/></svg>
+        Second slip
+      </div>
+      <p class="flip">The next bookmark is a little further in. It seems the moth-winged changeling has had enough of watching two lovers throw themselves at danger; he looks straight at the singer and says:</p>
+      <p class="quote">“So, next time you’re putting your boyfriend on a leash, right? If that’s what it takes. I don’t understand why you’re constantly martyring yourselves. Why you both would have no regard for your own safety.”</p>
+      <p class="after">Nobody has a tidy answer, and the walk continues with rather more sulking than usual. You turn again.</p>
+    </div>
+
+    <div class="passage">
+      <div class="num mark-row">
+        <svg viewBox="0 0 20 26" width="11" height="14" fill="#8a6030" aria-hidden="true"><circle cx="10" cy="17.5" r="2.6"/><polygon points="10,1.5 11.1,7.2 14.8,3.8 12.2,8.6 17.2,7.2 13.1,11.2 18.5,13.2 12.8,13.8 15.6,18.2 11.2,15.2 12.4,21.2 10,17.2 7.6,21.2 8.8,15.2 4.4,18.2 7.2,13.8 1.5,13.2 6.9,11.2 2.8,7.2 7.8,8.6 5.2,3.8 8.9,7.2"/></svg>
+        Third slip
+      </div>
+      <p class="flip">Deeper still. It seems two lovers are worrying aloud about what crossing into fairy-land will cost them, and after a quiet pause the singer answers:</p>
+      <p class="quote">“I don’t know what we’re going to have to give up. But I refuse to give up you.”</p>
+      <p class="after">He says he feels the same, and they keep walking toward the veil. One slip left.</p>
+    </div>
+
+    <div class="passage">
+      <div class="num mark-row">
+        <svg viewBox="0 0 20 26" width="11" height="14" fill="#8a6030" aria-hidden="true"><circle cx="10" cy="17.5" r="2.6"/><polygon points="10,1.5 11.1,7.2 14.8,3.8 12.2,8.6 17.2,7.2 13.1,11.2 18.5,13.2 12.8,13.8 15.6,18.2 11.2,15.2 12.4,21.2 10,17.2 7.6,21.2 8.8,15.2 4.4,18.2 7.2,13.8 1.5,13.2 6.9,11.2 2.8,7.2 7.8,8.6 5.2,3.8 8.9,7.2"/></svg>
+        Fourth slip
+      </div>
+      <p class="flip">Near the unfinished end. It seems the young man with the journals is being offered one of his own lost moth-pieces back, and warned it may hurt; after a pause he takes it anyway and says:</p>
+      <p class="quote">“I don’t remember it causing me much pain back when I had it to begin with. I would love to prove to her that we are capable of holding more than just one Lann — or one trait.”</p>
+      <p class="after">He starts looking around for the little lights that remember what was taken. After that, the wet book simply… stops. The roots have not finished writing.</p>
+    </div>
+  </article>
+</div>
+
+</body>
+</html>

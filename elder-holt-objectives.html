@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Spine · DH Countdown Escort (GM)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#141c24; --panel:#1e2a36; --ink:#e8eef5; --muted:#8aa0b5;
+  --gold:#c4a86a; --ice:#7ec8e8; --ok:#8fd4a8; --bad:#e89098; --line:#3d4a58;
+  --heat:#e8a070; --wet:#6ab0d8; --bug:#a0c878; --wind:#c8b8e8; --blank:#e8d0a0;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Source Sans 3',sans-serif; background:var(--bg); color:var(--ink); line-height:1.45; font-size:14.5px; }
+.wrap { max-width:900px; margin:0 auto; padding:22px 16px 70px; }
+h1 { font-family:'Cinzel',serif; font-size:22px; color:var(--gold); }
+.sub { color:var(--muted); font-size:13px; margin:4px 0 16px; }
+h2 { font-family:'Cinzel',serif; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ice); margin:20px 0 8px; border-bottom:1px solid var(--line); padding-bottom:4px; }
+.box { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:10px 0; }
+.box ul { margin-left:1.15em; }
+.box li { margin-bottom:5px; }
+.patterns { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media (max-width:700px){ .patterns { grid-template-columns:1fr; } }
+.pat { background:#121820; border-radius:8px; padding:8px 10px; font-size:13px; }
+.pat b { color:var(--gold); display:block; font-family:'Cinzel',serif; font-size:12px; margin-bottom:2px; }
+.dh {
+  font-size:12.5px; color:#b8c8d8; background:#121820; border-radius:8px; padding:10px 12px; margin:8px 0;
+  font-family:ui-monospace,Consolas,monospace; line-height:1.4;
+}
+.dh .p { color:var(--ok); }
+.dh .c { color:var(--bad); }
+.room {
+  background:var(--panel); border-radius:12px; border:1px solid var(--line);
+  padding:14px 16px; margin:12px 0; border-left:5px solid var(--gold);
+}
+.room.r1 { border-left-color:var(--heat); }
+.room.r2 { border-left-color:var(--wet); }
+.room.r3 { border-left-color:var(--bug); }
+.room.r4 { border-left-color:var(--wind); }
+.room.r5 { border-left-color:var(--blank); }
+.room .title { font-family:'Literata',Georgia,serif; font-style:italic; font-size:18px; color:var(--gold); margin:2px 0 6px; }
+.room .meta { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+.room .obj { background:#121820; border-radius:8px; padding:8px 10px; margin:8px 0; }
+.room .obj b { color:var(--ok); }
+.room .threat { color:var(--bad); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0; }
+@media (max-width:700px){ .grid2 { grid-template-columns:1fr; } }
+.card { background:#182028; border-radius:8px; padding:8px 10px; font-size:13px; }
+.card h4 { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; }
+.card.h4p h4 { color:var(--ok); }
+.card.h4c h4 { color:var(--bad); }
+.room ul { margin:6px 0 0 1.1em; font-size:13.5px; color:#c8d4e0; }
+.room li { margin-bottom:4px; }
+.scroll { border:1px dashed var(--ice); border-radius:8px; padding:8px 10px; margin-top:8px; font-size:13px; }
+footer { margin-top:18px; color:var(--muted); font-size:12px; }
+a { color:var(--ice); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Little Spine Finishes the Story</h1>
+<p class="sub">
+  Elder Holt · inside the chapbook · Drii <em>Woven Light Shattering</em> · Wes escort ·
+  Daggerheart linked countdowns · Shatter Line 0–6 still public for his paper body
+</p>
+
+<!-- TOOLS -->
+<div class="box">
+  <h2 style="border:0;margin:0 0 8px;padding:0;">Before Page One — Scroll of Spelling</h2>
+  <ul>
+    <li>Found at the glowing stump-lectern <b>before they step into the book</b> (pressed into the cover, or the Bookworm’s discarded skin of parchment — your call).</li>
+    <li>Each PC may use it <b>once per page/room</b> (rooms 1–5). Does not bank.</li>
+    <li>Effect: change up to <b>2 letters in one word</b> on a spell or domain card → new effect. You adjudicate generously when it serves a room’s Progress track.</li>
+    <li>Design intent: rooms are built so <b>several different mutations are useful</b> — not one “correct” scroll answer.</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2 style="border:0;margin:0 0 8px;padding:0;">Daggerheart countdown reminder</h2>
+  <div class="dh">
+    Linked scene: same action roll feeds both tracks.<br>
+    <span class="p">Progress</span> (good): Fail+Fear 0 · Fail+Hope 0 · Succ+Fear 1 · Succ+Hope 2 · Crit 3<br>
+    <span class="c">Consequence</span> (bad): Fail+Fear 3 · Fail+Hope 2 · Succ+Fear 1 · Succ+Hope 0 · Crit 0<br>
+    Start values ~6–8 for a meaty room. Fear spends can poke Consequence extra when telegraphed.
+  </div>
+</div>
+
+<!-- DESIGN MENU -->
+<h2>Encounter patterns used (the menu)</h2>
+<div class="patterns">
+  <div class="pat"><b>1. Linked race</b>Progress vs Consequence on the same rolls — Hope pulls win, Fear pulls doom.</div>
+  <div class="pat"><b>2. Split labor</b>Two Progress tracks (or Progress + side objective). Party must fork attention; one scroll can’t solve both.</div>
+  <div class="pat"><b>3. Soft ally / hard threat</b>Thing that helps in the nursery myth accelerates Consequence if accepted.</div>
+  <div class="pat"><b>4. Escort accelerant</b>Wes’s “hero” choices tick Consequence unless a PC spends a beat stopping him.</div>
+  <div class="pat"><b>5. Bait / forge</b>Win by creating a substitute the threat prefers — scroll mutates words into bait.</div>
+  <div class="pat"><b>6. Hold the line</b>Progress = stabilize/slow; Consequence = forced skip. Combat serves the clock, not mop-up.</div>
+  <div class="pat"><b>7. Dual ending tracks</b>Two Progress clocks (Press vs Talk-out); boss advances Consequence.</div>
+  <div class="pat"><b>8. Multi-site table</b>Explicit stations (stoke / write / wrestle / ward) so 3–4 PCs have simultaneous jobs.</div>
+</div>
+
+<!-- ROOMS -->
+<h2>Five pages</h2>
+
+<article class="room r1">
+  <div class="meta">Page 1 · patterns 1, 3, 4, 8</div>
+  <div class="title">The Warm That Eats Stories</div>
+  <div class="obj"><b>Win:</b> Progress <em>Sate / Bind the Warm</em> hits 0 → it releases the chapter-door.<br>
+  <span class="threat">Lose:</span> Consequence <em>Wes Fed to the Warm</em> hits 0 → big Line hit + door scorched shut (costly reopen) or Warm follows into Page 2.</div>
+  <div class="grid2">
+    <div class="card h4p">
+      <h4>Progress — Sate / Bind the Warm · start 7</h4>
+      Feed it substitute text · douse/bind its appetite · rewrite its “help” into “stay” · bargain a scrap meal. Stations: <b>Feed</b> · <b>Bind</b> · <b>Seal door hinges</b>.
+    </div>
+    <div class="card h4c">
+      <h4>Consequence — Wes Volunteers · start 7</h4>
+      Advances when rolls go badly <em>and</em> when Wes touches / invites the Warm (escort accelerant). Warm offers help every beat — accepting is free Consequence tick.
+    </div>
+  </div>
+  <ul>
+    <li><b>Clear goals:</b> (A) satisfy Warm without Wes, (B) keep Wes off it, (C) unlock door.</li>
+    <li><b>Not “carry past”:</b> door won’t open while Warm is hungry. Yeeting Wes through leaves Warm active → Consequence nearly done / follows.</li>
+    <li><b>Scroll hooks:</b> heat→heal bait, burn→born/bund, flame→frame (cage it), warm→ward, cook→cool, story→store (pantry meal).</li>
+  </ul>
+</article>
+
+<article class="room r2">
+  <div class="meta">Page 2 · patterns 1, 2, 4, 8</div>
+  <div class="title">The River That Remembers Too Much</div>
+  <div class="obj"><b>Win:</b> BOTH Progress tracks hit 0 (split labor).<br>
+  <span class="threat">Lose:</span> Consequence <em>Ink Tide</em> hits 0 → forced dunks, Line spikes, a verb/name washed into Page 3.</div>
+  <div class="grid2">
+    <div class="card h4p">
+      <h4>Progress A — Compose the Crossing · start 6</h4>
+      Not “find the ford.” <b>Build</b> a dry path out of remembered sentences: catch floating words, pin them as stepping-stones, mutate spells into bridge/freeze/divert. Needs multiple contributions (several scrolls / several spells).
+    </div>
+    <div class="card h4p">
+      <h4>Progress B — Pin the Remembers-Too-Much · start 6</h4>
+      A predator/current-intellect in the water that dunks Wes and steals verbs. Wrestle, bind, rename, or distract it. Separate station from path-building.
+    </div>
+  </div>
+  <div class="card h4c" style="margin-top:8px;">
+    <h4>Consequence — Ink Tide · start 8</h4>
+    Linked to action rolls. Fear spends = surge. Wes “swimming the trial” ticks this hard. If A finishes before B, path exists but the thing yanks people off it. If B finishes before A, beast pinned but no path — Tide still rising.
+  </div>
+  <ul>
+    <li><b>Clear goals:</b> (A) compose crossing, (B) pin river-threat, (C) keep Wes dry until both done.</li>
+    <li><b>Why scrolls matter:</b> one clever freeze helps A; another PC must still mutate something for B (bind/name/lure). Single “I make a bridge” doesn’t clear the room.</li>
+    <li><b>Scroll hooks:</b> water→wader/wafer path, drown→crown (name the beast), river→rider, sweep→sheep bait, tide→tile (stone path), ink→ink/ank/ilk — you rule.</li>
+  </ul>
+</article>
+
+<article class="room r3">
+  <div class="meta">Page 3 · patterns 1, 5, 4, 8</div>
+  <div class="title">The Tiny Hungry Choir</div>
+  <div class="obj"><b>Win:</b> Progress <em>Bait &amp; Recover</em> hits 0 (Choir drops the real morsel + you grab it).<br>
+  <span class="threat">Lose:</span> Consequence <em>Nouns Chewed</em> hits 0 → permanent funny blank on Wes (or seed-page ruined) + Line.</div>
+  <div class="grid2">
+    <div class="card h4p">
+      <h4>Progress — Bait &amp; Recover · start 7</h4>
+      Forge substitute text the Choir prefers → herd them onto it → snatch back Wes’s nouns / seed-page / washed verb from Page 2. Stations: <b>Write bait</b> · <b>Herd</b> · <b>Snatch</b>.
+    </div>
+    <div class="card h4c">
+      <h4>Consequence — Nouns Chewed · start 7</h4>
+      They’re already eating him. Wes reciting = free 2 ticks. Bad rolls chew faster. Recovering mid-chew can restore a noun if Progress wins first.
+    </div>
+  </div>
+  <ul>
+    <li><b>Clear goals:</b> (A) write irresistible bait, (B) move Choir off Wes, (C) recover the morsel.</li>
+    <li><b>Scroll hooks:</b> mutate card text into bait (“strike”→“sprite”, “brave”→“grave”/“brava”), command→commend, swarm→swarm/swarm→swear (oath-bait), eat→ear (listen instead).</li>
+  </ul>
+</article>
+
+<article class="room r4">
+  <div class="meta">Page 4 · patterns 1, 6, 4</div>
+  <div class="title">The Wind That Turns Pages Too Fast</div>
+  <div class="obj"><b>Win:</b> Progress <em>Hold the Chapter</em> hits 0 (turners broken <em>or</em> page anchored with Wes still in it).<br>
+  <span class="threat">Lose:</span> Consequence <em>Forced Turn</em> hits 0 → Wes torn alone into Page 5; party arrives late; Bookworm already mid-swallow setup.</div>
+  <div class="grid2">
+    <div class="card h4p">
+      <h4>Progress — Hold the Chapter · start 7</h4>
+      Kill/drive Page-Turners · silence Wes’s loud heroics · windbreak · weight/anchor the page. Combat serves the clock.
+    </div>
+    <div class="card h4c">
+      <h4>Consequence — Forced Turn · start 7</h4>
+      Gusts + unanswered foes. Wes speeches tick this. Fear = scissors-cavalry surge.
+    </div>
+  </div>
+  <ul>
+    <li><b>Clear goals:</b> (A) reduce turners, (B) keep Wes quiet/anchored, (C) finish Progress before Forced Turn.</li>
+    <li><b>Scroll hooks:</b> wind→bind/wand, tear→tear/team, haste→haste/hasp (latch), page→cage, next→nest (hold).</li>
+  </ul>
+</article>
+
+<article class="room r5">
+  <div class="meta">Page 5 · patterns 1, 7, 4 · BOSS</div>
+  <div class="title">The Page With No Words</div>
+  <div class="obj"><b>Win:</b> Either Progress track hits 0 before Consequence / Shatter Line 6.<br>
+  <span class="threat">Boss:</span> <b>Bookworm</b> (purple worm reskin) — burrow, swallow, eat endings. Its attacks and Fear features advance Consequence.</div>
+  <div class="grid2">
+    <div class="card h4p">
+      <h4>Progress A — Press the Ending · start 6</h4>
+      Gift hero-title → defend Wes while he presses (3 fictional beats mapped to Progress ticks from protect/press assists). Completing = paper-death + Lann gift.
+    </div>
+    <div class="card h4p">
+      <h4>Progress B — Talk Out the Myth · start 8</h4>
+      Harder/longer. Earn that he needn’t die. Advances on sincere social / proof beats. Completing = Lann gift, Wes lives. Wes will not help this track.
+    </div>
+  </div>
+  <div class="card h4c" style="margin-top:8px;">
+    <h4>Consequence — Bookworm Eats the Ending · start 8</h4>
+    Swallow Wes / chew the blank page / collapse dais. Linked rolls + worm Fear features. At 0: ending destroyed — Lann deleted or worse dump-out. Shatter Line still ticks on paper damage separately.
+  </div>
+  <ul>
+    <li><b>Clear goals:</b> pick Press or Talk-out (can soft-fail one), tank/kill/distract Bookworm, keep Line &lt; 6.</li>
+    <li><b>Scroll hooks:</b> worm→word/worn, swallow→shallow, burrow→barrow/borrow, blank→bland/brand (title), press→press/prest.</li>
+  </ul>
+  <div class="scroll"><b>Bookworm:</b> Use purple worm instincts (tunnel, swallow whole, thrash). Fiction: ink-mucus, perforated pages, ozone before it breaches. Killing it is optional if an ending track completes — but a living worm at Consequence 1–2 will try to eat the epilogue on the way out.</div>
+</article>
+
+<div class="box">
+  <h2 style="border:0;margin:0 0 8px;padding:0;">Wes · always</h2>
+  <ul>
+    <li>Names himself early. Begs them into the glowing page as Companions.</li>
+    <li>Reads each page subtitle out loud; picks CYOA skin (A/B/C/D) — costume only.</li>
+    <li>Advances Consequence when he plays the nursery moral (touch Warm, swim trial, recite for Choir, speech in the Wind, insist on Press).</li>
+    <li>Shatter Line 0–6 = paper integrity. Separate from page Consequence clocks (both can doom him).</li>
+  </ul>
+</div>
+
+<footer>
+  v4 · DH countdown redesign · Jul 25 2026 · Page titles = nursery subtitles · Scroll of Spelling from lobby · Bookworm on Page 5 ·
+  <a href="woven-light-shattering-secret-score.html">Wes score</a> (update skins to match titles if needed)
+</footer>
+</div>
+</body>
+</html>

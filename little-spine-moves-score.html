@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Score — Little Spine Moves (Wes)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+@page { size:8.5in 11in; margin:0.45in; }
+:root {
+  --ink:#1a2430; --ink-soft:#3d4a58;
+  --parchment:#eef3f7; --parchment-deep:#e0e8f0;
+  --prism:#5a7a9a; --prism-deep:#243448; --volt:#2a6e6e; --crack:#7a3a4a;
+  --gold:#a89050; --gold-soft:#e8d9a8;
+}
+body { font-family:'Source Sans 3',sans-serif; color:var(--ink); background:#c5d0dc; line-height:1.45; font-size:10.5pt; }
+.page-wrap { max-width:8in; margin:0 auto; padding:0.2in 0; }
+.sheet {
+  background:linear-gradient(165deg, #f4f7fb 0%, var(--parchment) 55%, #e8eef5 100%);
+  border:1.5px solid var(--prism);
+  border-top:6px solid var(--volt);
+  box-shadow:0 0 0 4px var(--parchment), 0 0 0 5.5px var(--gold);
+  padding:0.38in 0.48in; margin-bottom:0.3in; position:relative; overflow:hidden;
+}
+.sheet::before {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0.06;
+  background:
+    radial-gradient(ellipse at 20% 15%, #7ec8e8 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 75%, #c87ec8 0%, transparent 40%);
+}
+.sheet > * { position:relative; }
+.sheet + .sheet { page-break-before:always; }
+.masthead {
+  background:var(--prism-deep); border:1.5px solid var(--gold); border-radius:3px;
+  padding:0.1in 0.18in; margin-bottom:0.12in; display:flex; justify-content:space-between; gap:0.15in; align-items:center;
+}
+.mtitle { font-family:'Cinzel Decorative','Cinzel',serif; font-weight:700; font-size:12pt; color:var(--gold-soft); }
+.mtitle small { display:block; font-family:'Cinzel',serif; font-weight:500; font-size:7pt; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-top:2px; }
+.mwarn { font-family:'Cinzel',serif; font-weight:700; font-size:7pt; letter-spacing:0.06em; color:var(--gold); text-transform:uppercase; text-align:right; max-width:2.1in; line-height:1.25; }
+.kicker { font-family:'Cinzel',serif; letter-spacing:0.22em; text-transform:uppercase; font-size:7.5pt; color:var(--gold); margin-bottom:0.02in; }
+h2.section { font-family:'Cinzel Decorative','Cinzel',serif; font-size:15pt; color:var(--prism-deep); border-bottom:2px solid var(--gold); padding-bottom:0.04in; margin-bottom:0.08in; }
+.note-soft { background:var(--parchment-deep); border-left:3px solid var(--gold); padding:0.08in 0.12in; margin:0.08in 0; font-size:9.5pt; }
+.footer-id { margin-top:0.1in; padding-top:0.05in; border-top:1px solid var(--gold); font-size:8pt; font-style:italic; color:var(--ink-soft); text-align:center; }
+.screen-only { max-width:8in; margin:0.12in auto; background:#1a2430; color:var(--gold-soft); border:1px solid var(--gold); border-radius:6px; padding:0.12in 0.2in; font-size:10pt; }
+@media print { .screen-only { display:none !important; } body { background:#fff; } .page-wrap { padding:0; } }
+
+.move {
+  border:1px solid var(--prism); border-left:4px solid var(--volt); border-radius:4px;
+  padding:0.08in 0.12in; margin-bottom:0.09in; background:rgba(255,255,255,0.45);
+}
+.move-name { font-family:'Cinzel',serif; font-weight:700; font-size:12pt; color:var(--volt); }
+.move-name .type { font-style:italic; font-weight:600; font-size:8.5pt; color:var(--prism); letter-spacing:0.02em; }
+.desc { font-size:9.5pt; margin:0.04in 0; }
+.invent { font-size:8.5pt; color:var(--ink-soft); margin-top:0.03in; }
+.blank { display:inline-block; border-bottom:1px dotted var(--ink-soft); min-width:1.6in; height:0.85em; vertical-align:bottom; }
+.spell-note {
+  display:inline-block; font-family:'Cinzel',serif; font-size:7pt; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--crack); border:1px solid var(--crack); border-radius:3px;
+  padding:1px 5px; margin-left:4px; vertical-align:middle;
+}
+.twocol { display:grid; grid-template-columns:1fr 1fr; gap:0.1in 0.2in; margin:0.08in 0; font-size:9pt; }
+.twocol b { color:var(--volt); font-family:'Cinzel',serif; }
+</style>
+</head>
+<body>
+<div class="screen-only">
+  <b>Print for Wes:</b> Letter, 100%, backgrounds on. 2 sheets · Moves only.<br>
+  <b>Nathan:</b> These do <em>not</em> target PCs as enemies. They’re scene tools. Short titles = Scroll of Spelling friendly (he may mutate a move name once/page if you allow — optional house rule; default scroll is for PC spell/domain cards).
+</div>
+<div class="page-wrap">
+
+<section class="sheet">
+  <div class="masthead">
+    <div class="mtitle">Little Spine · Moves<small>Woven Light Shattering · Wes · Elder Holt</small></div>
+    <div class="mwarn">⚜ For Wes only<br>don't read aloud</div>
+  </div>
+
+  <div class="kicker">How this works</div>
+  <h2 class="section">Your Moves</h2>
+  <p style="font-size:9.5pt;margin-bottom:0.08in;">
+    Announce the <strong>short name</strong> like an ability. Nathan adjudicates (Hope/Fear, Line, countdowns). These work in <em>many</em> rooms — they twist the story-space, not the Companions.
+    The ✎ line is yours. Titles stay short on purpose (Scroll of Spelling lives on the party’s cards; your names stay easy to shout).
+  </p>
+  <div class="note-soft">
+    <strong>Reminder:</strong> Companions hold the Scroll of Spelling (1 use each per page). You hold this list + the chapbook. Want the ending. Walk toward danger. Fail helpfully.
+  </div>
+
+  <div class="move">
+    <div class="move-name">Quote <span class="type">— speak the Legend</span></div>
+    <div class="desc">Say a nursery line out loud as if the book is law. For one beat, something in the scene <em>obeys the moral</em> — a door listens, a hazard hesitates, a station becomes obvious. It may also make the “helpful” danger more convincing. Nathan picks which.</div>
+    <div class="invent"><b>✎ Make it yours —</b> your favorite line to quote: <span class="blank"></span></div>
+  </div>
+
+  <div class="move">
+    <div class="move-name">Bookmark <span class="type">— save a thing</span></div>
+    <div class="desc">Point at a person, place, object, or sentence and declare it bookmarked. This page, it can’t be fully erased, washed away, or forgotten without a bigger cost. Useful for seed-pages, stolen nouns, open doors, Companions mid-fall.</div>
+    <div class="invent"><b>✎ Make it yours —</b> how you mark it (press, stamp, whisper): <span class="blank"></span></div>
+  </div>
+
+  <div class="move">
+    <div class="move-name">Note <span class="type">— margin rewrite</span></div>
+    <div class="desc">Scribble a margin note onto one object or hazard in the scene. Change how it works for a beat — “hungry for scraps,” “only bites loud stories,” “opens if thanked,” “sinks slower.” Small. Specific. Paper-logic.</div>
+    <div class="invent"><b>✎ Make it yours —</b> a note you’d write in any book: <span class="blank"></span></div>
+  </div>
+
+  <div class="move">
+    <div class="move-name">Fold <span class="type">— hitch a clock</span></div>
+    <div class="desc">Dog-ear the moment. Hitch <strong>one</strong> visible countdown by 1 (you choose Progress or Consequence; Nathan confirms). Fragile — if you take Line before the hitch lands, it unrolls. Not a full stop.</div>
+    <div class="invent"><b>✎ Make it yours —</b> what you say when you fold time: <span class="blank"></span></div>
+  </div>
+
+  <p class="footer-id">Little Spine · moves 1–4 · Wes · page 1</p>
+</section>
+
+<section class="sheet">
+  <div class="kicker">Moves continued</div>
+  <h2 class="section">Your Moves <span style="font-size:10pt;font-style:italic;color:var(--prism);">(cont.)</span></h2>
+
+  <div class="move">
+    <div class="move-name">Draw <span class="type">— sketch into place</span></div>
+    <div class="desc">Sketch something small into the scene: a handhold, a bait-sentence, a windbreak outline, a decoy Little Spine, a glowing arrow to a station. It is paper-real — useful, brittle, and hilarious if someone breathes on it wrong.</div>
+    <div class="invent"><b>✎ Make it yours —</b> your signature doodle style: <span class="blank"></span></div>
+  </div>
+
+  <div class="move">
+    <div class="move-name">Stamp <span class="type">— make it official</span></div>
+    <div class="desc">Stamp a short title onto something (“SAFE,” “BAIT,” “COMPANION,” “THE END,” a hero-title draft). For a beat the story treats it as official. Great for bait, doors, calming a page-turn, or forcing a station to count.</div>
+    <div class="invent"><b>✎ Make it yours —</b> the stamp word you overuse: <span class="blank"></span></div>
+  </div>
+
+  <div class="note-soft" style="margin-top:0.12in;">
+    <strong>Optional sixth instinct (always on, not a move):</strong> Invent your name early. At the blank page, ask them for your <strong>hero-title</strong> before you press. If they earn talking you out, listen — then gift the moth anyway if the story feels finished.
+  </div>
+
+  <div class="kicker" style="margin-top:0.14in;">Quick map</div>
+  <h2 class="section">When to shout what</h2>
+  <div class="twocol">
+    <div><b>Quote</b> — moral pressure / soft ally trap / reveal</div>
+    <div><b>Bookmark</b> — save seed-page, noun, friend, door</div>
+    <div><b>Note</b> — re-rule one hazard or object</div>
+    <div><b>Fold</b> — hitch Progress or Consequence by 1</div>
+    <div><b>Draw</b> — create a brittle helpful prop</div>
+    <div><b>Stamp</b> — officialize bait, title, SAFE, END</div>
+  </div>
+
+  <div class="kicker" style="margin-top:0.14in;">Exit</div>
+  <h2 class="section">When the moth leaves you</h2>
+  <p style="font-size:9.5pt;">Runs Before Rain gives a pithy lesson. Snaps. You go deadpan. Stand up. Leave the table. No trait = no longer a player. That’s the joke and the horror.</p>
+
+  <p class="footer-id">As They Seem · Little Spine Moves · Wes · Woven Light Shattering · v1</p>
+</section>
+
+</div>
+</body>
+</html>
