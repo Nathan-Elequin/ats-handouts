@@ -162,6 +162,17 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 .clock .row { display:flex; align-items:center; gap:0.35rem; }
 .job { font-size:0.88rem; color:#d8c8a0; margin-top:0.55rem; }
 .job li { margin:0.25rem 0 0.25rem 1.1em; }
+.companions-job {
+  background:#121c16; border:2px solid var(--amber); border-radius:8px;
+  padding:0.65rem 0.75rem; margin-bottom:0.65rem;
+}
+.companions-job .lbl {
+  font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--amber); margin-bottom:0.3rem;
+}
+.companions-job .txt { font-size:0.92rem; color:#fff8e8; line-height:1.4; font-weight:600; }
+.companions-job ul { margin:0.35rem 0 0 1.1em; font-size:0.85rem; color:#d8c8a0; font-weight:400; }
+.companions-job li { margin-bottom:0.2rem; }
 .links { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.65rem; }
 .credit {
   max-width:1100px; margin:1rem auto 0; font-size:0.72rem; color:var(--muted);
@@ -198,6 +209,7 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 
 <nav class="tabs" role="tablist">
   <button type="button" class="tab active" data-tab="run" role="tab" aria-selected="true">Run</button>
+  <button type="button" class="tab" data-tab="moves" role="tab" aria-selected="false">Moves</button>
   <button type="button" class="tab" data-tab="art" role="tab" aria-selected="false" id="tab-art">Art</button>
 </nav>
 
@@ -214,8 +226,9 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
           <button type="button" data-p="5">5 Blank</button>
         </div>
         <img class="hero-art" id="hero-art" src="elder-holt-art/01-warm.png" alt="Page art">
+        <div id="companions-job" class="companions-job"></div>
         <div class="clocks" id="clocks"></div>
-        <ul class="job" id="job"></ul>
+        <p id="costume-line" style="font-size:0.8rem;color:var(--muted);margin:0.45rem 0 0;"></p>
         <div class="links">
           <a class="btn-act" href="elder-holt-objectives.html" target="_blank" rel="noopener">Objectives</a>
           <a class="btn-act" href="elder-holt-dungeon-map.html" target="_blank" rel="noopener">Dungeon map</a>
@@ -226,16 +239,46 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
       <aside class="card">
         <h2>Sticky</h2>
         <ul class="job">
+          <li><b style="color:var(--amber)">Wes</b> = paper-boy escort. <b style="color:var(--amber)">Little Spine</b> = chapbook hero (not Wes).</li>
           <li>CYOA = costume only. Clocks never change with A/B/C.</li>
           <li>Wes accelerant: hero choices tick Consequence.</li>
-          <li>Scroll of Spelling: 1 use / PC / page (≤2 letters).</li>
-          <li>Shatter Line 0–6 = paper body (separate from page clocks).</li>
-          <li>Page 5 boss: Bookworm = purple worm reskin.</li>
+          <li>Scroll of Spelling: 1 use / PC / page (≤2 letters) — check below.</li>
+          <li>Shatter Line 0–6 = paper body (≠ page Consequence).</li>
+          <li>Page 5: Press-in → Lann + exit · Talk-out earned → lives + Lann · Line 6 / worm eats ending → Lann deleted.</li>
           <li>Exit: Rain lesson → snap → Wes deadpan → leaves table.</li>
         </ul>
+        <div id="scroll-box" style="margin-top:0.55rem;padding:0.45rem 0.5rem;border:1px dashed var(--teal);border-radius:8px;font-size:0.8rem;">
+          <b style="color:var(--teal);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;">Scroll this page</b>
+          <div id="scroll-checks" style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.35rem;"></div>
+        </div>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.45rem;font-family:ui-monospace,Consolas,monospace;line-height:1.35;">
+          DH linked · <span style="color:#8fd4a8">P</span> F+F0 F+H0 S+F1 S+H2 Crit3 ·
+          <span style="color:#e89098">C</span> F+F3 F+H2 S+F1 S+H0 Crit0
+        </p>
         <img class="hero-art" style="aspect-ratio:1/1;margin-top:0.75rem" src="elder-holt-art/00-bookworm-anthro.png" alt="Bookworm anthro" id="boss-thumb">
         <p style="font-size:0.8rem;color:var(--muted);margin-top:0.35rem;font-family:'Cinzel',serif;">Bookworm (anthro ref)</p>
       </aside>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-moves" role="tabpanel">
+    <div class="card" style="max-width:1100px;margin:0 auto;">
+      <h2>Wes Moves · adjudicate in ~2s</h2>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.55rem;">Scene tools, not PC attacks. Fold sticks immediately — no Line prerequisite.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.45rem;font-size:0.85rem;">
+        <div class="clock"><b style="color:var(--teal)">Quote</b>Nursery line as law — soft ally / door / moral trap.</div>
+        <div class="clock"><b style="color:var(--teal)">Bookmark</b>Thing can’t fully erase/wash this page.</div>
+        <div class="clock"><b style="color:var(--teal)">Tear</b>One-use paper tool (rope/flag/bait/bridge).</div>
+        <div class="clock"><b style="color:var(--teal)">Fold</b>Nudge P or C by 1 — <em>sticks now</em>.</div>
+        <div class="clock"><b style="color:var(--teal)">Draw</b>Brittle paper prop into scene.</div>
+        <div class="clock"><b style="color:var(--teal)">Press</b>Pin / brace / rub-copy a word.</div>
+      </div>
+      <div class="links" style="margin-top:0.75rem;">
+        <a class="btn-act" href="little-spine-moves-score.html" target="_blank" rel="noopener">Print · Wes Moves</a>
+        <a class="btn-act" href="elder-holt-little-spine-index.html" target="_blank" rel="noopener">Kit index</a>
+        <a class="btn-act" href="elder-holt-enter-blurb.html" target="_blank" rel="noopener">Enter blurb</a>
+        <a class="btn-act" href="shatterglass-shelf-gm-module.html" target="_blank" rel="noopener">GM module</a>
+      </div>
     </div>
   </section>
 
@@ -270,11 +313,13 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         { kind:'ok', name:'Sate / Bind Warm', start:7, key:'p1' },
         { kind:'bad', name:'Wes Volunteers', start:7, key:'c1' }
       ],
+      jobLead: 'Feed or bind the Warm with something that isn’t a Companion · keep Wes from hugging it · open the door when its hunger lets go.',
       jobs: [
-        'Feed/bind Warm without Wes as lunch',
-        'Keep Wes off the smile',
-        'Door opens only when hunger lets go'
-      ]
+        'Cannot simply carry past — hungry Warm follows or seals the door',
+        'Accepting Warm’s “help” = free Consequence tick',
+        'Costume skins: Giant toasting oven · Campfire cider bartender · Dragon radiator'
+      ],
+      costumes: 'A) Giant toasting oven · B) Campfire cider bartender · C) Dragon radiator · D) Invent'
     },
     2: {
       title: 'The River That Remembers Too Much',
@@ -284,11 +329,13 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         { kind:'ok', name:'Pin the Dunker', start:6, key:'p2b' },
         { kind:'bad', name:'Ink Tide', start:8, key:'c2' }
       ],
+      jobLead: '(1) Compose / secure the crossing. (2) Pin the dunking predator. (3) Keep Wes dry until both are done. Stones stay. Tide rises. Both Progress tracks matter.',
       jobs: [
-        'Stones are fixed — secure the crossing',
-        'Pin dunking predator (costume only)',
-        'Keep Wes dry until BOTH Progress tracks clear'
-      ]
+        'Not “find the ford” — build / brace the path',
+        'Wes swimming the trial ticks Consequence hard',
+        'Costume skins: Apologetic ink-sharks · Librarian octopus · Bookmark crocodile'
+      ],
+      costumes: 'A) Apologetic ink-sharks · B) Librarian octopus · C) Bookmark crocodile · D) Invent'
     },
     3: {
       title: 'The Tiny Hungry Choir',
@@ -297,11 +344,13 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         { kind:'ok', name:'Bait & Recover', start:7, key:'p3' },
         { kind:'bad', name:'Nouns Chewed', start:7, key:'c3' }
       ],
+      jobLead: 'Write bait text the Choir prefers more than his real name · herd them onto that bait · snatch back the stolen morsel before the last syllable is chewed.',
       jobs: [
-        'Write bait they prefer',
-        'Herd Choir off Wes / seed-page',
-        'Snatch the real morsel back'
-      ]
+        'Shooing without bait only makes them chew faster',
+        'Wes reciting / joining chorus = free Consequence ticks',
+        'Costume skins: Opera-cape bookworms · LATE-stamping silverfish · Crumb knights'
+      ],
+      costumes: 'A) Opera-cape bookworms · B) LATE-stamping silverfish · C) Crumb knights · D) Invent'
     },
     4: {
       title: 'The Wind That Turns Pages Too Fast',
@@ -310,11 +359,13 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         { kind:'ok', name:'Hold the Chapter', start:7, key:'p4' },
         { kind:'bad', name:'Forced Turn', start:7, key:'c4' }
       ],
+      jobLead: 'Hold the chapter still — weight/anchor the page · stop or drive off the turners · keep Wes quiet and planted. Combat serves the clock.',
       jobs: [
-        'Anchor / weight the page',
-        'Stop turners (costume only)',
-        'Keep Wes quiet — lose = he tears alone into Page 5'
-      ]
+        'If Forced Turn finishes first → Wes tears alone into Page 5',
+        'Wes speeches tick Consequence',
+        'Costume skins: Scissors cavalry · NEXT CHAPTER chicken-leg signs · Giant Reader’s Thumb'
+      ],
+      costumes: 'A) Scissors cavalry · B) NEXT CHAPTER chicken-leg signs · C) Giant Reader’s Thumb · D) Invent'
     },
     5: {
       title: 'The Page With No Words',
@@ -324,11 +375,13 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         { kind:'ok', name:'Talk Out the Myth', start:8, key:'p5b' },
         { kind:'bad', name:'Bookworm Eats Ending', start:8, key:'c5' }
       ],
+      jobLead: 'Gift a hero-title · either defend him while he presses (paper-death; Lann gifted) or earn talking him out (harder; he lives; Lann still gifted) · keep the Bookworm from swallowing the ending / him.',
       jobs: [
-        'Gift hero-title',
-        'Press (he dies) OR talk-out (harder, he lives)',
-        'Bookworm = purple worm — tank / distract / kill optional'
-      ]
+        'No costume CYOA — locked ending + Bookworm boss',
+        'Wes will not help the Talk-out track',
+        'Line 6 / worm eats ending → Lann deleted'
+      ],
+      costumes: 'No costume — party gifts hero-title'
     }
   };
 
@@ -342,13 +395,14 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
     { src:'elder-holt-art/05-blank.png', label:'Page 5 · Blank', sub:'Press / talk-out / worm' }
   ];
 
+  const PC_NAMES = ['PC1','PC2','PC3','PC4','PC5'];
   const state = load();
 
   function load() {
     try {
       const raw = JSON.parse(localStorage.getItem(STORAGE) || '{}');
-      return Object.assign({ page:1, line:0, fear:0, clocks:{} }, raw);
-    } catch (e) { return { page:1, line:0, fear:0, clocks:{} }; }
+      return Object.assign({ page:1, line:0, fear:0, clocks:{}, scroll:{} }, raw);
+    } catch (e) { return { page:1, line:0, fear:0, clocks:{}, scroll:{} }; }
   }
   function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
 
@@ -382,7 +436,7 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 
   document.getElementById('btn-reset').onclick = () => {
     if (!confirm('Reset Line, Fear, and all countdown ticks?')) return;
-    state.line = 0; state.fear = 0; state.clocks = {}; state.page = 1;
+    state.line = 0; state.fear = 0; state.clocks = {}; state.scroll = {}; state.page = 1;
     save(); renderAll();
   };
 
@@ -437,7 +491,31 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
         save(); renderPage();
       });
     });
-    document.getElementById('job').innerHTML = pg.jobs.map(j => '<li>' + j + '</li>').join('');
+    const jobEl = document.getElementById('companions-job');
+    jobEl.innerHTML = '<div class="lbl">Companions’ Job (always)</div>' +
+      '<div class="txt">' + pg.jobLead + '</div>' +
+      '<ul>' + pg.jobs.map(j => '<li>' + j + '</li>').join('') + '</ul>';
+    document.getElementById('costume-line').textContent = 'Wes costume circle: ' + pg.costumes;
+    renderScroll();
+  }
+
+  function renderScroll() {
+    if (!state.scroll) state.scroll = {};
+    if (!state.scroll[state.page]) state.scroll[state.page] = {};
+    const box = document.getElementById('scroll-checks');
+    if (!box) return;
+    box.innerHTML = '';
+    PC_NAMES.forEach(name => {
+      const lab = document.createElement('label');
+      const used = !!state.scroll[state.page][name];
+      lab.style.cssText = 'display:inline-flex;gap:0.2rem;align-items:center;background:#0a100c;border:1px solid var(--line);border-radius:5px;padding:0.15rem 0.4rem;cursor:pointer;color:var(--muted);font-size:0.72rem;' + (used ? 'opacity:0.55;text-decoration:line-through;' : '');
+      lab.innerHTML = '<input type="checkbox"' + (used ? ' checked' : '') + '> ' + name;
+      lab.querySelector('input').addEventListener('change', e => {
+        state.scroll[state.page][name] = e.target.checked;
+        save(); renderScroll();
+      });
+      box.appendChild(lab);
+    });
   }
 
   // Art grid
